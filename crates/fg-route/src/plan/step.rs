@@ -76,12 +76,7 @@ impl Planner<'_> {
         let every_late = s.level >= s.trained + self.params.train_every + self.params.train_max_delay;
         let (due, late) = match self.model.power.as_ref().filter(|p| p.has_spells()) {
             Some(p) => {
-                let gain = p.train_gain(
-                    s.trained,
-                    s.level,
-                    s.abilities,
-                    self.model.abilities.trained(s.abilities, s.level),
-                );
+                let gain = self.train_gain(p, s.trained, s.level, s.abilities);
                 // In a group, everyone trains at the cadence (the others' spells are not known).
                 let group = !self.profile.mates.is_empty();
                 (

@@ -8,7 +8,7 @@
 use super::Interrupt;
 use crate::model::{Model, Profile};
 use crate::params::{Construction, Params};
-use crate::plan::{Effort, Exchange, Member, Planner, Stop, ZoneChange, fmt_time};
+use crate::plan::{Effort, Exchange, Member, Planner, PlannerCaches, Stop, ZoneChange, fmt_time};
 use crate::sync::{Joined, LockExt, Unpoisoned};
 use crate::world::World;
 use rand::{RngExt, SeedableRng};
@@ -493,6 +493,22 @@ struct Mutant {
     what: String,
 }
 
+/// One worker thread's kit: its travels memoized once, shared by every route it builds and every
+/// search it runs (see `PlannerCaches`), and the planner scoring them under the request's own
+/// settings.
+struct Kit<'a> {
+    caches: PlannerCaches,
+    planner: Planner<'a>,
+}
+
+impl<'a> Kit<'a> {
+    fn new(model: &'a Model, world: &'a World, params: &'a Params, profile: &'a Profile) -> Self {
+        let caches = PlannerCaches::default();
+        let planner = Planner::new(model, world, params, profile).with_caches(&caches);
+        Self { caches, planner }
+    }
+}
+
 impl Searcher<'_> {
     /// The settings of race candidate `k` (`candidate_params`), the first ones after the first
     /// beginning in a zone rich in quests rather than where the character stands.
@@ -510,7 +526,7 @@ impl Searcher<'_> {
     /// meeting the other searches of the route at `member`'s exchange. Returns its score under
     /// the request's own settings; None when the generation is cancelled, or stopped while
     /// building a route that is not `needed` (the first ones are: without them there would be no
-    /// guide to keep).
+    /// guide to keep). The travels of `kit` are the thread's own (see `PlannerCaches`).
     fn search(
         &self,
         k: usize,
@@ -518,6 +534,7 @@ impl Searcher<'_> {
         slot: Slot,
         needed: bool,
         member: Option<&Member<'_>>,
+        kit: &Kit<'_>,
     ) -> Option<(f64, Vec<Stop>)> {
         if self.interrupt.cancelled() {
             return None;
@@ -529,6 +546,7 @@ impl Searcher<'_> {
         }
         let give_up = || self.interrupt.cancelled() || (!needed && self.interrupt.stopping());
         let planner = Planner::new(self.model, self.world, &p, self.profile)
+            .with_caches(&kit.caches)
             .abortable(&give_up)
             .sharing(member);
         let log = |m: &str| {
@@ -574,7 +592,7 @@ impl Searcher<'_> {
         if self.interrupt.cancelled() {
             return None;
         }
-        Some((self.score(&route), route))
+        Some((scored(&route, &kit.planner).0, route))
     }
 
     /// Build candidate `k`'s route (None when given up), keeping its zone changes.
@@ -611,29 +629,27 @@ impl Searcher<'_> {
     }
 
     /// Build candidate `k`'s route only, scored (None when cancelled, or stopped while building a
-    /// route that is not `needed`).
-    fn build_only(&self, k: usize, needed: bool) -> Option<(f64, Vec<Stop>)> {
+    /// route that is not `needed`). The travels of `kit` are the thread's own (see
+    /// `PlannerCaches`).
+    fn build_only(&self, k: usize, needed: bool, kit: &Kit<'_>) -> Option<(f64, Vec<Stop>)> {
         let mutant = self.mutants.locked().get(k).cloned().flatten();
         let p = mutant.as_ref().map_or_else(|| self.candidate(k), |m| m.params.clone());
         let give_up = || self.interrupt.cancelled() || (!needed && self.interrupt.stopping());
-        let planner = Planner::new(self.model, self.world, &p, self.profile).abortable(&give_up);
+        let planner = Planner::new(self.model, self.world, &p, self.profile)
+            .with_caches(&kit.caches)
+            .abortable(&give_up);
         let route = self.build(k, &planner, mutant.as_ref(), |_| {})?;
-        let (score, play) = self.scored(&route);
+        let (score, play) = scored(&route, &kit.planner);
         self.live.on_built(score, play, &route);
         Some((score, route))
     }
+}
 
-    /// Score of a route under the request's own settings.
-    fn score(&self, route: &[Stop]) -> f64 {
-        self.scored(route).0
-    }
-
-    /// Score and play time of a route under the request's own settings.
-    fn scored(&self, route: &[Stop]) -> (f64, f64) {
-        Planner::new(self.model, self.world, self.params, self.profile)
-            .simulate_full(route, None)
-            .map_or((f64::INFINITY, f64::INFINITY), |(score, spent)| (score, spent.total))
-    }
+/// Score and play time of a route under the request's own settings (`Kit::planner`).
+fn scored(route: &[Stop], scorer: &Planner<'_>) -> (f64, f64) {
+    scorer
+        .simulate_full(route, None)
+        .map_or((f64::INFINITY, f64::INFINITY), |(score, spent)| (score, spent.total))
 }
 
 /// Seed of search `search` of a route in round `stage`, from the candidate's seed.
@@ -699,13 +715,15 @@ fn build_all(searcher: &Searcher<'_>, plan: &Tournament, ks: std::ops::Range<usi
     std::thread::scope(|scope| {
         for _ in 0..plan.threads {
             scope.spawn(|| {
+                // Everything this thread builds shares its memoized travels (see `Kit`).
+                let kit = Kit::new(searcher.model, searcher.world, searcher.params, searcher.profile);
                 loop {
                     let k = next.fetch_add(1, Ordering::Relaxed);
                     let stopping = searcher.interrupt.stopping() && k >= plan.threads;
                     if k >= ks.end || stopping || searcher.interrupt.cancelled() {
                         break;
                     }
-                    if let Some((score, route)) = searcher.build_only(k, k < plan.threads) {
+                    if let Some((score, route)) = searcher.build_only(k, k < plan.threads, &kit) {
                         built.locked().push((score, k, route));
                     }
                 }
@@ -806,6 +824,8 @@ fn race(
     std::thread::scope(|scope| {
         for _ in 0..plan.threads {
             scope.spawn(|| {
+                // As in `build_all`: the travels of the thread shared by everything it runs.
+                let kit = Kit::new(searcher.model, searcher.world, searcher.params, searcher.profile);
                 loop {
                     let i = next.fetch_add(1, Ordering::Relaxed);
                     let stopping = searcher.interrupt.stopping() && i >= plan.threads;
@@ -815,7 +835,7 @@ fn race(
                     let Some((k, route)) = candidates[i].locked().take() else {
                         continue;
                     };
-                    if let Some((score, route)) = searcher.search(k, route, slot, i < plan.threads, None) {
+                    if let Some((score, route)) = searcher.search(k, route, slot, i < plan.threads, None, &kit) {
                         qualified.locked().push((score, k, route));
                         searcher.live.qualified.fetch_add(1, Ordering::Relaxed);
                     }
@@ -859,7 +879,9 @@ fn round(
                     // Dropped at the end, panic included: the others stop waiting for it.
                     let member = exchange.member();
                     let seat = (searcher.params.share_every > 0 && searches > 1).then_some(&member);
-                    let result = searcher.search(*k, route.clone(), slot, true, seat);
+                    // As in `build_all`: the travels of the thread shared by everything it runs.
+                    let kit = Kit::new(searcher.model, searcher.world, searcher.params, searcher.profile);
+                    let result = searcher.search(*k, route.clone(), slot, true, seat, &kit);
                     result.map(|(score, r)| (score, *k, r))
                 }));
             }

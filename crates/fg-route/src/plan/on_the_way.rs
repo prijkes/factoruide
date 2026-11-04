@@ -293,8 +293,12 @@ impl Planner<'_> {
         }
         let mobs = farm();
         let mut memo = self.farm_walks.borrow_mut();
+        // Full beyond `FARM_MEMO`: half the walks go, not all of them (the working set stays).
         if memo.len() >= FARM_MEMO {
-            memo.clear();
+            memo.retain(|k, _| (k.1[0] ^ k.1[2]) & 1 == 0);
+            if memo.len() >= FARM_MEMO {
+                memo.clear();
+            }
         }
         memo.insert(key, mobs.clone());
         mobs

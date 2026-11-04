@@ -163,8 +163,13 @@ impl Trips<'_> {
         let leg = self.compute_leg(from, b, level, known, open);
         if let Some(hop) = Hop::of(leg.1) {
             let mut legs = self.legs.borrow_mut();
+            // Full beyond `LEGS_MAX`: half the trips go, not all of them (starting over would
+            // lose the whole working set).
             if legs.len() >= LEGS_MAX {
-                legs.clear();
+                legs.retain(|k, _| (k.0[1] ^ k.1[1] ^ k.2 as u64) & 1 == 0);
+                if legs.len() >= LEGS_MAX {
+                    legs.clear();
+                }
             }
             legs.insert(key, (leg.0, hop));
         }
@@ -484,11 +489,13 @@ impl Trips<'_> {
     }
 
     pub(crate) fn flight_table(&self, known: u128) -> Rc<FlightTable> {
-        self.flights
-            .borrow_mut()
-            .entry(known)
-            .or_insert_with(|| Rc::new(self.world.flights(known)))
-            .clone()
+        // A read first: the table is asked at every flight, computed once per set known.
+        if let Some(table) = self.flights.borrow().get(&known) {
+            return Rc::clone(table);
+        }
+        let table = Rc::new(self.world.flights(known));
+        self.flights.borrow_mut().insert(known, Rc::clone(&table));
+        table
     }
 }
 

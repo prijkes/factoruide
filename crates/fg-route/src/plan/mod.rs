@@ -88,17 +88,33 @@ pub(crate) enum Mode {
 /// A zone change of the greedy construction: (level, time, from, to).
 pub(crate) type ZoneChange = (i64, f64, i64, i64);
 
+/// What `train_gain` is asked for (the last training, the level, the abilities known) with its
+/// answer, in the planner's memo (`Planner::train_memo`).
+type TrainMemo = ((i64, i64, u64), f64);
+
+/// The memoized travels of a planner (`Planner::flights`, `legs` and `farm_walks`), shared by
+/// every planner built `with_caches`: the race builds and scores hundreds of routes and runs
+/// dozens of searches, each with its own planner, and the trips they ask are the same ones.
+/// Content-addressed, so sharing them changes no result; used by one thread only (`Planner`
+/// keeps them behind `Rc` and `RefCell`).
+#[derive(Default)]
+pub(crate) struct PlannerCaches {
+    flights: Rc<FlightTables>,
+    legs: Rc<Legs>,
+    farm_walks: Rc<FarmWalks>,
+}
+
 pub struct Planner<'a> {
     pub model: &'a Model,
     pub world: &'a World,
     pub params: &'a Params,
     pub profile: &'a Profile,
     /// Flight times and prices between known flight paths, by known set.
-    flights: FlightTables,
+    flights: Rc<FlightTables>,
     /// Trips already computed (see `travel::Legs`).
-    legs: Legs,
+    legs: Rc<Legs>,
     /// Mobs farmed on each walk, by level (see `on_the_way::farm_along`).
-    farm_walks: FarmWalks,
+    farm_walks: Rc<FarmWalks>,
     /// The camps nearest to each place grinding starts at (see `camp::camp`).
     near_camps: NearCamps,
     /// The next walk kills every normal mob met, beyond `farm_cap` (a step of an edited route).
@@ -128,6 +144,12 @@ pub struct Planner<'a> {
     /// Where each stop takes place seen from the start (`Places::pos` from the initial state),
     /// by quest: accept, turn-in, then its objectives. The insertions ask it all the time.
     from_start: Vec<Vec<Pos>>,
+    /// The quests whose turn-in the route must keep (`Quest::mandatory`), to check a candidate
+    /// against the evaluated route without walking the whole model.
+    mandatory: Vec<u32>,
+    /// `train_gain` of the last state asked (asked at every stop, its three inputs rarely
+    /// change: the level, the last training, the abilities known).
+    train_memo: Cell<Option<TrainMemo>>,
     /// Check every incremental evaluation of the search against a full replay (`verified`, or
     /// the FG_VERIFY environment variable).
     verify: bool,
@@ -164,9 +186,9 @@ impl<'a> Planner<'a> {
             world,
             params,
             profile,
-            flights: FlightTables::default(),
-            legs: Legs::default(),
-            farm_walks: FarmWalks::default(),
+            flights: Rc::new(FlightTables::default()),
+            legs: Rc::new(Legs::default()),
+            farm_walks: Rc::new(FarmWalks::default()),
             near_camps: NearCamps::default(),
             farm_all: Cell::new(false),
             open_walks: Cell::new(false),
@@ -180,6 +202,14 @@ impl<'a> Planner<'a> {
             followers: followers(model),
             in_dungeon,
             from_start: Vec::new(),
+            mandatory: model
+                .quests
+                .iter()
+                .enumerate()
+                .filter(|(_, q)| q.mandatory)
+                .map(|(i, _)| i as u32)
+                .collect(),
+            train_memo: Cell::new(None),
             verify: std::env::var_os("FG_VERIFY").is_some(),
             abort: None,
             share: None,
@@ -225,6 +255,21 @@ impl<'a> Planner<'a> {
     #[must_use]
     pub fn sharing(self, member: Option<&'a Member<'a>>) -> Self {
         Self { share: member, ..self }
+    }
+
+    /// The same planner memoizing its travels in `caches` (see `PlannerCaches`): every planner
+    /// of one thread sharing them computes each trip, flight table and farmed walk once. Only
+    /// for planners that agree on what the trips depend on (the same request: the race's
+    /// candidates vary their construction weights only), and none of them `explicit`, whose
+    /// trips are walks alone.
+    #[must_use]
+    pub(crate) fn with_caches(self, caches: &PlannerCaches) -> Self {
+        Self {
+            flights: Rc::clone(&caches.flights),
+            legs: Rc::clone(&caches.legs),
+            farm_walks: Rc::clone(&caches.farm_walks),
+            ..self
+        }
     }
 
     /// Whether the construction must give up (see `abortable`).
@@ -449,6 +494,26 @@ impl<'a> Planner<'a> {
             explicit: self.explicit,
             open_walks: self.open_walks.get(),
         }
+    }
+
+    /// What training at the level brings to the fights (`PowerModel::train_gain`), memoized:
+    /// asked at every stop of every replay, and its inputs (the last training, the level, the
+    /// abilities known) change only at a level-up, a training or a turn-in.
+    pub(crate) fn train_gain(&self, p: &crate::power::PowerModel, trained: i64, level: i64, abilities: u64) -> f64 {
+        let key = (trained, level, abilities);
+        if let Some((memo, gain)) = self.train_memo.get()
+            && memo == key
+        {
+            return gain;
+        }
+        let gain = p.train_gain(
+            trained,
+            level,
+            abilities,
+            self.model.abilities.trained(abilities, level),
+        );
+        self.train_memo.set(Some((key, gain)));
+        gain
     }
 
     /// The level a walk at `level` is made at: the zones closed to it (`World::walk_level`), none
