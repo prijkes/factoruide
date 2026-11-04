@@ -300,6 +300,8 @@ export interface Breakdown {
   flight_cost?: number;
   /** Copper spent at the class trainers (the ranks bought on the way). */
   training_cost?: number;
+  /** Copper spent buying best items from vendors (`Params::bis`). */
+  vendor_cost?: number;
   /** Copper in the bags at the start (the addon records it; 0 from scratch). */
   gold_start?: number;
   /** Copper the quests give on their turn-ins. */
@@ -900,6 +902,8 @@ export type RouteStep =
   | { kind: "turn_in"; quest: number }
   /** Learn a flight path (taxi node ID). */
   | { kind: "flight_master"; node: number }
+  /** Buy a best item from a vendor (`Params::bis`): the item (game ID). */
+  | { kind: "buy"; item: number }
   /** Bind the hearthstone (innkeeper ID). */
   | { kind: "bind"; inn: number }
   | { kind: "hearth"; recall?: boolean }

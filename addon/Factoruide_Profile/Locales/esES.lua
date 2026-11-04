@@ -67,6 +67,7 @@ FG.Locales.esES = {
     ["Profession"] = "Profesión",
     ["Practice"] = "Práctica",
     ["Vendor"] = "Vendedor",
+    ["Buy"] = "Comprar",
     ["Step"] = "Paso",
     ["Use the quest item"] = "Usar el objeto de misión",
     ["Full or minimal guide"] = "Guía completa o mínima",

@@ -341,10 +341,13 @@ fn bis_of(model: &Model) -> Vec<BisSlot> {
                                 quest_name: quest.name.clone(),
                             }
                         }
-                        crate::model::BisSource::Vendor(npcs) => BisSource::Vendor {
-                            npcs: npcs
+                        crate::model::BisSource::Vendor(sellers) => BisSource::Vendor {
+                            npcs: sellers
                                 .iter()
-                                .map(|&(id, ref name)| BisVendor { id, name: name.clone() })
+                                .map(|v| BisVendor {
+                                    id: v.id,
+                                    name: v.name.clone(),
+                                })
                                 .collect(),
                         },
                     },

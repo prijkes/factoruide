@@ -170,6 +170,12 @@ export function RouteSummary({ route, notes, compare }: Props) {
               {t("Entraînement")} <Money copper={b.training_cost ?? 0} />
             </>
           )}
+          {(b.vendor_cost ?? 0) > 0 && (
+            <>
+              {" · "}
+              {t("Marchands")} <Money copper={b.vendor_cost ?? 0} />
+            </>
+          )}
         </div>
       )}
       {(route.bis ?? []).length > 0 && <BisPanel bis={route.bis!} />}

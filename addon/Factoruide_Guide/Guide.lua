@@ -91,6 +91,7 @@ local KINDS = {
     deathskip = { icon = "Interface\\Icons\\Spell_Holy_Resurrection", color = "c0c0ff", label = T("Death skip") },
     bind = { icon = "Interface\\GossipFrame\\BinderGossipIcon", color = "40c0ff", label = T("Inn") },
     sell = { icon = "Interface\\GossipFrame\\VendorGossipIcon", color = "ffffff", label = T("Vendor") },
+    buy = { icon = "Interface\\GossipFrame\\VendorGossipIcon", color = "ffd100", label = T("Buy") },
     dungeon = { icon = "Interface\\Icons\\INV_Misc_Key_10", color = "ff4040", label = T("Dungeon") },
     profession = {
         icon = "Interface\\Icons\\Trade_BlackSmithing",
@@ -301,6 +302,18 @@ function IsDone(step, index)
         and (select(2, FG.ProfessionSkill(ProfessionLine(step))) or 0) >= step.sk
     then
         return true -- rank already learned
+    elseif step.k == "buy" then
+        -- Bought from a vendor: done once the item is had (in the bags or worn) or marked so.
+        if state.marks[index or state.step] then return true end
+        if not step.rw then return false end
+        if GetItemCount(step.rw) > 0 then return true end
+        -- Worn: one of the equipment slots holds it.
+        for slot = 1, 19 do
+            local link = GetInventoryItemLink("player", slot)
+            local id = link and tonumber(link:match("item:(%d+)"))
+            if id == step.rw then return true end
+        end
+        return false
     elseif
         step.k == "flight_master"
         or step.k == "train"

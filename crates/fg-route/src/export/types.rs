@@ -43,6 +43,8 @@ pub enum StepKind {
     Train,
     #[serde(rename = "sell")]
     Sell,
+    #[serde(rename = "buy")]
+    Buy,
     #[serde(rename = "profession")]
     Profession,
     #[serde(rename = "dungeon")]
@@ -69,6 +71,7 @@ impl StepKind {
             Self::Teleport => "teleport",
             Self::Train => "train",
             Self::Sell => "sell",
+            Self::Buy => "buy",
             Self::Profession => "profession",
             Self::Dungeon => "dungeon",
             Self::Bind => "bind",
@@ -191,7 +194,8 @@ pub struct Step {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub map: Option<MapPointOut>,
     /// Other places its mobs are, closest first: where to look when there is nothing at `map`
-    /// (mobs to kill or loot, the mob dropping the item that starts a quest).
+    /// (mobs to kill or loot, the mob dropping the item that starts a quest). A buy step: the
+    /// item's other sellers.
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub spots: Vec<MapPointOut>,
     /// The step's NPC patrols: `spots` are places along its path (the addon points at the
@@ -231,7 +235,8 @@ pub struct Step {
     pub elite: bool,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub mob_level: Option<i64>,
-    /// Reward to pick among the quest's choices (item ID) on a turn-in.
+    /// Reward to pick among the quest's choices (item ID) on a turn-in. A buy step: the item
+    /// bought (the addon tells it apart by the step's kind).
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub reward: Option<i64>,
     /// Copper the quest gives on its turn-in (0: none or unknown).

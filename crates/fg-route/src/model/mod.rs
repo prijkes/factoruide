@@ -152,7 +152,7 @@ pub fn load(conn: &Connection, world: &World, profile: &Profile, params: &Params
     // The best item of each slot at each level band (`Params::bis`): nothing without the
     // character power data.
     let bis = match &power {
-        Some(p) => bis::load(conn, p, &quests, &rewards, profile, &sources, params)?,
+        Some(p) => bis::load(conn, p, &quests, &rewards, profile, world, &sources, params)?,
         None => Bis::default(),
     };
     // Required: the quests giving a best item are kept even when slower, like the required class

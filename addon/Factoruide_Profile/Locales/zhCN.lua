@@ -67,6 +67,7 @@ FG.Locales.zhCN = {
     ["Profession"] = "专业",
     ["Practice"] = "练习",
     ["Vendor"] = "商人",
+    ["Buy"] = "购买",
     ["Step"] = "步骤",
     ["Use the quest item"] = "使用任务物品",
     ["Full or minimal guide"] = "完整或精简指南",

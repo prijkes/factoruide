@@ -3,10 +3,11 @@
 //! vendors' stock, never the drops.
 
 use super::sources::Sources;
-use super::types::{EntityKind, Quest};
+use super::types::{EntityKind, Quest, Vendor};
 use crate::Profile;
 use crate::params::{BisMode, Params};
 use crate::power::PowerModel;
+use crate::world::World;
 use anyhow::Result;
 use rusqlite::Connection;
 use std::collections::HashSet;
@@ -37,8 +38,8 @@ pub struct BisEntry {
 pub enum BisSource {
     /// A quest (index in `Model::quests`) giving it as a reward.
     Quest(u32),
-    /// The vendors selling it (NPC ID and English name).
-    Vendor(Vec<(i64, String)>),
+    /// The vendors selling it (index in the power model's items -> the sellers).
+    Vendor(Vec<Vendor>),
 }
 
 /// The best items of a class (`Params::bis`).
@@ -49,6 +50,12 @@ pub struct Bis {
     pub entries: Vec<BisEntry>,
     /// Whether each quest (index in `Model::quests`) gives a best item as one of its rewards.
     pub(super) gives: Vec<bool>,
+    /// The vendors selling each item (index in the power model's items): the ones of the best
+    /// items a vendor sells, empty for the others. Built with the entries.
+    sellers: Vec<Vec<Vendor>>,
+    /// The best items vendors sell (indexes in the power model's items), in the entries'
+    /// order, each once. Built with the entries.
+    vendor_items: Vec<u16>,
 }
 
 impl Bis {
@@ -57,25 +64,45 @@ impl Bis {
     pub fn gives(&self, i: usize) -> bool {
         self.gives.get(i).copied().unwrap_or(false)
     }
+
+    /// The vendors selling best item `i` (index in the power model's items): empty when it is
+    /// not one a vendor sells.
+    pub fn sellers(&self, i: u16) -> &[Vendor] {
+        self.sellers.get(i as usize).map_or(&[], Vec::as_slice)
+    }
+
+    /// The best items vendors sell (indexes in the power model's items), in the entries'
+    /// order, each once.
+    pub fn vendor_items(&self) -> &[u16] {
+        &self.vendor_items
+    }
 }
+
+/// The vendor stock by item (index in the power model's items): each seller and where it
+/// stands.
+type Stock = Vec<Vec<(i64, Vec<(crate::world::Pos, i64)>)>>;
 
 /// The best items of the character's class over its levels (`profile`): for each band of
 /// `BAND` levels and each ranked slot, the best item among the quests' rewards and the
 /// vendors' stock (drops are never guaranteed: they do not count), and which quests give
 /// one. Ranked by the value of the item in the slot (`PowerModel::value_in`), ties to the
 /// lowest item index. `Params::bis` `Off`: nothing is looked for.
+#[expect(clippy::too_many_arguments, reason = "a private loader read once by model::load")]
 pub(super) fn load(
     conn: &Connection,
     power: &PowerModel,
     quests: &[Quest],
     rewards: &[(Vec<u16>, Vec<u16>)],
     profile: &Profile,
+    world: &World,
     sources: &Sources,
     params: &Params,
 ) -> Result<Bis> {
     let mut bis = Bis {
         entries: Vec::new(),
         gives: vec![false; quests.len()],
+        sellers: Vec::new(),
+        vendor_items: Vec::new(),
     };
     if params.bis == BisMode::Off || power.items.is_empty() {
         return Ok(bis);
@@ -88,9 +115,10 @@ pub(super) fn load(
             giver[i as usize] = giver[i as usize].min(q as u32);
         }
     }
-    // The vendors' stock: which NPC sells which item, the character's side only.
+    // The vendors' stock: which NPC sells which item, the character's side only. Vendors of the
+    // other side do not sell to it.
     let hostile: &HashSet<i64> = &sources.entities.hostile;
-    let mut stock: Vec<Vec<(i64, String)>> = vec![Vec::new(); power.items.len()];
+    let mut stock: Stock = vec![Vec::new(); power.items.len()];
     let mut stmt = conn.prepare("SELECT from_id, item_id FROM m_item_source WHERE from_type = 'vendor'")?;
     let rows = stmt.query_map([], |r| Ok((r.get::<_, i64>(0)?, r.get::<_, i64>(1)?)))?;
     for row in rows {
@@ -99,13 +127,35 @@ pub(super) fn load(
         if !hostile.contains(&npc) {
             let sellers = &mut stock[i as usize];
             if !sellers.iter().any(|&(sold, _)| sold == npc) {
-                sellers.push((npc, sources.entities.name(EntityKind::Npc, npc).clone()));
+                let points = sources.entities.points(world, EntityKind::Npc, npc);
+                sellers.push((npc, points));
             }
         }
     }
     for sellers in &mut stock {
-        sellers.sort();
+        sellers.sort_by_key(|&(npc, _)| npc);
     }
+    // The vendors the character can go to for each item: those with a position (some are not
+    // placed by the data), each as the quest objectives' item places have them
+    // (`ItemModel::vendors`).
+    let sellers: Vec<Vec<Vendor>> = (0..power.items.len())
+        .map(|i| {
+            stock[i]
+                .iter()
+                .filter_map(|&(npc, ref points)| {
+                    let (pos, zone) = points.first().copied()?;
+                    Some(Vendor {
+                        id: npc,
+                        name: sources.entities.name(EntityKind::Npc, npc),
+                        zone,
+                        zone_name: world.zone_name(zone).to_owned(),
+                        pos,
+                        stock: sources.entities.vendor_stock.get(&(npc, power.items[i].id)).copied(),
+                    })
+                })
+                .collect()
+        })
+        .collect();
     // The bands of the character's levels, at their top level.
     let top = profile.to_level.min(power.top_level());
     let first = (profile.from_level + BAND - 1) / BAND * BAND;
@@ -126,7 +176,7 @@ pub(super) fn load(
                 }
                 let giver = giver[i as usize];
                 let gettable = giver < u32::MAX && quests[giver as usize].level <= level;
-                if (!gettable && stock[i as usize].is_empty()) || best.is_some_and(|(b, _)| value <= b) {
+                if (!gettable && sellers[i as usize].is_empty()) || best.is_some_and(|(b, _)| value <= b) {
                     continue;
                 }
                 best = Some((value, i));
@@ -137,7 +187,7 @@ pub(super) fn load(
                 bis.gives[giver as usize] = true;
                 BisSource::Quest(giver)
             } else {
-                BisSource::Vendor(stock[item as usize].clone())
+                BisSource::Vendor(sellers[item as usize].clone())
             };
             bis.entries.push(BisEntry {
                 level,
@@ -147,5 +197,18 @@ pub(super) fn load(
             });
         }
     }
+    // The best items vendors sell, each once, in the entries' order: the stops the search may
+    // add (`Kind::Buy`), with their sellers ready.
+    let mut vendor_items = Vec::new();
+    for entry in &bis.entries {
+        if let BisSource::Vendor(sellers) = &entry.source
+            && !sellers.is_empty()
+            && !vendor_items.contains(&entry.item)
+        {
+            vendor_items.push(entry.item);
+        }
+    }
+    bis.sellers = sellers;
+    bis.vendor_items = vendor_items;
     Ok(bis)
 }

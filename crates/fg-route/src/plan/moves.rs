@@ -46,6 +46,10 @@ impl Planner<'_> {
             16 => self.add_visit(route, rng),
             17 => self.rebind_nearby(route, rng),
             18 => Some(self.move_hearth(route, rng)),
+            // A best item a vendor sells, bought where the route passes close to one of its
+            // vendors: only when there is one (`Params::bis`), else the odds of the moves are
+            // those they always were.
+            19 if !self.model.bis.vendor_items().is_empty() => self.buy_visit(route, rng),
             20 => self.move_zone_stay(route, rng),
             21 | 22 => self.gather_zone_visits(route, rng),
             23 | 24 => self.relocate_objective(route, run, rng),
@@ -165,6 +169,31 @@ impl Planner<'_> {
             .expect("the chain contains a stop of the route");
         route.retain(|s| !gone(s));
         Some(Change::edited(first, len))
+    }
+
+    /// A best item a vendor sells (`Params::bis`), bought where the route passes closest to one
+    /// of its vendors: never two stops for one item, the simulation decides whether it pays
+    /// (an upgrade the character can wear and pay for, at a place on the way).
+    fn buy_visit(&self, route: &mut Vec<Stop>, rng: &mut SmallRng) -> Option<Change> {
+        let items = self.model.bis.vendor_items();
+        let item = items[rng.random_range(0..items.len())];
+        let stop = Stop {
+            index: u32::from(item),
+            kind: Kind::Buy,
+        };
+        if route.contains(&stop) {
+            return None;
+        }
+        let sellers = self.model.bis.sellers(item);
+        let s0 = self.initial_state();
+        let nearest = |p: &Pos| (sellers.iter()).map(|v| v.pos.dist(p)).fold(f64::INFINITY, f64::min);
+        let at = (0..route.len())
+            .map(|i| (i, nearest(&self.pos_from_start(&s0, route[i]))))
+            .filter(|(_, d)| d.is_finite())
+            .min_by(|a, b| a.1.total_cmp(&b.1))
+            .map(|(i, _)| i + 1)?;
+        route.insert(at, stop);
+        Some(Change::edited(at, route.len()))
     }
 
     /// A detour to a flight master (`add_flight_visit`), a dungeon run, or the hearthstone

@@ -69,6 +69,7 @@ FG.Locales.frFR = {
     ["Profession"] = "Métier",
     ["Practice"] = "Pratique",
     ["Vendor"] = "Marchand",
+    ["Buy"] = "Acheter",
     ["Step"] = "Étape",
     ["Use the quest item"] = "Utiliser l'objet de quête",
     ["Full or minimal guide"] = "Guide complet ou minimal",

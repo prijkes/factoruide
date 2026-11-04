@@ -741,9 +741,22 @@ impl Planner<'_> {
                 }
             }
             Kind::Hearth => {}
+            // A best item from the vendor the stop went to: the copper it costs is spent and
+            // the item worn (the stop was validated an upgrade).
+            Kind::Buy => self.buy(s, stop.index as u16),
             Kind::Dungeon => self.run_dungeon(s, i),
         }
         None
+    }
+
+    /// A best item bought from the vendor the stop went to (`Kind::Buy`): pay for it and wear
+    /// it (the stop was validated an upgrade).
+    fn buy(&self, s: &mut State, item: u16) {
+        let Some(p) = self.model.power.as_ref() else { return };
+        s.spent.vendor_cost += p.items[item as usize].buy_price;
+        if p.equip(&mut s.gear, item, 1.0, s.level) {
+            self.growth().refresh_power(s);
+        }
     }
 
     /// Kill or use what objective `k` of `quest` still needs at place `here`. Objects gathered

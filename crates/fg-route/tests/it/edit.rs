@@ -106,6 +106,7 @@ fn every_thing_done_is_a_step_of_its_own() {
             RouteStep::Objective { .. } => StepKind::Objective,
             RouteStep::TurnIn { .. } => StepKind::TurnIn,
             RouteStep::FlightMaster { .. } => StepKind::FlightMaster,
+            RouteStep::Buy { .. } => StepKind::Buy,
             RouteStep::Bind { .. } => StepKind::Bind,
             RouteStep::Hearth { .. } => StepKind::Hearth,
             RouteStep::Fly { .. } => StepKind::Fly,
@@ -304,6 +305,11 @@ fn a_guide_with_a_child_quest_replays_in_the_editor() {
     let names = Names::load(&conn, "enUS").unwrap();
     let (steps, _) = editor.steps(&outcome);
     let report = editor.simulate(&steps, &names);
-    let broken: Vec<_> = steps.iter().zip(&report.steps).filter(|(_, r)| r.status == "error").map(|(s, r)| (s, r.reason)).collect();
+    let broken: Vec<_> = steps
+        .iter()
+        .zip(&report.steps)
+        .filter(|(_, r)| r.status == "error")
+        .map(|(s, r)| (s, r.reason))
+        .collect();
     assert_eq!(report.errors, 0, "{broken:?}");
 }

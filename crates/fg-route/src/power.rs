@@ -70,9 +70,10 @@ pub struct Item {
     pub name: String,
     fit: Fit,
     stats: [f32; STATS],
-    required_level: i64,
+    /// Level the character must have to use it (`m_item_stats.required_level`).
+    pub(crate) required_level: i64,
     /// Level from which the class can wear it (mail and plate at 40).
-    wear_level: i64,
+    pub(crate) wear_level: i64,
     /// Copper a vendor sells it for (`fg gold`): 0 without the column (never bought then).
     pub buy_price: i64,
     /// Copper a vendor pays for it (`fg gold`): 0 without the column.
@@ -684,7 +685,7 @@ impl PowerModel {
     }
 
     /// Gear gain of wearing item `i` (owned with `chance`), in levels; the slot it would take.
-    fn gain_of(&self, gear: &Gear, i: usize, chance: f64, level: i64) -> (f64, usize) {
+    pub(crate) fn gain_of(&self, gear: &Gear, i: usize, chance: f64, level: i64) -> (f64, usize) {
         let mut best = (0.0, usize::MAX);
         let level = level.max(self.items[i].required_level);
         // Wearing it changes one slot: only that slot's value is computed again.

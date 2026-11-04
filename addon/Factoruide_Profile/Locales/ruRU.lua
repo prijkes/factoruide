@@ -67,6 +67,7 @@ FG.Locales.ruRU = {
     ["Profession"] = "Профессия",
     ["Practice"] = "Практика",
     ["Vendor"] = "Торговец",
+    ["Buy"] = "Купить",
     ["Step"] = "Шаг",
     ["Use the quest item"] = "Использовать предмет задания",
     ["Full or minimal guide"] = "Полный или минимальный гайд",

@@ -2,7 +2,7 @@
 //! area, the flight master, the innkeeper, the dungeon entrance, the profession trainer.
 
 use super::state::{Kind, State, Stop};
-use crate::model::{EntityKind, Loc, Model};
+use crate::model::{EntityKind, Loc, Model, Vendor};
 use crate::world::{Pos, World};
 
 /// Zone of a hearthstone stop (`Places::zone`): none.
@@ -47,7 +47,40 @@ impl Places<'_> {
             Kind::Bind => self.model.inns[stop.index as usize].clone(),
             Kind::Hearth => self.model.inns[s.bind].clone(),
             Kind::Dungeon => self.model.dungeons[stop.index as usize].entrance.clone(),
+            // A best item bought from a vendor: the seller nearest where the character stands.
+            Kind::Buy => match self.seller(s, stop.index as u16) {
+                Some(vendor) => Loc {
+                    pos: vendor.pos,
+                    zone: vendor.zone,
+                    kind: EntityKind::Npc,
+                    id: vendor.id,
+                    name: vendor.name.clone(),
+                },
+                None => Loc {
+                    pos: s.pos,
+                    zone: s.zone,
+                    kind: EntityKind::Npc,
+                    id: 0,
+                    name: String::new(),
+                },
+            },
         }
+    }
+
+    /// The vendor selling best item `i` (`Kind::Buy`) nearest to where the character stands
+    /// (ties: the first, the sellers in the model's order).
+    pub(crate) fn seller(&self, s: &State, i: u16) -> Option<&Vendor> {
+        self.model
+            .bis
+            .sellers(i)
+            .iter()
+            .min_by(|a, b| s.pos.dist(&a.pos).total_cmp(&s.pos.dist(&b.pos)))
+    }
+
+    /// The first vendor selling best item `i` (`Kind::Buy`): the stop's usual zone and place,
+    /// before the character stands anywhere.
+    fn first_seller(&self, i: u16) -> Option<&Vendor> {
+        self.model.bis.sellers(i).first()
     }
 
     /// Position of a stop, cheap (no allocation) for distance heuristics.
@@ -72,6 +105,8 @@ impl Places<'_> {
             Kind::Bind => self.model.inns[stop.index as usize].pos,
             Kind::Hearth => self.model.inns[s.bind].pos,
             Kind::Dungeon => self.model.dungeons[stop.index as usize].entrance.pos,
+            // The seller the stop would go to from where the character stands.
+            Kind::Buy => self.seller(s, stop.index as u16).map_or(s.pos, |vendor| vendor.pos),
         }
     }
 
@@ -86,6 +121,8 @@ impl Places<'_> {
             // Not a place of its own (the bound inn): a stay by itself.
             Kind::Hearth => HEARTH_ZONE,
             Kind::Dungeon => self.model.dungeons[i].entrance.zone,
+            // The first seller: the zone of the stop, before the character stands anywhere.
+            Kind::Buy => self.first_seller(s.index as u16).map_or(HEARTH_ZONE, |v| v.zone),
         }
     }
 
@@ -101,6 +138,9 @@ impl Places<'_> {
             Kind::Bind => self.model.inns[i].pos,
             Kind::Hearth => self.model.inns[self.model.start_inn].pos,
             Kind::Dungeon => self.model.dungeons[i].entrance.pos,
+            Kind::Buy => self
+                .first_seller(s.index as u16)
+                .map_or(self.model.start.pos, |v| v.pos),
         }
     }
 

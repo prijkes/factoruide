@@ -67,6 +67,7 @@ FG.Locales.ptBR = {
     ["Profession"] = "Profissão",
     ["Practice"] = "Prática",
     ["Vendor"] = "Vendedor",
+    ["Buy"] = "Comprar",
     ["Step"] = "Etapa",
     ["Use the quest item"] = "Usar o item de missão",
     ["Full or minimal guide"] = "Guia completo ou mínimo",

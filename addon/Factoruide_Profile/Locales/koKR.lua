@@ -67,6 +67,7 @@ FG.Locales.koKR = {
     ["Profession"] = "전문 기술",
     ["Practice"] = "연습",
     ["Vendor"] = "상인",
+    ["Buy"] = "구매",
     ["Step"] = "단계",
     ["Use the quest item"] = "퀘스트 아이템 사용",
     ["Full or minimal guide"] = "전체 또는 최소 가이드",

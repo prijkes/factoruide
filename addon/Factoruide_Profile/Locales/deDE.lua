@@ -67,6 +67,7 @@ FG.Locales.deDE = {
     ["Profession"] = "Beruf",
     ["Practice"] = "Üben",
     ["Vendor"] = "Händler",
+    ["Buy"] = "Kaufen",
     ["Step"] = "Schritt",
     ["Use the quest item"] = "Questgegenstand benutzen",
     ["Full or minimal guide"] = "Vollständiger oder minimaler Guide",
