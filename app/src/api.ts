@@ -49,6 +49,7 @@ export interface Params {
   /** The zone the route begins in (AreaTable zone), chosen on the starts' preview; 0 or unset: the planner's choice. */
   start_zone?: number;
   run_speed: number;
+  assume_movement_talents: boolean;
   mount_level: number;
   mount_bonus: number;
   flight_speed: number;
@@ -145,6 +146,7 @@ export interface Params {
   gold_weight: number;
   zone_change_weight: number;
   abandon_weight: number;
+  unlock_delay_weight: number;
   profession_quest_weight: number;
   zone_stay: number;
   forced_dungeons: number[];
@@ -173,6 +175,7 @@ export interface Params {
   common_item_time: number;
   dungeons: boolean;
   dungeon_pickup_ahead: number;
+  child_glue: number;
   /** Levels dungeons are run at, around their level (-3 and +3: from 15 to 21 for a level 18 dungeon). */
   dungeon_from: number;
   dungeon_to: number;
@@ -185,6 +188,10 @@ export interface Params {
   group_kill_speed: number;
   group_shared_drops: boolean;
   explore_radius: number;
+  food_xp: boolean;
+  sleeping_bag: boolean;
+  auction_house: boolean;
+  profession_trainers: boolean;
   edition: Edition;
 }
 
@@ -205,8 +212,8 @@ export interface PlanRequest {
   name?: string | null;
   params?: Params | null;
   required_class_quests?: string[] | null;
-  /** Exact quest IDs or names. Prerequisites are included; omission fails generation. */
-  required_quests?: (number | string)[];
+  /** Exact quest IDs or names, optionally with inclusive turn-in levels. Prerequisites are included; omission fails generation. */
+  required_quests?: RequiredQuest[];
   professions?: ProfessionGoal[];
   /** Language of the guide texts (English where a name is not translated). */
   locale?: string | null;
@@ -217,6 +224,8 @@ export interface PlanRequest {
   /** The professions each of `mates` levels, in their order. */
   mate_professions?: ProfessionGoal[][];
 }
+
+export type RequiredQuest = number | string | { quest: number | string; min_level?: number | null; max_level?: number | null };
 
 /** A point of a game map (uiMapID, percent coordinates). */
 export interface MapPos {
@@ -337,6 +346,8 @@ export interface Step {
   /** Mobs to target (to kill, or that drop the item): their names. */
   mobs?: string[];
   map?: { ui_map: number; x: number; y: number };
+  /** Inside a dungeon: where on its floor's map (a map of kind 4 of the index). */
+  floor?: { ui_map: number; x: number; y: number };
   /** World position: [continent (map ID), x, y]. */
   world?: [number, number, number];
   /** XP the guide has in `level` once the step is done. */

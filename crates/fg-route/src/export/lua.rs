@@ -4,8 +4,24 @@ use super::phrase::Arg;
 use super::types::{Route, RouteProfession, Step, TargetKind};
 use std::fmt::Write as _;
 
-pub fn lua_str(s: &str) -> String {
-    format!("{s:?}")
+/// A Lua string literal: what Lua 5.1 reads back as `text`. Control characters are decimal
+/// escapes (Lua 5.1 has no `\u{..}`), other characters are written as they are (UTF-8).
+pub fn lua_str(text: &str) -> String {
+    let mut out = String::with_capacity(text.len() + 2);
+    out.push('"');
+    for c in text.chars() {
+        match c {
+            '\\' => out.push_str("\\\\"),
+            '"' => out.push_str("\\\""),
+            '\n' => out.push_str("\\n"),
+            c if c.is_ascii_control() => {
+                let _ = write!(out, "\\{:03}", c as u32);
+            }
+            c => out.push(c),
+        }
+    }
+    out.push('"');
+    out
 }
 
 /// Professions as the addon reads them: key, name, skill line, target, start and curve.
@@ -72,9 +88,17 @@ pub fn to_lua(routes: &[Route]) -> String {
                     .join(", ")
             )
         };
+        let buffs = if r.buffs.is_empty() {
+            String::new()
+        } else {
+            format!(
+                " buffs = {{ {} }},",
+                r.buffs.iter().map(|b| lua_str(b)).collect::<Vec<_>>().join(", ")
+            )
+        };
         let _ = writeln!(
             out,
-            "FG.Routes[{}] = {{ race = {}, class = {}, faction = {}, locale = {}, fromLevel = {}, toLevel = {}, time = {}, levels = {{ {} }}, professions = {{ {} }}, reputations = {{ {} }}, spells = {{ {} }}, checkpoints = {{ {} }},{players} steps = {{",
+            "FG.Routes[{}] = {{ race = {}, class = {}, faction = {}, locale = {}, fromLevel = {}, toLevel = {}, time = {}, levels = {{ {} }}, professions = {{ {} }}, reputations = {{ {} }}, spells = {{ {} }}, checkpoints = {{ {} }},{players}{buffs} steps = {{",
             lua_str(&r.name),
             r.race_id,
             r.class_id,
@@ -244,6 +268,16 @@ pub fn to_lua(routes: &[Route]) -> String {
             if let Some(xp) = s.reward_xp {
                 fields.push(format!("rx = {xp}"));
             }
+            if !s.party_reward_xp.is_empty() {
+                fields.push(format!(
+                    "rxp = {{ {} }}",
+                    s.party_reward_xp
+                        .iter()
+                        .map(ToString::to_string)
+                        .collect::<Vec<_>>()
+                        .join(", ")
+                ));
+            }
             if !s.spells.is_empty() {
                 fields.push(format!(
                     "sp = {{ {} }}",
@@ -331,4 +365,19 @@ fn lighten_walk(step: &Step) -> Vec<[f64; 2]> {
     }
     kept.pop();
     kept.iter().map(|[x, y]| [x.round(), y.round()]).collect()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::lua_str;
+
+    /// Lua 5.1 reads `\ddd` (always three digits here: a digit after one stays a digit) and no
+    /// `\u{..}`: a no-break space or a zero-width space go as they are.
+    #[test]
+    fn a_string_is_written_as_lua_5_1_reads_it() {
+        assert_eq!(
+            lua_str("a\"b\\c\nd\te\u{7f}1\u{a0}\u{200b}é"),
+            "\"a\\\"b\\\\c\\nd\\009e\\1271\u{a0}\u{200b}é\""
+        );
+    }
 }

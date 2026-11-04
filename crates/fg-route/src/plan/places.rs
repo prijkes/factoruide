@@ -5,6 +5,24 @@ use super::state::{Kind, State, Stop};
 use crate::model::{EntityKind, Loc, Model, Vendor};
 use crate::world::{Pos, World};
 
+/// The dungeon stop `stop` takes place in from state `s` (`Places::inside`).
+pub(crate) fn stop_inside(model: &Model, s: &State, stop: Stop) -> Option<usize> {
+    let nearest = |locs: &[Loc]| {
+        locs.iter()
+            .min_by(|a, b| s.pos.dist(&a.pos).total_cmp(&s.pos.dist(&b.pos)))
+            .and_then(|l| l.inside)
+    };
+    let i = stop.index as usize;
+    match stop.kind {
+        Kind::Accept => nearest(&model.quests[i].starts),
+        Kind::TurnIn => nearest(&model.quests[i].ends),
+        Kind::Objective(k) => model.quests[i].objectives[k as usize].nearest(&s.pos).loc.inside,
+        Kind::Dungeon => return Some(i),
+        Kind::LearnFlight | Kind::Bind | Kind::Hearth | Kind::Buy => None,
+    }
+    .map(usize::from)
+}
+
 /// Zone of a hearthstone stop (`Places::zone`): none.
 const HEARTH_ZONE: i64 = -1;
 
@@ -42,6 +60,8 @@ impl Places<'_> {
                     kind: EntityKind::Taxi,
                     id: n.id,
                     name: n.name.clone(),
+                    inside: None,
+                    floor: None,
                 }
             }
             Kind::Bind => self.model.inns[stop.index as usize].clone(),
@@ -55,6 +75,8 @@ impl Places<'_> {
                     kind: EntityKind::Npc,
                     id: vendor.id,
                     name: vendor.name.clone(),
+                    inside: None,
+                    floor: None,
                 },
                 None => Loc {
                     pos: s.pos,
@@ -62,6 +84,8 @@ impl Places<'_> {
                     kind: EntityKind::Npc,
                     id: 0,
                     name: String::new(),
+                    inside: None,
+                    floor: None,
                 },
             },
         }
@@ -81,6 +105,11 @@ impl Places<'_> {
     /// before the character stands anywhere.
     fn first_seller(&self, i: u16) -> Option<&Vendor> {
         self.model.bis.sellers(i).first()
+    }
+
+    /// The dungeon a stop takes place in (`Loc::inside`), as `loc` chooses its place.
+    pub(crate) fn inside(&self, s: &State, stop: Stop) -> Option<usize> {
+        stop_inside(self.model, s, stop)
     }
 
     /// Position of a stop, cheap (no allocation) for distance heuristics.
@@ -124,6 +153,28 @@ impl Places<'_> {
             // The first seller: the zone of the stop, before the character stands anywhere.
             Kind::Buy => self.first_seller(s.index as u16).map_or(HEARTH_ZONE, |v| v.zone),
         }
+    }
+
+    /// The dungeon a stop usually takes place in (as `usual_pos`).
+    pub(crate) fn usual_inside(&self, s: Stop) -> Option<usize> {
+        let i = s.index as usize;
+        match s.kind {
+            Kind::Accept => self.model.quests[i].starts[0].inside,
+            Kind::Objective(k) => self.model.quests[i].objectives[k as usize].loc.inside,
+            Kind::TurnIn => self.model.quests[i].ends[0].inside,
+            Kind::Dungeon => return Some(i),
+            Kind::LearnFlight | Kind::Bind | Kind::Hearth | Kind::Buy => None,
+        }
+        .map(usize::from)
+    }
+
+    /// The dungeons a route enters: its dungeon stops and those of its stops inside one.
+    pub(crate) fn entered(&self, route: &[Stop]) -> std::collections::BTreeSet<u32> {
+        route
+            .iter()
+            .filter_map(|&s| self.usual_inside(s))
+            .map(|d| d as u32)
+            .collect()
     }
 
     /// Usual position of a stop (quest giver, objective area, turn-in NPC, flight master...),

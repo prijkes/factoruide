@@ -75,14 +75,6 @@ pub const CHECKS: &[Check] = &[
         error: true,
     },
     Check {
-        name: "child-quests",
-        what: "quests handed in on the way to another's turn-in (its children: Distracting Jarven \
-               for Bitter Rivals) that the guide cannot place where they end: the parent is \
-               planned without them and its turn-in may be impossible. Give the place in the \
-               quest data",
-        error: true,
-    },
-    Check {
         name: "starter-drops",
         what: "quests started by an item dropped by creatures with no drop chance known: the \
                planner assumes 10% when one creature (or only unique ones) drops it, and a rare \
@@ -227,11 +219,6 @@ pub fn audit(
     } else {
         HashSet::new()
     };
-    let children = if on("child-quests") {
-        child_links(conn)?
-    } else {
-        Vec::new()
-    };
     let starter_drops = if on("starter-drops") {
         starter_drops(conn)?
     } else {
@@ -325,11 +312,6 @@ pub fn audit(
                 .into_iter()
                 .for_each(&mut add);
         }
-        if on("child-quests") {
-            children_left_out(&prepared.model, &children)
-                .into_iter()
-                .for_each(&mut add);
-        }
         if on("starter-drops") {
             unknown_starter_drops(&prepared.model, &starter_drops)
                 .into_iter()
@@ -382,7 +364,7 @@ pub fn audit(
                 };
                 if required {
                     let own = class_quest_ids(conn, p.profile.class_id)?;
-                    class_quests_left_out(&class, &p.profile.required_class_quests, &own, &p.model)
+                    class_quests_left_out(&class, &p.profile.class_requirements, &own, &p.model)
                         .into_iter()
                         .for_each(&mut add);
                 }
@@ -570,26 +552,46 @@ fn class_quest_ids(conn: &Connection, class_id: i64) -> Result<HashSet<i64>> {
     Ok(ids)
 }
 
-/// Required class quests of a class (by name) the model leaves out: skipped while building it,
-/// or no longer required because a prerequisite cannot be planned.
-fn class_quests_left_out(class: &str, required: &[String], own: &HashSet<i64>, model: &Model) -> Vec<Finding> {
-    let skipped = (model.skipped.iter())
-        .filter(|(id, name, why)| required.contains(name) && own.contains(id) && why != "repeatable")
-        .map(|(id, name, why)| (*id, name, why.as_str()));
-    // Of a name teaching a spell, only those leading to it are required.
-    let designated = crate::model::required_by_name(&model.quests);
-    let released = (model.quests.iter())
-        .filter(|q| required.contains(&q.name) && own.contains(&q.id) && !q.mandatory)
-        .filter(|q| designated.contains(&q.id))
-        .map(|q| (q.id, &q.name, "a prerequisite cannot be planned"));
-    skipped
-        .chain(released)
-        .map(|(id, name, why)| Finding {
-            check: "class-quests",
-            key: format!("{class} quest {id}"),
-            detail: format!("{name} ({id}): {why}"),
-            races: Vec::new(),
-            npcs: Vec::new(),
+/// Required class quests of a class the model leaves out: skipped while building it (no version
+/// can be planned), or no longer required because a prerequisite cannot be planned.
+fn class_quests_left_out(
+    class: &str,
+    requirements: &[crate::model::ClassRequirement],
+    own: &HashSet<i64>,
+    model: &Model,
+) -> Vec<Finding> {
+    requirements
+        .iter()
+        .filter(|requirement| requirement.selected)
+        .filter_map(|requirement| {
+            let members: Vec<i64> = requirement
+                .quests
+                .iter()
+                .copied()
+                .filter(|id| own.contains(id))
+                .collect();
+            let first = *members.first()?;
+            let done = |id: &i64| {
+                model
+                    .quests
+                    .iter()
+                    .any(|q| q.id == *id && (q.mandatory || !q.exclusive.is_empty()))
+            };
+            if members.iter().any(done) {
+                return None;
+            }
+            let skipped = model.skipped.iter().find(|(id, _, _)| members.contains(id));
+            let (id, why) = match skipped {
+                Some((id, _, why)) => (*id, why.as_str()),
+                None => (first, "a prerequisite cannot be planned"),
+            };
+            Some(Finding {
+                check: "class-quests",
+                key: format!("{class} quest {id}"),
+                detail: format!("{} ({id}): {why}", requirement.name),
+                races: Vec::new(),
+                npcs: Vec::new(),
+            })
         })
         .collect()
 }
@@ -678,7 +680,7 @@ fn out_of_reach(
             .chain(
                 q.objectives
                     .iter()
-                    .filter(|o| o.dungeon.is_none())
+                    .filter(|o| o.dungeon_of().is_none())
                     .map(|o| (o.text.clone(), &o.loc)),
             );
         for (what, loc) in places {
@@ -772,7 +774,7 @@ fn ambiguous_floors(world: &World, model: &Model) -> Vec<Finding> {
             .chain(q.ends.iter().map(|l| ("ends at", l)))
             .chain(
                 (q.objectives.iter())
-                    .filter(|o| o.dungeon.is_none())
+                    .filter(|o| o.dungeon_of().is_none())
                     .flat_map(|o| std::iter::once(&o.loc).chain(o.alts.iter().map(|a| &a.loc)))
                     .map(|l| ("objective at", l)),
             );
@@ -960,7 +962,7 @@ fn uncovered_source_items(model: &Model, source_items: &HashMap<i64, SourceItems
         let Some(needs) = source_items.get(&q.id) else {
             continue;
         };
-        if needs.assembled || q.objectives.iter().any(|o| o.dungeon.is_some()) {
+        if needs.assembled || q.objectives.iter().any(|o| o.dungeon_of().is_some()) {
             continue;
         }
         for (item, name, found) in &needs.items {
@@ -1271,41 +1273,6 @@ fn timed_quests(model: &Model, untimed: &HashMap<i64, String>) -> Vec<Finding> {
         .collect()
 }
 
-/// (parent, parent's name, child, child's name) of the children the guides hand in on the way
-/// (the repeatable ones, see the model's `LinkKind::Child`).
-fn child_links(conn: &Connection) -> Result<Vec<(i64, String, i64, String)>> {
-    let mut stmt = conn.prepare(
-        "SELECT p.id, p.name, c.id, c.name FROM m_quest_link l
-         JOIN m_quest p ON p.id = l.quest_id JOIN m_quest c ON c.id = l.other_id
-         WHERE l.kind = 'child' AND coalesce(c.special_flags, 0) & 1 != 0 ORDER BY p.id, c.id",
-    )?;
-    let rows = stmt
-        .query_map([], |r| Ok((r.get(0)?, r.get(1)?, r.get(2)?, r.get(3)?)))?
-        .collect::<rusqlite::Result<_>>()?;
-    Ok(rows)
-}
-
-/// Planned quests one of whose children has no objective handing it in.
-fn children_left_out(model: &Model, children: &[(i64, String, i64, String)]) -> Vec<Finding> {
-    let mut out = Vec::new();
-    for (parent, parent_name, child, child_name) in children {
-        let Some(&i) = model.index.get(parent) else { continue };
-        if model.quests[i].objectives.iter().any(|o| o.child == Some(*child)) {
-            continue;
-        }
-        out.push(Finding {
-            check: "child-quests",
-            key: format!("quest {parent} child {child}"),
-            detail: format!(
-                "{parent_name} ({parent}) is planned without {child_name} ({child}): where it is handed in is unknown"
-            ),
-            races: Vec::new(),
-            npcs: Vec::new(),
-        });
-    }
-    out
-}
-
 /// Quests left out for something the data does not know (`unknown_in_data`) that quests of the
 /// guide need first: all of them (`pre_all`), or the only ones of a choice (`pre_any`, all left
 /// out). Secure the Mountain's den had no place, which lost the report taken back after it.
@@ -1490,7 +1457,7 @@ mod tests {
                 })
                 .collect()
         };
-        let found = |p: &crate::job::Prepared, mobs: &[Hostile]| guarded_givers(&p.world, &p.model, mobs).len();
+        let found = |p: &job::Prepared, mobs: &[Hostile]| guarded_givers(&p.world, &p.model, mobs).len();
         p.model.quests[0].start_guard = guard(level + GUARD_GAP);
         assert_eq!(found(&p, &mobs(2, (level + GUARD_GAP) as u8)), 1);
         assert_eq!(

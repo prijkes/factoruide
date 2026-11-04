@@ -67,6 +67,8 @@ impl QuestBuilder<'_> {
             kind: EntityKind::Item,
             id: target,
             name: name.clone(),
+            inside: None,
+            floor: None,
         };
         // Objects giving it only now and then (random containers): bought instead when sold.
         let object_chance = places
@@ -144,7 +146,10 @@ impl QuestBuilder<'_> {
             }
         } else if let Some(handed) = self.handed_by(quest.row.id, target, &places) {
             handed
-        } else if self.params.auction_items.contains(&target) && !self.auction_houses().is_empty() {
+        } else if (self.params.auction_items.contains(&target)
+            || self.params.auction_house && !self.sources.entities.not_sold.contains(&target))
+            && !self.auction_houses().is_empty()
+        {
             // Made by a profession: bought, from the auction house nearest the quest giver.
             let (pos, zone, auctioneers) = (self.auction_houses().into_iter())
                 .min_by(|a, b| a.0.dist(&quest.anchor).total_cmp(&b.0.dist(&quest.anchor)))
@@ -179,8 +184,8 @@ impl QuestBuilder<'_> {
         Ok(Some(objective))
     }
 
-    /// An item nothing gives but the turn-in of other quests (not repeatable ones): got there,
-    /// for no work, once one of them is turned in (`Objective::handed_by`).
+    /// An item nothing gives but the turn-in of other quests: got there, for no work, once one
+    /// of them is turned in (`Objective::handed_by`).
     fn handed_by(&self, quest: i64, item: i64, places: &ItemPlaces) -> Option<Objective> {
         // Questie lists the NPC who hands the quest reward as its source: not one to kill.
         let entities = &self.sources.entities;
@@ -193,24 +198,10 @@ impl QuestBuilder<'_> {
             .get(&item)?
             .iter()
             .copied()
-            .filter(|g| *g != quest && !self.sources.repeatable.contains(g))
+            .filter(|g| *g != quest)
             .collect();
         let name = self.sources.entities.name(EntityKind::Item, item);
-        let Some(at) = givers.iter().find_map(|g| self.ender(*g)) else {
-            // Handed by a repeatable quest with nothing to do (Xizk's Fine Gold Thread): asked for
-            // at the NPC who takes it back, which is no quest of the guide.
-            let talk = |g: &i64| self.sources.objectives.get(g).is_none_or(Vec::is_empty);
-            let at = (self.sources.reward_of.get(&item)?.iter())
-                .filter(|g| **g != quest && self.sources.repeatable.contains(g) && talk(g))
-                .find_map(|g| self.ender(*g))?;
-            let loc = Loc {
-                kind: EntityKind::Item,
-                id: item,
-                name: name.clone(),
-                ..at
-            };
-            return Some(Objective::plain(loc, format!("Get {name}"), 30.0));
-        };
+        let at = givers.iter().find_map(|g| self.ender(*g))?;
         Some(Objective {
             handed_by: givers,
             ..Objective::plain(
@@ -231,7 +222,7 @@ impl QuestBuilder<'_> {
     fn auction_houses(&self) -> Vec<AuctionHouse> {
         let entities = &self.sources.entities;
         let mut houses: Vec<AuctionHouse> = Vec::new();
-        for &id in &entities.auctioneers {
+        for &id in entities.auctioneers.iter() {
             for (pos, zone) in entities.points(self.world, EntityKind::Npc, id) {
                 let name = entities.name(EntityKind::Npc, id);
                 match houses.iter_mut().find(|h| h.0.dist(&pos) <= AUCTION_HOUSE) {

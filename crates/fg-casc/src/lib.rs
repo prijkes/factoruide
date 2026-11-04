@@ -256,9 +256,7 @@ fn build_key(build_info: &str, product: &str) -> Result<String> {
     for line in lines {
         let fields: Vec<&str> = line.split('|').collect();
         if fields.get(product_at).is_some_and(|p| *p == product) {
-            let key = fields
-                .get(build_at)
-                .context("a product line without its build key")?;
+            let key = fields.get(build_at).context("a product line without its build key")?;
             return Ok((*key).to_owned());
         }
     }

@@ -8,18 +8,49 @@ impl Planner<'_> {
     /// Exact requirements checked against what the simulation actually turned in.
     fn required_missing(&self, route: &[Stop]) -> Vec<String> {
         let Some(end) = self.end_of(route) else {
-            return vec!["route cannot be simulated".into()];
+            return vec![
+                self.diagnose(route)
+                    .map_or_else(|| "route cannot be simulated".into(), |(_, why)| why),
+            ];
         };
         self.model
             .quests
             .iter()
             .enumerate()
             .filter(|(i, q)| q.required && !end.turned.contains(i))
-            .map(|(_, q)| format!("{} ({})", q.name, q.id))
+            .map(|(_, q)| {
+                let label = format!("{} ({})", q.name, q.id);
+                if q.completion_window.min_level.is_some() || q.completion_window.max_level.is_some() {
+                    format!("{label}, completion at {}", q.completion_window)
+                } else {
+                    label
+                }
+            })
+            .collect()
+    }
+
+    /// The forced dungeons the route does not run (as `finish` counts them, but exact).
+    fn forced_dungeons_missing(&self, route: &[Stop]) -> Vec<String> {
+        let Some((_, end)) = self.simulate_state(route, None) else {
+            return Vec::new();
+        };
+        (0..self.model.dungeons.len())
+            .filter(|&d| {
+                self.availability().dungeon_forced(d)
+                    && end.dungeons & (1u128 << d) == 0
+                    && self.model.dungeons[d].min_level < self.profile.to_level
+            })
+            .map(|d| self.model.dungeons[d].name.clone())
             .collect()
     }
 
     pub fn validate_required(&self, route: &[Stop]) -> anyhow::Result<()> {
+        let dungeons = self.forced_dungeons_missing(route);
+        anyhow::ensure!(
+            dungeons.is_empty(),
+            "no route running every forced dungeon was found: {}",
+            dungeons.join(", ")
+        );
         if !self.model.quests.iter().any(|q| q.required) {
             return Ok(());
         }
@@ -205,7 +236,7 @@ impl Planner<'_> {
             let Kind::Objective(k) = s.kind else { continue };
             let q = self.quest(s.index);
             let o = &q.objectives[k as usize];
-            if o.kills <= 0.0 || o.dungeon.is_some() || self.model.unlocks[s.index as usize] > 0.0 {
+            if o.kills <= 0.0 || o.dungeon_of().is_some() || self.model.unlocks[s.index as usize] > 0.0 {
                 continue;
             }
             if o.kills * self.combat().kill_time(q.level, 0.0, o) < 240.0 {

@@ -17,6 +17,7 @@ impl QuestBuilder<'_> {
         // their XP goes to those it is for).
         profile.members_of(r.races, r.classes) != 0
             && (!profile.required_quests.is_empty()
+                || self.sources.class_quest_ids.contains(&r.id)
                 || profile.within_levels(level, min_level, self.params.max_quest_above))
     }
 
@@ -41,9 +42,6 @@ impl QuestBuilder<'_> {
         }
         if self.sources.pvp.contains(&r.id) && !self.params.pvp_quests {
             return Err("PvP (battleground) quest");
-        }
-        if r.special.unwrap_or(0) & 1 != 0 {
-            return Err("repeatable");
         }
         // A negative spell is one the character must not know yet: the spell the quest teaches
         // (Camping 101's Camp Tent), never known before taking it.

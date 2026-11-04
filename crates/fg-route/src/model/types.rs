@@ -15,17 +15,22 @@ pub struct Profile {
     pub start_npc: i64,
     pub from_level: i64,
     pub to_level: i64,
-    /// Names of class quests that must be done (see overrides/class_quests.toml).
+    /// Names of the class requirements the guide includes (`ClassRequirement::name`, or the name
+    /// of one of its quests: the guides saved before the requirements).
     pub required_class_quests: Vec<String>,
+    /// The class requirements of every class of the group (`m_class_requirement`): those of
+    /// `required_class_quests` are `selected`.
+    pub class_requirements: Vec<ClassRequirement>,
     pub quest_overrides: Vec<QuestOverride>,
     /// Exact quests selected by the player.
-    pub required_quests: Vec<i64>,
+    pub required_quests: Vec<QuestRequirement>,
     /// Confirmed completions from the starting profile, never inferred from character level.
     pub completed_quests: HashSet<i64>,
     /// Class quests that make the character stronger: name and power gained.
     pub class_powers: Vec<(String, f64)>,
     /// Class trainer spells that count for power (see overrides/spells.toml).
     pub spell_weights: Vec<(String, crate::power::SpellWeight)>,
+    pub abilities: Vec<crate::abilities::MovementDef>,
     /// Dungeon settings (see overrides/dungeons.toml).
     pub dungeons: Vec<DungeonDef>,
     /// The class's teleports that a quest teaches (see overrides/travel.toml).
@@ -43,9 +48,58 @@ pub struct Profile {
     pub player: String,
 }
 
+/// A class quest the route must do (`m_class_requirement`): the quests teaching a spell, or the
+/// overrides' list. The quests are its versions, the last quest of each chain: the route does one
+/// of those the character can take, the others are closed.
+#[derive(Debug, Clone, PartialEq)]
+pub struct ClassRequirement {
+    pub class_id: i64,
+    pub name: String,
+    /// The spell it teaches.
+    pub spell: Option<i64>,
+    /// The level it must be done by, once it can be started.
+    pub max_level: Option<i64>,
+    pub quests: Vec<i64>,
+    /// The names of its quests (the guides saved before the requirements name those).
+    pub quest_names: Vec<String>,
+    /// The guide includes it (the others still give their power).
+    pub selected: bool,
+}
+
+/// Inclusive levels when a required quest is turned in, before its XP reward.
+#[derive(Debug, Clone, Copy, Default, serde::Serialize, serde::Deserialize)]
+pub struct CompletionWindow {
+    pub min_level: Option<i64>,
+    pub max_level: Option<i64>,
+}
+
+impl CompletionWindow {
+    pub fn contains(self, level: i64) -> bool {
+        self.min_level.is_none_or(|min| level >= min) && self.max_level.is_none_or(|max| level <= max)
+    }
+}
+
+impl std::fmt::Display for CompletionWindow {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match (self.min_level, self.max_level) {
+            (Some(min), Some(max)) => write!(f, "levels {min}–{max}"),
+            (Some(min), None) => write!(f, "level {min} or later"),
+            (None, Some(max)) => write!(f, "level {max} or earlier"),
+            (None, None) => write!(f, "any level"),
+        }
+    }
+}
+
+#[derive(Debug, Clone)]
+pub struct QuestRequirement {
+    pub id: i64,
+    pub window: CompletionWindow,
+}
+
 /// Another player of a group guide.
 #[derive(Debug, Clone)]
 pub struct Mate {
+    pub class_name: String,
     /// "Name-Realm".
     pub name: String,
     pub race_id: i64,
@@ -147,6 +201,30 @@ pub struct Loc {
     pub kind: EntityKind,
     pub id: i64,
     pub name: String,
+    /// The dungeon it is inside (index in `Model::dungeons`, below 128 as `State::dungeons`):
+    /// reached by entering it.
+    pub inside: Option<u8>,
+    /// Where it stands on its dungeon's floor, when known (`dungeon_spawn`).
+    pub floor: Option<FloorPoint>,
+}
+
+/// A point on a dungeon floor's map: the floor (its map, `dungeon_floor`) and percent
+/// coordinates on it.
+#[derive(Debug, Clone, Copy, PartialEq)]
+pub struct FloorPoint {
+    pub ui_map: i32,
+    pub x: f32,
+    pub y: f32,
+}
+
+/// A trainer of a profession.
+#[derive(Debug, Clone)]
+pub struct ProfessionTrainer {
+    /// The profession's skill line.
+    pub line: i64,
+    /// The highest skill cap its title says it teaches (75, 150, 225 or 300).
+    pub cap: i64,
+    pub loc: Loc,
 }
 
 #[derive(Debug, Clone)]
@@ -197,10 +275,6 @@ pub struct Objective {
     /// Common loot the route's kills gather by themselves (index in `Model::loot`): only what
     /// the bags lack is gathered or bought, `extra` is the time for the whole count.
     pub stock: Option<u16>,
-    /// The child quest this objective hands in (see `LinkKind::Child`): done once it is turned in.
-    pub child: Option<i64>,
-    /// That child quest's name.
-    pub child_name: Option<String>,
     /// An item bought: the vendors selling it, the one the place is at first, then the others
     /// from the nearest.
     pub vendors: Vec<Vendor>,
@@ -228,6 +302,11 @@ pub struct Vendor {
 }
 
 impl Objective {
+    /// The dungeon the objective belongs to: done by entering it (`dungeon`), or inside it.
+    pub fn dungeon_of(&self) -> Option<usize> {
+        self.dungeon.or(self.loc.inside.map(usize::from))
+    }
+
     /// Its places: itself, then its `alts`.
     pub fn places(&self) -> impl Iterator<Item = &Self> {
         std::iter::once(self).chain(&self.alts)
@@ -429,11 +508,19 @@ pub struct Quest {
     pub carried: bool,
     /// Class quests: always planned, the optimizer cannot drop them.
     pub mandatory: bool,
+    /// A class unlock kept although it is below the guide's levels (`Params::unlock_delay_weight`).
+    pub late_unlock: bool,
     /// Required because its zone is forced (`Params::forced_zones`), or as a prerequisite of
     /// such a quest: `mandatory` too, reported apart from the class quests.
     pub zone_forced: bool,
     /// Explicit player requirement or a prerequisite selected to reach one.
     pub required: bool,
+    pub completion_window: CompletionWindow,
+    /// The window is the default one (`default_completion_windows`), not the player's: a guide
+    /// replayed as it is (an older one, the editor's) is not refused for it.
+    pub implicit_window: bool,
+    /// Earliest deadline of the requirements this quest helps complete.
+    pub priority_deadline: Option<i64>,
     /// Profession quest: index in `Model::professions` and skill needed to accept it.
     pub skill: Option<(usize, i64)>,
     /// Class quest making the character stronger: index in `Profile::class_powers` (quests of
@@ -441,6 +528,8 @@ pub struct Quest {
     pub power: Option<(u8, f64)>,
     /// The spell its turn-in teaches (a pet, a totem...).
     pub reward_spell: Option<i64>,
+    /// The items its turn-in gives (`m_quest_reward`, offered as a choice or not).
+    pub reward_items: Vec<i64>,
     /// Hostile mobs around its givers and its turn-ins (the hardest of them).
     pub start_guard: Guard,
     pub end_guard: Guard,
@@ -452,6 +541,13 @@ pub struct Quest {
 }
 
 impl Quest {
+    /// The dungeon one of its objectives belongs to (`Objective::dungeon_of`), else the one it is
+    /// handed in inside.
+    pub fn dungeon(&self) -> Option<usize> {
+        (self.objectives.iter().find_map(Objective::dungeon_of))
+            .or_else(|| self.ends.iter().find_map(|l| l.inside.map(usize::from)))
+    }
+
     /// The `pre_any` quests that must be done: `pre_need` of them, at most the ones that exist.
     pub fn pre_any_needed(&self, plannable: usize) -> usize {
         self.pre_need.min(plannable.max(1))
@@ -466,7 +562,11 @@ impl Quest {
 }
 
 pub struct Model {
+    /// Configured class powers whose reward is already known.
+    pub known_class_powers: u32,
     pub abilities: crate::abilities::Abilities,
+    /// Class prerequisites proven by completion or an unambiguous learned reward.
+    pub known_class_prerequisites: HashSet<i64>,
     pub quests: Vec<Quest>,
     pub dungeons: Vec<Dungeon>,
     pub professions: Vec<ProfessionPlan>,
@@ -479,6 +579,8 @@ pub struct Model {
     pub chain_top: Vec<i64>,
     /// Class trainers and innkeepers the character can use.
     pub trainers: Vec<Loc>,
+    /// Profession trainers the character can use, loaded only for `Params::profession_trainers`.
+    pub profession_trainers: Vec<ProfessionTrainer>,
     pub inns: Vec<Loc>,
     /// Vendors friendly to the character: the bags' loot is sold there.
     pub vendors: Vec<Loc>,
@@ -534,7 +636,8 @@ pub struct Model {
 pub struct Teleport {
     pub name: String,
     pub level: i64,
-    pub quests: Vec<usize>,
+    /// Quest-taught ability, or zero for a city trainer teleport.
+    pub ability: u64,
     pub to: Loc,
 }
 
@@ -542,6 +645,7 @@ pub struct Teleport {
 /// taking "Moonglade" teaches the druid Teleport: Moonglade.
 #[derive(Debug, Clone, serde::Deserialize)]
 pub struct TeleportDef {
+    pub spell: i64,
     pub name: String,
     /// Class file name, lower case (druid).
     pub class: String,

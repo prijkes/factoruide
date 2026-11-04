@@ -63,20 +63,31 @@ pub(crate) fn camp_index(model: &Model, radius: f64) -> CampIndex {
 const TIMED_SHARE: f64 = 0.75;
 
 impl Planner<'_> {
+    /// Training after a step: the class, then the professions.
+    pub(crate) fn train(&self, s: &mut State, record: &mut impl FnMut(&State, Event)) {
+        self.train_class(s, record);
+        self.train_professions(s, record);
+    }
+
     /// Class training: on the way when a trainer is close, or a dedicated trip when late.
     /// With class spell data, training is due when the spells the trainer sells make fights
     /// `train_min_gain` faster, late at `train_trip_gain`; else every `train_every` levels
     /// (and for the other classes of a group).
-    pub(crate) fn train(&self, s: &mut State, record: &mut impl FnMut(&State, Event)) {
+    fn train_class(&self, s: &mut State, record: &mut impl FnMut(&State, Event)) {
         // Nothing left to fight for once at the target level (the guide ends there).
         if self.model.trainers.is_empty() || self.explicit || s.level >= self.profile.to_level {
             return;
         }
         let every = s.level >= s.trained + self.params.train_every;
         let every_late = s.level >= s.trained + self.params.train_every + self.params.train_max_delay;
-        let (due, late) = match self.model.power.as_ref().filter(|p| p.has_spells()) {
+        let (mut due, late) = match self.model.power.as_ref().filter(|p| p.has_spells()) {
             Some(p) => {
-                let gain = self.train_gain(p, s.trained, s.level, s.abilities);
+                let gain = p.train_gain(
+                    s.trained,
+                    s.level,
+                    s.abilities,
+                    self.model.abilities.trained(s.abilities, s.level),
+                );
                 // In a group, everyone trains at the cadence (the others' spells are not known).
                 let group = !self.profile.mates.is_empty();
                 (
@@ -86,6 +97,14 @@ impl Planner<'_> {
             }
             None => (every, every_late),
         };
+        if self.model.initial.mates.is_empty() {
+            let abilities = &self.model.abilities;
+            let available = s.abilities | abilities.trained(s.abilities, s.level);
+            let gain = abilities.speed(available, s.level, self.params)
+                / abilities.speed(s.abilities, s.level, self.params)
+                - 1.0;
+            due |= gain >= self.params.train_min_gain && gain > 0.0;
+        }
         if !due {
             return;
         }
@@ -151,7 +170,7 @@ impl Planner<'_> {
     pub(crate) fn sell_at(&self, s: &mut State, i: usize, record: &mut impl FnMut(&State, Event)) {
         let vendor = &self.model.vendors[i];
         let detour = (s.landed == Landed::No && s.pos.dist(&vendor.pos) <= self.params.sell_radius)
-            .then(|| 2.0 * self.trips().walk(&s.pos, &vendor.pos, s.level))
+            .then(|| 2.0 * self.trips().at(s).walk(&s.pos, &vendor.pos, s.level))
             .filter(|d| d.is_finite());
         if let Some(detour) = detour {
             s.time += detour;
@@ -172,9 +191,17 @@ impl Planner<'_> {
         let trainer = &self.model.trainers[i];
         // Close as the crow flies, but maybe not on foot (another side of the mountains).
         let detour = (s.landed == Landed::No && s.pos.dist(&trainer.pos) <= self.params.train_radius)
-            .then(|| 2.0 * self.trips().walk(&s.pos, &trainer.pos, s.level))
-            .filter(|d| d.is_finite());
-        if let Some(detour) = detour {
+            .then(|| {
+                let trips = self.trips().at(s);
+                let learned = s.abilities | self.model.abilities.trained(s.abilities, s.level);
+                let outbound = trips.walk(&s.pos, &trainer.pos, s.level);
+                (
+                    outbound,
+                    outbound + trips.with_movement(learned).walk(&s.pos, &trainer.pos, s.level),
+                )
+            })
+            .filter(|(_, total)| total.is_finite());
+        if let Some((_, detour)) = detour {
             s.time += detour;
             s.spent.travel += detour;
         } else {
@@ -192,7 +219,7 @@ impl Planner<'_> {
             s.spent.training_cost += p.new_ranks(since, s.level).iter().map(|r| r.cost).sum::<i64>();
         }
         for (k, tp) in self.model.teleports.iter().enumerate() {
-            if tp.quests.is_empty() && tp.level <= s.level && tp.to.zone == trainer.zone {
+            if tp.ability == 0 && tp.level <= s.level && tp.to.zone == trainer.zone {
                 s.taught |= 1 << k;
             }
         }
@@ -202,6 +229,7 @@ impl Planner<'_> {
             s,
             Event::Train {
                 trainer: i,
+                outbound: detour.map_or(0.0, |(outbound, _)| outbound),
                 since,
                 abilities: s.abilities & !abilities_before,
             },
@@ -215,21 +243,19 @@ impl Planner<'_> {
     /// Those the route took count against it (`Params::abandon_weight`); a quest of the
     /// character's log it does not take was not its choice.
     pub(crate) fn abandon_hopeless(&self, s: &mut State, record: &mut impl FnMut(&State, Event)) {
-        if self.explicit || s.abandon_check == (s.level, s.dungeons) {
+        if self.explicit || s.abandon_check == (s.level, s.dungeons, s.inside) {
             return;
         }
-        s.abandon_check = (s.level, s.dungeons);
+        s.abandon_check = (s.level, s.dungeons, s.inside);
         for i in s.accepted.and_not(&s.turned) {
             let q = &self.model.quests[i];
             let hopeless = self.availability().gray_dead_end(s, q, i as u32)
                 || q.objectives.iter().enumerate().any(|(k, o)| {
                     s.objectives[i] & (1 << k) == 0
-                        && o.dungeon.is_some_and(|d| {
-                            !self.availability().dungeon_allowed(d)
-                                || s.dungeons & (1u128 << d) != 0
-                                || s.level > self.model.dungeons[d].max_level
-                        })
-                });
+                        && o.dungeon_of().is_some_and(|d| !self.availability().can_be_in(s, d))
+                })
+                // Handed in only inside a dungeon left.
+                || q.ends.iter().all(|l| l.inside.is_some_and(|d| !self.availability().can_be_in(s, usize::from(d))));
             if hopeless {
                 if s.planned.flags.get(i).is_some_and(|f| f & 1 != 0) {
                     s.spent.abandoned += 1;
@@ -315,6 +341,7 @@ impl Planner<'_> {
             self.growth().gather(s, q.starts[0].zone, q.start_kills);
         }
         s.accepted.set(i as usize, true);
+        s.abilities |= self.model.abilities.accepted(q.id);
         s.log += 1;
         s.held += u16::from(q.carried);
         if let Some(limit) = q.time_limit {
@@ -324,16 +351,23 @@ impl Planner<'_> {
 
     /// Turn in quest `i`, wearing its reward items when they are upgrades. Returns the item
     /// picked among the choices.
-    pub(crate) fn turn_in(&self, s: &mut State, i: u32) -> Option<i64> {
+    pub(crate) fn turn_in(&self, s: &mut State, i: u32, rewards: &[i64; crate::job::GROUP_MAX]) -> Option<i64> {
+        if let Some((member, level)) = self.availability().completion_error(s, i) {
+            s.completion_error = Some((i, member, level));
+            return None;
+        }
         let q = self.quest(i);
         self.release(s, i);
         s.timers.retain(|&(q, _)| q != i);
-        s.turned.set(i as usize, true);
         s.log -= 1;
         s.started.retain(|&(q, _, _)| q != i);
         s.required_left = s.required_left.saturating_sub(u32::from(q.required));
-        s.spent.quest_xp += self.growth().reward(s, i);
+        s.spent.quest_xp += self.growth().reward(s, rewards);
         s.spent.gold_earned += q.reward_money;
+        s.turned.set(i as usize, true);
+        if q.late_unlock {
+            s.spent.unlock_delay += (s.level - self.profile.from_level).max(0) as f64;
+        }
         self.growth().gain_power(s, i);
         if s.forced_left > 0 {
             let closed = (q.exclusive.iter())
@@ -426,8 +460,23 @@ impl Planner<'_> {
         self.grind_to_gate(s, stop, spot, record);
         let loc = self.arrive(s, stop, spot, record);
         if !(Self::timed(stop.kind) && self.failed_in_time(s, stop.index, record)) {
-            let picked = self.do_stop(s, stop, spot);
-            record(s, Event::Stop { stop, loc });
+            let rewards = if stop.kind == Kind::TurnIn {
+                self.growth().quest_rewards(s, stop.index)
+            } else {
+                [0; crate::job::GROUP_MAX]
+            };
+            let picked = self.do_stop(s, stop, spot, &rewards);
+            if s.completion_error.is_some() {
+                return;
+            }
+            record(
+                s,
+                Event::Stop {
+                    stop,
+                    loc,
+                    reward_xp: rewards,
+                },
+            );
             if let Some(item) = picked {
                 record(
                     s,
@@ -511,43 +560,46 @@ impl Planner<'_> {
         // XP to `target` from (level, xp), and the time it takes alone.
         let combat = self.combat();
         let group = self.params.group_xp_share() * self.params.group_damage();
-        let need = |level: i64, xp: i64| -> (i64, f64) {
-            let (mut l, mut x, mut need, mut time) = (level, xp, 0, 0.0);
+        let need = |level: i64, xp: i64, rested: i64, member: u8| -> (i64, f64, i64) {
+            let (mut l, mut x, mut need, mut time, mut left) = (level, xp, 0, 0.0, rested);
             while at(l, x) < target && l < rules.max_level {
                 let bar = rules.to_next_level(l);
                 let to = ((target - l as f64).min(1.0) * bar as f64).ceil() as i64;
                 let gained = (to - x).max(0);
                 need += gained;
-                time += gained as f64 / (combat.grind_rate(l, s.bonus, &s.pos) / group);
+                let (work, consumed) = growth.kill_work(s, member, gained, left);
+                left -= consumed;
+                time += work / (combat.grind_rate(l, s.bonus, &s.pos) / group);
                 if to >= bar {
                     (l, x) = (l + 1, 0);
                 } else {
                     x = to;
                 }
             }
-            (need, time)
+            (need, time, rested - left)
         };
         let mut members = 0u8;
         let mut seconds = 0.0f64;
-        let (own, t) = need(s.level, s.xp);
+        let (own, t, own_rested) = need(s.level, s.xp, s.rested, s.order[0]);
         if own > 0 {
             members |= 1 << s.order[0];
             seconds = seconds.max(t);
         }
-        let mut gains = [0i64; super::state::MATES];
+        let mut gains = [(0i64, 0i64); super::state::MATES];
         for (k, (m, g)) in s.mates[..n].iter().zip(&mut gains).enumerate() {
-            let (gain, t) = need(m.level, m.xp);
+            let (gain, t, consumed) = need(m.level, m.xp, m.rested, s.order[k + 1]);
             if gain > 0 {
                 members |= 1 << s.order[k + 1];
                 seconds = seconds.max(t);
-                *g = gain;
+                *g = (gain, consumed);
             }
         }
         if members == 0 {
             return;
         }
-        for (k, &gain) in gains.iter().enumerate().take(n) {
+        for (k, &(gain, consumed)) in gains.iter().enumerate().take(n) {
             let m = &mut s.mates[k];
+            m.rested -= consumed;
             m.xp += gain;
             while m.level < rules.max_level && m.xp >= rules.to_next_level(m.level) {
                 m.xp -= rules.to_next_level(m.level);
@@ -555,6 +607,7 @@ impl Planner<'_> {
             }
         }
         if own > 0 {
+            s.rested -= own_rested;
             s.spent.grind_xp += own;
             s.grind_used += own;
             growth.gain(s, own);
@@ -629,28 +682,72 @@ impl Planner<'_> {
         self.gate_level_at(s, stop, self.spot_of(s, stop))
     }
 
-    /// The same with the objective's place already chosen (`spot`).
+    /// The same with the objective's place already chosen (`spot`): a stop entering a dungeon
+    /// waits for the dungeon's level too.
     fn gate_level_at(&self, s: &State, stop: Stop, spot: Option<&Objective>) -> i64 {
+        let own = self.stop_gate(s, stop, spot);
+        let inside = match spot {
+            Some(o) => o.loc.inside.map(usize::from),
+            None => self.places().inside(s, stop),
+        };
+        match inside {
+            Some(d) if stop.kind != Kind::Dungeon && s.inside.is_none_or(|i| usize::from(i) != d) => {
+                own.max(self.stop_gate(
+                    s,
+                    Stop {
+                        index: d as u32,
+                        kind: Kind::Dungeon,
+                    },
+                    None,
+                ))
+            }
+            _ => own,
+        }
+    }
+
+    fn stop_gate(&self, s: &State, stop: Stop, spot: Option<&Objective>) -> i64 {
         let i = stop.index as usize;
         match stop.kind {
             Kind::Accept => {
                 let q = self.quest(stop.index);
                 let own = q.min_level.max(self.combat().guard_level(&q.start_guard, s.might()));
                 if q.time_limit.is_some() {
-                    own.max(self.timed_gate(q, s))
+                    own.max(self.timed_gate(q, s)).max(self.completion_gate(s, stop.index))
                 } else {
                     own
                 }
             }
-            Kind::TurnIn => self.combat().guard_level(&self.quest(stop.index).end_guard, s.might()),
+            Kind::TurnIn => {
+                let q = self.quest(stop.index);
+                self.completion_gate(s, stop.index)
+                    .max(self.combat().guard_level(&q.end_guard, s.might()))
+            }
             Kind::Objective(k) => self.combat().level_at(
                 self.quest(stop.index),
                 spot.unwrap_or(&self.quest(stop.index).objectives[k as usize]),
                 s.might(),
             ),
-            Kind::Dungeon => self.model.dungeons[i].min_level,
+            // A must-have quest the player asked at a level has its dungeon run from it (not the
+            // default window: it only keeps the hand-in at a fair level).
+            Kind::Dungeon => self.in_dungeon[i]
+                .iter()
+                .map(|&(q, _)| q as usize)
+                .filter(|&q| self.model.quests[q].mandatory && !self.model.quests[q].implicit_window && !s.turned[q])
+                .filter_map(|q| self.model.quests[q].completion_window.min_level)
+                .fold(self.model.dungeons[i].min_level, i64::max),
             _ => 0,
         }
+    }
+
+    fn completion_gate(&self, s: &State, i: u32) -> i64 {
+        if (self.availability().replaying || self.explicit) && self.quest(i).implicit_window {
+            return 0;
+        }
+        let floor = self.availability().completion_floor(s, i);
+        self.quest(i)
+            .completion_window
+            .min_level
+            .map_or(0, |min| s.level + (min - floor).max(0))
     }
 
     /// Level a timed quest is taken at: the one its objectives and its turn-in need (each at its
@@ -658,7 +755,7 @@ impl Planner<'_> {
     /// started and the quest fails (The Affray at 30 when Big Will needs 33).
     fn timed_gate(&self, q: &crate::model::Quest, s: &State) -> i64 {
         let combat = self.combat();
-        (q.objectives.iter().filter(|o| o.dungeon.is_none()))
+        (q.objectives.iter().filter(|o| o.dungeon_of().is_none()))
             .map(|o| {
                 o.places()
                     .map(|place| combat.level_at(q, place, s.might()))
@@ -681,6 +778,17 @@ impl Planner<'_> {
         }
         self.grind_at_camps(s, gate, record);
         self.train(s, record);
+        if (stop.kind == Kind::TurnIn || stop.kind == Kind::Accept && self.quest(stop.index).time_limit.is_some())
+            && let Some(min) = self.quest(stop.index).completion_window.min_level
+        {
+            self.keep_lowest(s);
+            // Group members gain different XP from the same kills.
+            while s.time.is_finite() && self.availability().completion_floor(s, stop.index) < min {
+                self.grind_at_camps(s, s.level + 1, record);
+                self.keep_lowest(s);
+                self.train(s, record);
+            }
+        }
     }
 
     /// Travel to the stop, picking up a flight path close to it on the way.
@@ -692,7 +800,26 @@ impl Planner<'_> {
         record: &mut impl FnMut(&State, Event),
     ) -> Loc {
         let loc = spot.map_or_else(|| self.places().loc(s, stop), |o| o.loc.clone());
+        let into = if stop.kind == Kind::Dungeon {
+            Some(stop.index as usize)
+        } else {
+            loc.inside.map(usize::from)
+        };
+        // A stop elsewhere leaves the dungeon the character is in.
+        if s.inside.is_some_and(|d| Some(usize::from(d)) != into) {
+            s.inside = None;
+        }
         self.go(s, &loc.pos, loc.zone, record);
+        if let Some(d) = into
+            && s.inside.is_none()
+        {
+            self.run_dungeon(s, d);
+            s.inside = Some(u8::try_from(d).expect("fewer dungeons than `State::dungeons` holds"));
+            // A dungeon stop is the run's step itself.
+            if stop.kind != Kind::Dungeon {
+                record(s, Event::Enter { dungeon: d });
+            }
+        }
         s.time += self.params.stop_overhead;
         s.spent.overhead += self.params.stop_overhead;
         if stop.kind != Kind::LearnFlight && !self.explicit {
@@ -708,7 +835,12 @@ impl Planner<'_> {
         if s.known & (1u128 << node) != 0 {
             return;
         }
-        let detour = 2.0 * self.trips().walk(&s.pos, &self.world.taxi_nodes[node].pos, s.level) + 5.0;
+        let detour = 2.0
+            * self
+                .trips()
+                .at(s)
+                .walk(&s.pos, &self.world.taxi_nodes[node].pos, s.level)
+            + 5.0;
         if !detour.is_finite() {
             return;
         }
@@ -719,7 +851,13 @@ impl Planner<'_> {
     }
 
     /// What the stop itself does. Returns the reward item picked on a turn-in.
-    fn do_stop(&self, s: &mut State, stop: Stop, spot: Option<&Objective>) -> Option<i64> {
+    fn do_stop(
+        &self,
+        s: &mut State,
+        stop: Stop,
+        spot: Option<&Objective>,
+        rewards: &[i64; crate::job::GROUP_MAX],
+    ) -> Option<i64> {
         let i = stop.index as usize;
         match stop.kind {
             Kind::Accept => self.accept(s, stop.index),
@@ -727,7 +865,7 @@ impl Planner<'_> {
                 let o = spot.unwrap_or(&self.quest(stop.index).objectives[k as usize]);
                 self.complete_objective(s, stop.index, k, o);
             }
-            Kind::TurnIn => return self.turn_in(s, stop.index),
+            Kind::TurnIn => return self.turn_in(s, stop.index, rewards),
             Kind::LearnFlight => {
                 s.known |= 1u128 << i;
                 s.time += 5.0;
@@ -740,11 +878,11 @@ impl Planner<'_> {
                     (s.hearth_ready, s.recall_ready) = (0.0, 0.0);
                 }
             }
-            Kind::Hearth => {}
             // A best item from the vendor the stop went to: the copper it costs is spent and
             // the item worn (the stop was validated an upgrade).
             Kind::Buy => self.buy(s, stop.index as u16),
-            Kind::Dungeon => self.run_dungeon(s, i),
+            // A dungeon is entered on arriving (`arrive`), the hearthstone used where it was.
+            Kind::Hearth | Kind::Dungeon => {}
         }
         None
     }
@@ -777,9 +915,9 @@ impl Planner<'_> {
         let near = s.together.at.is_some_and(|at| {
             at.continent == here.loc.pos.continent && at.dist(&here.loc.pos) <= self.params.gather_radius
         });
-        if !near || here.dungeon.is_some() {
+        if !near || here.dungeon_of().is_some() {
             s.together = Together {
-                at: (here.dungeon.is_none()).then_some(here.loc.pos),
+                at: (here.dungeon_of().is_none()).then_some(here.loc.pos),
                 ..Together::default()
             };
         }
@@ -836,8 +974,8 @@ impl Planner<'_> {
         (kill_work, uses * self.params.object_time)
     }
 
-    /// A group run: its time, its mobs' XP, the boss loot the character may win, and every
-    /// objective inside it of the quests in the log.
+    /// Dungeon `i` entered: its run's fixed time, its mobs' XP, the boss loot the character may
+    /// win, and what its group does outside (`Objective::dungeon`) for the quests in the log.
     fn run_dungeon(&self, s: &mut State, i: usize) {
         let d = &self.model.dungeons[i];
         let run = d.minutes * 60.0;
@@ -860,9 +998,10 @@ impl Planner<'_> {
                 self.growth().refresh_power(s);
             }
         }
+        // What its group does outside: done with the entry (the rest is a stop inside).
         for &(qi, k) in &self.in_dungeon[i] {
             let qi = qi as usize;
-            if s.accepted[qi] && !s.turned[qi] {
+            if s.accepted[qi] && !s.turned[qi] && self.model.quests[qi].objectives[k as usize].dungeon.is_some() {
                 self.hold(s, qi, k);
             }
         }
@@ -882,6 +1021,16 @@ impl Planner<'_> {
         let (mut missing, mut zone) = (0, 0);
         for (i, q) in self.model.quests.iter().enumerate() {
             if q.mandatory && !s.rewarded(i) && !self.availability().alternative_done(s, q) {
+                // Versions of one quest (the two letters of the Felsteed) are missing once, at the first.
+                let version_before = q.exclusive.iter().any(|id| {
+                    self.model
+                        .index
+                        .get(id)
+                        .is_some_and(|&j| j < i && self.model.quests[j].mandatory)
+                });
+                if version_before {
+                    continue;
+                }
                 if q.zone_forced { zone += 1 } else { missing += 1 }
             }
         }
@@ -892,11 +1041,12 @@ impl Planner<'_> {
             .filter(|&d| {
                 self.availability().dungeon_forced(d)
                     && s.dungeons & (1u128 << d) == 0
-                    && self.model.dungeons[d].min_level <= self.profile.to_level
+                    && self.model.dungeons[d].min_level < self.profile.to_level
             })
             .count();
         s.spent.missing_dungeons = dungeons as u32;
         s.spent.reputation_missing = self.reputation_missing(s);
+        self.count_unfinished_as_grind(s);
         s.spent.total = s.time;
         // Optimizer score: grinding and flights weigh more than their real time, gold spent on
         // flights and missing goals cost.
@@ -905,6 +1055,31 @@ impl Planner<'_> {
             + (missing + zone + dungeons + self.reputation_goals_unmet(s)) as f64 * self.params.mandatory_penalty
             + s.spent.reputation_missing * self.params.reputation_weight
             + f64::from(s.spent.missing_profession_quests) * self.params.profession_quest_weight
+    }
+
+    /// A quest the route took and never turned in is grinding in all but name (kills for XP, no
+    /// reward): the time its done objectives took counts as grinding, in the optimizer's score and
+    /// against the grind cap, instead of as a quest's fighting.
+    fn count_unfinished_as_grind(&self, s: &mut State) {
+        let mut work = 0.0;
+        for i in s.accepted.and_not(&s.turned) {
+            let q = &self.model.quests[i];
+            for (k, o) in q.objectives.iter().enumerate().take(8) {
+                if s.objectives[i] & (1 << k) != 0 {
+                    work += o.kills * self.params.kill_time(q.level, 0.0, o.mob_level)
+                        + o.uses * self.params.object_time
+                        + o.extra;
+                }
+            }
+        }
+        let work = work.min(s.spent.fighting.max(0.0));
+        if work <= 0.0 {
+            return;
+        }
+        let allowed = (self.params.grind_cap * s.time - s.spent.grinding).max(0.0);
+        s.spent.fighting -= work;
+        s.spent.grinding += work;
+        s.spent.grind_over += (work - allowed).max(0.0);
     }
 
     /// Quests of the leveled professions the route does not turn in, though the profession's

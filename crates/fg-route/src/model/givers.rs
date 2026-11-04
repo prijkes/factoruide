@@ -3,7 +3,7 @@
 
 use super::builder::{QuestBuilder, Skip};
 use super::entities::best_cluster;
-use super::sources::{ObjectiveKind, QuestRow, Role, SourceKind};
+use super::sources::{LinkKind, ObjectiveKind, QuestRow, Role, SourceKind};
 use super::types::{EntityKind, Loc, Spots};
 
 pub(super) struct Givers {
@@ -23,6 +23,7 @@ pub(super) struct Givers {
 }
 
 /// How the item starting a quest is got.
+#[expect(clippy::large_enum_variant, reason = "one a quest, read at once")]
 enum ItemStart {
     Looted {
         at: Loc,
@@ -157,17 +158,24 @@ impl QuestBuilder<'_> {
             .filter(|(t, _)| *t == SourceKind::Object)
             .flat_map(|(_, o)| entities.points(world, EntityKind::Object, *o))
             .collect();
-        // A boss's drop: looted during the run, with the group (the quest needs it,
-        // `add_dungeon_givers`).
+        // A boss's drop, or an object's inside (Hall of Thanes' Treaty of Understanding): looted
+        // inside, with the group: taken there.
         let boss = sources.iter().find_map(|(t, n)| {
             (*t == SourceKind::Npc).then(|| self.dungeon_of(EntityKind::Npc, *n).map(|d| (*n, d)))?
         });
+        let found_inside = sources
+            .iter()
+            .find_map(|(t, o)| (*t == SourceKind::Object).then(|| self.dungeon_of(EntityKind::Object, *o))?);
         let in_run = |d: usize, mob: Option<(i64, String)>| ItemStart::Looted {
             at: Loc {
                 kind: EntityKind::Item,
                 id: item,
                 name: entities.name(EntityKind::Item, item),
-                ..self.sources.dungeons[d].entrance.clone()
+                // At the boss dropping it.
+                ..match &mob {
+                    Some((npc, _)) => self.inside_at(d, EntityKind::Npc, *npc),
+                    None => self.inside(d),
+                }
             },
             work: (0.0, 0, 0.0),
             mob,
@@ -176,6 +184,9 @@ impl QuestBuilder<'_> {
         };
         if let Some((npc, d)) = boss {
             return in_run(d, Some((npc, entities.name(EntityKind::Npc, npc))));
+        }
+        if let Some(d) = found_inside.filter(|_| objects.is_empty()) {
+            return in_run(d, None);
         }
         let rank = |n: &i64| entities.npc.get(n).map_or(0, |e| e.3);
         let droppers: Vec<Dropper> = sources
@@ -211,6 +222,8 @@ impl QuestBuilder<'_> {
             kind: EntityKind::Item,
             id: item,
             name: entities.name(EntityKind::Item, item),
+            inside: None,
+            floor: None,
         };
         if let Some((pos, zone, _)) = best_cluster(&objects, Some(&start.pos)) {
             return ItemStart::Looted {
@@ -257,7 +270,14 @@ impl QuestBuilder<'_> {
             .find_map(|(_, kind, id)| self.locate(*kind, *id, Some(&self.sources.start.pos)))
     }
 
+    /// Quests handing out the item are prerequisites, except one exclusive with this quest: taking
+    /// it closes this one (Another Power Source? hands the Power Source of Tanaris Field Sampling
+    /// again, for those who lost it).
     fn item_rewarded(&self, quest: i64, item: i64) -> ItemStart {
+        let closes = |giver: i64| {
+            self.links(quest, LinkKind::Exclusive).contains(&giver)
+                || self.links(giver, LinkKind::Exclusive).contains(&quest)
+        };
         let mut places = Vec::new();
         for &giver in self
             .sources
@@ -265,14 +285,14 @@ impl QuestBuilder<'_> {
             .get(&item)
             .into_iter()
             .flatten()
-            .filter(|g| **g != quest)
+            .filter(|g| **g != quest && !closes(**g))
         {
             for (role, kind, eid) in self.sources.relations.get(&giver).into_iter().flatten() {
                 if *role == Role::End
                     && *kind != EntityKind::Item
                     && let Some(loc) = self.locate(*kind, *eid, Some(&self.sources.start.pos))
                 {
-                    let pre = (!self.sources.repeatable.contains(&giver)).then_some(giver);
+                    let pre = Some(giver);
                     places.push((loc, pre));
                 }
             }

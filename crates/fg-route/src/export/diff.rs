@@ -829,6 +829,7 @@ mod tests {
                 x: 50.0,
                 y: 50.0,
             }),
+            floor: None,
             world: None,
             height: None,
             path: Vec::new(),
@@ -841,6 +842,7 @@ mod tests {
             reward: None,
             money: None,
             reward_xp: None,
+            party_reward_xp: Vec::new(),
             route_xp: None,
             spells: Vec::new(),
             xp: None,
@@ -897,6 +899,7 @@ mod tests {
             sync_max: None,
             class_spells: Vec::new(),
             bis: Vec::new(),
+            buffs: Vec::new(),
             steps,
         }
     }
