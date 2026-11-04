@@ -42,12 +42,15 @@ use guides::{
     edit_suggest, export_version, get_guide, get_version, guide_timeline, import_guide, inferred_flights, list_guides,
     manual_route, migrate_results, plan_route, preview_starts, quest_choices, set_installed, stop_plan,
 };
+/// The items' icons.
+mod icons;
 /// The game's maps.
 mod maps;
 use contributions::{
     auto_contribute_loop, contribution_preview, need_help, read_send_record, send_contribution, send_issue,
     send_record_file, sent_lua, setup_report,
 };
+use icons::item_icon;
 use maps::{map_image, map_index, minimap_image, minimap_index};
 
 mod embedded {
@@ -661,6 +664,7 @@ fn main() {
             map_image,
             minimap_index,
             minimap_image,
+            item_icon,
             list_characters,
             import_profile,
             guide_timeline,
