@@ -522,6 +522,9 @@ pub struct Model {
     /// The paths NPCs who patrol walk (NPC ID -> its points in order): the guide shows places
     /// along them, the planner goes to their usual place.
     pub patrols: HashMap<i64, Vec<Pos>>,
+    /// The best item of each slot at each level band (`Params::bis`): the quest rewards and the
+    /// vendors' stock, never the drops. Empty without the character power data.
+    pub bis: super::Bis,
 }
 
 /// A class spell taking the character to a city (a mage's "Teleport: Stormwind"): learned at the

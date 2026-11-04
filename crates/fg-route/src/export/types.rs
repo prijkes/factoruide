@@ -409,7 +409,44 @@ pub struct Route {
     /// The spells worth learning of the group's other classes (as `spells`): class ID, spells.
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub class_spells: Vec<(i64, Vec<i64>)>,
+    /// The best item of each ranked slot at each level band (`Params::bis`), and where it comes
+    /// from: a quest reward, or the vendors selling it. Empty when the best items are not
+    /// looked for, and in guides made before they were.
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub bis: Vec<BisSlot>,
     pub steps: Vec<Step>,
+}
+
+/// The best item of a slot at a level band (`Route::bis`).
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct BisSlot {
+    /// The band's top level (5, 10...).
+    pub level: i64,
+    /// The slot (`crate::power` equipment slots).
+    pub slot: usize,
+    /// The item (ID).
+    pub item: i64,
+    /// The item's English name.
+    pub name: String,
+    /// Where it comes from.
+    pub source: BisSource,
+}
+
+/// Where a best item comes from (`Route::bis`): a quest giving it, or the vendors selling it.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(tag = "kind", rename_all = "lowercase")]
+pub enum BisSource {
+    /// A quest (ID and English name) giving the item as a reward.
+    Quest { quest: i64, quest_name: String },
+    /// The vendors selling it (NPC ID and English name).
+    Vendor { npcs: Vec<BisVendor> },
+}
+
+/// A vendor selling a best item.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct BisVendor {
+    pub id: i64,
+    pub name: String,
 }
 
 /// A player of a group guide.

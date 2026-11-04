@@ -582,8 +582,13 @@ impl PowerModel {
         self.item(id).map_or("", |i| &self.items[i as usize].name)
     }
 
+    /// The top level the model knows the stat weights of (`weights`).
+    pub(crate) fn top_level(&self) -> i64 {
+        self.weights.len() as i64 - 1
+    }
+
     /// Value of item `i` worn in `slot` at `level` (share of power).
-    fn value_in(&self, i: usize, level: i64, slot: usize) -> f64 {
+    pub(crate) fn value_in(&self, i: usize, level: i64, slot: usize) -> f64 {
         let item = &self.items[i];
         if level < item.required_level || level < item.wear_level {
             return 0.0;
@@ -668,7 +673,7 @@ impl PowerModel {
     }
 
     /// Slots item `i` can go to.
-    fn slots_of(&self, i: usize) -> &'static [usize] {
+    pub(crate) fn slots_of(&self, i: usize) -> &'static [usize] {
         match self.items[i].fit {
             Fit::Slot(s) => SINGLE[s],
             Fit::Pair(FINGER) => &[FINGER, FINGER + 1],

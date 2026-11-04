@@ -130,6 +130,8 @@ export interface Params {
   power_scale: number;
   dungeon_loot_share: number;
   gear_value: number;
+  /** The best item per slot at each level band: off, favoured quests, or kept like required quests. */
+  bis?: "off" | "prefer" | "required";
   mandatory_penalty: number;
   grind_weight: number;
   allow_grind: boolean;
@@ -370,7 +372,20 @@ export interface Route {
   /** The reputation goals and how far the guide gets (none without goals). */
   reputation?: ReputationReached[];
   professions?: RouteProfession[];
+  /** The best item of each slot at each level band (empty when not looked for). */
+  bis?: BisSlot[];
   steps: Step[];
+}
+
+/** The best item of a slot at a level band (`Route::bis`), and where it comes from. */
+export interface BisSlot {
+  /** The band's top level (5, 10...). */
+  level: number;
+  /** The slot (`power` equipment slots). */
+  slot: number;
+  item: number;
+  name: string;
+  source: { kind: "quest"; quest: number; quest_name: string } | { kind: "vendor"; npcs: { id: number; name: string }[] };
 }
 
 export interface PlanOutcome {
