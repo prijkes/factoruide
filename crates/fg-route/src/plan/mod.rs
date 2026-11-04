@@ -378,7 +378,10 @@ impl<'a> Planner<'a> {
                 .collect(),
             forced_left: 0,
             required_left: 0,
-            spent: Breakdown::default(),
+            spent: Breakdown {
+                gold_start: init.money.max(0),
+                ..Breakdown::default()
+            },
         };
         for &i in &init.turned {
             s.turned.set(i, true);

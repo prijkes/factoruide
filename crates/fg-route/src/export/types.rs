@@ -234,6 +234,9 @@ pub struct Step {
     /// Reward to pick among the quest's choices (item ID) on a turn-in.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub reward: Option<i64>,
+    /// Copper the quest gives on its turn-in (0: none or unknown).
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub money: Option<i64>,
     /// XP a turn-in gives at the level it is planned at: a quest complete in the log counts for
     /// the grind steps aiming at a level it is turned in before.
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -321,6 +324,7 @@ impl Step {
             elite: false,
             mob_level: None,
             reward: None,
+            money: None,
             reward_xp: None,
             route_xp: None,
             spells: Vec::new(),

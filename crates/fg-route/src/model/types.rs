@@ -608,6 +608,9 @@ pub struct Initial {
     /// In a group whose hearthstones are bound to different inns: none can be used before
     /// everyone binds it at the same inn.
     pub unbound: bool,
+    /// Copper in the bags at the start (the addon records it): what the route's gold
+    /// projection starts from.
+    pub money: i64,
 }
 
 /// Where another player of a group guide starts.

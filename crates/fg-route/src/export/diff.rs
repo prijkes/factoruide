@@ -839,6 +839,7 @@ mod tests {
             elite: false,
             mob_level: None,
             reward: None,
+            money: None,
             reward_xp: None,
             route_xp: None,
             spells: Vec::new(),

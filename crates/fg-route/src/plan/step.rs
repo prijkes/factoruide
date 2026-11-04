@@ -186,6 +186,11 @@ impl Planner<'_> {
         let since = s.trained;
         let abilities_before = s.abilities;
         s.trained = s.level;
+        // The copper the ranks bought cost (none without the class spell data: the model
+        // only knows their level then, not their price).
+        if let Some(p) = self.model.power.as_ref() {
+            s.spent.training_cost += p.new_ranks(since, s.level).iter().map(|r| r.cost).sum::<i64>();
+        }
         for (k, tp) in self.model.teleports.iter().enumerate() {
             if tp.quests.is_empty() && tp.level <= s.level && tp.to.zone == trainer.zone {
                 s.taught |= 1 << k;
@@ -328,6 +333,7 @@ impl Planner<'_> {
         s.started.retain(|&(q, _, _)| q != i);
         s.required_left = s.required_left.saturating_sub(u32::from(q.required));
         s.spent.quest_xp += self.growth().reward(s, i);
+        s.spent.gold_earned += q.reward_money;
         self.growth().gain_power(s, i);
         if s.forced_left > 0 {
             let closed = (q.exclusive.iter())
