@@ -28,13 +28,13 @@ function useIcon(item: number): string | null {
   useEffect(() => {
     let alive = true;
     let made: string | null = null;
-    api.itemIcon(item).then((url) => {
+    api.itemIcon(item).then((fresh) => {
       if (!alive) {
-        if (url) URL.revokeObjectURL(url);
+        if (fresh) URL.revokeObjectURL(fresh);
         return;
       }
-      made = url;
-      setUrl(url);
+      made = fresh;
+      setUrl(fresh);
     });
     return () => {
       alive = false;
