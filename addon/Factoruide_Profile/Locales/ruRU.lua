@@ -77,6 +77,7 @@ FG.Locales.ruRU = {
     ["repaired: %s"] = "ремонт: %s",
     ["bought: %d × %s"] = "куплено: %d × %s",
     ["bought for a quest: %d × %s"] = "куплено для задания: %d × %s",
+    ["bought the guide's gear: %s"] = "куплено снаряжение из гайда: %s",
     ["out of stock here: %s"] = "здесь закончилось: %s",
     ["step %d/%d"] = "шаг %d/%d",
     ["done"] = "выполнен",

@@ -77,6 +77,7 @@ FG.Locales.ptBR = {
     ["repaired: %s"] = "reparado: %s",
     ["bought: %d × %s"] = "comprado: %d × %s",
     ["bought for a quest: %d × %s"] = "comprado para uma missão: %d × %s",
+    ["bought the guide's gear: %s"] = "comprado o equipamento do guia: %s",
     ["out of stock here: %s"] = "esgotado aqui: %s",
     ["step %d/%d"] = "etapa %d/%d",
     ["done"] = "feita",

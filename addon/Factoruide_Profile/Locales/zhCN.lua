@@ -77,6 +77,7 @@ FG.Locales.zhCN = {
     ["repaired: %s"] = "已修理：%s",
     ["bought: %d × %s"] = "已购买：%d × %s",
     ["bought for a quest: %d × %s"] = "为任务购买：%d × %s",
+    ["bought the guide's gear: %s"] = "已购买指南装备：%s",
     ["out of stock here: %s"] = "此处已售罄：%s",
     ["step %d/%d"] = "步骤 %d/%d",
     ["done"] = "已完成",

@@ -79,6 +79,7 @@ FG.Locales.frFR = {
     ["repaired: %s"] = "réparation : %s",
     ["bought: %d × %s"] = "acheté : %d × %s",
     ["bought for a quest: %d × %s"] = "acheté pour une quête : %d × %s",
+    ["bought the guide's gear: %s"] = "acheté l'équipement du guide : %s",
     ["out of stock here: %s"] = "plus en stock ici : %s",
     ["step %d/%d"] = "étape %d/%d",
     ["done"] = "faite",

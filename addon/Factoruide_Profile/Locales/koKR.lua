@@ -77,6 +77,7 @@ FG.Locales.koKR = {
     ["repaired: %s"] = "수리: %s",
     ["bought: %d × %s"] = "구입: %d × %s",
     ["bought for a quest: %d × %s"] = "퀘스트용 구입: %d × %s",
+    ["bought the guide's gear: %s"] = "가이드 장비 구입: %s",
     ["out of stock here: %s"] = "여기서 품절: %s",
     ["step %d/%d"] = "단계 %d/%d",
     ["done"] = "완료",
