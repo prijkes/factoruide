@@ -8,6 +8,7 @@ under Unreleased; `scripts/release.sh` gives them the release's version.
 
 - WoW Forever: the Sleeping Bag XP reminder starts after its reward quest is completed.
 - WoW Forever: the automatic purchase of food, water and ammo works (the client lost the old item count API).
+- WoW Forever: no more interface errors from the quest panel in combat; its lines wait for the end of the fight.
 - Steps that buy the guide's gear at a vendor: the item's picture in the step, done once the item is in the bags or worn.
 - At a merchant, the guide's gear is bought for you, like the items its quests ask for (hold Shift to skip).
 - The reward item the guide picked for a turn-in shows its picture too.
