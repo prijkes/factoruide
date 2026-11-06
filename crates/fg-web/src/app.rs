@@ -4,7 +4,7 @@
 //! the app (`import_profile`).
 
 use crate::{embedded, host, store};
-use fg_app::{CmdError, Host, Settings, SettingsStore, Studio, now};
+use fg_app::{CmdError, Host, Settings, SettingsStore, Studio, item_info, now};
 use fg_library::{GuideId, Library};
 use fg_route::Route;
 use fg_route::diagnostics::Diagnostics;
@@ -654,6 +654,14 @@ fn run(cmd: &str, a: serde_json::Value) -> CmdResult<serde_json::Value> {
             to_json(import_profile(&args::<A>(a)?.content))
         }
         "list_characters" => to_json(characters()),
+        "item_info" => {
+            #[derive(Deserialize)]
+            struct A {
+                item: i64,
+            }
+            let item = args::<A>(a)?.item;
+            to_json(Ok(item_info(&open_db(edition())?, item)))
+        }
         "guide_text" => {
             let g = args::<GuideArgs>(a)?;
             guide_text(&g.guide, version_of(&g)?)

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { api, type BisSlot } from "../api";
 import { useT } from "../i18n";
+import { ItemHover } from "./ItemTip";
 
 /** The equipment slots of the power model (`fg_route::power`), by index. */
 const SLOTS: Record<number, string> = {
@@ -77,25 +78,17 @@ export function BisPanel({ bis }: { bis: BisSlot[] }) {
   );
 }
 
-/** One best item: its slot, its icon, its name and where it comes from. */
+/** One best item: its slot, its icon, its name and where it comes from (its details on hover). */
 function BisRow({ entry }: { entry: BisSlot }) {
   const t = useT();
   const icon = useIcon(entry.item);
   return (
     <li>
       <span className="bis-slot">{t(SLOTS[entry.slot] ?? "?")}</span>
-      {icon && (
-        <img
-          className="bis-icon"
-          src={icon}
-          alt=""
-          width={20}
-          height={20}
-          loading="lazy"
-          title={entry.name}
-        />
-      )}
-      <strong className="bis-item">{entry.name}</strong>
+      <ItemHover item={entry.item} name={entry.name}>
+        {icon && <img className="bis-icon" src={icon} alt="" width={20} height={20} loading="lazy" />}
+        <strong className="bis-item">{entry.name}</strong>
+      </ItemHover>
       {entry.source.kind === "quest" ? (
         <small>{t("Quête : {name}", { name: entry.source.quest_name })}</small>
       ) : (

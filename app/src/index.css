@@ -3996,6 +3996,67 @@ button.link.cmp-jump {
 .bis-band small {
   color: var(--text-muted);
 }
+/* An item's details as the game's tooltip shows them: over the best gear's rows
+   (`ItemHover`, in a bubble of their own) and in a step's own tip (`ItemBlock`). */
+.item-hover {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px;
+  min-width: 0;
+}
+.item-hover:focus-visible {
+  outline: 1px solid var(--accent-text);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+.item-tip {
+  position: fixed;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  width: max-content;
+  min-width: 200px;
+  max-width: 300px;
+  padding: 8px 10px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--surface-1) 96%, transparent);
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-tip);
+  color: var(--text-secondary);
+  font-size: 12px;
+  line-height: 1.35;
+  pointer-events: none;
+}
+.item-block {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.sl-tip .item-block {
+  margin-top: 4px;
+  padding-top: 5px;
+  border-top: 1px solid var(--border);
+}
+.item-name {
+  font-size: 13px;
+}
+.item-fit {
+  color: var(--text-muted);
+}
+/* What it gives: green, as the game writes the stats it adds. */
+.item-stat {
+  color: #1eff00;
+}
+.item-price {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  margin-top: 2px;
+  color: var(--text-muted);
+}
 .sl-row .step-check {
   flex: none;
   width: 13px;

@@ -14,6 +14,7 @@ An addon change also goes, in the same words, under Unreleased in that addon's o
 - The first guide of a game version no longer fails now and then because another command removed its data while unpacking it.
 - A settings change made while the addon installs, or while a character is added back or forgotten, is no longer lost.
 - A dungeon quest with one objective inside shows its name in the guide ("An Ancient Grudge: Faldrim Anvilmar"), not the dungeon's ("The Hall of Thanes: Faldrim Anvilmar").
+- An item's details show on hover, as the game's tooltip: its name colored by its quality, what it is, what it gives, the level it asks and what it sells for (the best gear's rows and a step's own tip).
 
 ### Guides
 
