@@ -3464,21 +3464,22 @@ button.dungeon.excluded b {
   align-items: center;
   gap: 3px;
 }
+/* The game's own money coins, read out of the game client (`fg-casc`, NOTICE.md). */
 .coin {
   display: inline-block;
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.35);
+  width: 11px;
+  height: 11px;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 .coin.gold {
-  background: radial-gradient(circle at 35% 35%, #fff1a8, #e2b33c 60%, #9c7414);
+  background-image: url("./assets/coins/gold.png");
 }
 .coin.silver {
-  background: radial-gradient(circle at 35% 35%, #ffffff, #c5ccd6 60%, #7d8693);
+  background-image: url("./assets/coins/silver.png");
 }
 .coin.copper {
-  background: radial-gradient(circle at 35% 35%, #ffc79a, #c4733a 60%, #7c3f17);
+  background-image: url("./assets/coins/copper.png");
 }
 
 /* Read by screen readers only. */
@@ -3997,7 +3998,13 @@ button.link.cmp-jump {
   color: var(--text-muted);
 }
 /* An item's details as the game's tooltip shows them: over the best gear's rows
-   (`ItemHover`, in a bubble of their own) and in a step's own tip (`ItemBlock`). */
+   (`ItemHover`, in a bubble of their own) and in a step's own tip (`ItemBlock`). The game's own
+   tooltip font (Friz Quadrata, `fg-casc`, NOTICE.md). */
+@font-face {
+  font-family: "Friz Quadrata TT";
+  src: url("./assets/friz-quadrata.ttf") format("truetype");
+  font-display: swap;
+}
 .item-hover {
   display: inline-flex;
   flex-wrap: wrap;
@@ -4034,14 +4041,31 @@ button.link.cmp-jump {
   display: flex;
   flex-direction: column;
   gap: 3px;
+  font-family: "Friz Quadrata TT", system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 13px;
+  line-height: 1.4;
 }
 .sl-tip .item-block {
   margin-top: 4px;
   padding-top: 5px;
   border-top: 1px solid var(--border);
 }
+/* The item's icon beside its name, as the game's tooltip holds them. The name is not bold:
+ * the font has only its normal weight, and the game writes none. */
+.item-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.item-icon {
+  flex: none;
+  width: 36px;
+  height: 36px;
+  image-rendering: pixelated;
+}
 .item-name {
-  font-size: 13px;
+  font-size: 14px;
+  font-weight: 400;
 }
 .item-fit {
   color: var(--text-muted);

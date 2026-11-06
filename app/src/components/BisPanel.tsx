@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
-import { api, type BisSlot } from "../api";
+import { type BisSlot } from "../api";
 import { useT } from "../i18n";
-import { ItemHover } from "./ItemTip";
+import { ItemHover, useIcon } from "./ItemTip";
 
 /** The equipment slots of the power model (`fg_route::power`), by index. */
 const SLOTS: Record<number, string> = {
@@ -22,28 +21,6 @@ const SLOTS: Record<number, string> = {
   16: "Deux mains",
   17: "À distance",
 };
-
-/** An item's icon (an object URL), fetched once: null without one. */
-function useIcon(item: number): string | null {
-  const [url, setUrl] = useState<string | null>(null);
-  useEffect(() => {
-    let alive = true;
-    let made: string | null = null;
-    api.itemIcon(item).then((fresh) => {
-      if (!alive) {
-        if (fresh) URL.revokeObjectURL(fresh);
-        return;
-      }
-      made = fresh;
-      setUrl(fresh);
-    });
-    return () => {
-      alive = false;
-      if (made) URL.revokeObjectURL(made);
-    };
-  }, [item]);
-  return url;
-}
 
 /** The best item of each slot at each level band (`Route::bis`), grouped by band: what to pick
  * up or buy and when, the drops left out (never guaranteed). */

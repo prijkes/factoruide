@@ -4,6 +4,28 @@ import { SETTINGS_CHANGED, api, type ItemInfo } from "../api";
 import { useT } from "../i18n";
 import { Money } from "./Money";
 
+/** An item's icon (an object URL), fetched once per mount: null without one. */
+export function useIcon(item: number): string | null {
+  const [url, setUrl] = useState<string | null>(null);
+  useEffect(() => {
+    let alive = true;
+    let made: string | null = null;
+    api.itemIcon(item).then((fresh) => {
+      if (!alive) {
+        if (fresh) URL.revokeObjectURL(fresh);
+        return;
+      }
+      made = fresh;
+      setUrl(fresh);
+    });
+    return () => {
+      alive = false;
+      if (made) URL.revokeObjectURL(made);
+    };
+  }, [item]);
+  return url;
+}
+
 /** The items read so far, by ID: each is read once, until the settings change (another game
  * version reads another database). */
 const ITEMS = new Map<number, Promise<ItemInfo | null>>();
@@ -85,23 +107,30 @@ const STAT_LABELS: Record<string, string> = {
 const QUALITY = ["#9d9d9d", "#ffffff", "#1eff00", "#0070dd", "#a335ee", "#ff8000", "#e6cc80"];
 
 /**
- * An item's details as the game's tooltip shows them: its name colored by its quality, where it
- * goes, what it gives, the level it asks and what it sells for. Nothing without data of it:
- * `info` read by the caller, or by `item` here.
+ * An item's details as the game's tooltip shows them: its picture beside its name colored by its
+ * quality, where it goes, what it gives, the level it asks and what it sells for. Nothing
+ * without data of it: `info` and `icon` read by the caller, or by `item` here.
  */
-export function ItemBlock({ item, name, info }: { item: number; name?: string; info?: ItemInfo | null }) {
+export function ItemBlock({ item, name, info, icon }: { item: number; name?: string; info?: ItemInfo | null; icon?: string | null }) {
   const t = useT();
   const own = useItemInfo(item);
+  const ownIcon = useIcon(item);
   const data = info ?? own;
+  const picture = icon ?? ownIcon;
   if (!data) return null;
   const fit = FITS[data.inventoryType];
   const title = data.name || name;
   return (
     <div className="item-block">
-      {title && (
-        <strong className="item-name" style={{ color: QUALITY[data.quality] ?? "#ffffff" }}>
-          {title}
-        </strong>
+      {(picture || title) && (
+        <div className="item-head">
+          {picture && <img className="item-icon" src={picture} alt="" width={36} height={36} />}
+          {title && (
+            <strong className="item-name" style={{ color: QUALITY[data.quality] ?? "#ffffff" }}>
+              {title}
+            </strong>
+          )}
+        </div>
       )}
       {fit && <div className="item-fit">{t(fit)}</div>}
       {data.armor > 0 && <div className="item-armor">{t("Armure : {n}", { n: data.armor })}</div>}
@@ -134,19 +163,21 @@ export function ItemBlock({ item, name, info }: { item: number; name?: string; i
  */
 export function ItemHover({ item, name, children }: { item: number; name?: string; children: ReactNode }) {
   const info = useItemInfo(item);
+  const icon = useIcon(item);
   const ref = useRef<HTMLSpanElement>(null);
   const tip = useRef<HTMLDivElement>(null);
   const [at, setAt] = useState<DOMRect | null>(null);
   const [pos, setPos] = useState<{ left: number; top: number } | null>(null);
 
   // Right of what is hovered, else left of it; never past the window's edges. Measured again
-  // when the details arrive: the bubble grows with them.
+  // when the details and the picture arrive: the bubble grows with them.
   useLayoutEffect(() => {
     if (!at || !tip.current || info == null) return;
     const { width, height } = tip.current.getBoundingClientRect();
     const left = at.right + 10 + width <= window.innerWidth - 8 ? at.right + 10 : Math.max(8, at.left - width - 10);
     setPos({ left, top: Math.max(8, Math.min(at.top - 6, window.innerHeight - height - 8)) });
-  }, [at, info]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- the icon changes what is measured
+  }, [at, info, icon]);
 
   const show = () => ref.current && setAt(ref.current.getBoundingClientRect());
   const hide = () => {
@@ -162,7 +193,7 @@ export function ItemHover({ item, name, children }: { item: number; name?: strin
         info != null &&
         createPortal(
           <div ref={tip} className="item-tip" role="tooltip" style={pos ?? { left: 0, top: 0, visibility: "hidden" }}>
-            <ItemBlock item={item} name={name} info={info} />
+            <ItemBlock item={item} name={name} info={info} icon={icon} />
           </div>,
           document.body,
         )}
