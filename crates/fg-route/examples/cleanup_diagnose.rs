@@ -2,7 +2,7 @@
 use anyhow::{Context, Result, ensure};
 use fg_route::job::{self, Overrides, PlanRequest, Prepared};
 use fg_route::model::Objective;
-use fg_route::plan::{Breakdown, Effort, Event, Kind, Planner, Stop};
+use fg_route::plan::{Breakdown, Effort, Event, Kind, Planner, Stop, Timed};
 use fg_route::xp::Edition;
 use rusqlite::{Connection, OpenFlags};
 use serde_json::{Value, json};
@@ -198,6 +198,32 @@ fn numeric_delta(before: &Value, after: &Value) -> Value {
     Value::Object(out)
 }
 
+fn actual_dungeon_entries(trace: &[Timed], planner: &Planner<'_>) -> Vec<Value> {
+    let mut seen = BTreeSet::new();
+    trace
+        .iter()
+        .filter_map(|t| {
+            let (dungeon, observation_kind) = match &t.event {
+                Event::Enter { dungeon } => (*dungeon, "implicit_entry"),
+                Event::Stop { stop, .. } if stop.kind == Kind::Dungeon => {
+                    (stop.index as usize, "explicit_dungeon_stop")
+                }
+                _ => return None,
+            };
+            if !seen.insert(dungeon) {
+                return None;
+            }
+            // An explicit dungeon stop is recorded after its run; this timestamp is
+            // the first observed trace event for this dungeon, not an entry/start time.
+            Some(
+                json!({"dungeon_index": dungeon, "dungeon_id": planner.model.dungeons[dungeon].area,
+                "time": t.time, "time_semantics": "observed_trace_event_time_not_run_start",
+                "level": t.level, "observation_kind": observation_kind}),
+            )
+        })
+        .collect()
+}
+
 /// All calls to this function happen after search and finalization have completed.
 fn describe_stage(stage: &str, route: &[Stop], previous: Option<&Value>, prepared: &Prepared) -> Result<Value> {
     let planner = Planner::new(&prepared.model, &prepared.world, &prepared.params, &prepared.profile);
@@ -215,14 +241,7 @@ fn describe_stage(stage: &str, route: &[Stop], previous: Option<&Value>, prepare
         .filter(|s| s.kind == Kind::Dungeon)
         .map(|s| planner.model.dungeons[s.index as usize].area)
         .collect();
-    let entered: Vec<_> = trace
-        .iter()
-        .filter_map(|t| match &t.event {
-            Event::Enter { dungeon } => Some(json!({"dungeon_index": dungeon,
-            "dungeon_id": planner.model.dungeons[*dungeon].area, "time": t.time, "level": t.level})),
-            _ => None,
-        })
-        .collect();
+    let entered = actual_dungeon_entries(&trace, &planner);
     let turnins: Vec<_> = trace
         .iter()
         .filter_map(|t| match &t.event {
@@ -518,6 +537,114 @@ fn main() -> Result<()> {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use fg_route::testing::{At, Obj, Q, Scenario};
+
+    fn dungeon_scenario() -> Prepared {
+        let mut prepared = Scenario::new()
+            .levels(18, 20)
+            .dungeon("Implicit run", 1, 55.0, 50.0)
+            .dungeon("Explicit run", 1, 60.0, 50.0)
+            .quest(
+                Q::new(100, "Inside the first dungeon").level(18).objective(
+                    Obj::visit(
+                        "Visit inside",
+                        At {
+                            zone: 1,
+                            x: 55.0,
+                            y: 50.0,
+                        },
+                    )
+                    .inside(0),
+                ),
+            )
+            .quest(Q::new(200, "Finish after the runs").level(18).xp(100_000))
+            .params(|p| {
+                p.farm_on_way = false;
+                p.explore_radius = 0.0;
+            })
+            .build();
+        // Keep every dungeon event before the final outdoor reward, without relying on
+        // dungeon XP or on fallback camps beyond this deliberately small fixture.
+        for dungeon in &mut prepared.model.dungeons {
+            (dungeon.min_level, dungeon.max_level, dungeon.mob_level) = (18, 20, 18);
+            (dungeon.kills, dungeon.minutes) = (0.0, 0.0);
+        }
+        prepared
+    }
+
+    #[test]
+    fn actual_dungeons_include_an_explicit_only_run_without_enter_event() {
+        let prepared = dungeon_scenario();
+        let planner = Planner::new(&prepared.model, &prepared.world, &prepared.params, &prepared.profile);
+        let mut trace = Vec::new();
+        planner
+            .simulate_full(
+                &[
+                    Stop {
+                        index: 1,
+                        kind: Kind::Dungeon,
+                    },
+                    Stop::quest(1, Kind::Accept),
+                    Stop::quest(1, Kind::TurnIn),
+                ],
+                Some(&mut trace),
+            )
+            .unwrap();
+        assert!(!trace.iter().any(|t| matches!(t.event, Event::Enter { .. })));
+        assert!(
+            trace
+                .iter()
+                .any(|t| matches!(t.event, Event::Stop { stop, .. } if stop.kind == Kind::Dungeon && stop.index == 1))
+        );
+        let entries = actual_dungeon_entries(&trace, &planner);
+        assert_eq!(entries.len(), 1);
+        assert_eq!(entries[0]["dungeon_index"], 1);
+        assert_eq!(entries[0]["dungeon_id"], 901);
+        assert_eq!(entries[0]["observation_kind"], "explicit_dungeon_stop");
+    }
+
+    #[test]
+    fn actual_dungeons_keep_first_occurrence_when_implicit_entry_precedes_explicit_stop() {
+        let prepared = dungeon_scenario();
+        let planner = Planner::new(&prepared.model, &prepared.world, &prepared.params, &prepared.profile);
+        let mut trace = Vec::new();
+        let route = [
+            Stop::quest(0, Kind::Accept),
+            Stop::quest(0, Kind::Objective(0)),
+            Stop {
+                index: 0,
+                kind: Kind::Dungeon,
+            },
+            Stop {
+                index: 1,
+                kind: Kind::Dungeon,
+            },
+            Stop::quest(1, Kind::Accept),
+            Stop::quest(1, Kind::TurnIn),
+        ];
+        planner.simulate_full(&route, Some(&mut trace)).unwrap();
+        let implicit = trace
+            .iter()
+            .position(|t| matches!(t.event, Event::Enter { dungeon: 0 }))
+            .unwrap();
+        let explicit = trace
+            .iter()
+            .position(|t| matches!(t.event, Event::Stop { stop, .. } if stop.kind == Kind::Dungeon && stop.index == 0))
+            .unwrap();
+        assert!(implicit < explicit);
+        let entries = actual_dungeon_entries(&trace, &planner);
+        let identities: Vec<_> = entries
+            .iter()
+            .map(|v| (v["dungeon_index"].as_u64().unwrap(), v["dungeon_id"].as_i64().unwrap()))
+            .collect();
+        assert_eq!(identities, vec![(0, 900), (1, 901)]);
+        assert_eq!(entries[0]["level"], trace[implicit].level);
+        assert_eq!(entries[0]["observation_kind"], "implicit_entry");
+        assert_eq!(
+            entries[0]["time"].as_f64().unwrap().to_bits(),
+            trace[implicit].time.to_bits()
+        );
+    }
 
     #[test]
     fn recorded_counts_require_one_complete_cleanup_log() {
