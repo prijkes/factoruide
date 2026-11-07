@@ -419,8 +419,184 @@ fn review_combat_floor_notes_are_qualified_and_actual_minimum_is_distinct() {
 fn review_already_unsupported_class_does_not_disable_independent_gear() {
     let mut p = class_case();
     p.model.quests[0].pre_all = vec![999];
-    p.model.quests[4].exclusive = vec![1];
     assert!(selector(&p, &[]).select(4).is_ok());
+}
+
+#[test]
+fn round2_missing_class_support_does_not_permit_a_direct_conflict() {
+    let mut p = class_case();
+    p.model.quests[0].pre_all = vec![999];
+    p.model.quests[4].exclusive = vec![1];
+    assert!(selector(&p, &[]).select(4).is_err());
+}
+
+#[test]
+fn round2_combat_estimate_failure_keeps_class_and_unavoidable_support_protected() {
+    let mut p = class_case();
+    p.model.quests[0].pre_any.clear();
+    p.model.quests[0].pre_all = vec![2];
+    let objective = Scenario::new()
+        .quest(Q::new(9, "Hard class").kill("Boss", 100, 10, 1, 50.0, 70.0))
+        .build()
+        .model
+        .quests[0]
+        .objectives[0]
+        .clone();
+    p.model.quests[0].objectives = vec![objective];
+    assert!(
+        selector(&p, &[]).select(4).is_ok(),
+        "genuinely unrelated gear remains eligible"
+    );
+    for conflict in [1, 2] {
+        p.model.quests[4].exclusive = vec![conflict];
+        assert!(
+            selector(&p, &[]).select(4).is_err(),
+            "unproven class support remains protected: {conflict}"
+        );
+    }
+}
+
+fn dungeon_chain() -> Prepared {
+    let mut p = Scenario::new()
+        .levels(1, 60)
+        .dungeon("Scholomance", 1, 50.0, 50.0)
+        .quest(Q::new(5382, "Doctor Theolen Krastinov, the Butcher").kill("Boss", 1, 1, 1, 50.0, 60.0))
+        .quest(
+            Q::new(5515, "Krastinov's Bag of Horrors")
+                .after(&[5382])
+                .kill("Bag", 1, 1, 1, 50.0, 60.0),
+        )
+        .quest(
+            Q::new(5384, "Kirtonos the Herald")
+                .after(&[5515])
+                .kill("Herald", 1, 1, 1, 50.0, 60.0),
+        )
+        .quest(Q::new(7, "Alternate source"))
+        .build();
+    p.model.dungeons[0].min_level = 1;
+    p.model.dungeons[0].max_level = 60;
+    for q in &mut p.model.quests[..3] {
+        q.members = 1;
+        for loc in q.starts.iter_mut().chain(&mut q.ends) {
+            loc.id = 11216;
+            loc.name = "Eva Sarkhoff".into();
+        }
+        q.objectives[0].loc.inside = Some(0);
+    }
+    p
+}
+
+#[test]
+fn round2_dungeon_chain_requiring_reentry_is_not_supported() {
+    let p = dungeon_chain();
+    let error = selector(&p, &[]).select(2).unwrap_err();
+    assert!(error.contains("one continuous visit"), "{error}");
+}
+
+#[test]
+fn round2_sequential_inside_npcs_and_recorded_history_remain_supported() {
+    let mut p = dungeon_chain();
+    for q in &mut p.model.quests[..3] {
+        for loc in q.starts.iter_mut().chain(&mut q.ends) {
+            loc.inside = Some(0);
+        }
+    }
+    assert!(selector(&p, &[]).select(2).is_ok());
+    let p = dungeon_chain();
+    let start = StartState {
+        completed: vec![5382.into(), 5515.into()],
+        ..Default::default()
+    };
+    assert!(selector(&p, &[&start]).select(2).is_ok());
+}
+
+#[test]
+fn round2_dungeon_topology_backtracks_and_checks_committed_roots() {
+    let mut p = dungeon_chain();
+    let mut outside = p.model.quests[0].objectives[0].clone();
+    outside.loc.inside = None;
+    p.model.quests[3].objectives = vec![outside.clone(), outside];
+    p.model.quests[2].pre_all.clear();
+    p.model.quests[2].pre_any = vec![5515, 7];
+    let plan = selector(&p, &[]).select(2).unwrap().0;
+    assert!(plan.quests.contains(&3) && !plan.quests.contains(&1));
+    let mut s = selector(&p, &[]);
+    s.committed = s.select(0).unwrap().1;
+    s.committed = s.select(2).unwrap().1;
+    let graph = s.finalize().unwrap();
+    let inside: Vec<_> = graph
+        .actions
+        .iter()
+        .enumerate()
+        .filter_map(|(i, a)| {
+            matches!(
+                a,
+                BisQuestAction::Objective {
+                    quest: 0 | 2,
+                    objective: 0
+                }
+            )
+            .then_some(i)
+        })
+        .collect();
+    assert_eq!(inside.len(), 2);
+    assert_eq!(
+        inside[1],
+        inside[0] + 1,
+        "the finalized source ordering keeps the shared visit continuous"
+    );
+    p.model.quests[3].pre_all = vec![5382];
+    let mut s = selector(&p, &[]);
+    s.committed = s.select(0).unwrap().1;
+    assert!(
+        s.select(2).is_err(),
+        "cross-root outside dependencies still require re-entry"
+    );
+}
+
+#[test]
+fn round2_completed_logged_objective_cuts_prior_visit() {
+    let mut p = dungeon_chain();
+    p.model.quests[2].pre_all = vec![5382];
+    let start = StartState {
+        log: vec![LogQuest {
+            id: 5382.into(),
+            complete: true,
+            ..Default::default()
+        }],
+        ..Default::default()
+    };
+    assert!(selector(&p, &[&start]).select(2).is_ok());
+}
+
+#[test]
+fn round2_alternate_inside_givers_can_preserve_one_visit() {
+    let mut p = dungeon_chain();
+    for q in &mut p.model.quests[..3] {
+        let mut inside = q.starts[0].clone();
+        inside.inside = Some(0);
+        q.starts.push(inside);
+        let mut inside = q.ends[0].clone();
+        inside.inside = Some(0);
+        q.ends.push(inside);
+    }
+    assert!(selector(&p, &[]).select(2).is_ok());
+}
+
+#[test]
+fn round2_blackbox_credit_needs_acceptance_before_entry() {
+    let mut p = dungeon_chain();
+    p.model.quests[0].starts[0].inside = Some(0);
+    p.model.quests[0].objectives[0].dungeon = Some(0);
+    assert!(
+        selector(&p, &[]).select(0).is_err(),
+        "acceptance inside cannot precede entry credit"
+    );
+    p.model.quests[0].objectives[0].dungeon = None;
+    assert!(
+        selector(&p, &[]).select(0).is_ok(),
+        "a direct objective inside can follow an inside accept"
+    );
 }
 
 #[test]

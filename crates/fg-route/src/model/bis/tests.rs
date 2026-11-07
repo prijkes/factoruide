@@ -128,3 +128,81 @@ fn missing_predecessor_falls_back_but_recorded_completion_restores_best() {
         990010
     );
 }
+
+#[test]
+fn round2_higher_reward_reentry_chain_falls_back_before_ranking() {
+    use crate::testing::{Q, Scenario};
+    let mut p = prepared(false);
+    let inside = Scenario::new()
+        .dungeon("Scholomance", 1, 50.0, 50.0)
+        .quest(Q::new(5382, "Dungeon objective").kill("Boss", 1, 1, 1, 50.0, 60.0))
+        .build();
+    let mut objective = inside.model.quests[0].objectives[0].clone();
+    objective.loc.inside = Some(0);
+    p.model.dungeons = inside.model.dungeons;
+    p.model.dungeons[0].min_level = 1;
+    p.model.dungeons[0].max_level = 60;
+    let high = p.model.index[&990003];
+    p.model.quests[high].id = 5384;
+    p.model.quests[high].name = "Kirtonos the Herald".into();
+    p.model.quests[high].pre_all = vec![5515];
+    p.model.quests[high].objectives = vec![objective];
+    for (id, name, previous) in [
+        (5382, "Doctor Theolen Krastinov, the Butcher", vec![]),
+        (5515, "Krastinov's Bag of Horrors", vec![5382]),
+    ] {
+        let mut q = p.model.quests[high].clone();
+        q.id = id;
+        q.name = name.into();
+        q.pre_all = previous;
+        p.model.quests.push(q);
+        p.model.rewards.push((vec![], vec![]));
+    }
+    for q in p.model.quests.iter_mut().filter(|q| [5382, 5515, 5384].contains(&q.id)) {
+        for loc in q.starts.iter_mut().chain(&mut q.ends) {
+            loc.id = 11216;
+            loc.name = "Eva Sarkhoff".into();
+            loc.inside = None;
+        }
+    }
+    let conn = Fixture::new(Edition::Classic).open();
+    let empty = std::collections::HashSet::new();
+    let mut sources =
+        super::super::sources::Sources::read(&conn, &p.world, &p.profile, &p.params, &empty, &empty, &empty).unwrap();
+    sources.dungeons = p.model.dungeons.clone();
+    let rank = |starts: &[&job::StartState]| {
+        super::load(
+            &conn,
+            p.model.power.as_ref().unwrap(),
+            &p.model.quests,
+            &p.model.rewards,
+            &p.profile,
+            &p.world,
+            &sources,
+            &p.params,
+            &[],
+            &empty,
+            starts,
+        )
+        .unwrap()
+    };
+    let bis = rank(&[]);
+    assert_eq!(
+        p.model.power.as_ref().unwrap().items[bis.entries[0].item as usize].id,
+        990011
+    );
+    assert!(
+        bis.fallback_notes()
+            .iter()
+            .any(|n| n.contains("Kirtonos") && n.contains("one continuous visit") && n.contains("Supported cap"))
+    );
+    let start = job::StartState {
+        completed: vec![5382.into(), 5515.into()],
+        ..Default::default()
+    };
+    let bis = rank(&[&start]);
+    assert_eq!(
+        p.model.power.as_ref().unwrap().items[bis.entries[0].item as usize].id,
+        990010
+    );
+}

@@ -40,6 +40,12 @@ struct Floor {
     minimum: i64,
     combat: i64,
 }
+
+#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
+enum Visit {
+    Outside(BisQuestAction),
+    Dungeon(usize),
+}
 impl Floor {
     fn merge(self, other: Self) -> Self {
         Self {
@@ -92,6 +98,7 @@ pub(super) struct Selector<'a> {
     index: HashMap<i64, u32>,
     pub(super) committed: Closure,
     class_goals: Result<Vec<Task>, String>,
+    unproven_class: Vec<(String, Vec<u32>)>,
 }
 
 impl<'a> Selector<'a> {
@@ -116,6 +123,7 @@ impl<'a> Selector<'a> {
             index: quests.iter().enumerate().map(|(i, q)| (q.id, i as u32)).collect(),
             committed: Closure::default(),
             class_goals: Ok(Vec::new()),
+            unproven_class: Vec::new(),
         };
         selector.class_goals = selector.supported_class_goals();
         selector
@@ -265,7 +273,7 @@ impl<'a> Selector<'a> {
     /// Preserve class requirements that have a coherent baseline, without letting an already
     /// unsupported independent class goal disable every gear recommendation. No proof actions
     /// are committed to gear, and alternatives are chosen together rather than all reserved.
-    fn supported_class_goals(&self) -> Result<Vec<Task>, String> {
+    fn supported_class_goals(&mut self) -> Result<Vec<Task>, String> {
         let mut goals = Vec::new();
         let mut work = 0;
         for requirement in self.profile.class_requirements.iter().filter(|r| r.selected) {
@@ -282,14 +290,14 @@ impl<'a> Selector<'a> {
             }
             let goal = Task::ClassChoice {
                 name: requirement.name.clone(),
-                roots,
+                roots: roots.clone(),
             };
             let mut candidate = goals.clone();
             candidate.push(goal);
             match self.solve(Closure::default(), candidate.clone(), 0, &mut work, &[], true) {
                 Ok(_) => goals = candidate,
                 Err(e) if e == LIMIT => return Err(e),
-                Err(_) => {}
+                Err(_) => self.unproven_class.push((requirement.name.clone(), roots)),
             }
         }
         Ok(goals)
@@ -523,7 +531,107 @@ impl<'a> Selector<'a> {
                 }
             }
         }
+        for (name, roots) in &self.unproven_class {
+            let mut blocked = true;
+            for &root in roots {
+                if !self.unavoidable_class_conflict(root, &taken)? {
+                    blocked = false;
+                    break;
+                }
+            }
+            if blocked {
+                return Err(format!(
+                    "conflicts with selected class requirement {name}; its full support remains unproven"
+                ));
+            }
+        }
         Ok(())
+    }
+
+    /// Incomplete data or a conservative combat failure is not permission to close a selected
+    /// class root or its unavoidable residual support. Do not reserve every alternative.
+    fn unavoidable_class_conflict(&self, root: u32, taken: &HashSet<u32>) -> Result<bool, String> {
+        use BisQuestAction::{Accept, Objective, TurnIn};
+        let mut todo = vec![(TurnIn(root), self.participants(root))];
+        let mut seen = BTreeMap::<BisQuestAction, u8>::new();
+        let mut work = 0;
+        while let Some((action, members)) = todo.pop() {
+            work += 1;
+            if work > MAX_WORK {
+                return Err(LIMIT.into());
+            }
+            let members = self.residual(action, members) & !seen.get(&action).copied().unwrap_or(0);
+            if members == 0 {
+                continue;
+            }
+            *seen.entry(action).or_default() |= members;
+            let i = action.quest();
+            let q = &self.quests[i as usize];
+            if taken.iter().any(|&j| {
+                i != j
+                    && (q.exclusive.contains(&self.quests[j as usize].id)
+                        || self.quests[j as usize].exclusive.contains(&q.id))
+            }) {
+                return Ok(true);
+            }
+            let mut dependencies = Vec::new();
+            match action {
+                Accept(_) => {
+                    dependencies.extend(q.pre_all.iter().map(|&id| (id, true)));
+                    let distinct: HashSet<_> = q.pre_any.iter().copied().collect();
+                    if distinct.len() <= q.pre_need {
+                        dependencies.extend(distinct.into_iter().map(|id| (id, true)));
+                    }
+                    dependencies.extend(q.pre_held.iter().map(|&id| (id, false)));
+                }
+                Objective { quest, objective } => {
+                    todo.push((Accept(quest), members));
+                    let o = &q.objectives[objective as usize];
+                    let distinct: HashSet<_> = o.handed_by.iter().copied().collect();
+                    if distinct.len() == 1 {
+                        dependencies.extend(distinct.into_iter().map(|id| (id, true)));
+                    }
+                    for k in 0..q.objectives.len() {
+                        if o.after & (1 << k) != 0 {
+                            todo.push((
+                                Objective {
+                                    quest,
+                                    objective: k as u8,
+                                },
+                                members,
+                            ));
+                        }
+                    }
+                }
+                TurnIn(quest) => {
+                    todo.push((Accept(quest), members));
+                    todo.extend((0..q.objectives.len()).map(|k| {
+                        (
+                            Objective {
+                                quest,
+                                objective: k as u8,
+                            },
+                            members,
+                        )
+                    }));
+                }
+            }
+            for (id, complete) in dependencies {
+                let relevant = (0..8)
+                    .filter(|&m| members & (1 << m) != 0 && !(complete && self.completed(id, m)))
+                    .fold(0, |mask, m| mask | (1 << m));
+                if relevant == 0 || complete && self.known.contains(&id) {
+                    continue;
+                }
+                if taken.iter().any(|&j| self.quests[j as usize].exclusive.contains(&id)) {
+                    return Ok(true);
+                }
+                if let Some(&j) = self.index.get(&id) {
+                    todo.push((if complete { TurnIn(j) } else { Accept(j) }, relevant));
+                }
+            }
+        }
+        Ok(false)
     }
 
     /// Topological scheduling with level intervals catches cycles and elapsed windows together.
@@ -545,7 +653,10 @@ impl<'a> Selector<'a> {
             let floor = min.merge(floors.get(&a).copied().unwrap_or_default());
             if floor.minimum.max(floor.combat) > max {
                 let reason = if floor.minimum > max {
-                    format!("minimum-level/start/window constraints require level {}", floor.minimum)
+                    format!(
+                        "modeled minimum-level/start/window constraints require level {}",
+                        floor.minimum
+                    )
                 } else {
                     format!(
                         "the planner's conservative combat estimate requires level {} with plain gear and no class-quest power",
@@ -578,7 +689,151 @@ impl<'a> Selector<'a> {
         if ordered.len() != state.nodes.len() {
             return Err("cyclic quest action dependencies".into());
         }
-        Ok(ordered)
+        self.visit_order(state, &ordered)
+    }
+
+    /// Contract each dungeon to one continuous visit. Internal quest order is retained, so
+    /// only a path through another place and back is rejected, not sequential inside work.
+    fn visit_order(&self, state: &Closure, ordered: &[BisQuestAction]) -> Result<Vec<BisQuestAction>, String> {
+        let options: Vec<_> = ordered
+            .iter()
+            .map(|&a| {
+                let q = &self.quests[a.quest() as usize];
+                let mut places: Vec<Option<usize>> = match a {
+                    BisQuestAction::Accept(_) => q.start_dungeon.map_or_else(
+                        || q.starts.iter().map(|l| l.inside.map(usize::from)).collect(),
+                        |d| vec![Some(d)],
+                    ),
+                    BisQuestAction::TurnIn(_) => q.ends.iter().map(|l| l.inside.map(usize::from)).collect(),
+                    BisQuestAction::Objective { objective, .. } => {
+                        let o = &q.objectives[objective as usize];
+                        o.dungeon
+                            .map_or_else(|| o.places().map(|o| o.dungeon_of()).collect(), |d| vec![Some(d)])
+                    }
+                };
+                if places.is_empty() {
+                    places.push(None);
+                }
+                places.sort_unstable();
+                places.dedup();
+                places
+            })
+            .collect();
+        if options.iter().all(|p| p == &[None]) {
+            return Ok(ordered.to_vec());
+        }
+        let mut chosen: BTreeMap<_, _> = ordered.iter().zip(&options).map(|(&a, p)| (a, p[0])).collect();
+        let choices: Vec<_> = ordered
+            .iter()
+            .copied()
+            .zip(options)
+            .filter(|(_, p)| p.len() > 1)
+            .collect();
+        self.choose_visits(state, ordered, &choices, 0, &mut chosen, &mut 0)
+    }
+
+    fn choose_visits(
+        &self,
+        state: &Closure,
+        ordered: &[BisQuestAction],
+        choices: &[(BisQuestAction, Vec<Option<usize>>)],
+        depth: usize,
+        chosen: &mut BTreeMap<BisQuestAction, Option<usize>>,
+        work: &mut usize,
+    ) -> Result<Vec<BisQuestAction>, String> {
+        *work += 1;
+        if *work > MAX_WORK || depth > MAX_CHOICES {
+            return Err(LIMIT.into());
+        }
+        if let Some((a, places)) = choices.get(depth) {
+            let mut last = "no supported dungeon placement".to_owned();
+            for &place in places {
+                chosen.insert(*a, place);
+                match self.choose_visits(state, ordered, choices, depth + 1, chosen, work) {
+                    Ok(order) => return Ok(order),
+                    Err(e) if e == LIMIT => return Err(e),
+                    Err(e) => last = e,
+                }
+            }
+            return Err(last);
+        }
+        let visit = |a: BisQuestAction| chosen[&a].map_or(Visit::Outside(a), Visit::Dungeon);
+        let mut incoming: BTreeMap<Visit, usize> = ordered.iter().map(|&a| (visit(a), 0)).collect();
+        let mut edges = BTreeSet::new();
+        let mut parents = BTreeMap::<BisQuestAction, Vec<BisQuestAction>>::new();
+        for &(a, b) in &state.edges {
+            if chosen.contains_key(&a) && chosen.contains_key(&b) {
+                parents.entry(b).or_default().push(a);
+                if visit(a) != visit(b) {
+                    edges.insert((visit(a), visit(b)));
+                }
+            }
+        }
+        for &(_, b) in &edges {
+            *incoming.get_mut(&b).expect("visit exists") += 1;
+        }
+        // Entry credit is available only for already accepted quests. Other work performed
+        // inside cannot be an unsatisfied predecessor of that entry credit either.
+        for &a in ordered {
+            let BisQuestAction::Objective { quest, objective } = a else {
+                continue;
+            };
+            let Some(d) = self.quests[quest as usize].objectives[objective as usize].dungeon else {
+                continue;
+            };
+            let mut pending = vec![a];
+            let mut ancestors = BTreeSet::new();
+            while let Some(b) = pending.pop() {
+                for &before in parents.get(&b).into_iter().flatten() {
+                    *work += 1;
+                    if *work > MAX_WORK {
+                        return Err(LIMIT.into());
+                    }
+                    if !ancestors.insert(before) {
+                        continue;
+                    }
+                    let entry_credit = match before {
+                        BisQuestAction::Objective { quest, objective } => {
+                            self.quests[quest as usize].objectives[objective as usize].dungeon == Some(d)
+                        }
+                        _ => false,
+                    };
+                    if chosen[&before] == Some(d) && !entry_credit {
+                        return Err(format!(
+                            "{}: entry-credit objectives need acceptance and prerequisites before entry; the planner supports one continuous visit",
+                            self.dungeons[d].name
+                        ));
+                    }
+                    pending.push(before);
+                }
+            }
+        }
+        let mut ready: BTreeSet<_> = incoming.iter().filter_map(|(&v, &n)| (n == 0).then_some(v)).collect();
+        let mut result = Vec::new();
+        while let Some(v) = ready.pop_first() {
+            result.extend(ordered.iter().copied().filter(|&a| visit(a) == v));
+            for &(_, next) in edges.iter().filter(|(from, _)| *from == v) {
+                let n = incoming.get_mut(&next).expect("visit exists");
+                *n -= 1;
+                if *n == 0 {
+                    ready.insert(next);
+                }
+            }
+        }
+        if result.len() != ordered.len() {
+            let names: Vec<_> = incoming
+                .iter()
+                .filter_map(|(&v, &n)| match v {
+                    Visit::Dungeon(d) if n > 0 => Some(self.dungeons[d].name.as_str()),
+                    _ => None,
+                })
+                .collect();
+            return Err(format!(
+                "{} requires leaving and re-entering a dungeon; the planner supports one continuous visit",
+                names.join(", ")
+            ));
+        }
+        Ok(result)
     }
 
     fn window(&self, a: BisQuestAction, gear: bool) -> Result<(Floor, i64), String> {
