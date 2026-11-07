@@ -19,6 +19,8 @@ An addon change also goes, in the same words, under Unreleased in that addon's o
 
 ### Guides
 
+- With best gear from vendors enabled, the planner can still add useful quests and choose another version of a class quest.
+- A guide started from a character counts the copper already in the bags when buying gear from vendors.
 - A dungeon's quests are steps inside it: taken from a boss's drop or a giver inside, objectives and hand-ins, each where it is done, the dungeon entered once (its run's time and mobs counted then). Guides made before get those steps when opened.
 - After a quest at an NPC who walks around, the level checkpoint's arrow points at the checkpoint, not along the NPC's path.
 - A guide text with a control character or a character name with an unusual letter is written into the data addon as the game reads it, not as stray letters.

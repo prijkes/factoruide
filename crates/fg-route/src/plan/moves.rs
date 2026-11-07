@@ -101,20 +101,23 @@ impl Planner<'_> {
 impl Planner<'_> {
     /// One of the small moves, drawn at random.
     pub(crate) fn random_move(&self, route: &mut Vec<Stop>, run: &Run, rng: &mut SmallRng) -> Option<Change> {
-        match rng.random_range(0..25) {
+        // Vendor buys get their own slot; without them, keep the existing draws.
+        let choices = if self.model.bis.vendor_items().is_empty() {
+            25
+        } else {
+            26
+        };
+        match rng.random_range(0..choices) {
             0..=9 => Some(Self::move_one_stop(route, rng)),
             10..=13 => Some(Self::move_block(route, rng)),
             14 | 15 => self.drop_quest_or_visit(route, rng),
             16 => self.add_visit(route, rng),
             17 => self.rebind_nearby(route, rng),
             18 => Some(self.move_hearth(route, rng)),
-            // A best item a vendor sells, bought where the route passes close to one of its
-            // vendors: only when there is one (`Params::bis`), else the odds of the moves are
-            // those they always were.
-            19 if !self.model.bis.vendor_items().is_empty() => self.buy_visit(route, rng),
             20 => self.move_zone_stay(route, rng),
             21 | 22 => self.gather_zone_visits(route, rng),
             23 | 24 => self.relocate_objective(route, run, rng),
+            25 => self.buy_visit(route, rng),
             _ => (self.swap_version(route, run, rng)).or_else(|| self.add_unused_quest(route, rng)),
         }
     }

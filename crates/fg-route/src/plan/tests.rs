@@ -10,8 +10,20 @@ use std::path::PathBuf;
 
 mod dungeons;
 mod movement;
+mod moves;
 mod profession_trainers;
 mod xp_buffs;
+
+#[test]
+fn starting_copper_is_available_in_the_route_balance() {
+    let mut p = quests_at_start(1);
+    p.model.initial.money = 123;
+    let route = [Stop::quest(0, Kind::Accept), Stop::quest(0, Kind::TurnIn)];
+    let (_, spent) = planner(&p).simulate_full(&route, None).unwrap();
+    assert_eq!(spent.gold_start, 123);
+    assert_eq!(spent.gold(), 123);
+}
+
 #[test]
 fn completion_window_is_checked_after_exploration_on_the_trip() {
     let mut p = quests_at_start(1);
@@ -1071,7 +1083,10 @@ fn an_unbounded_required_quest_stays_in_the_log_when_gray() {
 /// Two versions of a must-have class quest, of two steps each: taking one closes the other. The
 /// first is far away, the second at the start.
 fn far_and_near_versions() -> Prepared {
-    let mut p = quests_at_start(4);
+    class_versions(quests_at_start(4))
+}
+
+fn class_versions(mut p: Prepared) -> Prepared {
     p.world.terrain = crate::terrain::Terrain::default();
     let ids: Vec<i64> = p.model.quests.iter().map(|q| q.id).collect();
     for q in &mut p.model.quests {
