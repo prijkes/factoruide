@@ -10,6 +10,22 @@ friendly_to = "A"
 at = [{ zone = 1519, x = 63.4, y = 75.8 }, { zone = 1519, x = 64.0, y = 75.6 }, { zone = 1519, x = 64.4, y = 74.4 }, { zone = 1519, x = 64.4, y = 77.6 }, { zone = 1519, x = 69.17, y = 82.72, z = 97 }, { zone = 1519, x = 69.23, y = 82.92, z = 97 }]
 
 [[npc]]
+id = 1495
+name = "Deathguard Linnea"
+level = 55
+npc_flags = 2
+friendly_to = "H"
+at = [{ zone = 85, x = 65.6, y = 60.2 }]
+
+[[npc]]
+id = 1937
+name = "Apothecary Renferrel"
+level = 30
+npc_flags = 2
+friendly_to = "H"
+at = [{ zone = 130, x = 42.8, y = 40.8 }]
+
+[[npc]]
 id = 2784
 name = "King Magni Bronzebeard"
 level = 63
@@ -118,6 +134,13 @@ name = "Morbin Lightbane"
 level = 30
 friendly_to = "H"
 at = [{ zone = 1497, x = 58.08, y = 89.51 }]
+
+[[npc]]
+id = 276020
+name = "Riptear"
+level = 13
+rank = 1
+at = [{ zone = 85, x = 66.5, y = 57.0 }]
 
 [[object]]
 id = 673474
@@ -435,6 +458,38 @@ objectives = [
   { item = 275443 },
 ]
 rewards = [{ item = 279876, count = 1, choice = true }, { item = 279877, count = 1, choice = true }]
+
+# The chains the Ruins of Lordaeron's quests ask for (see forever/quests.toml): the Rear Guard
+# Patrol of Tirisfal Glades and A Recipe For Death of Silverpine Forest, both Horde quests.
+
+[[quest]]
+id = 451
+name = "A Recipe For Death"
+level = 18
+min_level = 9
+races_mask = 8589934770
+zone = 130
+xp = 1500
+objectives_text = "Bring the mundane toxin to Apothecary Renferrel in Silverpine Forest."
+starts = [{ npc = 1937 }]
+ends = [{ npc = 1937 }]
+objectives = []
+
+[[quest]]
+id = 99156
+name = "Rear Guard Patrol"
+level = 13
+min_level = 6
+races_mask = 8589934770
+zone = 85
+xp = 990
+objectives_text = "Defeat Riptear for Deathguard Linnea in Tirisfal Glades."
+requirements = "[\"Riptear\"]"
+starts = [{ npc = 1495 }]
+ends = [{ npc = 1495 }]
+objectives = [
+  { creature = 276020 },
+]
 
 [[row]]
 table = "dungeon"

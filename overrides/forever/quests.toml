@@ -42,3 +42,21 @@ id = 82208
 pre_all = [79536]
 pre_any = [78124, 78127, 78142, 78143, 78145, 78146, 78147, 78148, 78149, 79091, 79092, 79093, 79094, 79095, 79096, 79097, 79535, 79947, 79948, 79949, 79950, 79951, 79952, 81947, 81949, 81952, 81953, 81954, 81955, 81956, 84395, 84396, 84397, 84398, 84399, 84400, 84401, 84402]
 pre_count = 25
+
+# The Ruins of Lordaeron's quests ask for the chains of their zones done first, a change the
+# sources have not caught (both are still listed without prerequisites).
+# https://www.wowhead.com/forever/news/new-prerequisites-required-for-ruins-of-lordaeron-dungeon-quests-in-wow-forever-383769
+
+[[quest]]
+# The Wrath of Rath'mael: the Rear Guard Patrol chain of Tirisfal Glades, its two parts one
+# after the other (99156 itself asks for 356).
+# https://www.wowhead.com/forever/quest=92422/the-wrath-of-rathmael
+id = 92422
+pre_all = [99156]
+
+[[quest]]
+# The New Plague: the A Recipe For Death chain of Silverpine Forest, its parts one after the
+# other (451 asks for 450, which asks for 447).
+# https://www.wowhead.com/forever/quest=95216/the-new-plague
+id = 95216
+pre_all = [451]

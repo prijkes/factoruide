@@ -43,6 +43,7 @@ An addon change also goes, in the same words, under Unreleased in that addon's o
 
 - WoW Forever's Hall of Thanes: Underground Map is planned (the Dark Iron Map drops from the Dark Iron Spies and Captain Beld), and Old Ironforge Incursion after it (GitHub #98).
 - WoW Forever: the warlocks' pets and the Theramore Emissaries no longer count as hostile creatures in Stormwind (they kept low-level characters from its auction house), and A Dynamite Plan asks for its 10 Rough Dynamite.
+- WoW Forever: The Wrath of Rath'mael and The New Plague (Ruins of Lordaeron) ask for the chains of their zones done first (Rear Guard Patrol, both its parts, and A Recipe For Death), as in the game, so the guide plans the chains before them.
 
 ## 0.15.0 (2026-11-01)
 

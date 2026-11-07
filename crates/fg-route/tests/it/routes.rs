@@ -3739,6 +3739,34 @@ fn rare_books_asked_for_are_planned_with_one_of_each_book() {
     assert!(counts(91775).contains(&(248002, 1.0)) && counts(91775).contains(&(248001, 6.0)));
 }
 
+/// The Ruins of Lordaeron's quests ask for the chains of their zones done first, a change the
+/// sources have not caught (forever/quests.toml corrects it): The Wrath of Rath'mael needs the
+/// Rear Guard Patrol, The New Plague the A Recipe For Death chain.
+#[test]
+fn the_ruins_of_lordaeron_quests_ask_for_the_chains_of_their_zones() {
+    let overrides = Overrides::load_edition(&repo().join("overrides"), Edition::Forever).unwrap();
+    let request = PlanRequest {
+        params: Some(overrides.params.with_overrides(&[]).unwrap()),
+        ..request("undead", "warrior", 30, &[])
+    };
+    let p = job::prepare(
+        &Fixture::new(Edition::Forever)
+            .file("forever_services")
+            .file("forever_dungeon_starts")
+            .open(),
+        &overrides,
+        &request,
+        &|_| {},
+    )
+    .unwrap();
+    let needs = |id: i64| {
+        let q = &p.model.quests[quest(&p, id).unwrap_or_else(|| panic!("{id} in the model")) as usize];
+        (q.pre_all.clone(), q.pre_any.clone())
+    };
+    assert_eq!(needs(92422), (vec![99156], vec![]));
+    assert_eq!(needs(95216), (vec![451], vec![]));
+}
+
 /// Ishamuhale comes to a Fresh Zhevra Carcass, which rots in 30 minutes (GitHub #51): the fang
 /// is got after the carcass, and the carcass no earlier than the kill can follow.
 #[test]
