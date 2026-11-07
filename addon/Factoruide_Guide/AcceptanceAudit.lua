@@ -131,10 +131,11 @@ local function Open(kind, item, phase)
         and current.quest
         and not current.deadline
         and (not source or (current.source and current.source:find("^item:")))
-    -- A detail replacing a still-open unknown-source gossip/greeting is explicit UI
-    -- continuation. An arbitrary later no-GUID visit does not establish equal identity.
+    -- Explicit panel transitions can retain or promote an unreadable source snapshot.
+    -- Two distinct known sources never join through this continuation evidence.
+    local compatible = current and (not source or not current.source or source == current.source)
     local detailTransition = (phase == "detail" or phase == "opening")
-        and not source
+        and compatible
         and current
         and not current.deadline
         and (current.gossip or current.greeting or current.opening)
@@ -144,24 +145,37 @@ local function Open(kind, item, phase)
             explicitPhase
             or detailTransition
             or (source and source == current.source)
-            or (not source and current.continuing)
+            or (compatible and current.continuing)
         )
     if not same then
+        local resume
+        if source then
+            for i = #closing, 1, -1 do
+                local token = closing[i]
+                if Valid(token) and token.source == source then
+                    resume = token
+                    table.remove(closing, i) -- preserve it if closing the current source reaches the bound
+                    break
+                end
+            end
+        end
         if current then Close(current) end -- previous NPC's snapshot keeps its own deadline
-        current = {
-            generation = generation,
-            route = route,
-            source = source,
-            ids = {},
-            names = {},
-            seen = {},
-            confirmed = {},
-            turnedIn = {},
-            close = 0,
-            live = true,
-        }
+        current = resume
+            or {
+                generation = generation,
+                route = route,
+                source = source,
+                ids = {},
+                names = {},
+                seen = {},
+                confirmed = {},
+                turnedIn = {},
+                close = 0,
+                live = true,
+            }
     end
     local token = current
+    token.source = token.source or source
     if token.deadline then
         token.deadline = nil
         for i = #closing, 1, -1 do

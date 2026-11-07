@@ -5021,6 +5021,33 @@ function AcceptanceAuditTest()
             assert(#notices == 0, "repeatable turn-in resolves observed offer even without permanent completion flag")
         end
     end)
+    check("unknown source becomes readable through explicit detail transition without premature close", function()
+        for _, opening in ipairs({ "GOSSIP_SHOW", "QUEST_GREETING", "continuing", "manager" }) do
+            setup()
+            npc = nil
+            fire(opening == "QUEST_GREETING" and opening or "GOSSIP_SHOW")
+            if opening == "continuing" or opening == "manager" then fire("GOSSIP_CLOSED", true) end
+            npc = "Creature-0-1-2-3-658-3333"
+            if opening == "manager" then
+                Enum.PlayerInteractionType = { Gossip = 3, QuestGiver = 4 }
+                C_PlayerInteractionManager = { IsInteractingWithNpcOfType = function() return true end }
+                fire("PLAYER_INTERACTION_MANAGER_FRAME_SHOW", 4)
+            end
+            fire("QUEST_DETAIL", 0)
+            elapse(1.1)
+            assert(#notices == 0, opening .. " nil-to-known detail stays open without advice")
+            C_PlayerInteractionManager = nil
+            fire("QUEST_FINISHED")
+            elapse(1.1)
+            assert(
+                #notices == 1 and notices[1]:find("Second offer", 1, true),
+                opening .. " final close retains original offered union"
+            )
+            fire("GOSSIP_SHOW")
+            elapse(1.1)
+            assert(#notices == 1, "promoted source snapshot has no stale duplicate")
+        end
+    end)
     check("same NPC reopen cancels close and unions offers, later visit warns again", function()
         setup()
         offers = { { questID = 99001, title = "First offer" } }
@@ -5053,6 +5080,34 @@ function AcceptanceAuditTest()
         assert(#notices == 1 and notices[1]:find("First offer", 1, true), "old NPC audit survives new source")
         close()
         assert(#notices == 2 and notices[2]:find("Second offer", 1, true), "new source has independent warning")
+    end)
+    check("A B A reopen resumes A pending union while preserving B deadline", function()
+        setup({ { k = "accept", q = 99001 }, { k = "accept", q = 99002 }, { k = "accept", q = 99003 } })
+        local sourceA = npc
+        offers = { { questID = 99001, title = "Original A offer" } }
+        fire("GOSSIP_SHOW")
+        fire("GOSSIP_CLOSED", false)
+        elapse(0.2)
+        npc = "Creature-0-1-2-3-658-4444"
+        offers = { { questID = 99002, title = "B offer" } }
+        fire("GOSSIP_SHOW")
+        fire("GOSSIP_CLOSED", false)
+        elapse(0.2)
+        npc = sourceA
+        offers = { { questID = 99003, title = "New A offer" } }
+        fire("GOSSIP_SHOW")
+        elapse(0.7)
+        assert(#notices == 0, "A's old deadline cannot warn during reopened A")
+        elapse(0.2)
+        assert(#notices == 1 and notices[1]:find("B offer", 1, true), "B's independent deadline still warns once")
+        fire("GOSSIP_CLOSED", false)
+        elapse(1.1)
+        assert(
+            #notices == 2 and notices[2]:find("Original A offer", 1, true) and notices[2]:find("New A offer", 1, true),
+            "one final A warning preserves original and reopened offers"
+        )
+        elapse(2)
+        assert(#notices == 2, "no stale A callback duplicates final warning")
     end)
     check("route switch away and back or same-name replacement cancels stale audit", function()
         local name = setup()
