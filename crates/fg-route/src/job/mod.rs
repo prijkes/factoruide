@@ -176,11 +176,8 @@ pub(crate) fn plan_prepared(
     }
     let best = finalize_route(&planner, best)?;
     let route = export::build(&planner, &prepared.profile, &best);
-    for missing in planner.missing_class_quests(&best) {
-        prepared.notes.push(format!("required quest not planned: {missing}"));
-    }
-    for missing in planner.missing_zone_quests(&best) {
-        prepared.notes.push(format!("zone quest not planned: {missing}"));
+    for missing in planner.missing_mandatory_quests(&best) {
+        prepared.notes.push(missing);
     }
     for late in planner.late_timed_quests(&best) {
         prepared.notes.push(format!("timed quest given up: {late}"));

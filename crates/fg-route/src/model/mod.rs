@@ -22,6 +22,8 @@ mod loot;
 mod names;
 mod objectives;
 mod places;
+#[cfg(test)]
+mod provenance_tests;
 mod pvp;
 mod quest;
 mod required;
@@ -44,8 +46,8 @@ pub use loot::CommonLoot;
 pub use names::Names;
 pub use types::{
     ClassRequirement, CompletionWindow, Dungeon, DungeonDef, EntityKind, ExploreArea, FloorPoint, Guard, Initial, Loc,
-    Mate, MateStart, Model, Objective, ObjectiveOrder, ProfessionPlan, ProfessionTrainer, Profile, Quest,
-    QuestOverride, QuestRequirement, Spots, Teleport, TeleportDef, Vendor, race_bit,
+    MandatoryOrigins, Mate, MateStart, Model, Objective, ObjectiveOrder, ProfessionPlan, ProfessionTrainer, Profile,
+    Quest, QuestOverride, QuestRequirement, Spots, Teleport, TeleportDef, Vendor, race_bit,
 };
 
 use crate::params::Params;
@@ -242,6 +244,9 @@ pub fn load(
     if params.bis == crate::params::BisMode::Required {
         for (i, q) in quests.iter_mut().enumerate() {
             q.mandatory |= bis.requires(i);
+            if bis.requires(i) {
+                q.mandatory_origins.insert(MandatoryOrigins::GEAR);
+            }
         }
     }
     Ok(Model {
@@ -303,6 +308,9 @@ pub(crate) fn settle_quests(
     for q in quests.iter_mut() {
         let forced = |d: usize| params.forced_dungeon_quests.contains(&dungeons[d].area);
         q.mandatory |= q.objectives.iter().any(|o| o.dungeon_of().is_some_and(forced));
+        if q.objectives.iter().any(|o| o.dungeon_of().is_some_and(forced)) {
+            q.mandatory_origins.insert(MandatoryOrigins::FORCED_DUNGEON);
+        }
     }
     chains::require_alternatives(quests, requirements);
     chains::require_prerequisites(quests);
@@ -310,7 +318,11 @@ pub(crate) fn settle_quests(
     chains::settle_class_quest_versions(quests, &versions);
     for q in quests.iter_mut() {
         q.mandatory |= q.required;
+        if q.required {
+            q.mandatory_origins.insert(MandatoryOrigins::EXACT);
+        }
     }
+    chains::propagate_mandatory_origins(quests, requirements);
     chains::default_completion_windows(quests, profile, params);
 }
 

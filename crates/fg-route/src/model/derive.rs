@@ -64,6 +64,11 @@ pub(crate) fn settle(
     let known_names: HashSet<_> = names_known.into_iter().filter_map(|(n, k)| k.then_some(n)).collect();
     chains::drop_unhanded(quests, skipped, &knowledge.satisfied_objectives);
     for q in quests.iter_mut() {
+        // An exact/zone request can still require doing a known unlock again, but its class
+        // reward is already satisfied. Keep those independent reasons and the legacy flags.
+        if known_names.contains(&q.name) {
+            q.mandatory_origins.remove(super::MandatoryOrigins::CLASS);
+        }
         if known_names.contains(&q.name) && !q.required && !q.zone_forced {
             q.mandatory = false;
         }

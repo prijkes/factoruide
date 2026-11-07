@@ -36,6 +36,9 @@ pub(crate) fn select_test_sources(p: &mut job::Prepared, roots: &[u32], starts: 
     }
     for (i, q) in p.model.quests.iter_mut().enumerate() {
         q.mandatory |= bis.requires(i);
+        if bis.requires(i) {
+            q.mandatory_origins.insert(super::super::MandatoryOrigins::GEAR);
+        }
     }
     p.model.bis = bis;
 }
@@ -116,6 +119,18 @@ fn alternate_giver_is_retained_and_modes_keep_their_contract() {
     assert!(!p.model.quests[p.model.index[&990004]].mandatory);
     let p = prepared_with(false, "off", sql);
     assert!(p.model.bis.entries.is_empty() && p.model.bis.fallback_notes().is_empty());
+}
+
+#[test]
+fn gear_only_class_category_uses_completion_membership_not_category_for_origin() {
+    use crate::model::MandatoryOrigins as Origins;
+    let sql = "UPDATE m_quest SET zone_or_sort=-81, classes_mask=1 WHERE id=990004;";
+    for mode in ["required", "prefer", "off"] {
+        let p = prepared_with(false, mode, sql);
+        let q = &p.model.quests[p.model.index[&990004]];
+        assert!(!q.mandatory_origins.contains(Origins::CLASS));
+        assert_eq!(q.mandatory_origins.contains(Origins::GEAR), mode == "required");
+    }
 }
 
 #[test]

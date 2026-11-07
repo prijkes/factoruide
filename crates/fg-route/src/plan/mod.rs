@@ -70,7 +70,7 @@ pub(crate) use profession_trainers::RANKS;
 pub use regions::Group;
 pub use search::{CleanupStage, Effort};
 pub use share::{Exchange, Member};
-pub use state::{Breakdown, Event, Kind, Stop, Timed, fmt_time};
+pub use state::{Breakdown, Event, Kind, MandatoryGoalCounts, Stop, Timed, fmt_time};
 
 use crate::diagnostics::{self, Diagnostics};
 use crate::model::{Model, Profile, Quest};
