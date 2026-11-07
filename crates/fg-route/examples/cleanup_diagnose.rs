@@ -1,4 +1,4 @@
-//! Fixed-attempt regeneration of an archived single-start run; no timing claims.
+//! Fixed-attempt regeneration, fixed-snapshot rescoring, or cleanup-only replay; no timing claims.
 use anyhow::{Context, Result, ensure};
 use fg_route::job::{self, Overrides, PlanRequest, Prepared};
 use fg_route::model::Objective;
@@ -91,6 +91,7 @@ fn parse_stop(value: &Value) -> Result<Stop> {
         "Buy" => Kind::Buy,
         "Hearth" => Kind::Hearth,
         "Dungeon" => Kind::Dungeon,
+        "Train" => Kind::Train,
         _ => {
             let ordinal = text
                 .strip_prefix("Objective(")
@@ -367,12 +368,98 @@ fn write_report(output: &std::path::Path, report: &Value) -> Result<()> {
     Ok(())
 }
 
+fn validate_modes(opts: &BTreeMap<String, String>) -> Result<()> {
+    ensure!(
+        !opts.contains_key("--rescore-snapshots") || !opts.contains_key("--tries"),
+        "--tries cannot be combined with --rescore-snapshots: rescoring never searches"
+    );
+    ensure!(
+        !opts.contains_key("--cleanup-snapshots")
+            || (!opts.contains_key("--tries") && !opts.contains_key("--rescore-snapshots")),
+        "--cleanup-snapshots cannot be combined with --tries or --rescore-snapshots: cleanup never searches"
+    );
+    Ok(())
+}
+
+struct CleanupReplay {
+    snapshots: Vec<(String, Vec<Stop>)>,
+    callbacks: Vec<Value>,
+    logs: Value,
+}
+
+fn cleanup_selected_input(planner: &Planner<'_>, initial: Vec<Stop>) -> Result<CleanupReplay> {
+    let callbacks = RefCell::new(Vec::new());
+    let callback_routes = RefCell::new(Vec::new());
+    let logs = RefCell::new(Vec::new());
+    let snapshots = RefCell::new(Vec::new());
+    let improved = planner.improve_while_observed(
+        initial.clone(),
+        Effort::Tries(0),
+        || true,
+        |line| logs.borrow_mut().push(line.to_owned()),
+        |score, play, route| {
+            callbacks.borrow_mut().push(json!({"score": score,
+                "player_seconds": play, "stops": route.len(), "stage": "cleanup_initial"}));
+            callback_routes.borrow_mut().push(route.to_vec());
+        },
+        |stage, route| snapshots.borrow_mut().push((format!("{stage:?}"), route.to_vec())),
+    );
+    let callbacks = callbacks.into_inner();
+    let callback_routes = callback_routes.into_inner();
+    let logs = json!(logs.into_inner());
+    let mut snapshots = snapshots.into_inner();
+    ensure!(
+        callbacks.len() == 1,
+        "cleanup-only replay must emit exactly one initial best callback"
+    );
+    ensure!(
+        callback_routes[0] == initial,
+        "initial best callback changed the typed SelectedInput"
+    );
+    ensure!(
+        recorded_counts(&logs)? == (0, 0),
+        "cleanup-only replay performed search attempts or improvements"
+    );
+    let expected = [
+        "SelectedInput",
+        "PowerFirst",
+        "Rebind",
+        "PlaceHearths",
+        "DropUnfinished",
+        "TrimTarget",
+        "DropDungeonless",
+    ];
+    ensure!(
+        snapshots.iter().map(|(stage, _)| stage.as_str()).eq(expected),
+        "cleanup-only replay must emit all seven ordered cleanup boundaries"
+    );
+    ensure!(
+        snapshots[0].1 == initial,
+        "cleanup changed the typed SelectedInput before its first boundary"
+    );
+    let final_route = job::finalize_route(planner, improved)?;
+    snapshots.push(("Finalized".to_owned(), final_route));
+    Ok(CleanupReplay {
+        snapshots,
+        callbacks,
+        logs,
+    })
+}
+
 fn main() -> Result<()> {
     let mut args = std::env::args().skip(1);
     let mut opts = BTreeMap::new();
     while let Some(key) = args.next() {
         ensure!(
-            ["--artifact", "--output", "--repo", "--tries", "--rescore-snapshots"].contains(&key.as_str()),
+            [
+                "--artifact",
+                "--output",
+                "--repo",
+                "--tries",
+                "--rescore-snapshots",
+                "--cleanup-snapshots"
+            ]
+            .contains(&key.as_str()),
             "unknown option {key}"
         );
         let value = args.next().with_context(|| format!("missing value for {key}"))?;
@@ -390,10 +477,7 @@ fn main() -> Result<()> {
     );
     let artifact: Value = serde_json::from_slice(&std::fs::read(&artifact_path)?)?;
     validate_replay_contract(&artifact)?;
-    ensure!(
-        !opts.contains_key("--rescore-snapshots") || !opts.contains_key("--tries"),
-        "--tries cannot be combined with --rescore-snapshots: rescoring never searches"
-    );
+    validate_modes(&opts)?;
     let (recorded_tries, recorded_wins) = recorded_counts(&artifact["search_log"])?;
     let tries = opts
         .get("--tries")
@@ -448,6 +532,44 @@ fn main() -> Result<()> {
         write_report(&output, &report)?;
         println!(
             "{}: rescored eight fixed snapshots without search or callback comparison",
+            output.display()
+        );
+        return Ok(());
+    }
+    if let Some(source) = opts.get("--cleanup-snapshots") {
+        ensure!(
+            request_equal && params_equal,
+            "prepared cleanup configuration differs from source artifact"
+        );
+        let diagnosis: Value = serde_json::from_slice(&std::fs::read(source)?)?;
+        let routes = snapshot_routes(&artifact, &diagnosis)?;
+        let initial = routes.into_iter().next().context("missing SelectedInput")?.1;
+        let planner = Planner::new(&prepared.model, &prepared.world, &prepared.params, &prepared.profile);
+        let replay = cleanup_selected_input(&planner, initial)?;
+        // Describe snapshots only after ordinary cleanup and finalization have completed.
+        let mut stages = Vec::new();
+        for (stage, route) in replay.snapshots {
+            stages.push(describe_stage(&stage, &route, stages.last(), &prepared)?);
+        }
+        ensure!(
+            stages[0]["stops"] == diagnosis["stages"][0]["stops"],
+            "SelectedInput quest/stop identity changed in the prepared model"
+        );
+        let report = json!({"schema": 1, "experiment": "cleanup_training_cleanup_only_replay",
+            "mode": "cleanup_snapshots", "archived_artifact": artifact_path,
+            "source_diagnosis": source, "repo": repo, "edition": edition, "seed": artifact["seed"],
+            "arm": artifact["arm"], "search_performed": false, "search_attempts": 0,
+            "search_improvements": 0, "callback_comparison_performed": false,
+            "configuration_identity_verified": true, "selected_input_typed_identity_verified": true,
+            "selected_input_stop_identity_records_verified": true,
+            "initial_best_callback_count": replay.callbacks.len(), "cleanup_boundary_count": stages.len() - 1,
+            "initial_best_callbacks": replay.callbacks, "cleanup_log": replay.logs,
+            "provenance_requirement": "Verify source/data/overrides externally and compare archived boundaries through TrimTarget before attributing later cleanup differences; this mode makes no search-reproduction claim.",
+            "timing_claims": false, "effective_request": request, "effective_params": prepared.params,
+            "stages": stages});
+        write_report(&output, &report)?;
+        println!(
+            "{}: replayed cleanup from fixed SelectedInput with zero search attempts",
             output.display()
         );
         return Ok(());
@@ -720,6 +842,75 @@ mod tests {
     }
 
     #[test]
+    fn archive_stop_decoder_preserves_independent_training() {
+        assert_eq!(
+            parse_stop(&json!({"index": 7, "kind": "Train", "quest_id": null})).unwrap(),
+            Stop {
+                index: 7,
+                kind: Kind::Train
+            }
+        );
+    }
+
+    #[test]
+    fn cleanup_mode_excludes_search_override_and_snapshot_rescoring() {
+        for keys in [
+            vec!["--cleanup-snapshots", "--tries"],
+            vec!["--cleanup-snapshots", "--rescore-snapshots"],
+            vec!["--rescore-snapshots", "--tries"],
+        ] {
+            let opts = keys.iter().map(|key| ((*key).to_owned(), "0".to_owned())).collect();
+            assert!(validate_modes(&opts).is_err(), "accepted {keys:?}");
+        }
+        for key in ["--cleanup-snapshots", "--rescore-snapshots", "--tries"] {
+            assert!(validate_modes(&BTreeMap::from([(key.to_owned(), "0".to_owned())])).is_ok());
+        }
+        assert!(validate_modes(&BTreeMap::new()).is_ok());
+    }
+
+    #[test]
+    fn cleanup_only_uses_fixed_input_with_one_callback_and_zero_attempts() {
+        let prepared = Scenario::new()
+            .levels(18, 20)
+            .quest(Q::new(100, "First fixed visit").level(18).xp(100))
+            .quest(Q::new(200, "Finish the fixed route").level(18).xp(100_000))
+            .build();
+        let planner = Planner::new(&prepared.model, &prepared.world, &prepared.params, &prepared.profile);
+        // More than two stops makes a nonzero Effort enter the search loop, so the
+        // zero-count assertion detects an accidental search attempt.
+        let initial = vec![
+            Stop::quest(0, Kind::Accept),
+            Stop::quest(0, Kind::TurnIn),
+            Stop::quest(1, Kind::Accept),
+            Stop::quest(1, Kind::TurnIn),
+        ];
+        let replay = cleanup_selected_input(&planner, initial.clone()).unwrap();
+        assert_eq!(recorded_counts(&replay.logs).unwrap(), (0, 0));
+        assert_eq!(replay.callbacks.len(), 1);
+        assert_eq!(replay.callbacks[0]["stops"], 4);
+        assert_eq!(replay.snapshots[0].1, initial);
+        assert_eq!(
+            replay
+                .snapshots
+                .iter()
+                .map(|(stage, _)| stage.as_str())
+                .collect::<Vec<_>>(),
+            [
+                "SelectedInput",
+                "PowerFirst",
+                "Rebind",
+                "PlaceHearths",
+                "DropUnfinished",
+                "TrimTarget",
+                "DropDungeonless",
+                "Finalized"
+            ]
+        );
+        assert_eq!(replay.snapshots[7].1, initial);
+        assert!(planner.validate_required(&replay.snapshots[7].1).is_ok());
+    }
+
+    #[test]
     fn callback_equality_ignores_timestamps_but_detects_sequence_and_player_drift() {
         let expected = vec![json!({"seconds": 0.1, "score": 100.0, "player_seconds": 80.0,
             "stops": 9, "stage": "search"})];
@@ -763,6 +954,23 @@ mod tests {
         for field in ["seed", "edition", "effective_request", "effective_params"] {
             let mut changed = diagnosis.clone();
             changed[field] = Value::Null;
+            assert!(
+                snapshot_routes(&artifact, &changed).is_err(),
+                "accepted changed {field}"
+            );
+        }
+    }
+
+    #[test]
+    fn snapshot_source_requires_original_schema_and_experiment() {
+        let (artifact, diagnosis) = snapshot_fixture();
+        for (field, value) in [
+            ("schema", json!(2)),
+            ("experiment", json!("cleanup_training_cleanup_only_replay")),
+            ("experiment", json!("cleanup_loss_snapshot_rescore")),
+        ] {
+            let mut changed = diagnosis.clone();
+            changed[field] = value;
             assert!(
                 snapshot_routes(&artifact, &changed).is_err(),
                 "accepted changed {field}"
