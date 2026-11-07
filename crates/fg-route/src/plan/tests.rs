@@ -12,6 +12,7 @@ mod dungeons;
 mod movement;
 mod moves;
 mod profession_trainers;
+mod shared_kills;
 mod xp_buffs;
 
 #[test]
@@ -192,6 +193,7 @@ fn quests_at_hand_are_looked_for_where_the_stop_went() {
         elite: false,
         count: 1.0,
         mobs: vec![],
+        direct_kill: None,
         pull: 1.0,
         spawns: 1,
         pack: 1.0,
@@ -253,6 +255,7 @@ fn objective_started_counts_its_share_at_another_place() {
         elite: false,
         count: 10.0,
         mobs: vec![],
+        direct_kill: None,
         pull: 1.0,
         spawns: 20,
         pack: 1.0,
@@ -337,6 +340,7 @@ fn camp_of_two_objectives() -> Prepared {
         elite: false,
         count: 10.0,
         mobs: vec![],
+        direct_kill: None,
         pull: 1.0,
         spawns: 10,
         pack: 1.0,
@@ -538,6 +542,7 @@ fn road_of_mobs() -> (Prepared, crate::world::Pos, crate::world::Pos) {
         elite: false,
         count: 3.0,
         mobs: vec![(777, "Wolf".into())],
+        direct_kill: None,
         pull: 1.0,
         spawns: 3,
         pack: 1.0,
@@ -646,6 +651,7 @@ fn greedy_grinds_to_the_mobs_of_a_quest_in_reach() {
         elite: false,
         count: 1.0,
         mobs: vec![],
+        direct_kill: None,
         pull: 1.0,
         spawns: 1,
         pack: 1.0,
@@ -871,6 +877,7 @@ fn timed_quest_taken_once_strong_enough_for_its_objectives() {
         elite: false,
         count: 1.0,
         mobs: vec![],
+        direct_kill: None,
         pull: 1.0,
         spawns: 1,
         pack: 1.0,

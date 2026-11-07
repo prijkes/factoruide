@@ -19,6 +19,7 @@ An addon change also goes, in the same words, under Unreleased in that addon's o
 
 ### Guides
 
+- Accepted quests asking for the same creature kills share progress, with combat time, XP and loot counted once; shared work is not charged again as grinding for an unfinished quest.
 - With best gear from vendors enabled, the planner can still add useful quests and choose another version of a class quest.
 - A guide started from a character counts the copper already in the bags when buying gear from vendors.
 - A dungeon's quests are steps inside it: taken from a boss's drop or a giver inside, objectives and hand-ins, each where it is done, the dungeon entered once (its run's time and mobs counted then). Guides made before get those steps when opened.

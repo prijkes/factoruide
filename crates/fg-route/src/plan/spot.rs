@@ -24,9 +24,18 @@ impl Simulator<'_> {
             return place;
         }
         let open = self.trips().open_links(s);
+        let left = if o.shared_kill_target().is_some() {
+            1.0 - s
+                .started
+                .iter()
+                .find(|&&(q, ok, _)| q == quest && ok == k)
+                .map_or(0.0, |p| p.2)
+        } else {
+            1.0
+        };
         let mut best = (f64::INFINITY, o);
         for place in std::iter::once(o).chain(&o.alts) {
-            let there = self.spot_work(s, q, place);
+            let there = self.spot_work(s, q, place, left.max(0.0));
             if there >= best.0 {
                 continue;
             }
@@ -63,13 +72,16 @@ impl Simulator<'_> {
     }
 
     /// Time of the work at a place, with the grinding to the level it requires.
-    fn spot_work(&self, s: &State, q: &Quest, o: &Objective) -> f64 {
+    fn spot_work(&self, s: &State, q: &Quest, o: &Objective, left: f64) -> f64 {
         let gate = self.combat().level_at(q, o, s.might());
         let grind = if gate > s.level {
             self.growth().grind_time(s, gate)
         } else {
             0.0
         };
-        grind + o.kills * self.combat().kill_time(s.level, s.bonus, o) + o.uses * self.params.object_time + o.extra
+        grind
+            + o.kills_left(1.0 - left) * self.combat().kill_time(s.level, s.bonus, o)
+            + o.uses * self.params.object_time
+            + o.extra * left
     }
 }

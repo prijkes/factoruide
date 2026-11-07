@@ -5,6 +5,9 @@ Date: 2026-11-07. Source revision: `e041e69`.
 Implementation follow-up: after the user's approval, the first dispatcher fix
 and an associated starting-copper correction were implemented. See the
 [phase-one implementation and validation record](superpowers/plans/2026-11-07-bis-search-dispatch.md).
+The subsequent [shared-kill correction](superpowers/plans/2026-11-07-shared-kill-credit.md)
+and [algorithm-alternatives analysis](route-search-alternatives-2026-11-07.md)
+continue that work.
 The assessment below records the source and experiments before those changes.
 
 This completes the assessment requested in [the Astra handoff](../ASTRA_HANDOFF.md).

@@ -1,11 +1,21 @@
 # Factoruide route-quality analysis: handoff to Astra
 
+Latest continuation: shared ordinary creature-kill credit and its XP, loot,
+timer, and unfinished-work accounting are implemented on `fix/shared-kill-credit`.
+See the [phase-two implementation and validation record](docs/superpowers/plans/2026-11-07-shared-kill-credit.md).
+The user's algorithm question is addressed in the
+[route-search alternatives report](docs/route-search-alternatives-2026-11-07.md):
+the current heuristic was inspected and credible alternatives researched, but
+competing designs have not yet been benchmarked at equal computation budgets.
+No proof that the current search is best, or that no faster/better search exists,
+has been established.
+
 Implementation continuation: the user subsequently approved the first fix with
 “OK, continue.” The dispatcher and starting-copper corrections are implemented on
 `fix/bis-search-dispatch`; see the [implementation plan and validation record](docs/superpowers/plans/2026-11-07-bis-search-dispatch.md).
 The original handoff's read-only authorization below describes the earlier
-assessment stage. Shared-kill credit, vendor-source reconciliation, and broader
-search experiments remain subsequent work.
+assessment stage. Vendor-source reconciliation and comparative search
+experiments remain subsequent work.
 
 Continuation completed on 2026-11-07: see the
 [route-quality assessment and proposed next work](docs/route-quality-assessment-2026-11-07.md).
