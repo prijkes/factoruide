@@ -16,6 +16,8 @@ pub enum Kind {
     /// Buy a best item from a vendor (`Stop::index` is the item, index in the power model's
     /// items; the vendor is the seller nearest where the character stands).
     Buy,
+    /// Class training (`Stop::index` is the trainer in `Model::trainers`).
+    Train,
     /// Back to the inn the hearthstone is bound to: the hearthstone (`Stop::index` 0) or the
     /// shaman's Astral Recall (1). Nothing when it is not ready yet, or not learned.
     Hearth,

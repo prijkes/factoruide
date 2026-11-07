@@ -407,6 +407,16 @@ impl Simulator<'_> {
         if !matches!(stop.kind, Kind::Objective(_)) {
             s.together = Together::default();
         }
+        if stop.kind == Kind::Train {
+            let abilities = self.model.abilities.trained(s.abilities, s.level) & !s.abilities;
+            if s.trained < s.level || abilities != 0 {
+                // The service owns its trip and lesson time. Keep a preceding flight's
+                // landing marker so `train_at` accounts for the onward walk once.
+                s.inside = None;
+                self.train_at(s, stop.index as usize, record);
+            }
+            return;
+        }
         if stop.kind == Kind::Hearth {
             s.landed = Landed::No;
             if self.hearth(s, stop.index == 1, record) {
@@ -847,7 +857,7 @@ impl Simulator<'_> {
             // the item worn (the stop was validated an upgrade).
             Kind::Buy => self.buy(s, stop.index as u16),
             // A dungeon is entered on arriving (`arrive`), the hearthstone used where it was.
-            Kind::Hearth | Kind::Dungeon => {}
+            Kind::Hearth | Kind::Dungeon | Kind::Train => {}
         }
         None
     }

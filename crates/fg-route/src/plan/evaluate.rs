@@ -503,6 +503,7 @@ impl Planner<'_> {
             Kind::Objective(_) => "objective done in a dungeon run",
             Kind::TurnIn => "objectives not done",
             Kind::LearnFlight => "flight path already known",
+            Kind::Train => "unknown trainer",
             Kind::Buy => "not an upgrade, or not the copper for it",
             Kind::Bind => "hearthstone already bound there",
             Kind::Hearth => "no such spell",

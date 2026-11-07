@@ -357,11 +357,52 @@ impl Planner<'_> {
         left.dedup();
         let (mut best, mut changed) = (route.to_vec(), false);
         for q in left {
+            // Trace only the removed slots from the current accepted route's pre-stop
+            // states. Training at another retained slot is not a service we removed.
+            let mut trained = Vec::new();
+            if let Some(run) = self.run(&best) {
+                for (k, &stop) in best.iter().enumerate().take(run.states.len().saturating_sub(1)) {
+                    if stop.is_quest() && stop.index == q {
+                        let mut s = run.states[k].clone();
+                        s.at = k as u32;
+                        s.next = self.sim().next_pos(&s, &best, k);
+                        let mut trace = Vec::new();
+                        self.sim().apply(&mut s, stop, Some(&mut trace));
+                        trained.push((
+                            k,
+                            trace
+                                .into_iter()
+                                .filter_map(|t| match t.event {
+                                    Event::Train { trainer, .. } => Some(Stop {
+                                        index: trainer as u32,
+                                        kind: Kind::Train,
+                                    }),
+                                    _ => None,
+                                })
+                                .collect::<Vec<_>>(),
+                        ));
+                    }
+                }
+            }
+            // The original run is released before either full candidate simulation.
             let candidate: Vec<Stop> = (best.iter().copied())
                 .filter(|s| !(s.is_quest() && s.index == q))
                 .collect();
-            if self.simulate(&candidate, None).is_some() {
-                (best, changed) = (candidate, true);
+            if let Some(bare_score) = self.simulate(&candidate, None) {
+                let mut substitute = Vec::new();
+                for (k, &stop) in best.iter().enumerate() {
+                    if stop.is_quest() && stop.index == q {
+                        if let Some((_, training)) = trained.iter().find(|(slot, _)| *slot == k) {
+                            substitute.extend_from_slice(training);
+                        }
+                    } else {
+                        substitute.push(stop);
+                    }
+                }
+                let keep_training =
+                    substitute != candidate && self.simulate(&substitute, None).is_some_and(|score| score < bare_score);
+                best = if keep_training { substitute } else { candidate };
+                changed = true;
             }
         }
         changed.then_some(best)
