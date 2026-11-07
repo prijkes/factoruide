@@ -654,8 +654,8 @@ impl Searcher<'_> {
         }
         let (score, _, goals) = self.scored(&route);
         Some(Found {
-            score,
             goals,
+            score,
             k,
             route,
             changes,

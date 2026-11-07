@@ -287,7 +287,7 @@ impl Planner<'_> {
                 .accepts(cost, current, progress, tries, &mut draw, rng)
         };
         let scalar_accepts = accepts(estimate, &mut search.rng);
-        let cost = if exact && goals > search.run.goals || !scalar_accepts && !(exact && goals < search.run.goals) {
+        let cost = if exact && goals > search.run.goals || !(scalar_accepts || exact && goals < search.run.goals) {
             None
         } else if exact {
             Some(estimate)

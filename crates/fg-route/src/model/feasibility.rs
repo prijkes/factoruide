@@ -1,5 +1,5 @@
 //! Bounded structural support for gear sources. This does not promise a schedulable route.
-use super::{Dungeon, Profile, Quest};
+use super::{Dungeon, Objective, Profile, Quest};
 use crate::{
     job::StartState,
     params::{Might, Params},
@@ -72,6 +72,8 @@ pub(super) struct SourceGraph {
     pub(super) visits: BTreeMap<BisQuestAction, Option<usize>>,
 }
 
+type VisitWitness = (Vec<BisQuestAction>, BTreeMap<BisQuestAction, Option<usize>>);
+
 #[derive(Clone)]
 enum Task {
     Action(BisQuestAction, u8),
@@ -103,7 +105,6 @@ pub(super) struct Selector<'a> {
 }
 
 impl<'a> Selector<'a> {
-    #[expect(clippy::too_many_arguments, reason = "the nonmutating model inputs")]
     pub(super) fn new(
         quests: &'a [Quest],
         dungeons: &'a [Dungeon],
@@ -315,6 +316,8 @@ impl<'a> Selector<'a> {
         class_goals: &[Task],
         class_support: bool,
     ) -> Result<Closure, String> {
+        use BisQuestAction::{Accept, Objective, TurnIn};
+
         if depth > MAX_CHOICES {
             return Err(LIMIT.into());
         }
@@ -412,7 +415,6 @@ impl<'a> Selector<'a> {
             }
             state.nodes.insert(action, old | members);
             self.compatible(&state, action)?;
-            use BisQuestAction::{Accept, Objective, TurnIn};
             match action {
                 Accept(i) => {
                     for &id in &q.pre_all {
@@ -642,10 +644,7 @@ impl<'a> Selector<'a> {
         self.order_with_visits(state).map(|(actions, _)| actions)
     }
 
-    fn order_with_visits(
-        &self,
-        state: &Closure,
-    ) -> Result<(Vec<BisQuestAction>, BTreeMap<BisQuestAction, Option<usize>>), String> {
+    fn order_with_visits(&self, state: &Closure) -> Result<VisitWitness, String> {
         let mut incoming: BTreeMap<_, usize> = state.nodes.keys().map(|&a| (a, 0)).collect();
         let mut following: BTreeMap<_, Vec<_>> = BTreeMap::new();
         for &(a, b) in &state.edges {
@@ -704,11 +703,7 @@ impl<'a> Selector<'a> {
 
     /// Contract each dungeon to one continuous visit. Internal quest order is retained, so
     /// only a path through another place and back is rejected, not sequential inside work.
-    fn visit_order(
-        &self,
-        state: &Closure,
-        ordered: &[BisQuestAction],
-    ) -> Result<(Vec<BisQuestAction>, BTreeMap<BisQuestAction, Option<usize>>), String> {
+    fn visit_order(&self, state: &Closure, ordered: &[BisQuestAction]) -> Result<VisitWitness, String> {
         let options: Vec<_> = ordered
             .iter()
             .map(|&a| {
@@ -722,7 +717,7 @@ impl<'a> Selector<'a> {
                     BisQuestAction::Objective { objective, .. } => {
                         let o = &q.objectives[objective as usize];
                         o.dungeon
-                            .map_or_else(|| o.places().map(|o| o.dungeon_of()).collect(), |d| vec![Some(d)])
+                            .map_or_else(|| o.places().map(Objective::dungeon_of).collect(), |d| vec![Some(d)])
                     }
                 };
                 if places.is_empty() {

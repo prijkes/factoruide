@@ -1117,9 +1117,9 @@ impl Simulator<'_> {
         for (i, q) in self.model.quests.iter().enumerate() {
             if self.missing_mandatory_representative(s, i) {
                 if q.zone_forced {
-                    zone += 1
+                    zone += 1;
                 } else {
-                    missing += 1
+                    missing += 1;
                 }
                 let origins = self.missing_mandatory_origins(s, i);
                 let class = origins.contains(crate::model::MandatoryOrigins::CLASS);

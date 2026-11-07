@@ -500,6 +500,7 @@ impl MandatoryOrigins {
         self.0 & origin.0 == origin.0
     }
 
+    #[must_use]
     pub fn union(self, other: Self) -> Self {
         Self(self.0 | other.0)
     }
