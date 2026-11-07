@@ -387,13 +387,13 @@ struct CleanupReplay {
     logs: Value,
 }
 
-fn cleanup_selected_input(planner: &Planner<'_>, initial: Vec<Stop>) -> Result<CleanupReplay> {
+fn cleanup_selected_input(planner: &Planner<'_>, initial: &[Stop]) -> Result<CleanupReplay> {
     let callbacks = RefCell::new(Vec::new());
     let callback_routes = RefCell::new(Vec::new());
     let logs = RefCell::new(Vec::new());
     let snapshots = RefCell::new(Vec::new());
     let improved = planner.improve_while_observed(
-        initial.clone(),
+        initial.to_owned(),
         Effort::Tries(0),
         || true,
         |line| logs.borrow_mut().push(line.to_owned()),
@@ -545,7 +545,7 @@ fn main() -> Result<()> {
         let routes = snapshot_routes(&artifact, &diagnosis)?;
         let initial = routes.into_iter().next().context("missing SelectedInput")?.1;
         let planner = Planner::new(&prepared.model, &prepared.world, &prepared.params, &prepared.profile);
-        let replay = cleanup_selected_input(&planner, initial)?;
+        let replay = cleanup_selected_input(&planner, &initial)?;
         // Describe snapshots only after ordinary cleanup and finalization have completed.
         let mut stages = Vec::new();
         for (stage, route) in replay.snapshots {
@@ -884,7 +884,7 @@ mod tests {
             Stop::quest(1, Kind::Accept),
             Stop::quest(1, Kind::TurnIn),
         ];
-        let replay = cleanup_selected_input(&planner, initial.clone()).unwrap();
+        let replay = cleanup_selected_input(&planner, &initial).unwrap();
         assert_eq!(recorded_counts(&replay.logs).unwrap(), (0, 0));
         assert_eq!(replay.callbacks.len(), 1);
         assert_eq!(replay.callbacks[0]["stops"], 4);
