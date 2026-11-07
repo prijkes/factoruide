@@ -35,11 +35,28 @@ const MAX_ACTIONS: usize = 4096;
 const MAX_CHOICES: usize = 128;
 const LIMIT: &str = "selection limit reached (support not determined)";
 
+#[derive(Clone, Copy, Default)]
+struct Floor {
+    minimum: i64,
+    combat: i64,
+}
+impl Floor {
+    fn merge(self, other: Self) -> Self {
+        Self {
+            minimum: self.minimum.max(other.minimum),
+            combat: self.combat.max(other.combat),
+        }
+    }
+}
+
 #[derive(Debug, Clone, Default)]
 pub(super) struct Closure {
     nodes: BTreeMap<BisQuestAction, u8>,
     edges: BTreeSet<(BisQuestAction, BisQuestAction)>,
     participants: BTreeSet<u32>,
+    local_participants: BTreeMap<BisQuestAction, BTreeSet<u32>>,
+    /// Only real gear actions use the strict pre-target horizon in temporary class proofs.
+    gear_actions: BTreeSet<BisQuestAction>,
 }
 
 pub(super) struct SourceGraph {
@@ -51,6 +68,10 @@ pub(super) struct SourceGraph {
 #[derive(Clone)]
 enum Task {
     Action(BisQuestAction, u8),
+    ClassChoice {
+        name: String,
+        roots: Vec<u32>,
+    },
     Choose {
         ids: Vec<i64>,
         need: usize,
@@ -70,6 +91,7 @@ pub(super) struct Selector<'a> {
     starts: &'a [&'a StartState],
     index: HashMap<i64, u32>,
     pub(super) committed: Closure,
+    class_goals: Result<Vec<Task>, String>,
 }
 
 impl<'a> Selector<'a> {
@@ -83,7 +105,7 @@ impl<'a> Selector<'a> {
         known: &'a HashSet<i64>,
         starts: &'a [&'a StartState],
     ) -> Self {
-        Self {
+        let mut selector = Self {
             quests,
             dungeons,
             skipped,
@@ -93,7 +115,10 @@ impl<'a> Selector<'a> {
             starts,
             index: quests.iter().enumerate().map(|(i, q)| (q.id, i as u32)).collect(),
             committed: Closure::default(),
-        }
+            class_goals: Ok(Vec::new()),
+        };
+        selector.class_goals = selector.supported_class_goals();
+        selector
     }
 
     fn completed(&self, id: i64, member: usize) -> bool {
@@ -172,6 +197,11 @@ impl<'a> Selector<'a> {
         tasks: &mut Vec<Task>,
     ) {
         state.participants.insert(action.quest());
+        state
+            .local_participants
+            .entry(before)
+            .or_default()
+            .insert(action.quest());
         if self.residual(action, members) != 0 {
             state.edges.insert((action, before));
             tasks.push(Task::Action(action, members));
@@ -194,16 +224,14 @@ impl<'a> Selector<'a> {
 
     pub(super) fn select(&self, root: u32) -> Result<(BisQuestPlan, Closure), String> {
         let mut work = 0;
-        let count = self.starts.len().max(self.profile.mates.len() + 1).min(8);
-        let participants = ((1u16 << count) - 1) as u8;
+        let class_goals = self.class_goals.as_ref().map_err(Clone::clone)?;
         let state = self.solve(
             self.committed.clone(),
-            vec![Task::Action(
-                BisQuestAction::TurnIn(root),
-                self.quests[root as usize].members & participants,
-            )],
+            vec![Task::Action(BisQuestAction::TurnIn(root), self.participants(root))],
             0,
             &mut work,
+            class_goals,
+            false,
         )?;
         let ordered = self.order(&state)?;
         let mut needed = BTreeSet::from([BisQuestAction::TurnIn(root)]);
@@ -220,10 +248,51 @@ impl<'a> Selector<'a> {
         }
         let actions: Vec<_> = ordered.into_iter().filter(|a| needed.contains(a)).collect();
         let mut quests: Vec<_> = actions.iter().map(|a| a.quest()).collect();
+        for action in &needed {
+            quests.extend(state.local_participants.get(action).into_iter().flatten().copied());
+        }
         quests.push(root);
         quests.sort_unstable();
         quests.dedup();
         Ok((BisQuestPlan { root, quests, actions }, state))
+    }
+
+    fn participants(&self, root: u32) -> u8 {
+        let count = self.starts.len().max(self.profile.mates.len() + 1).min(8);
+        self.quests[root as usize].members & (((1u16 << count) - 1) as u8)
+    }
+
+    /// Preserve class requirements that have a coherent baseline, without letting an already
+    /// unsupported independent class goal disable every gear recommendation. No proof actions
+    /// are committed to gear, and alternatives are chosen together rather than all reserved.
+    fn supported_class_goals(&self) -> Result<Vec<Task>, String> {
+        let mut goals = Vec::new();
+        let mut work = 0;
+        for requirement in self.profile.class_requirements.iter().filter(|r| r.selected) {
+            let mut roots: Vec<_> = requirement
+                .quests
+                .iter()
+                .filter_map(|id| self.index.get(id).copied())
+                .filter(|&i| self.quests[i as usize].mandatory)
+                .collect();
+            roots.sort_by_key(|&i| self.quests[i as usize].id);
+            roots.dedup();
+            if roots.is_empty() {
+                continue;
+            }
+            let goal = Task::ClassChoice {
+                name: requirement.name.clone(),
+                roots,
+            };
+            let mut candidate = goals.clone();
+            candidate.push(goal);
+            match self.solve(Closure::default(), candidate.clone(), 0, &mut work, &[], true) {
+                Ok(_) => goals = candidate,
+                Err(e) if e == LIMIT => return Err(e),
+                Err(_) => {}
+            }
+        }
+        Ok(goals)
     }
 
     fn solve(
@@ -232,6 +301,8 @@ impl<'a> Selector<'a> {
         mut tasks: Vec<Task>,
         depth: usize,
         work: &mut usize,
+        class_goals: &[Task],
+        class_support: bool,
     ) -> Result<Closure, String> {
         if depth > MAX_CHOICES {
             return Err(LIMIT.into());
@@ -243,6 +314,19 @@ impl<'a> Selector<'a> {
             }
             let (action, members) = match task {
                 Task::Action(a, m) => (a, m),
+                Task::ClassChoice { name, roots } => {
+                    let mut last = "no supported version".to_owned();
+                    for root in roots {
+                        let mut pending = tasks.clone();
+                        pending.push(Task::Action(TurnIn(root), self.participants(root)));
+                        match self.solve(state.clone(), pending, depth + 1, work, class_goals, class_support) {
+                            Ok(s) => return Ok(s),
+                            Err(e) if e == LIMIT => return Err(e),
+                            Err(e) => last = e,
+                        }
+                    }
+                    return Err(format!("conflicts with selected class requirement {name}: {last}"));
+                }
                 Task::Choose {
                     mut ids,
                     need,
@@ -285,7 +369,7 @@ impl<'a> Selector<'a> {
                         });
                         match self
                             .completion(ids[k], members, before, &mut branch, &mut pending)
-                            .and_then(|()| self.solve(branch, pending, depth + 1, work))
+                            .and_then(|()| self.solve(branch, pending, depth + 1, work, class_goals, class_support))
                         {
                             Ok(s) => return Ok(s),
                             Err(e) if e == LIMIT => return Err(e),
@@ -299,6 +383,9 @@ impl<'a> Selector<'a> {
             let members = self.residual(action, members);
             if members == 0 {
                 continue;
+            }
+            if !class_support {
+                state.gear_actions.insert(action);
             }
             let old = state.nodes.get(&action).copied().unwrap_or(0);
             let members = members & !old;
@@ -397,6 +484,9 @@ impl<'a> Selector<'a> {
             }
         }
         self.order(&state)?;
+        if !class_support && !class_goals.is_empty() {
+            self.solve(state.clone(), class_goals.to_vec(), depth, work, &[], true)?;
+        }
         Ok(state)
     }
 
@@ -433,51 +523,7 @@ impl<'a> Selector<'a> {
                 }
             }
         }
-        for requirement in self.profile.class_requirements.iter().filter(|c| c.selected) {
-            let alternatives: Vec<_> = requirement
-                .quests
-                .iter()
-                .filter_map(|id| self.index.get(id))
-                .filter(|&&i| self.quests[i as usize].mandatory)
-                .collect();
-            if !alternatives.is_empty() && alternatives.iter().all(|&&i| self.class_path_conflicts(i, &taken)) {
-                return Err(format!(
-                    "conflicts with selected class requirement {}",
-                    requirement.name
-                ));
-            }
-        }
         Ok(())
-    }
-
-    /// A class version includes its unavoidable support, not just the named final quest.
-    fn class_path_conflicts(&self, root: u32, taken: &HashSet<u32>) -> bool {
-        let mut todo = vec![root];
-        let mut seen = HashSet::new();
-        while let Some(i) = todo.pop() {
-            if !seen.insert(i) {
-                continue;
-            }
-            let q = &self.quests[i as usize];
-            if taken.iter().any(|&j| {
-                i != j
-                    && (q.exclusive.contains(&self.quests[j as usize].id)
-                        || self.quests[j as usize].exclusive.contains(&q.id))
-            }) {
-                return true;
-            }
-            for id in q
-                .pre_all
-                .iter()
-                .chain(&q.pre_held)
-                .chain(q.pre_any.iter().filter(|_| q.pre_any.len() == 1))
-            {
-                if let Some(&j) = self.index.get(id) {
-                    todo.push(j);
-                }
-            }
-        }
-        false
     }
 
     /// Topological scheduling with level intervals catches cycles and elapsed windows together.
@@ -491,21 +537,36 @@ impl<'a> Selector<'a> {
             }
         }
         let mut ready: BTreeSet<_> = incoming.iter().filter_map(|(&a, &n)| (n == 0).then_some(a)).collect();
-        let mut floors: BTreeMap<_, i64> = BTreeMap::new();
+        let mut floors: BTreeMap<_, Floor> = BTreeMap::new();
         let mut ordered = Vec::new();
         while let Some(a) = ready.pop_first() {
-            let (min, max) = self.window(a)?;
-            let floor = min.max(floors.get(&a).copied().unwrap_or(0));
-            if floor > max {
+            let gear = state.gear_actions.contains(&a);
+            let (min, max) = self.window(a, gear)?;
+            let floor = min.merge(floors.get(&a).copied().unwrap_or_default());
+            if floor.minimum.max(floor.combat) > max {
+                let reason = if floor.minimum > max {
+                    format!("minimum-level/start/window constraints require level {}", floor.minimum)
+                } else {
+                    format!(
+                        "the planner's conservative combat estimate requires level {} with plain gear and no class-quest power",
+                        floor.combat
+                    )
+                };
+                let endpoint = if gear {
+                    "; gear actions must occur before the endpoint"
+                } else {
+                    ""
+                };
                 return Err(format!(
-                    "{} ({}) needs level {floor}, outside its supported window ending at {max}",
+                    "{} ({}): {reason}, outside the supported window ending at {max}; the route ends at level {}{endpoint}",
                     self.quests[a.quest() as usize].name,
-                    self.quests[a.quest() as usize].id
+                    self.quests[a.quest() as usize].id,
+                    self.profile.to_level,
                 ));
             }
             for &b in following.get(&a).into_iter().flatten() {
                 let next = floors.entry(b).or_default();
-                *next = (*next).max(floor);
+                *next = next.merge(floor);
                 let count = incoming.get_mut(&b).expect("present node");
                 *count -= 1;
                 if *count == 0 {
@@ -520,37 +581,35 @@ impl<'a> Selector<'a> {
         Ok(ordered)
     }
 
-    fn window(&self, a: BisQuestAction) -> Result<(i64, i64), String> {
+    fn window(&self, a: BisQuestAction, gear: bool) -> Result<(Floor, i64), String> {
         let q = &self.quests[a.quest() as usize];
         let combat = crate::plan::Combat {
             params: self.params,
             dungeons: self.dungeons,
         };
         let mut min = self.profile.from_level;
-        let mut max = self.profile.to_level - 1;
+        let mut estimate = 0;
+        let mut max = self.profile.to_level - i64::from(gear);
         let d = match a {
             BisQuestAction::Accept(_) => {
-                min = min
-                    .max(q.min_level)
-                    .max(combat.guard_level(&q.start_guard, Might::PLAIN));
+                min = min.max(q.min_level);
+                estimate = combat.guard_level(&q.start_guard, Might::PLAIN);
                 q.start_dungeon
             }
             BisQuestAction::Objective { objective, .. } => {
                 let o = &q.objectives[objective as usize];
                 if o.dungeon_of().is_none() {
-                    min = min.max(
-                        o.places()
-                            .map(|p| combat.level_at(q, p, Might::PLAIN))
-                            .min()
-                            .unwrap_or(0),
-                    );
+                    estimate = o
+                        .places()
+                        .map(|p| combat.level_at(q, p, Might::PLAIN))
+                        .min()
+                        .unwrap_or(0);
                 }
                 o.dungeon_of()
             }
             BisQuestAction::TurnIn(_) => {
-                min = min
-                    .max(q.completion_window.min_level.unwrap_or(0))
-                    .max(combat.guard_level(&q.end_guard, Might::PLAIN));
+                min = min.max(q.completion_window.min_level.unwrap_or(0));
+                estimate = combat.guard_level(&q.end_guard, Might::PLAIN);
                 max = max.min(q.completion_window.max_level.unwrap_or(max));
                 q.ends.iter().find_map(|l| l.inside.map(usize::from))
             }
@@ -566,7 +625,13 @@ impl<'a> Selector<'a> {
             }
             max = max.min(d.max_level);
         }
-        Ok((min, max))
+        Ok((
+            Floor {
+                minimum: min,
+                combat: estimate,
+            },
+            max,
+        ))
     }
 }
 

@@ -279,7 +279,13 @@ fn final_global_graph_keeps_cross_root_held_order_and_recorded_participants() {
     p.model.quests[1].pre_held = vec![1];
     let mut s = selector(&p, &[]);
     s.committed = s.select(0).unwrap().1;
-    s.committed = s.select(1).unwrap().1;
+    let (plan, closure) = s.select(1).unwrap();
+    assert_eq!(
+        plan.quests,
+        vec![0, 1],
+        "local participants retain a recorded held parent"
+    );
+    s.committed = closure;
     let graph = s.finalize().unwrap();
     assert!(graph.edges.contains(&(Accept(1), TurnIn(0))));
     assert!(
@@ -295,8 +301,205 @@ fn final_global_graph_keeps_cross_root_held_order_and_recorded_participants() {
     };
     let starts = [&start];
     let mut s = selector(&p, &starts);
-    s.committed = s.select(1).unwrap().1;
+    let (plan, closure) = s.select(1).unwrap();
+    assert_eq!(
+        plan.quests,
+        vec![0, 1],
+        "local participants retain a recorded held parent"
+    );
+    s.committed = closure;
     let graph = s.finalize().unwrap();
     assert_eq!(graph.quests, vec![0, 1]);
     assert!(!graph.actions.contains(&Accept(0)) && !graph.actions.contains(&TurnIn(0)));
+}
+
+fn class_case() -> Prepared {
+    let mut p = scenario(5);
+    p.model.quests[0].mandatory = true;
+    p.model.quests[0].pre_any = vec![2, 3];
+    p.profile.class_requirements = vec![crate::model::ClassRequirement {
+        class_id: 1,
+        name: "Protected class power".into(),
+        spell: None,
+        max_level: None,
+        quests: vec![1],
+        quest_names: vec![],
+        selected: true,
+    }];
+    p
+}
+
+#[test]
+fn review_class_one_of_all_branches_blocked_rejects_gear() {
+    let mut p = class_case();
+    p.model.quests[4].exclusive = vec![2, 3];
+    assert!(
+        selector(&p, &[]).select(4).is_err(),
+        "gear must preserve a class branch"
+    );
+}
+
+#[test]
+fn review_class_two_of_three_preserves_original_cardinality() {
+    let mut p = class_case();
+    p.model.quests[0].pre_any = vec![2, 3, 4];
+    p.model.quests[0].pre_need = 2;
+    p.model.quests[4].exclusive = vec![2, 3];
+    assert!(
+        selector(&p, &[]).select(4).is_err(),
+        "one remaining branch cannot satisfy two"
+    );
+}
+
+#[test]
+fn review_class_sole_handed_item_provider_is_protected() {
+    let mut p = class_case();
+    p.model.quests[0].pre_any.clear();
+    let objective = Scenario::new()
+        .quest(Q::new(9, "Item").kill("thing", 1, 1, 1, 50.0, 60.0))
+        .build()
+        .model
+        .quests[0]
+        .objectives[0]
+        .clone();
+    p.model.quests[0].objectives = vec![objective];
+    p.model.quests[0].objectives[0].handed_by = vec![2];
+    p.model.quests[4].exclusive = vec![2];
+    assert!(
+        selector(&p, &[]).select(4).is_err(),
+        "the objective still needs its provider"
+    );
+}
+
+#[test]
+fn review_class_one_compatible_branch_does_not_reserve_all_alternatives() {
+    let mut p = class_case();
+    p.model.quests[4].exclusive = vec![2];
+    p.model.quests[1].exclusive = vec![3];
+    let mut s = selector(&p, &[]);
+    let (plan, closure) = s.select(4).unwrap();
+    assert_eq!(
+        plan.actions,
+        vec![BisQuestAction::Accept(4), BisQuestAction::TurnIn(4)],
+        "only the gear root can acquire a gear completion requirement"
+    );
+    s.committed = closure;
+    assert_eq!(s.finalize().unwrap().actions, plan.actions);
+    assert_eq!(
+        s.finalize().unwrap().edges,
+        vec![(BisQuestAction::Accept(4), BisQuestAction::TurnIn(4))]
+    );
+    assert_eq!(s.finalize().unwrap().quests, vec![4], "class proof is not gear support");
+}
+
+#[test]
+fn review_combat_floor_notes_are_qualified_and_actual_minimum_is_distinct() {
+    let mut p = Scenario::new()
+        .levels(1, 60)
+        .quest(Q::new(1, "Dangerous prerequisite").kill("High mob", 100, 10, 1, 50.0, 70.0))
+        .quest(Q::new(2, "Gear").after(&[1]))
+        .build();
+    let note = selector(&p, &[]).select(1).unwrap_err();
+    assert!(
+        note.contains("conservative combat estimate")
+            && note.contains("plain gear")
+            && note.contains("route ends at level 60"),
+        "{note}"
+    );
+    p.model.quests[0].objectives.clear();
+    p.model.quests[0].min_level = 60;
+    let note = selector(&p, &[]).select(1).unwrap_err();
+    assert!(
+        note.contains("minimum") && note.contains("level 60") && !note.contains("combat estimate"),
+        "{note}"
+    );
+}
+
+#[test]
+fn review_already_unsupported_class_does_not_disable_independent_gear() {
+    let mut p = class_case();
+    p.model.quests[0].pre_all = vec![999];
+    p.model.quests[4].exclusive = vec![1];
+    assert!(selector(&p, &[]).select(4).is_ok());
+}
+
+#[test]
+fn review_recorded_class_accept_cuts_old_alternative_edges() {
+    let mut p = class_case();
+    p.model.quests[0].members = 1;
+    p.model.quests[4].exclusive = vec![2, 3];
+    let start = StartState {
+        log: vec![LogQuest {
+            id: 1.into(),
+            ..Default::default()
+        }],
+        ..Default::default()
+    };
+    assert!(selector(&p, &[&start]).select(4).is_ok());
+}
+
+#[test]
+fn review_class_horizon_does_not_use_strict_gear_endpoint() {
+    let mut p = class_case();
+    p.model.quests[0].min_level = 60;
+    p.model.quests[4].exclusive = vec![2, 3];
+    assert!(
+        selector(&p, &[]).select(4).is_err(),
+        "class baseline remains supported at its normal endpoint"
+    );
+    p.model.quests[4].exclusive = vec![2];
+    assert!(selector(&p, &[]).select(4).is_ok());
+}
+
+#[test]
+fn review_gear_choice_backtracks_to_preserve_a_coherent_class_closure() {
+    let mut p = class_case();
+    p.model.quests[4].pre_any = vec![2, 4];
+    p.model.quests[1].exclusive = vec![1];
+    let plan = selector(&p, &[]).select(4).unwrap().0;
+    assert!(!plan.quests.contains(&1));
+    assert!(plan.quests.contains(&3));
+}
+
+#[test]
+fn review_propagated_combat_estimate_keeps_its_qualification() {
+    let mut p = Scenario::new()
+        .levels(1, 60)
+        .quest(Q::new(1, "Combat").kill("Mob", 30, 10, 1, 50.0, 70.0))
+        .quest(Q::new(2, "Earlier hand-in").after(&[1]))
+        .build();
+    p.model.quests[1].completion_window.max_level = Some(10);
+    let note = selector(&p, &[]).select(1).unwrap_err();
+    assert!(
+        note.contains("Earlier hand-in")
+            && note.contains("conservative combat estimate")
+            && note.contains("ending at 10"),
+        "{note}"
+    );
+}
+
+#[test]
+fn review_class_requirements_need_one_jointly_coherent_witness() {
+    let mut p = scenario(7);
+    p.model.quests[0].mandatory = true;
+    p.model.quests[0].pre_any = vec![2, 3];
+    p.model.quests[3].mandatory = true;
+    p.model.quests[3].pre_any = vec![2, 6];
+    p.model.quests[2].exclusive = vec![6];
+    let template = class_case().profile.class_requirements[0].clone();
+    p.profile.class_requirements = vec![
+        template.clone(),
+        crate::model::ClassRequirement {
+            quests: vec![4],
+            name: "Other class power".into(),
+            ..template
+        },
+    ];
+    p.model.quests[6].exclusive = vec![2];
+    assert!(
+        selector(&p, &[]).select(6).is_err(),
+        "individually possible class branches must also coexist"
+    );
+    p.model.quests[6].exclusive.clear();
+    assert!(selector(&p, &[]).select(6).is_ok());
 }
