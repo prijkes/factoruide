@@ -639,7 +639,7 @@ impl<'a> Selector<'a> {
         Ok(false)
     }
 
-    /// Topological scheduling with level intervals catches cycles and elapsed windows together.
+    /// Dependency order is independent of placement; windows are checked on each visit witness.
     fn order(&self, state: &Closure) -> Result<Vec<BisQuestAction>, String> {
         self.order_with_visits(state).map(|(actions, _)| actions)
     }
@@ -654,11 +654,39 @@ impl<'a> Selector<'a> {
             }
         }
         let mut ready: BTreeSet<_> = incoming.iter().filter_map(|(&a, &n)| (n == 0).then_some(a)).collect();
-        let mut floors: BTreeMap<_, Floor> = BTreeMap::new();
         let mut ordered = Vec::new();
         while let Some(a) = ready.pop_first() {
+            for &b in following.get(&a).into_iter().flatten() {
+                let count = incoming.get_mut(&b).expect("present node");
+                *count -= 1;
+                if *count == 0 {
+                    ready.insert(b);
+                }
+            }
+            ordered.push(a);
+        }
+        if ordered.len() != state.nodes.len() {
+            return Err("cyclic quest action dependencies".into());
+        }
+        self.visit_order(state, &ordered)
+    }
+
+    fn check_windows(
+        &self,
+        state: &Closure,
+        ordered: &[BisQuestAction],
+        chosen: &BTreeMap<BisQuestAction, Option<usize>>,
+    ) -> Result<(), String> {
+        let mut following: BTreeMap<_, Vec<_>> = BTreeMap::new();
+        for &(a, b) in &state.edges {
+            if state.nodes.contains_key(&a) && state.nodes.contains_key(&b) {
+                following.entry(a).or_default().push(b);
+            }
+        }
+        let mut floors: BTreeMap<_, Floor> = BTreeMap::new();
+        for &a in ordered {
             let gear = state.gear_actions.contains(&a);
-            let (min, max) = self.window(a, gear)?;
+            let (min, max) = self.window(a, gear, chosen[&a])?;
             let floor = min.merge(floors.get(&a).copied().unwrap_or_default());
             if floor.minimum.max(floor.combat) > max {
                 let reason = if floor.minimum > max {
@@ -687,18 +715,9 @@ impl<'a> Selector<'a> {
             for &b in following.get(&a).into_iter().flatten() {
                 let next = floors.entry(b).or_default();
                 *next = next.merge(floor);
-                let count = incoming.get_mut(&b).expect("present node");
-                *count -= 1;
-                if *count == 0 {
-                    ready.insert(b);
-                }
             }
-            ordered.push(a);
         }
-        if ordered.len() != state.nodes.len() {
-            return Err("cyclic quest action dependencies".into());
-        }
-        self.visit_order(state, &ordered)
+        Ok(())
     }
 
     /// Contract each dungeon to one continuous visit. Internal quest order is retained, so
@@ -728,10 +747,11 @@ impl<'a> Selector<'a> {
                 places
             })
             .collect();
-        if options.iter().all(|p| p == &[None]) {
-            return Ok((ordered.to_vec(), ordered.iter().map(|&a| (a, None)).collect()));
-        }
         let mut chosen: BTreeMap<_, _> = ordered.iter().zip(&options).map(|(&a, p)| (a, p[0])).collect();
+        if options.iter().all(|p| p == &[None]) {
+            self.check_windows(state, ordered, &chosen)?;
+            return Ok((ordered.to_vec(), chosen));
+        }
         let choices: Vec<_> = ordered
             .iter()
             .copied()
@@ -767,6 +787,8 @@ impl<'a> Selector<'a> {
             }
             return Err(last);
         }
+        // A failed location window is a failed branch, not a rejection of every alternative.
+        self.check_windows(state, ordered, chosen)?;
         let visit = |a: BisQuestAction| chosen[&a].map_or(Visit::Outside(a), Visit::Dungeon);
         let mut incoming: BTreeMap<Visit, usize> = ordered.iter().map(|&a| (visit(a), 0)).collect();
         let mut edges = BTreeSet::new();
@@ -846,7 +868,7 @@ impl<'a> Selector<'a> {
         Ok(result)
     }
 
-    fn window(&self, a: BisQuestAction, gear: bool) -> Result<(Floor, i64), String> {
+    fn window(&self, a: BisQuestAction, gear: bool, visit: Option<usize>) -> Result<(Floor, i64), String> {
         let q = &self.quests[a.quest() as usize];
         let combat = crate::plan::Combat {
             params: self.params,
@@ -855,31 +877,31 @@ impl<'a> Selector<'a> {
         let mut min = self.profile.from_level;
         let mut estimate = 0;
         let mut max = self.profile.to_level - i64::from(gear);
-        let d = match a {
+        match a {
             BisQuestAction::Accept(_) => {
                 min = min.max(q.min_level);
                 estimate = combat.guard_level(&q.start_guard, Might::PLAIN);
-                q.start_dungeon
             }
             BisQuestAction::Objective { objective, .. } => {
                 let o = &q.objectives[objective as usize];
-                if o.dungeon_of().is_none() {
+                // Black-box entry credit uses the run's window. Direct work, inside or
+                // outside, uses combat estimates only from the selected location category.
+                if o.dungeon.is_none() {
                     estimate = o
                         .places()
+                        .filter(|p| p.dungeon_of() == visit)
                         .map(|p| combat.level_at(q, p, Might::PLAIN))
                         .min()
                         .unwrap_or(0);
                 }
-                o.dungeon_of()
             }
             BisQuestAction::TurnIn(_) => {
                 min = min.max(q.completion_window.min_level.unwrap_or(0));
                 estimate = combat.guard_level(&q.end_guard, Might::PLAIN);
                 max = max.min(q.completion_window.max_level.unwrap_or(max));
-                q.ends.iter().find_map(|l| l.inside.map(usize::from))
             }
-        };
-        if let Some(d) = d {
+        }
+        if let Some(d) = visit {
             let d = self
                 .dungeons
                 .get(d)

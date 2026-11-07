@@ -679,3 +679,121 @@ fn review_class_requirements_need_one_jointly_coherent_witness() {
     p.model.quests[6].exclusive.clear();
     assert!(selector(&p, &[]).select(6).is_ok());
 }
+
+fn placement_case() -> Prepared {
+    let mut p = dungeon_chain();
+    p.profile.from_level = 20;
+    p.model.dungeons[0].min_level = 5;
+    p.model.dungeons[0].max_level = 19;
+    p.model.quests[0].min_level = 20;
+    p.model.quests[0].objectives.clear();
+    p
+}
+
+fn selected_visits(p: &Prepared) -> BTreeMap<BisQuestAction, Option<usize>> {
+    let mut s = selector(p, &[]);
+    s.committed = s.select(0).expect("source has a legal placement").1;
+    s.finalize().unwrap().visits
+}
+
+#[test]
+fn final_fix_expired_optional_inside_turnin_uses_outside_witness() {
+    let mut p = placement_case();
+    let mut inside = p.model.quests[0].ends[0].clone();
+    inside.inside = Some(0);
+    p.model.quests[0].ends.push(inside);
+    assert_eq!(selected_visits(&p)[&BisQuestAction::TurnIn(0)], None);
+}
+
+#[test]
+fn final_fix_inside_accept_checks_its_selected_window() {
+    let mut p = placement_case();
+    p.model.quests[0].starts[0].inside = Some(0);
+    assert!(selector(&p, &[]).select(0).is_err(), "inside start has expired");
+    let mut outside = p.model.quests[0].starts[0].clone();
+    outside.inside = None;
+    p.model.quests[0].starts.push(outside);
+    assert_eq!(selected_visits(&p)[&BisQuestAction::Accept(0)], None);
+    p.model.quests[0].start_dungeon = Some(0);
+    assert!(
+        selector(&p, &[]).select(0).is_err(),
+        "fixed dungeon-item start stays fixed"
+    );
+}
+
+#[test]
+fn final_fix_optional_inside_objective_uses_outside_combat_and_window() {
+    let mut p = placement_case();
+    let mut objective = dungeon_chain().model.quests[0].objectives[0].clone();
+    let mut outside = objective.clone();
+    outside.loc.inside = None;
+    objective.alts.push(outside);
+    p.model.quests[0].objectives = vec![objective];
+    assert_eq!(
+        selected_visits(&p)[&BisQuestAction::Objective { quest: 0, objective: 0 }],
+        None
+    );
+    p.model.quests[0].objectives[0].alts[0].mob_level = 100;
+    let error = selector(&p, &[]).select(0).unwrap_err();
+    assert!(!error.is_empty(), "neither placement meets its own floor/window");
+}
+
+#[test]
+fn final_fix_backtracks_from_outside_combat_to_legal_inside_objective() {
+    let mut p = placement_case();
+    p.model.dungeons[0].max_level = 59;
+    let mut outside = dungeon_chain().model.quests[0].objectives[0].clone();
+    outside.loc.inside = None;
+    let inside = dungeon_chain().model.quests[0].objectives[0].clone();
+    outside.mob_level = 100;
+    outside.alts.push(inside);
+    p.model.quests[0].objectives = vec![outside];
+    let a = BisQuestAction::Objective { quest: 0, objective: 0 };
+    assert_eq!(selected_visits(&p)[&a], Some(0), "outside cannot borrow inside combat");
+    p.model.quests[0].objectives[0].alts[0].mob_level = 100;
+    let error = selector(&p, &[]).select(0).unwrap_err();
+    assert!(error.contains("conservative combat estimate"), "{error}");
+}
+
+#[test]
+fn final_fix_inside_start_floor_propagates_and_backtracks_to_outside() {
+    let mut p = placement_case();
+    p.model.dungeons[0].min_level = 40;
+    p.model.dungeons[0].max_level = 59;
+    p.model.quests[0].completion_window.max_level = Some(30);
+    p.model.quests[0].starts[0].inside = Some(0);
+    assert!(selector(&p, &[]).select(0).is_err(), "start floor must reach hand-in");
+    let mut outside = p.model.quests[0].starts[0].clone();
+    outside.inside = None;
+    p.model.quests[0].starts.push(outside);
+    assert_eq!(selected_visits(&p)[&BisQuestAction::Accept(0)], None);
+}
+
+#[test]
+fn final_fix_outside_fast_path_retains_windows_and_gear_endpoint() {
+    let mut p = placement_case();
+    assert!(selector(&p, &[]).select(0).is_ok());
+    p.model.quests[0].min_level = 60;
+    assert!(selector(&p, &[]).select(0).is_err());
+    p.model.quests[0].min_level = 20;
+    p.model.quests[0].completion_window.max_level = Some(19);
+    assert!(selector(&p, &[]).select(0).is_err());
+}
+
+#[test]
+fn final_fix_blackbox_credit_does_not_use_outside_alternative_or_combat() {
+    let mut p = placement_case();
+    let mut credit = dungeon_chain().model.quests[0].objectives[0].clone();
+    let mut outside = credit.clone();
+    outside.loc.inside = None;
+    credit.dungeon = Some(0);
+    credit.mob_level = 100;
+    credit.alts.push(outside);
+    p.model.quests[0].objectives = vec![credit];
+    assert!(selector(&p, &[]).select(0).is_err(), "entry-credit window stays fixed");
+    p.model.dungeons[0].max_level = 59;
+    assert_eq!(
+        selected_visits(&p)[&BisQuestAction::Objective { quest: 0, objective: 0 }],
+        Some(0)
+    );
+}
