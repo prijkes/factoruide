@@ -22,6 +22,10 @@ Build a residual action closure: initially completed quests, already accepted qu
 
 Retain all quest givers of an item until selection. Rank item/source candidates deterministically, preserving the existing item tie rule; an unsupported lower-index giver must not hide another supported giver of the same item. Commit one compatible source closure across bands/slots, deduplicating roots and sharing alternatives. Library tiers 10/20/25 of 38 reuse one growing book set. Mark only selected supported closure quests mandatory in Required; Prefer filters sources but creates no hard goals, and Off preserves its existing path.
 
+Support must respect the simulator's one-continuous-visit rule for each dungeon. Validate residual action topology before ranking: an unavoidable inside-D action followed by an outside hand-in/accept and a later inside-D action requires unsupported re-entry. Keep ordinary sequential NPC/objective work entirely inside the same visit eligible. Blackbox `Objective.dungeon` credit is stricter still: acceptance must precede the sole entry. Distinguish it from a legal direct objective whose location is inside. Recorded progress may cut the earlier visit dependency; alternative selection must backtrack before declaring no supported source.
+
+A failed conservative class witness does not authorize a direct conflict with that selected class goal or its unavoidable support. Keep exclusion protection while allowing genuinely unrelated gear when an independent class goal has unsupported data; do not mistake a plain-gear estimate for proof that the class goal can be abandoned.
+
 Keep the final equipment band, but reject uncompleted actions requiring the target level or an already elapsed dungeon window. A pre-target source remains eligible in the target band. This is structural support, not proof that travel, XP, timers, money and log capacity can be scheduled; simulation remains authoritative.
 
 Emit deduplicated human-readable fallback notes naming rejected sources, their support reason, and the selected alternative or absence of an alternative. Use existing calculation notes. Do not silently clear an unsupported goal after selecting it.
@@ -34,11 +38,21 @@ Emit deduplicated human-readable fallback notes naming rejected sources, their s
 
 Here `requires` means **turn-in completion support**: a selected root or support quest with an unsatisfied TurnIn action. `BisQuestPlan.quests` includes all action-support participants. A held-only parent can have an Accept action without acquiring a fabricated turn-in goal, mandatory flag or missed-gear count. Independent genuine completion requirements on that parent keep their own origins.
 
+Participants include recorded held parents even when their accepted state needs no new action. Align source-plan residual acceptance with runtime initialization: the existing start importer may treat unbegun logged quests as abandonable/retakable. Preserve a selected source plan's actual logged state instead of reintroducing a historical prerequisite the recorded acceptance already satisfied. Keep the BiS-Off start policy unchanged.
+
+`Bis::source_actions() -> &[BisQuestAction]`, `source_edges() -> &[(BisQuestAction, BisQuestAction)]`, and `source_quests() -> &[u32]` expose the finalized coherent source DAG/participants in Prefer and Required. The global edges are authoritative when later roots add cross-root ordering, including a child's accept before an earlier selected held parent's turn-in. The planner must not infer ordering by concatenating stale root-local action lists. These getters also allow runtime to preserve a selected source's recorded acceptance in Prefer without creating hard goals.
+
+The final action order is also a visit-contiguous support witness. Dependency edges alone do not permit arbitrary inside/outside interleaving; the adapter must retain one continuous visit per dungeon and verify the actual locations chosen by simulation. Multiple modeled location alternatives are structural choices, not a promise that the nearest-place heuristic automatically reproduces the witness.
+
+`Bis::source_visit(action: BisQuestAction) -> Option<Option<usize>>` retains the exact successful global witness's location category: absent action, explicitly outside, or a modeled dungeon index. Required placement filters actual location and objective choices to that category, then retains normal nearest/cost selection within it. Repair must use the retained visit rather than infer it from the first location. This does not introduce a stop kind or a new eligibility policy.
+
 ## Construction and enforcement
 
 Repair missing required gear by inserting a whole selected action closure before the leveling stop, not isolated reward hand-ins. Reuse initially completed objectives/quests and actual recorded log progress. Keep existing gameplay constraints and validate each candidate transactionally. Permit extra cost when hard-goal fulfillment improves, while protecting already satisfied exact/gear goals.
 
 Action adapters must synthesize/reuse legal dungeon runs: a model dungeon objective is not a directly valid `Kind::Objective` stop. Accept required quests before the one relevant run, respect existing run windows, and do not run the dungeon twice or remove a forced run. Preserve the chosen held/handed objective ordering.
+
+Merge source actions and continuous visit blocks into the existing route at appropriate levels. Do not move completed support behind its unchanged dependents. Imported ordinary dungeon companions retain cross-quest constraints, including breadcrumb order, as well as their own action order. Outside work and different dungeon visits need not form one contiguous block; early deadline work must remain separable from later combat work.
 
 Preserve a known gear-complete candidate over a cheaper incomplete one in search, cleanup/finalization and tournament ranking. Do not add random draws, change search operators/defaults, or use an arbitrary huge penalty as a hard constraint. Do not retain multiple full-state runs or alter cache/memory-cap policies. BiS Off must not pay extra route simulations for this logic.
 

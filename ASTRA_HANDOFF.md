@@ -1,5 +1,21 @@
 # Factoruide route-quality analysis: handoff to Astra
 
+Current continuation: correcting the saved guide's misleading 25-class-quest
+warning and Required gear completion is in progress on `fix/reachable-required-bis`.
+The [supported gear assessment](docs/required-gear-assessment-2026-11-07.md) and
+[implementation plan](docs/superpowers/plans/2026-11-07-reachable-required-bis.md)
+track this work. Source selection, actual-completion enforcement, reporting and
+route repair are integrated. Final review's location/window finding is corrected
+and scoped-review approved in `66d2123`. Fresh generation on that source completes
+71 sources and 193 support quests, with class/gear/other counts all zero and 20
+applicable forced visits matching 20 entry markers, in 19.5 seconds at the recorded
+small budget. Original-guide compatibility, 754 release workspace tests and release
+all-target Clippy pass, with documented test exclusions. The production desktop
+executable is built with the bundled frontend; its source/hash and sanitized route
+evidence are in the [validation record](docs/required-gear-validation-2026-11-07.json).
+The final delivery review and documentation commit remain pending. Original guides
+remain untouched; no app launch, installer, push or merge was performed.
+
 Latest implementation continuation: useful class training survives dungeon-quest
 cleanup as an independent trainer action when full simulation scores it better
 than bare deletion. See the [training assessment](docs/cleanup-training-assessment-2026-11-07.md).

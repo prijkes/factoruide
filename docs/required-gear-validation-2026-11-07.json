@@ -1,0 +1,121 @@
+{
+  "actual_dungeon_areas": [
+    209,
+    491,
+    718,
+    719,
+    721,
+    722,
+    796,
+    1176,
+    1337,
+    1477,
+    1583,
+    1584,
+    2017,
+    2057,
+    2100,
+    2437,
+    2557,
+    16544,
+    16611,
+    16732
+  ],
+  "actual_dungeon_runs": 20,
+  "applicable_forced_dungeon_areas": [
+    209,
+    491,
+    718,
+    719,
+    721,
+    722,
+    796,
+    1176,
+    1337,
+    1477,
+    1583,
+    1584,
+    2017,
+    2057,
+    2100,
+    2437,
+    2557,
+    16544,
+    16611,
+    16732
+  ],
+  "capture_sha256": "3d769d17e6472ca45bbc5568b5db2d8ed23edc3cf58d68b1db105a4ff409879a",
+  "changed_budget_parameter_count": 6,
+  "completed_source_root_count": 71,
+  "completed_support_count": 193,
+  "completion_support_count": 193,
+  "desktop_artifact": {
+    "artifact_path": "target/release/factoruide-app.exe",
+    "built_at_utc": "2026-11-07T17:35:36.2106235Z",
+    "bytes": 159474688,
+    "sha256": "0525f72ca072fe9de74f3a38c05bb979b7919dac7e29c32df49ccfbb3638b32f",
+    "source_head": "66d21231ecbf833155f247e4a370904c57c925e8"
+  },
+  "exported_dungeon_marker_count": 20,
+  "fallback_note_count": 22,
+  "from_level": 18,
+  "frozen_input_sha256": {
+    "cargo_lock": "aa2b1fdca5d9dc159b2ec7cc18986d999b5702a2659966c5684bb67854aba57c",
+    "forever_database": "1c93c95bfa5d236728ce75d0d9059133a070cff9aa7fdaf62be902f7c3582db7",
+    "main_meta_snapshot": "1dacced22eef90e4f713c1e9b39441e124e09318e20589071d1ecc8f63dd5dc7",
+    "main_outcome_snapshot": "8a434c84e57652054504dc338c820ffcc2d4971e3d66bd111138217f187a7479",
+    "main_request_snapshot": "5994c3890441c1445c6ee6e49d9245794156d41b7433d1ce601af7f8f78748db"
+  },
+  "generation_wall_seconds": 19.4739347,
+  "mandatory_goal_counts": {
+    "bis_quests": 0,
+    "class_quests": 0,
+    "other_quests": 0
+  },
+  "missing_dungeons": 0,
+  "missing_source_root_count": 0,
+  "missing_support_count": 0,
+  "output_play_seconds": 553525.0,
+  "output_quests": 884,
+  "output_step_count": 3179,
+  "preparation_wall_seconds": 2.6003021,
+  "preview": false,
+  "request_preserved_except_budget": true,
+  "requested_forced_dungeon_count": 22,
+  "required_source_root_count": 71,
+  "schema_version": 1,
+  "source_head": "66d21231ecbf833155f247e4a370904c57c925e8",
+  "success": true,
+  "to_level": 60,
+  "validation_checks": {
+    "checks": {
+      "clippy": {
+        "passed": true
+      },
+      "frontend_build": {
+        "passed": true
+      },
+      "frontend_tests": {
+        "count": 9,
+        "passed": true
+      },
+      "legacy_read": {
+        "passed": true
+      },
+      "native_build": {
+        "passed": true
+      },
+      "route_tests": {
+        "count": 661,
+        "passed": true,
+        "platform_exclusion_count": 1
+      },
+      "workspace_tests": {
+        "count": 754,
+        "passed": true,
+        "platform_exclusion_count": 2
+      }
+    },
+    "source_head": "66d21231ecbf833155f247e4a370904c57c925e8"
+  }
+}

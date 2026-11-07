@@ -10,6 +10,7 @@ An addon change also goes, in the same words, under Unreleased in that addon's o
 
 ### App
 
+- Quest warnings separate class, gear and other mandatory goals, with neutral wording for older guides.
 - The steps inside a dungeon are a block of their own on the guide page, shown on the map of the dungeon's floor they are on (Classic and WoW Forever dungeons, from the game's own dungeon maps).
 - The first guide of a game version no longer fails now and then because another command removed its data while unpacking it.
 - A settings change made while the addon installs, or while a character is added back or forgotten, is no longer lost.
@@ -19,6 +20,8 @@ An addon change also goes, in the same words, under Unreleased in that addon's o
 
 ### Guides
 
+- With best gear Required, unsupported quest rewards get an explained alternative, and a guide succeeds only when every selected source is completed.
+- Required gear chains keep prerequisites, timed work and dungeon quests in order with the rest of the route.
 - Removing an unusable dungeon quest keeps its useful class-training visit when that makes the route better.
 - Unrewarded work is still counted as grinding after its quest expires or is abandoned, using only work performed during the guide.
 - Accepted quests asking for the same creature kills share progress, with combat time, XP and loot counted once; shared work is not charged again as grinding for an unfinished quest.
