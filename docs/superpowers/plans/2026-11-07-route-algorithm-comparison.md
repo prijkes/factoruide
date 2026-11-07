@@ -54,7 +54,7 @@
 - [x] Implement a Rust example accepting edition/request, seed, variant, total budget, reserve, and output path. Prepare and construct once, then use public `Effort::Time` with preparation/construction deducted and an outer cutoff. Do not use `abortable` in a way that skips cleanup.
 - [x] Record exact final `simulate_full` score, player time, hidden penalties, breakdown, warnings/required counts, route/guide, stage timing, search log/tries, effective request, and best-score-over-time callbacks. Final finalized score supersedes the callback endpoint when cleanup changes it.
 - [x] Implement fresh-process, strictly sequential execution, counterbalanced order, hashes/manifests, peak-memory observation, bounded timeouts, and resumable append-only artifacts. Serialization/process overhead is recorded separately from measured computation.
-- [ ] Pilot before freezing reserve and budgets. Run route-package tests, format, Clippy, and release example build. Review correctness and protocol before timing.
+- [x] Pilot before freezing reserve and budgets. Run route-package tests, format, Clippy, and release example build. Review correctness and protocol before timing.
 
 ## Frozen experiment protocol
 
@@ -70,11 +70,11 @@
 
 ## Task 4: Execute, review, conclude
 
-- [ ] Complete and review the finite oracles and harness.
-- [ ] Freeze the pilot-adjusted protocol, source, databases, requests, and runner before tuning.
-- [ ] Run tuning, freeze the candidate, and execute held-out comparisons without source changes or concurrent builds.
-- [ ] Analyze all metrics and limits; investigate validity or accounting discrepancies before trusting scores.
-- [ ] Obtain separate correctness and quality reviews of implementation and conclusions, address material findings, update the handoff, and commit the measured conclusion.
+- [x] Complete and review the finite oracles and harness.
+- [x] Freeze the pilot-adjusted protocol, source, databases, requests, and runner before tuning.
+- [x] Run tuning, freeze the candidate, and execute held-out comparisons without source changes or concurrent builds.
+- [x] Analyze all metrics and limits; investigate validity or accounting discrepancies before trusting scores.
+- [x] Obtain separate correctness and quality reviews of implementation and conclusions, address material findings, update the handoff, and commit the measured conclusion.
 
 ## Execution record
 
@@ -83,3 +83,9 @@
 - Pre-flight: workers own separate new operator files and the harness/finalizer; the coordinator owns parameter/dispatcher/module integration. Shared signatures are fixed above. Builds are serialized; timed runs wait for all builds to finish.
 - Pre-pilot implementation reviewed independently. Corrected linked-partner cycle/bounds bypass, per-member OR prerequisites, warning-ID comparison, and exceptional child cleanup. All four Important review findings were re-reviewed as addressed.
 - Final pre-pilot checks passed: format, release Clippy across all route targets with warnings denied, 302 library tests, 238 integration tests, three example tests, 14 Python protocol checks, and release example build. The known Windows fgstring newline test is explicitly skipped; two doc examples remain ignored. No game data or production defaults changed.
+- All eight pilots passed without adjusting the 20-second allowance or 3-second reserve. Frozen source `a3ce987` then completed all 64 tuning and 32 held-out runs sequentially, without compiler/planner overlap. No failed attempt was replaced. All 104 execution/resource checks passed.
+- Tuning selected chain insertion by the declared rule: 2.297914% score improvement, 1.179006% player-time improvement, seven positive profiles, but a 5.395765% worst regression. Hub and exact remained tuning-only observations.
+- Held-out chain insertion failed promotion: weighted score worsened 0.456956%, player time improved 1.273725%, four of eight profiles had positive two-seed mean savings, nine pairs won and seven lost, and worst regression was 30.994428%. No new content/resource failure was found. Both experimental defaults remain zero; no production-tournament trial, merge, or push was performed.
+- The independent 104-run audit verified hashes, 70 bootstrap/configuration comparisons, stage/player accounting and all recorded constraints; a separate evidence review verified all 31,657 anytime points, freeze chronology and lack of process overlap. Explicit hard-required quest counts were zero in this timed panel, a stated coverage limit.
+- The largest score loss is localized to search cleanup before later finalization. Excess-grinding penalties dominate the delivered gap. Dungeonless-removal policy is a source-supported hypothesis, not a proven subpass cause or confirmed correctness bug; the endpoints do not preserve per-pass route snapshots.
+- The [measured report](../../route-algorithm-comparison-2026-11-07.md) and [archived evidence](../../route-comparison-2026-11-07/README.md) preserve all pairs, frozen identities, curve data, plot and cleanup investigation. Final whole-branch code and independent evidence/prose reviews approved the bounded no-promotion conclusion; retained Minor implementation finding is quadratic neighborhood eligibility scanning.

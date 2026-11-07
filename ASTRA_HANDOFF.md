@@ -1,12 +1,28 @@
 # Factoruide route-quality analysis: handoff to Astra
 
+Latest measured continuation: the equal-budget algorithm comparison is complete
+on `experiment/route-quality-comparison` (experiment source `a3ce987`). See the
+[measured report](docs/route-algorithm-comparison-2026-11-07.md) and
+[archived protocol and evidence](docs/route-comparison-2026-11-07/README.md).
+Eight pilots, 64 tuning runs and 32 held-out runs passed execution/resource
+checks. The tuning-selected chain operator reduced aggregate held-out player
+time by 1.27%, but worsened weighted score by 0.46%, with a 30.99% worst-case
+score regression. It fails the declared promotion rule and remains off by
+default. Cleanup can erase raw-search gains; the worst regression is localized
+there, but its exact subpass is not established by the saved endpoints.
+
+This supplies a bounded measured answer, not proof that the current heuristic
+is optimal or that no faster/better algorithm exists. The experiment covers a
+single-start kernel, BiS off, eight solo profiles and two held-out seeds; the
+production tournament was not tested or changed. Requests contained no explicit
+hard-required quests. Vendor-source reconciliation remains separate work.
+
 Latest continuation: shared ordinary creature-kill credit and its XP, loot,
 timer, and unfinished-work accounting are implemented on `fix/shared-kill-credit`.
 See the [phase-two implementation and validation record](docs/superpowers/plans/2026-11-07-shared-kill-credit.md).
-The user's algorithm question is addressed in the
-[route-search alternatives report](docs/route-search-alternatives-2026-11-07.md):
-the current heuristic was inspected and credible alternatives researched, but
-competing designs have not yet been benchmarked at equal computation budgets.
+The [route-search alternatives report](docs/route-search-alternatives-2026-11-07.md)
+records the algorithm inspection and research that preceded the measured
+comparison linked above.
 No proof that the current search is best, or that no faster/better search exists,
 has been established.
 
@@ -14,8 +30,8 @@ Implementation continuation: the user subsequently approved the first fix with
 “OK, continue.” The dispatcher and starting-copper corrections are implemented on
 `fix/bis-search-dispatch`; see the [implementation plan and validation record](docs/superpowers/plans/2026-11-07-bis-search-dispatch.md).
 The original handoff's read-only authorization below describes the earlier
-assessment stage. Vendor-source reconciliation and comparative search
-experiments remain subsequent work.
+assessment stage. Vendor-source reconciliation remains subsequent work; the
+comparative search experiment is now complete as recorded above.
 
 Continuation completed on 2026-11-07: see the
 [route-quality assessment and proposed next work](docs/route-quality-assessment-2026-11-07.md).

@@ -1,0 +1,1227 @@
+{
+  "arms": {
+    "baseline": {},
+    "chain": {
+      "chain_insert": 0.05
+    },
+    "exact": {
+      "eval_window": 0
+    },
+    "hub": {
+      "hub_repair": 0.02
+    }
+  },
+  "budget_seconds": 20,
+  "compute_tolerance_seconds": 0.25,
+  "criterion": ">=1% equal-profile geometric score gain; >=6/8 positive two-seed means; worst pair regression <=2%; player geometric regression <=.25%; no new validity/resource failures",
+  "experiment": "single_start_search_kernel_not_production_tournament",
+  "heldout_seeds": [
+    20261107,
+    314159
+  ],
+  "identity": {
+    "binary_sha256": "a18e001ffd1ef476ce7c0509b4fa3246e633b91c74e9b0951ca5187da6b79e66",
+    "data_sha256": {
+      "classic": "226f4c361aa84667b694a45661d5be589cbe999042f3ed161445dc5eb1f585b9",
+      "forever": "1c93c95bfa5d236728ce75d0d9059133a070cff9aa7fdaf62be902f7c3582db7"
+    },
+    "head": "a3ce9878830b3414b4b200d9fbbfd1febc88cb58",
+    "requests": [
+      {
+        "edition": "classic",
+        "id": "classic-human-warrior-1-30",
+        "request": {
+          "class": "warrior",
+          "from_level": 1,
+          "race": "human",
+          "to_level": 30
+        }
+      },
+      {
+        "edition": "classic",
+        "id": "classic-undead-mage-1-40",
+        "request": {
+          "class": "mage",
+          "from_level": 1,
+          "race": "undead",
+          "to_level": 40
+        }
+      },
+      {
+        "edition": "classic",
+        "id": "classic-orc-warrior-20-40",
+        "request": {
+          "class": "warrior",
+          "from_level": 20,
+          "race": "orc",
+          "to_level": 40
+        }
+      },
+      {
+        "edition": "classic",
+        "id": "classic-gnome-mage-20-40",
+        "request": {
+          "class": "mage",
+          "from_level": 20,
+          "race": "gnome",
+          "to_level": 40
+        }
+      },
+      {
+        "edition": "forever",
+        "id": "forever-human-warrior-1-30",
+        "request": {
+          "class": "warrior",
+          "from_level": 1,
+          "race": "human",
+          "to_level": 30
+        }
+      },
+      {
+        "edition": "forever",
+        "id": "forever-undead-mage-1-40",
+        "request": {
+          "class": "mage",
+          "from_level": 1,
+          "race": "undead",
+          "to_level": 40
+        }
+      },
+      {
+        "edition": "forever",
+        "id": "forever-orc-warrior-20-40",
+        "request": {
+          "class": "warrior",
+          "from_level": 20,
+          "race": "orc",
+          "to_level": 40
+        }
+      },
+      {
+        "edition": "forever",
+        "id": "forever-gnome-mage-20-40",
+        "request": {
+          "class": "mage",
+          "from_level": 20,
+          "race": "gnome",
+          "to_level": 40
+        }
+      }
+    ],
+    "runner_sha256": "1363e80042aa42edf77cba616471cb15f55949e432bc4fdd762045bf33fb4fb0",
+    "source_files": {
+      "Cargo.lock": "aa2b1fdca5d9dc159b2ec7cc18986d999b5702a2659966c5684bb67854aba57c",
+      "Cargo.toml": "9700b8ab3b13008425bc58ffbb5a5f3f343e104e2898800fee7d64b7cb627600",
+      "crates/fg-app/Cargo.toml": "3cdbda0a92495575e5d8913cdf7f7b07316e223ec714dcd88c2db3235c25a62f",
+      "crates/fg-app/src/characters.rs": "31a0f52c59096624eb3cfc4a1af96f65b5da5b31691e5a901545957a6854d62a",
+      "crates/fg-app/src/error.rs": "3c9308bbcd3803e71859d3be924db05fb36e1403681075b73c947356fc302b78",
+      "crates/fg-app/src/host.rs": "65f1e267caedacd3645a5cf5c61789146aa612f2f1d9cb2b7fa7bb7eab5bc9b4",
+      "crates/fg-app/src/items.rs": "b0cb9c5b9f89c3c48a89f77eb8758ef51047a9ab1e487352917e66a54d48e124",
+      "crates/fg-app/src/lib.rs": "07bc154bcf833bc45b18a3e63f4f6bdf9a951ab92cbf8f3a4a42204e38d3bf4f",
+      "crates/fg-app/src/maps.rs": "b23e0ce5ac035defe8ae4d6a07eec6db99c8db50476d6d816c60624c4282ebc5",
+      "crates/fg-app/src/settings.rs": "63918c4f70cd66ccd82fce7c18fe1e54bb716f9b2dc7f38522f1c02afa4d33fb",
+      "crates/fg-app/src/studio.rs": "7cb7e11204281974479591ab3f5016c9ebd843ae2afc1c09ae16383436741237",
+      "crates/fg-casc/Cargo.toml": "1f23dc192314bbc160bc6d6699adb515b60b6396d1b46e11b6400c41bfb40f4f",
+      "crates/fg-casc/examples/extract-client-assets.rs": "f1d6d35b4a8faf621b56bffd2210089ea4782e44a9a63b4f3c929c1b0aef98b3",
+      "crates/fg-casc/examples/probe.rs": "f254703e509858f21e844a1c2646463a4d63f731ac5bf6c0050db26aa6971ac5",
+      "crates/fg-casc/src/blp.rs": "8af62169b38a490eb69ff659092ced46103381d16e632d43fb91d629fe263f47",
+      "crates/fg-casc/src/blte.rs": "1d602508231c2149aec9d08cbd2a927fa26f841f9623372771d7899af61af47f",
+      "crates/fg-casc/src/dbc.rs": "61f18096ed7c90b6e1dfaba2d36c74807046071a35b047ee1c0719f974a26835",
+      "crates/fg-casc/src/encoding.rs": "9b8961bf5018eb93b27956d6305fab305b54d40e02e95812782ba66744431832",
+      "crates/fg-casc/src/hotfix.rs": "4c7947cca13c06ea2d7fb3e9879997cd0797b9790bd1879492930e8262b351bf",
+      "crates/fg-casc/src/idx.rs": "b110d20fd0331251176f1073ad28bd57bb54fcc7b9a2578c75922759dab19c68",
+      "crates/fg-casc/src/jenkins.rs": "3a9daa044d2964b38bef30054ea4a02f4c57515e44b049c765d20150fa362ea2",
+      "crates/fg-casc/src/lib.rs": "b2c3ca30eaa2c52eb93a406704bf809dca23ed5098c01de0ff5281e95fc43f17",
+      "crates/fg-casc/src/root.rs": "f066835950d97eef39b7367149157d6b374f0fbf5cc2a92c72fbd1cd81f948af",
+      "crates/fg-contrib/Cargo.toml": "7235689519bc0905241b0d3e5fdc61226af1ac244b46944166494d83556368c3",
+      "crates/fg-contrib/src/collector.rs": "feb27d32f40af6c3041766a88efb29b667c7e0d3a4049e142cdf643c11edbe9b",
+      "crates/fg-contrib/src/contribution.rs": "0d222d5a1e4e4b483e73cd0f18ee2f09d43f65d8a49f1468b518d01748221f5e",
+      "crates/fg-contrib/src/issue.rs": "a9ec1f727ca56be3795b96f2f8411ebe14b65ae911d90c2aaec696b3e27c9ecd",
+      "crates/fg-contrib/src/lib.rs": "25f0e49077190f917c948634aedfecf8bd87fb0f8dbf102f8a595824e6721217",
+      "crates/fg-contrib/src/lua.rs": "d4ef6c60e2cbd9391d8bd380b0733cc3d8fe9a383c3aa4786e4a26ddb32c8022",
+      "crates/fg-contrib/src/profile.rs": "4886d218ac97c8eec560b9c6c51047091cb99525b02e11fa714458f617b61ab7",
+      "crates/fg-contrib/src/receipt.rs": "846378618916f5d86448a5fa9da2aa5385842b2513979a916f26c96b05b83aea",
+      "crates/fg-contrib/src/validate.rs": "d0d4bd053c86024f6f97525def14341e5c84c9c3fdf8de1250599971102f47a6",
+      "crates/fg-contrib/src/wdb.rs": "aa72fb6906aead8480d199dcf6bc22189608f38ae52459db1296f150798fa75e",
+      "crates/fg-contrib/src/wdb/creature.rs": "3cf926ce4f42159ea992344f3297299b5c93ba464cf647f8bf50b86f69acc60d",
+      "crates/fg-contrib/src/wdb/gameobject.rs": "87107849234ca4887fbb09291dcfcf7c5772dcce54d97a72a00156a3bb959ed8",
+      "crates/fg-contrib/src/wdb/quest.rs": "e5216b7c55be960c23aca93d79287b7b62b93b23f6c5df78e24aa6ae74922c6e",
+      "crates/fg-contrib/src/wdb/reader.rs": "fd080033fa0adaaffe176996e95ecaa9a181a3634818f7ced02918edc6580400",
+      "crates/fg-contrib/tests/saved-variables/0.14.0.lua": "89ac67365f541220cedcd7cd53466f964a05b6b4b7da04f924d9e7411ffec7b1",
+      "crates/fg-contrib/tests/saved-variables/README.md": "159c38bb8e4d58809250bb7f241aee669661419ed686cf3a8d5e95cfbefd86df",
+      "crates/fg-contrib/tests/saved_variables.rs": "3427a2aa58602dc26274361bfea7ab084263da67533f93ed6d331638b9f567a4",
+      "crates/fg-library/Cargo.toml": "aa672c15907e189ad425729ce1e28a1a53ff574d2968ec74ba1ea8a3f1b37698",
+      "crates/fg-library/src/error.rs": "f7530d7a660ae69e5cdf4bf48f0c56d0d953c6b98d80b50bf464da166cd92c52",
+      "crates/fg-library/src/files.rs": "82b187ac170274d44b267b0c8c2b494d220cc3ef5c7a64a8dc8c90ce0895f0d5",
+      "crates/fg-library/src/id.rs": "95f4a4cf88ad5363f586c34aa92d71c99f1b3f12693c0d84d6b695afb2ceac86",
+      "crates/fg-library/src/lib.rs": "168552e8acac65cb33d99c2765654f5703cc32e05038232b121c2e46793aec91",
+      "crates/fg-library/src/share.rs": "06f245882c4144aab175df775ee16399335862b1ecaeec93121d65ff0f1f61a8",
+      "crates/fg-library/src/types.rs": "059c57ad89b3ef23381d394a6e46902ac7c0a221b8bc124bdb877176c9699505",
+      "crates/fg-library/tests/library.rs": "898a78e99d887ea820c384ef510e0a34c7638c78571a573357828ffd16d3a52b",
+      "crates/fg-route/Cargo.toml": "b92c2d715528ff7e4d7647e51038ec0c56dbd336f1cbf7cbc39154932434ff8d",
+      "crates/fg-route/benches/prepare.rs": "ec612a3adb6a87c5bfb1822d87ddf5ea54c00a1350084805cf4d09c4fd93f155",
+      "crates/fg-route/benches/search.rs": "3e425ecb65fac741d0c87dc6c59e70fb9b81a4c31840f7e7bd26b38187284862",
+      "crates/fg-route/benches/walks.rs": "e6f71547de386b81575b0501422b5b27ede4d94318b30a69d92bc566ae1730e0",
+      "crates/fg-route/benches/walks/bridged.txt": "4f3f05d5d5de81161b60238f72c9929461794f6938581d4d0ae2885907af5701",
+      "crates/fg-route/benches/walks/crossing.txt": "5c9bc0b863591a3837e93d2e4004eed1405fe4f1934af7f4393baf043691e8d4",
+      "crates/fg-route/examples/prepare_loop.rs": "5ab06f4b0d33653e2f16fc85061a041ea27c0c3a1e71bde6fff20ee84402e311",
+      "crates/fg-route/examples/quality_compare.rs": "d31dbdcd880c0ecc61948059061e92fbd676b032067f56b53f17c27b16e4ccd1",
+      "crates/fg-route/src/abilities.rs": "11d7bffb792c227893042ba30c6afa620acad4f4d2c29c74d58f370b4024a894",
+      "crates/fg-route/src/audit.rs": "893772278aedad15a2069f8564b92a1d3b4ff5fe75922a9c203bad990f14724c",
+      "crates/fg-route/src/cache.rs": "57bb73a6a9d90a75f98d74de01f89019ac671a608a894b00e9ee0a4674f7d66a",
+      "crates/fg-route/src/diagnostics.rs": "b248c5c1db7cacd8b9c95edbbc16a2214b70d0ff26027172fe05633288fab293",
+      "crates/fg-route/src/export/checkpoints.rs": "a2f2b8e019fc377ec9deb75684953daed2e3248b34a9d79716fc39eb3def9eab",
+      "crates/fg-route/src/export/diff.rs": "f9152b93f3c070b1bee8e4ae942ec1d616a267bcd274243ca6381bc14799d53d",
+      "crates/fg-route/src/export/fgstring.rs": "7ddfb8aec226ed5b87df9f85f8762b793bf81ff2299ae55665f91bb9a93f53ca",
+      "crates/fg-route/src/export/format.rs": "78fcf9d547b0367a3b7acc62a1eac00779c741398c665c24f30d0c1ce6c9c2a3",
+      "crates/fg-route/src/export/grind_spots.rs": "6b52bbb0f73394238a333dd896e71a2583458690361c17067e88f58192b9d56a",
+      "crates/fg-route/src/export/groups.rs": "662caec759371c4e849459075bf37621fd8d57ea34779a756a17b0f7559c896d",
+      "crates/fg-route/src/export/lua.rs": "c58a1d89add44d590cbb422b4a962f8a05fe724f501c52b0f7bfc988942115dc",
+      "crates/fg-route/src/export/mod.rs": "8ae7e4bd2b26ca49544825a1f8572ca51a1439eb6d772b8b7f1248ad96bc7845",
+      "crates/fg-route/src/export/phrase.rs": "1246687b394de30f0e69ec5f5b2cfac76f7a93584df8acbce9706ff247feeb1a",
+      "crates/fg-route/src/export/polestar/mod.rs": "aab3aafdc48ca2353ac5ec6759b36c66d34cd26e250507e04a499a1ae4ee4717",
+      "crates/fg-route/src/export/polestar/source.rs": "48c2fbcafb97f154ce36254255196a8ed0451e2ed161da552fdaef508eb76fcd",
+      "crates/fg-route/src/export/templates.rs": "9fa3c55d53594e12a93c29fa12929a39556a513ab8ea82f56e32d90cafd4e3ad",
+      "crates/fg-route/src/export/types.rs": "92fb061971cbae028d794233cf1f51993511a02b35b0f8a5d56978457b8850e3",
+      "crates/fg-route/src/export/vendors.rs": "024ae5f0fab550c4feb626a321cf037803570de987a2d2528e84ef922719354f",
+      "crates/fg-route/src/export/writer.rs": "8f143b8bc9194c8299454f6614f981269046b819dde777e0a1e5f72d2b7391d0",
+      "crates/fg-route/src/faction.rs": "52bfd72bc1d984efab39e9a3a321efc4d8c40c3ebfae5a5ee56278e1a773f635",
+      "crates/fg-route/src/help.rs": "823aec8beef9810889e4b0c681be264804443e315083af4f229b9598920ea493",
+      "crates/fg-route/src/job/character.rs": "0cc407d8ed31a9821b69e32e474ff089f6cd910c774f825d26b7dfdae55df2a0",
+      "crates/fg-route/src/job/draft.rs": "40739da578c3cdb88b6beb9b23ec735669adabf1d1a09e401fdfc31dfefe21ae",
+      "crates/fg-route/src/job/edit.rs": "af11b53bb868a0eb80e688dda65a38efb64360b63330aa93b30f79658498479a",
+      "crates/fg-route/src/job/error.rs": "46b315d86fbfe67957ff7360f13f2e74f63d12207442269b6723d76f5c4b517a",
+      "crates/fg-route/src/job/event.rs": "7e8002fd8060024583e2d52b39907981024857a1d738ed23def0463b5a8fcece",
+      "crates/fg-route/src/job/flights.rs": "1e137428ab2d944b79df34aac5212a6d8363ea97a376ef445368780903324a94",
+      "crates/fg-route/src/job/group.rs": "ec095e5d3df514b13e623054a3852afb5dfbd9ddc2ad8a05e43d821cd5708108",
+      "crates/fg-route/src/job/mod.rs": "f0976b1b09f751c20be3ddfcf18c080bc076e7fb61886a0fb1ebf19c40943100",
+      "crates/fg-route/src/job/notes.rs": "17a0e6c534f4d7025654d29a109dc5e7e2ebb0fc8c873a76c90e6b77ed755a10",
+      "crates/fg-route/src/job/options.rs": "86102349d4aea29e573589e55b16d5a68bcfa0f5a8a9534b45e2edcdda4b94a0",
+      "crates/fg-route/src/job/overrides.rs": "afbd1047170968c9244a40b25a46e7f88bd5a15a4cf88e81ed732980dc276379",
+      "crates/fg-route/src/job/paths.rs": "3ea82753a12eb6c0ccf9913f8128a04e79bc032f7ebabd783b0f2d89618b247c",
+      "crates/fg-route/src/job/race.rs": "e7d47afee2eb644a63b9bf0b3a044e4ca433b16a89f18845e02f9fa6ab05b376",
+      "crates/fg-route/src/job/reputation.rs": "aeb284d3c7766c25869159e6749ee6e63db62963779e4b51949762aba4787123",
+      "crates/fg-route/src/job/request.rs": "4e09d95c64cf52223166964a7a6e49b2e8cb8eaaf7678904d0d82145a8a01f90",
+      "crates/fg-route/src/job/required.rs": "6216c3f2d068c94ab237891c37fac79d0e771b9cd7446dc68edac0900acf6f75",
+      "crates/fg-route/src/job/routes.rs": "6952ccf2d7d1401e242ed2bb4b7bacd6178552b44f6975de6cae506128b269b8",
+      "crates/fg-route/src/job/services.rs": "2a3b3e7989dd8805c92561d30b925d0f4aac61c3d08295813d04068bcf2d9b20",
+      "crates/fg-route/src/job/start.rs": "59c7221d8cc49e5359ed75cb2dfd3bf3c1660595226f379c9d8566a5b7ea671e",
+      "crates/fg-route/src/job/starts.rs": "f75a458a9e5a31f7cac1b4147fd9f7c89c595f865fa5e0f97b789a327c38c92b",
+      "crates/fg-route/src/job/timeline.rs": "006c0a31583775ba01293e4404e156a41c127ab05755608d52b1ed443c1d0b18",
+      "crates/fg-route/src/lib.rs": "6b5a70a817d3a2ce7e67eadf23e0fc62be5cdccab71b95014ae329b065012335",
+      "crates/fg-route/src/memo.rs": "b9120f8bd93136bc370b8a387aebc1ad82e6055008ac3d805afaa428ab8d44d2",
+      "crates/fg-route/src/model/bis.rs": "f1b5564070d5f3de36940be7c029bbf14d3c9136ba47a807642b60a52578ed7b",
+      "crates/fg-route/src/model/builder.rs": "632aa10022176079089dda84929ef5b6e45eac6436c833d7c1c3f90e0145e7bb",
+      "crates/fg-route/src/model/chains.rs": "543b723a607ab88fcb7cb7f511b771b94615072f883f40aae8934844dd17d5f5",
+      "crates/fg-route/src/model/crowd.rs": "e467164c94e846aa6fd1937c367980b1116ccbbeb38121ede9bcbf53bc39b468",
+      "crates/fg-route/src/model/derive.rs": "30ea158fcc63d65fc9ed83cfed575c74304bf89cba3484ea3aa57660cb340454",
+      "crates/fg-route/src/model/dungeons.rs": "f4ca2271febd68377f6c10bf0712ea665d52a788d0bd567a3777d726fa41ab7b",
+      "crates/fg-route/src/model/entities.rs": "29edd53a1b9205bc9b443fa869030b561f426b5dffae281c9417129b653f9741",
+      "crates/fg-route/src/model/explore.rs": "210ce5b4020a1bf740687bd592d4447e2a658a327f32f98f2e6bd672496bb6b8",
+      "crates/fg-route/src/model/farm.rs": "b47bab1097eb3a54aa6783d3258459bf1736c91ca2ad1d6b2fcd551eb70f4edf",
+      "crates/fg-route/src/model/fixture.rs": "d5183516b1244cf0dc91f3b7be491d9e3ac38603340e2c25168617b181f83d09",
+      "crates/fg-route/src/model/givers.rs": "3259923a5f105b9cc1a2356c9fd5f1431dde7bc4d24fc29f7e150fcf5070eda6",
+      "crates/fg-route/src/model/guard.rs": "fed785980bc2168b9de94cbf9899e335bdca7bc78db2da294cb3d5b702c56fa0",
+      "crates/fg-route/src/model/item.rs": "93bda802edc726f880b02c9ffd5eb06cb8bffb87d45e0091c1a98570546baeb3",
+      "crates/fg-route/src/model/loot.rs": "31c24b6cab26ec7fb8e453fd1f5dd3f27a0f65d6d52ac0b43077c982f48d9ae7",
+      "crates/fg-route/src/model/mod.rs": "857fd5b267178a6dba4307f8c70bdbf7e741bcfbbf41c6225805f4f2dc9a15ea",
+      "crates/fg-route/src/model/names.rs": "93267a100aaf6d973a3664de889f8903c84754165f7a32194b7cb83a365427da",
+      "crates/fg-route/src/model/objectives.rs": "5e85a4aaafc5990e730e5741375bc68fc0eb1c5acea63ac3d485cc9f8ac2903d",
+      "crates/fg-route/src/model/places.rs": "b9a74f7f4c9526c33ba958364ca0a1bfeccca48ff31a6df48a6f012a81ab50fa",
+      "crates/fg-route/src/model/pvp.rs": "40233e9b906d318056e43911de9c8947fc071f0e0fb6fedcff176aabdd129678",
+      "crates/fg-route/src/model/quest.rs": "499cff5447fc668588acdb221658fda4f53282657d4093a3c7edabd1f06f7d52",
+      "crates/fg-route/src/model/required.rs": "9723238dee24960e0bf54b9205a3ea0148cc399367cf70b75d1bf1eda52546f0",
+      "crates/fg-route/src/model/requirements.rs": "1298b9a73484b996f053dfbe787b752ca0c043593fccfca088be6f5bdff6483a",
+      "crates/fg-route/src/model/rewards.rs": "2ecff0accc23d3573d0e834547272c2468de7342b31d88df59f5d3732d24d771",
+      "crates/fg-route/src/model/selection.rs": "8e7a36da037d1ffe96752e915ec1be6e95247681232740a1be860c5ea6f35a2c",
+      "crates/fg-route/src/model/sources.rs": "c0681074c7a67b01dac22ae2305359b4b41865d88af4dd97c210c2a78fe9b1d1",
+      "crates/fg-route/src/model/testing.rs": "f1ce4fdc665b854b47898a7659ecaf60dd7092d4e5fc6f8097b1907189fc0591",
+      "crates/fg-route/src/model/types.rs": "a7c1440d160f9dc88b67fdd61b67e6f377d8e4db670aeb1c9ab19a67dabc58ae",
+      "crates/fg-route/src/params.rs": "47bd451b3180ec2748a7408719ebc16792a0fff72c095fa782d84ebf3db825a1",
+      "crates/fg-route/src/plan/acceptance.rs": "ed9283439fe79eb59d76dc51420e132d1028bece01a06e09f630f810f7bf5584",
+      "crates/fg-route/src/plan/alns.rs": "f89a6b458ec11d5fe882fb7091981ee362ccab7faf804e1721f42e75277326c6",
+      "crates/fg-route/src/plan/availability.rs": "b5df423549a9d453d8cc27b0d017e3a0a03bb2375edb9fd195ca3ea5c9d4ab36",
+      "crates/fg-route/src/plan/camp.rs": "d0b44be631bba7a42a9168a991130cadbcc1316125bd54adec70b1cfadcd32f3",
+      "crates/fg-route/src/plan/chains.rs": "b0c15c5b7a21a756835977207ec5609ed2e893982265b13543b69668a05d6b8e",
+      "crates/fg-route/src/plan/combat.rs": "c3c9cbbcbaed3d286b98b670249bc8e373d2ba79b0ea34daee5c7afcbd17616d",
+      "crates/fg-route/src/plan/construct.rs": "14d1f75840a74b763b1b0018e052e2acab6fd24328442f0e7ac7ebb406a3c975",
+      "crates/fg-route/src/plan/edit.rs": "979a060f9c77c061f06bd923437e9963bb9492d93923618e8b9bbef6773c705c",
+      "crates/fg-route/src/plan/evaluate.rs": "915c497887396080548550a1e7f477ec4f50d54006ed30b736c9628f6530ee0f",
+      "crates/fg-route/src/plan/follow.rs": "6c3fa20ccff9e0b93a6530281dd5ff085a00df9608c769974d1fd3ceefd07232",
+      "crates/fg-route/src/plan/growth.rs": "5eff7a85863b86c9b267fc855862f84ecaf4686aaf0f1d329afe87f114062c99",
+      "crates/fg-route/src/plan/hearth.rs": "29aa7ea6fe287f54ab194fbc6f3676334eadb65acc74c46fcf42f9689339918f",
+      "crates/fg-route/src/plan/indexes.rs": "2e3a8f25a1bf438022984e8d0c47d28ed32f80d65c8b2d3b5fca5789f165ae2f",
+      "crates/fg-route/src/plan/mod.rs": "1fe2f98ca80f1ba788a597497088dbf90118dd06aa3a6c6b58646bafd351c734",
+      "crates/fg-route/src/plan/moves.rs": "66ddf7d1fd445f65940af92bde8c19703dcf2043bdd94cae2d5f36aa91ffe8e6",
+      "crates/fg-route/src/plan/neighborhood.rs": "12afa803a8b8234b9a5d5563ab297e93895448af6303652fc1bb43102bde7a54",
+      "crates/fg-route/src/plan/on_the_way.rs": "62e7816f0f9aab74f1006c14071e7baa817e3292f18c5c5356bb745f15da07c2",
+      "crates/fg-route/src/plan/places.rs": "74c8a80b3afc805797dfe4e4992618374989758e395d8d09252c848f9189daa0",
+      "crates/fg-route/src/plan/profession_trainers.rs": "043a5492394973bfee6a09c03267cac0c8b60d5ffe71021cff8716a9abbdcadc",
+      "crates/fg-route/src/plan/regions.rs": "538218fdccaada8310c9569f93c5d87ae110d336b207fb5699d28cee4327469a",
+      "crates/fg-route/src/plan/report.rs": "538a8c0056b09ef9d434349844973066351e38a7a82651acd9e9a1a03bc391e7",
+      "crates/fg-route/src/plan/search.rs": "80d760171530dedf841b9caf10c0874629a70c2696615f4378cfc5418054977f",
+      "crates/fg-route/src/plan/share.rs": "563c63088d493e25901bdd2dfa2bedb1a9c0f57f36a3fc38141a66340e129ff8",
+      "crates/fg-route/src/plan/sim.rs": "8179ed782a3e78ed6ddd4f4b58f7ded51cec93ce6b60da0cc598191bb9b78b8e",
+      "crates/fg-route/src/plan/spot.rs": "5404fc5bbc1c46fae4df62e7313a56fd2ff3dc2a9547f866781c7b318f3dd429",
+      "crates/fg-route/src/plan/state.rs": "18ebe39aa88b173c9c9224894e881c38ed591945b69098877f74c20dfeb5b13a",
+      "crates/fg-route/src/plan/step.rs": "4a86a91bf5151ec0f59728282d55334a6d327738c015fa82ab203a2cef928b71",
+      "crates/fg-route/src/plan/tests.rs": "a7ab83c5493ba19f687233ff09f66f46b0732a4821d2bdf5ced5e59ae15ad4fe",
+      "crates/fg-route/src/plan/tests/abilities.rs": "38ea515e2e27af6ddcbca9cb15bfeefddb9869736f636fa0a50baa669f509ea8",
+      "crates/fg-route/src/plan/tests/dungeons.rs": "fa45da41b5f8a8225fdf699c215698f564f46d1be5c3e45d719450fcc0d10d80",
+      "crates/fg-route/src/plan/tests/movement.rs": "bb7e6ec628f0e86828bf5e64eb2d6f21188742831f3b733a6b01b0bea1668e5c",
+      "crates/fg-route/src/plan/tests/moves.rs": "f61f9845e91e9f8ef71e1b8c72b1051dbf04d5b1d792444419268fa583086738",
+      "crates/fg-route/src/plan/tests/profession_trainers.rs": "e3f358b2fa3802b01730938151ee18f433e5f1d52769b62084ae351a3c8a3514",
+      "crates/fg-route/src/plan/tests/shared_kills.rs": "683a1e520689a32d61ca6a7f237638ea47e7a596f1a4dcbcc0c45fffd028b680",
+      "crates/fg-route/src/plan/tests/xp_buffs.rs": "3379a16862185fb645d068e753b118991310786d7813586dedb991a9332d5288",
+      "crates/fg-route/src/plan/tidy.rs": "735c6d3910bc952514e3c89d434394037d32abf867998cc8343e249a90d56ff0",
+      "crates/fg-route/src/plan/together.rs": "8b09574abe2b2a62602e329ab17709ddb6bc4dcc1d3737cfbb2d0eecffad050f",
+      "crates/fg-route/src/plan/travel.rs": "e3130c631f278b8c0c45a5ae9860fc51fbad2592cd69ed3ba95cff87f017c205",
+      "crates/fg-route/src/plan/worth.rs": "b73facb8773bdbbb5c4f9e1366accc4d733feb8cd0d32961f7029cac45c997c6",
+      "crates/fg-route/src/power.rs": "af2d0672085334569f61b76a2139e87e0917d669c499694906c43e3267f448cd",
+      "crates/fg-route/src/profession.rs": "c1a8fcb49c5e2e6cb1a1d936e2fa4d54892176eb43b1991101b6b22e965d5ece",
+      "crates/fg-route/src/sync.rs": "f2a9f51f9a2597e581fe6dfc4ba2d781c3f9935d0877532f6985c955a2a2c00e",
+      "crates/fg-route/src/terrain/gates.rs": "49fd842aad2ece272fd6b56fa028285512f21400a68ff0fde887791b62a3900b",
+      "crates/fg-route/src/terrain/layers.rs": "4854f731b04e0ca08b9e22e90f6167f604758f4a471bf76226878e9e1d8b6b69",
+      "crates/fg-route/src/terrain/mod.rs": "afed386d0f8b62e37bbc57dc774a072867d5cc15cb3701e3d6887de660e70487",
+      "crates/fg-route/src/terrain/tests.rs": "00dc97f8f7f931ce68fc1d855006c42770f077ae6c38bc3466d59d5f96536296",
+      "crates/fg-route/src/world.rs": "5365c6f13c2a32720d071c87d761def047e70f03097d059c0d261a5917d49e62",
+      "crates/fg-route/src/xp.rs": "ac5ca68e514cf616704b35d283d18e038aee0f80962170db7ffd64b0a7ba7144",
+      "crates/fg-route/tests/fixtures/base-classic.sqlite.zst": "ab861978499d0011f4361ad0e86e7156f68a62668d3cb6739d67e36c04e05a8a",
+      "crates/fg-route/tests/fixtures/base-forever.sqlite.zst": "61976b787965c27b5e9da6501eae38737320bbb8e9b38816a4376bc02658067c",
+      "crates/fg-route/tests/fixtures/base-tbc.sqlite.zst": "394a5c8c1c0366fd790eaf05281b4ebff241aeb5cf7d4f0d0eca8a1273349c65",
+      "crates/fg-route/tests/fixtures/classic_aged_envelope.toml": "f2b205e17cf6ff817d802ee2f5f4382e480881883fc53a2c87f8c69462684127",
+      "crates/fg-route/tests/fixtures/classic_coldridge.toml": "1471e90edd429f0383f6434298683ddcac4853a5dae1a16440e616586a05ee79",
+      "crates/fg-route/tests/fixtures/classic_coldridge_terrain.toml": "ddda22c7690b2ccf44f84992563544704c538379901bd268b424d0f8a07b2cb5",
+      "crates/fg-route/tests/fixtures/classic_cooking.toml": "ceea3aef2c1fea199009f999d26791bd18f1ece980e64039c4e4897d65729b54",
+      "crates/fg-route/tests/fixtures/classic_cutting_teeth_in_french_and_german.toml": "e50fd4aa90c5d04f9bace0973b47daa47e69c5d95d8ef0620ca2144187fd550b",
+      "crates/fg-route/tests/fixtures/classic_druid.toml": "82566d9c2e5bcfae6e4bf5ff8c5f21232354829ed999dee6993d5476670f8fe6",
+      "crates/fg-route/tests/fixtures/classic_dungeons.toml": "b6d2599aeadd719446514d8723a978a0d335d4d8849e5b7d77ccd8b59a37bfd3",
+      "crates/fg-route/tests/fixtures/classic_durotar_terrain.toml": "64ec25dd43933319342ee7275ff4f981af80506c88f6424ba5d44cd5487e978d",
+      "crates/fg-route/tests/fixtures/classic_elwynn_terrain.toml": "a98e0fda2a12d28e086249afe7a486048fe05eacf95f3e5ff592894873d14ae6",
+      "crates/fg-route/tests/fixtures/classic_flight_masters_terrain.toml": "0f5f2c6c4f98093def15783cf01d4df42500189adbb28eab65d4e1c4be6ae182",
+      "crates/fg-route/tests/fixtures/classic_hunter.toml": "97cfe0fbb3f9d8c6b9512496559912f1db4c21e5014ac7e5782bef76881efd0b",
+      "crates/fg-route/tests/fixtures/classic_map_index.toml": "7062143281dfc6043911377b592c51ad4775a336038460213bab21b337ce3f48",
+      "crates/fg-route/tests/fixtures/classic_needles_tanaris.toml": "915356f35a6ad58ae3e99be1a2fb08c539911ae1e7db2f4d9b1a7832985e4af7",
+      "crates/fg-route/tests/fixtures/classic_needles_terrain.toml": "4c8bb4de4ccb49ac30779e3588411e789c696e9362f79fec08553bab18eccc65",
+      "crates/fg-route/tests/fixtures/classic_northshire.toml": "72467f2015b07af31df6402a134a0c6ad3f9c0ac4d977329eec045252a45ecaa",
+      "crates/fg-route/tests/fixtures/classic_orc_warlock.toml": "60ae81e713828a4f0e7e283a4d3a311ce3855b916dc315ed0cb553f62cad5db1",
+      "crates/fg-route/tests/fixtures/classic_places.toml": "f87bb642d4edf26be797b7402c9a089211704d70a8e9161ef0e7a553a209cbe8",
+      "crates/fg-route/tests/fixtures/classic_routes.toml": "38a019b52709517d3d0002c106812dbe83b12bd91679a7e96df2afbf174bf08c",
+      "crates/fg-route/tests/fixtures/classic_rutheran_terrain.toml": "f71a5f7f621ce599f17ae8cfeaf5c95614561fb11f216ece21d270e70c35b734",
+      "crates/fg-route/tests/fixtures/classic_services.toml": "466297bfcab8529a559e839ffc57231eede2f5dda3f0d619805ff33333758f6e",
+      "crates/fg-route/tests/fixtures/classic_shaman.toml": "fd781f4f457671ae7d423e524cb154a96ca66fd4deda48cf01803be7ede8f9d6",
+      "crates/fg-route/tests/fixtures/classic_stonetalon_barrens_terrain.toml": "8be44ac28fea1b47aae1696ab4770f2b8210b434ff62605d48eef202f275bf6f",
+      "crates/fg-route/tests/fixtures/classic_stormwind_quests.toml": "6bea51f65ecdd98b75570b4d283b82f88f3ab0b146134211adc93b29d8089c73",
+      "crates/fg-route/tests/fixtures/classic_strong_stonetalon.toml": "be7fba0aeea02eeb8d44a7b89493b22bd0d61c9e5b922f74cc5534feea774dfc",
+      "crates/fg-route/tests/fixtures/classic_svens_revenge.toml": "f91053431ea4f3756ee639ab2205e4fefbb4b115657a0296bdccf4f2452814d0",
+      "crates/fg-route/tests/fixtures/classic_tirisfal.toml": "6cca7eb81d07ee3614365f80dcc3f00d5f1bdb322df52278081665749a74453e",
+      "crates/fg-route/tests/fixtures/classic_tirisfal_terrain.toml": "3f041196b3ea551adff3da0cb96b89eb49ee5d21c4968216af9d7a10abbdda7c",
+      "crates/fg-route/tests/fixtures/classic_valley.toml": "d23d0b3a46ff51c273209bb1c5bbbe8f6ab6eb3214034274008eafa65abb919d",
+      "crates/fg-route/tests/fixtures/classic_valley_terrain.toml": "6cc70a978e0160714dd0a6ba0504f0cd0f06726c3e6d6d94ef247fa22dba9db8",
+      "crates/fg-route/tests/fixtures/classic_vendors_of_a_ring.toml": "b6dcba7a7c05533e5627ba24423cdc27c9f51c5af11390f3369515c0826d7262",
+      "crates/fg-route/tests/fixtures/classic_warlock_orb.toml": "ff9d01728c4bcbc1799e5d73841f55e2b0e7a2100b78ffae29863b26dc0098b8",
+      "crates/fg-route/tests/fixtures/classic_warrior.toml": "01b4b0c9e554c77f3a86c27cd86915ba442e00f60ae3b177e1b35790987cfdf6",
+      "crates/fg-route/tests/fixtures/forever_anchors_of_zephras.toml": "734bc93ba9770bbdb50a15527f2c8e62c0b0e585a1f7f7f00de5db35d6d89f3c",
+      "crates/fg-route/tests/fixtures/forever_bloodrobe.toml": "2e8f7d6523347d9f7944c300ac43c5623e5667192f412b80722d1ca43a0bb4bc",
+      "crates/fg-route/tests/fixtures/forever_class_spells.toml": "f90fd9bfd876f013420192b256a34a18606ad1fa20938013f8fcad58d7826b5d",
+      "crates/fg-route/tests/fixtures/forever_coldridge_terrain.toml": "ddda22c7690b2ccf44f84992563544704c538379901bd268b424d0f8a07b2cb5",
+      "crates/fg-route/tests/fixtures/forever_cooking.toml": "c102e3f7ce03ca8015acc6a5db4ab563cb3707b7b94c33e6d7fd56787e487dc4",
+      "crates/fg-route/tests/fixtures/forever_dalaran.toml": "75c198b8324da924917db305c6b8528001ec47a3b196db92c17a307325bfb906",
+      "crates/fg-route/tests/fixtures/forever_deadmines_quarry.toml": "2c78a253aa55a8cea202edab60219f9ad6400865d83782d33c6f9fedf5df3928",
+      "crates/fg-route/tests/fixtures/forever_druid.toml": "c99649f740b1349df6ba8dc763666e121c50785a3fae47a1460e008e7ab17bc3",
+      "crates/fg-route/tests/fixtures/forever_dungeon_starts.toml": "b4bbe32be0898b5d733b51667913e370be5a419693c93d515f37e51cae7766ac",
+      "crates/fg-route/tests/fixtures/forever_dynamite_plan.toml": "b455423ccf30937028342b2acd3a18caf1fd92f1decf443915d4c70f1ba02b1d",
+      "crates/fg-route/tests/fixtures/forever_elite_chain.toml": "4f3cfe4adcb22c15ebf0f72cb0d15fe19aa216cd3df304a85ab837f8b696630b",
+      "crates/fg-route/tests/fixtures/forever_excavation.toml": "2d03cebc39113eaff73b99f1f6da69dbc79a871a95fa68a95be7c7899f6ce9da",
+      "crates/fg-route/tests/fixtures/forever_great_outdoors.toml": "feef01d393e98fdc9b85fa06e5466b6467efb9fcd908e48ac07c3fcc3720b624",
+      "crates/fg-route/tests/fixtures/forever_hyjal_terrain.toml": "a540fff3196ce80fc994e6c73fd32eb5d6dbfda32b3a8a923e321ba5b0f2c87c",
+      "crates/fg-route/tests/fixtures/forever_library_book.toml": "2fcf6b81d5ff824fd60b056ea30404a0f403487b44c6f9c323bcfe6f8047bce3",
+      "crates/fg-route/tests/fixtures/forever_new_race_classes.toml": "965252bd9d57396a9b827089907b982b1dce802387b748d95d3a905a58c3a999",
+      "crates/fg-route/tests/fixtures/forever_northshire.toml": "5f4e02895c556705c18490e4ed8d01fc813a6ebe539e8c920ea177a9f5a0a76b",
+      "crates/fg-route/tests/fixtures/forever_orc_812.toml": "838df2ef37943f4701206b045b95070b6e53c25c9877207aa0ac9f9c760c552a",
+      "crates/fg-route/tests/fixtures/forever_ragefire.toml": "74f9aad4e724e5d3bd58d340a01136a985bedc9aa0ff8105d2f4fb998bf0cdbb",
+      "crates/fg-route/tests/fixtures/forever_rare_books.toml": "bee400410fa20f1b9b0c35e3536f4db62fa72c43b15a7359cc121ca1bb35dfcc",
+      "crates/fg-route/tests/fixtures/forever_services.toml": "81236a2e7f1f69427ba91570fd6f0bc19efa440c1ba80c1559ae20a4a68b1ac0",
+      "crates/fg-route/tests/fixtures/forever_sleeping_bag.toml": "14214a74b534d29c8edd9bcd77c898210fbf45d6ae6f182a553937ed60e1ae39",
+      "crates/fg-route/tests/fixtures/forever_valley_terrain.toml": "6cc70a978e0160714dd0a6ba0504f0cd0f06726c3e6d6d94ef247fa22dba9db8",
+      "crates/fg-route/tests/fixtures/forever_zephras.toml": "7707e0a01a158d03cacfb6c7140046836d8f03330b6512c2991c099f7ac63a82",
+      "crates/fg-route/tests/fixtures/forever_zephras_terrain.toml": "152b95dacac25fea20ec8aa2806a3a490793b6bd5808938b59d91fefece9a9ca",
+      "crates/fg-route/tests/fixtures/tbc_ammen.toml": "d1b049442803bdf7e8c800bc52eb4e2ce0c13dec01a974491631c8262e37e1f1",
+      "crates/fg-route/tests/fixtures/tbc_coldridge_terrain.toml": "ddda22c7690b2ccf44f84992563544704c538379901bd268b424d0f8a07b2cb5",
+      "crates/fg-route/tests/fixtures/tbc_cooking.toml": "329af35bc690423d99c40b2b1bb3f8cc505e1fee8df8e6cf310626810f498ffd",
+      "crates/fg-route/tests/fixtures/tbc_northshire.toml": "67684c9e27570ebd545141a3d44d1d84791d77e6d612d191f4d6bcb51eae560e",
+      "crates/fg-route/tests/fixtures/tbc_services.toml": "244e833df7199f55f3483d335489fbe2085443fabcf1433307a1953c58c056ea",
+      "crates/fg-route/tests/fixtures/tbc_sunstrider.toml": "f2aea8779b3b8bd84c6857f895db418693db78cc13ba72ea1942291556cdf490",
+      "crates/fg-route/tests/fixtures/tbc_valley_terrain.toml": "6cc70a978e0160714dd0a6ba0504f0cd0f06726c3e6d6d94ef247fa22dba9db8",
+      "crates/fg-route/tests/fixtures/terrain-classic.sqlite.zst": "9e4b750795e5aa8cad983094eed3b8e89f9621e961b5390cdab441b90c96a76f",
+      "crates/fg-route/tests/fixtures/terrain-forever.sqlite.zst": "07e7d96f25a05efac0965a03371895bd4f170a3d80608d4f665578946982a31d",
+      "crates/fg-route/tests/fixtures/terrain-regions.txt": "324ce776242ce927582f5a90d58282f1dfb222f161deb0327e20cdff2ed1bd2d",
+      "crates/fg-route/tests/fixtures/terrain-tbc.sqlite.zst": "327e80bef3c77cd0af2850567144592c1b3bd3de9c565e968ad3a447ed337d66",
+      "crates/fg-route/tests/fixtures/warlock_binding.toml": "c3f26e96c649911944f00e143ff478ae5862cbdf40a1e57b47164b674f26bf6c",
+      "crates/fg-route/tests/it/abilities.rs": "5c1c143903750735b5e673ac98bc48327925d59486f09f5c699dc639eb880af4",
+      "crates/fg-route/tests/it/addon.rs": "35602d63edd4f0622e12b2c0acde50ec9768f4b83ff8f3b1bfe91e4ec8925266",
+      "crates/fg-route/tests/it/class_unlocks.rs": "ef028fc10df0879ea74da6d022d36f878a5a410e1125a0d5138cd40293ec7968",
+      "crates/fg-route/tests/it/common.rs": "202382a7eb05e9c8fee981a3502f356644dd350ee683691b3b711f131090c96b",
+      "crates/fg-route/tests/it/completion.rs": "03fa4b6088b43c889507a757f1a101326696e8bd914ca3104009f14a2d035315",
+      "crates/fg-route/tests/it/draft.rs": "d885e0c456a13ba4eee7e088cc04de72e9c683a814040e427181a9ce06c8a049",
+      "crates/fg-route/tests/it/edit.rs": "c13af1007d84df6d4ead6f1afc1e0af3c6877b6c7ccee6353bf891291a5fc8e5",
+      "crates/fg-route/tests/it/main.rs": "4c29d43774d5ad45fa9051024b16acdd924868698937e28eb791ecb52b846f58",
+      "crates/fg-route/tests/it/required.rs": "4e1349ee0315a2c7dc6e0801ad0d87bfdb2b5a6f744943ada918c608febb03eb",
+      "crates/fg-route/tests/it/routes.rs": "d2dc846e04d6d5f4c97cabe43f8560a520abe416abc2afc8b439dfd38143ac8b",
+      "crates/fg-route/tests/it/timeline.rs": "5f61a736330dd090e6056564a2177c45114a8cd82f27ae755044f9ac2aa4a72c",
+      "crates/fg-web/Cargo.toml": "0bc42a867f9b1aa3f3a50199077d4e6a23b083627ef408304de7c53593fda9f3",
+      "crates/fg-web/build.rs": "2ff4ad5eba625c1f83f5653c39afecc138238edb4d6980c4574d56cd13d60f3a",
+      "crates/fg-web/src/alloc.rs": "d392d97579637f5fd7ba83e5df48fb850d266710fef352ca86a459b863093241",
+      "crates/fg-web/src/app.rs": "2f48624bb8365b575e85c95d0c37c29211e4c14168786bcfe2deb0fb6f73083a",
+      "crates/fg-web/src/app/tests.rs": "aa8ac7d4412a9caad213650f377595693e9ede8e5cb0172d760bccf29c275877",
+      "crates/fg-web/src/host.rs": "c5d1eab9e569a763fa597bfb593cff6459480acbefeeb024b9437cc5488182f1",
+      "crates/fg-web/src/lib.rs": "b8b82ad967a7e568d5b23139e29beffb8afd9371ddaeafc7295c40c1f0ea76ee",
+      "crates/fg-web/src/store.rs": "184917ed94c7c699da6662dd00920a9c4c2e5c3d9e8f1db83aabc1d1025207ed",
+      "crates/fg-web/src/zip.rs": "de9891052494661cdd7ecfc41e9e97dc4fcf916adc049efc6fb264f06834ab68",
+      "crates/fg-web/tests/alloc_stress.rs": "741d7b7a10c666f690e005915f22402234d5d0bdd97b7b0d27287e36708c59cb",
+      "crates/fg-web/tests/profiles/0.14.0.txt": "105aa171489936bf05488bfee9c985640ed3c553f10e496d4467ce4bd5bfabcd",
+      "crates/fg-web/tests/profiles/README.md": "dd4051bb2809ca55cf7131da0b2908f4176bc701b08686e23a283bffea980997",
+      "crates/fg/Cargo.toml": "b0a97a5bc313ad2874781bdd9611ad0737a976238b6e7991eb2c778ea375ff31",
+      "crates/fg/src/audit.rs": "e31149eed47299b35345f375a175d46af58478109890b97e51f562a62835dd0a",
+      "crates/fg/src/diff.rs": "8d12d2111f497ef586829f1ebd59cb269e615358e58abe906ead9a2fbbdf2037",
+      "crates/fg/src/gold.rs": "6ec9c2800a3defe805efd1c3d5bbb66626c14fda90b754d36d30f9358e322a91",
+      "crates/fg/src/icons.rs": "0273129b5cab72cd5cb55a90f11bd8960a5d0de9a5943c7c32bdb6a3d4fd724d",
+      "crates/fg/src/main.rs": "28409c6d22f0762f22df8bcb1dccb0db338df26082225dc2ac516244e7996215",
+      "crates/fg/src/route.rs": "d6278d02683f90c0437dd6bc70f8920b4eb77ce25109c8fe952f728cdf750dd4",
+      "crates/fg/src/talents.rs": "11bdeed050214cdb588af32074bf5f68c2a33688649a19215c06eafa6d228b38",
+      "crates/fg/src/travel.rs": "92f76b247e05af817d6d6e648aed4e073e7863c872c99052bf257ef5728c0fef",
+      "crates/fg/src/walks.rs": "0dba67688828e7e617470e4775fa103d7c00bde4c8e360809e3c4a61e26cfe2d",
+      "crates/fg/tests/required.rs": "f58ee2b9eb66730364dad4c45bbd70930d46742973f28adcb512324533f3085d",
+      "overrides/audit.toml": "aaea45d83cc8e76ca76c68f29901ab5d93a3ef2c60aea01047b5338b079fa6a9",
+      "overrides/class_power.toml": "525afd31c49dea4dd37496b3af268a2856c2c5d207e77dccdd4647cbbd697368",
+      "overrides/class_quests.toml": "d3d95d100c8090ce2b2769f6ea2655a5b51842cbe82fc53b0cee4adc4d8f12c6",
+      "overrides/classic/routing.toml": "77cbdff502fee5181b13a58fc0b37589c24e7ea46517e20817e55acfd27b6c80",
+      "overrides/classic/travel.toml": "4966f3c3d786f2b9e496248c359b815ecee0dae910bb2db6e702a55998a61795",
+      "overrides/database/classic/quests.toml": "e201a96373c47a2e5976b5c63a8929fc63c822c2d045c8044bd033169c4aab8e",
+      "overrides/database/forever/dungeons.toml": "4c8733d740fb39b341ba8a7faabb5caae50201b89a10170614c76e8083a418ce",
+      "overrides/database/forever/items.toml": "09211783668c6926eb60da3c761b3c00dc6e2f42b5db7f4367576980493dd30a",
+      "overrides/database/forever/quests.toml": "7e190033b506588658c6d10ae067216f47e85c830f11e73c25e1ab08cfe347a0",
+      "overrides/database/quests.toml": "9bf503716034db5e6ca1968b5f9d6fc7a6f3a3a9fd488707d88f886e3cb08932",
+      "overrides/database/tbc/quests.toml": "37e38a533281c202133a6bf6f761ecf13ce417f0c87a0207ef7ded5f37561754",
+      "overrides/dungeons.toml": "cdb241a792d77f06df600139e8988b264b8271ba914633b55153707f61f3c6b4",
+      "overrides/forever/audit.toml": "9fe24d7de3314d3ad9b20bc5320b3445ea92f3320d1291933f67fe3e817f47d7",
+      "overrides/forever/class_power.toml": "04d5501501108b4b502f8dd79c8108679791f222fed3837af4874fe84e304ec6",
+      "overrides/forever/dungeons.toml": "c955e5812f97e3b024792b31083ed41ebab5a251e99ca3d3e50092501d1832ee",
+      "overrides/forever/need_help.toml": "2b680a136fd770ef26ecc1476fe103ab7fb96017f3e9fa3fdebf6ff2315b04dc",
+      "overrides/forever/passes.toml": "4b3ea51711ce212d74ef7e1ebece2196ff89281622b7257b63dfaf1ecfeab963",
+      "overrides/forever/quests.toml": "63d28b825cf8c9c8cf1d8ff28dcb57890130fa461e3013c9ba7a446d6c116650",
+      "overrides/forever/races.toml": "d00acb70f821f8bfa7fa5368cdc349491763e9302b778b2388378c4a127ed236",
+      "overrides/forever/travel.toml": "a0a5dfeee8d62de32649ad7092d972cc640bc1de71bbd4852ad745626cfa6e0e",
+      "overrides/movement.toml": "27ca71a13eb6719297f77d02e0c6717eeab93d4a6be1252be697dd59dfcd4310",
+      "overrides/objectives.toml": "258eae39c92137b2c16f4fc86662036e509d668f0d6a3a2bb59c100086943db5",
+      "overrides/passes.toml": "7692d067ee87f46838876c09e3265d9f4d6ecbc84507e33e5dc92f33aeef6c93",
+      "overrides/quests.toml": "adae87a32522474d3443ac5fe5bd9131d7b37c9cdd0c15b248ddc0c31fb0f564",
+      "overrides/races.toml": "c176c3834c0f3be1b30a636fd35fd34981da86aa1cce9e6ae821d4969d280253",
+      "overrides/routing.toml": "7b48a1ffd6195b185e3a18488721714f72d05e062beefef9259ce04195b65142",
+      "overrides/spells.toml": "c9221c4109b2ed148e2c254d2f0d8c5bf5dc70b19f5f1361916d6480c0b3eac1",
+      "overrides/tbc/audit.toml": "ff6e960948887152126a31a762adda384a06fb7ca1914787caca90ea7cd18534",
+      "overrides/tbc/movement.toml": "2358d5a652932cee68545406a7ad459fe8da24c794b69864eff042ae63b322e0",
+      "overrides/tbc/races.toml": "5cdbd7220f7b03a4e1ff0cf686e4aae2e7a1223fcfeaa17a9e201b5a1769d83e",
+      "overrides/tbc/routing.toml": "77cbdff502fee5181b13a58fc0b37589c24e7ea46517e20817e55acfd27b6c80",
+      "overrides/tbc/travel.toml": "e30a37dc5472334215edd4c8a4d5adfb4e538e784bce630ab6b34d2dc2bfc7f5",
+      "overrides/travel.toml": "f13da120a1214630a2089d0810977f2f4798fd58e093a3adeacedb9a6ad868f2",
+      "rust-toolchain.toml": "0565213c3768b343289f66617666044c33f869a39770d06daffd3897ccc4f87e",
+      "scripts/addon-changes.sh": "ebd1e25af77929d1935079ea0d25b50e55023eb0b88da900925a585d6d7d566b",
+      "scripts/addon-test.sh": "4fd750983cd64c77dad08892895cade0b73bf426d705b711b9e73dbf4f2f8064",
+      "scripts/build-linux.sh": "294e562481cc3b377af956b5ebaf71ab2e13a43116db8380a5f4b43d71653260",
+      "scripts/build-macos.sh": "f80554db17254d7c699aa6ba0271213d2eb97ff685188f3b98fee16a3bbd7e17",
+      "scripts/build-web.sh": "0a118eced81ff7e9cac3af2fcd984b839a0111a5030017104b14f07beaeeccf3",
+      "scripts/check.sh": "8e51d75aa38bc481f2f11b3ae92c5333bdcf79a8b1628807d59e1bcc39d75817",
+      "scripts/example-guide.sh": "8eb973ea24fb9af41618d3c3964d30f9dcf005b5a52ee96eb6d8adc9677bebce",
+      "scripts/group-scenario.sh": "297f9bc331d659f0d1e6f7fe5ab6c06570767864f55506f2a92b567835e0151e",
+      "scripts/guide-fixture.sh": "340f9c8b1811bfd8f69ded5d8c3e59fc73ab0e581df60ff8ecaac87b8f1b101b",
+      "scripts/install-addon.sh": "b5fcb70c120fdf438efa69bf3404209191b7d8b610d8197d66efc5bd67f372cd",
+      "scripts/measure.sh": "5f8567b0eb87d7b16d931c6f78f6a3c9acf94fc8257f326dc952b009d5fc38a8",
+      "scripts/profile.sh": "c02847d61b44b47adcacb0acc8235927baca1e2dc8545569c72db8f39d3d0ee9",
+      "scripts/publish-addons.sh": "5206a18a051237b4d58608a5ea540c5d226311f08843cfb6614bbc35eea285b7",
+      "scripts/release.sh": "d148ef3acc9072b35623000e2fa67940e682c821da2b84d2ba5f9e6f6dc7e8c1",
+      "scripts/route-compare.sh": "39b177ec2a3a98a44be99327de8b7e5c4106775f065b9ace60c187ed1f99d40c",
+      "scripts/route_quality_compare.py": "1363e80042aa42edf77cba616471cb15f55949e432bc4fdd762045bf33fb4fb0",
+      "scripts/sync-windows.sh": "a5c6d129dce2d0cfb80e575cabd0e05489ddb23f1fa5014f837020baf8063ffc",
+      "scripts/test-base.sh": "88fe247b5a8f8d7558a49ce7df38423f4fd611f32600f953a5a273df4b437801",
+      "scripts/test-terrain.sh": "82c4c125c6c5737a5366449cf8d00e7355822d7f4e0d631e14884c28b92dede0",
+      "scripts/test_route_quality_compare.py": "81922a8dd59c2a4427ef09f4e493decba77b02d69f5a15ef089d400f30b77c00",
+      "scripts/web-data.mjs": "8971b29947d3417cb38ba6c572c4c3a1022d2d1c622a15e7773dbe8fc66cc77d"
+    }
+  },
+  "note": "Initial 20-second computation allowance and 3-second uniform reserve; pilot passed.",
+  "parent_timeout_extra_seconds": 10,
+  "peak_memory_limit_bytes": 1610612736,
+  "pilot_result_sha256": "d1764eb1872afb1d2f28d9709c334bf077ffce6280ac78111012d20dc542cbca",
+  "reserve_seconds": 3,
+  "tuning_order": [
+    {
+      "arm": "baseline",
+      "edition": "classic",
+      "profile": "classic-human-warrior-1-30",
+      "request": {
+        "class": "warrior",
+        "from_level": 1,
+        "race": "human",
+        "to_level": 30
+      },
+      "seed": 42
+    },
+    {
+      "arm": "chain",
+      "edition": "classic",
+      "profile": "classic-human-warrior-1-30",
+      "request": {
+        "class": "warrior",
+        "from_level": 1,
+        "race": "human",
+        "to_level": 30
+      },
+      "seed": 42
+    },
+    {
+      "arm": "hub",
+      "edition": "classic",
+      "profile": "classic-human-warrior-1-30",
+      "request": {
+        "class": "warrior",
+        "from_level": 1,
+        "race": "human",
+        "to_level": 30
+      },
+      "seed": 42
+    },
+    {
+      "arm": "exact",
+      "edition": "classic",
+      "profile": "classic-human-warrior-1-30",
+      "request": {
+        "class": "warrior",
+        "from_level": 1,
+        "race": "human",
+        "to_level": 30
+      },
+      "seed": 42
+    },
+    {
+      "arm": "baseline",
+      "edition": "classic",
+      "profile": "classic-human-warrior-1-30",
+      "request": {
+        "class": "warrior",
+        "from_level": 1,
+        "race": "human",
+        "to_level": 30
+      },
+      "seed": 1337
+    },
+    {
+      "arm": "exact",
+      "edition": "classic",
+      "profile": "classic-human-warrior-1-30",
+      "request": {
+        "class": "warrior",
+        "from_level": 1,
+        "race": "human",
+        "to_level": 30
+      },
+      "seed": 1337
+    },
+    {
+      "arm": "hub",
+      "edition": "classic",
+      "profile": "classic-human-warrior-1-30",
+      "request": {
+        "class": "warrior",
+        "from_level": 1,
+        "race": "human",
+        "to_level": 30
+      },
+      "seed": 1337
+    },
+    {
+      "arm": "chain",
+      "edition": "classic",
+      "profile": "classic-human-warrior-1-30",
+      "request": {
+        "class": "warrior",
+        "from_level": 1,
+        "race": "human",
+        "to_level": 30
+      },
+      "seed": 1337
+    },
+    {
+      "arm": "chain",
+      "edition": "classic",
+      "profile": "classic-undead-mage-1-40",
+      "request": {
+        "class": "mage",
+        "from_level": 1,
+        "race": "undead",
+        "to_level": 40
+      },
+      "seed": 42
+    },
+    {
+      "arm": "hub",
+      "edition": "classic",
+      "profile": "classic-undead-mage-1-40",
+      "request": {
+        "class": "mage",
+        "from_level": 1,
+        "race": "undead",
+        "to_level": 40
+      },
+      "seed": 42
+    },
+    {
+      "arm": "exact",
+      "edition": "classic",
+      "profile": "classic-undead-mage-1-40",
+      "request": {
+        "class": "mage",
+        "from_level": 1,
+        "race": "undead",
+        "to_level": 40
+      },
+      "seed": 42
+    },
+    {
+      "arm": "baseline",
+      "edition": "classic",
+      "profile": "classic-undead-mage-1-40",
+      "request": {
+        "class": "mage",
+        "from_level": 1,
+        "race": "undead",
+        "to_level": 40
+      },
+      "seed": 42
+    },
+    {
+      "arm": "chain",
+      "edition": "classic",
+      "profile": "classic-undead-mage-1-40",
+      "request": {
+        "class": "mage",
+        "from_level": 1,
+        "race": "undead",
+        "to_level": 40
+      },
+      "seed": 1337
+    },
+    {
+      "arm": "baseline",
+      "edition": "classic",
+      "profile": "classic-undead-mage-1-40",
+      "request": {
+        "class": "mage",
+        "from_level": 1,
+        "race": "undead",
+        "to_level": 40
+      },
+      "seed": 1337
+    },
+    {
+      "arm": "exact",
+      "edition": "classic",
+      "profile": "classic-undead-mage-1-40",
+      "request": {
+        "class": "mage",
+        "from_level": 1,
+        "race": "undead",
+        "to_level": 40
+      },
+      "seed": 1337
+    },
+    {
+      "arm": "hub",
+      "edition": "classic",
+      "profile": "classic-undead-mage-1-40",
+      "request": {
+        "class": "mage",
+        "from_level": 1,
+        "race": "undead",
+        "to_level": 40
+      },
+      "seed": 1337
+    },
+    {
+      "arm": "hub",
+      "edition": "classic",
+      "profile": "classic-orc-warrior-20-40",
+      "request": {
+        "class": "warrior",
+        "from_level": 20,
+        "race": "orc",
+        "to_level": 40
+      },
+      "seed": 42
+    },
+    {
+      "arm": "exact",
+      "edition": "classic",
+      "profile": "classic-orc-warrior-20-40",
+      "request": {
+        "class": "warrior",
+        "from_level": 20,
+        "race": "orc",
+        "to_level": 40
+      },
+      "seed": 42
+    },
+    {
+      "arm": "baseline",
+      "edition": "classic",
+      "profile": "classic-orc-warrior-20-40",
+      "request": {
+        "class": "warrior",
+        "from_level": 20,
+        "race": "orc",
+        "to_level": 40
+      },
+      "seed": 42
+    },
+    {
+      "arm": "chain",
+      "edition": "classic",
+      "profile": "classic-orc-warrior-20-40",
+      "request": {
+        "class": "warrior",
+        "from_level": 20,
+        "race": "orc",
+        "to_level": 40
+      },
+      "seed": 42
+    },
+    {
+      "arm": "hub",
+      "edition": "classic",
+      "profile": "classic-orc-warrior-20-40",
+      "request": {
+        "class": "warrior",
+        "from_level": 20,
+        "race": "orc",
+        "to_level": 40
+      },
+      "seed": 1337
+    },
+    {
+      "arm": "chain",
+      "edition": "classic",
+      "profile": "classic-orc-warrior-20-40",
+      "request": {
+        "class": "warrior",
+        "from_level": 20,
+        "race": "orc",
+        "to_level": 40
+      },
+      "seed": 1337
+    },
+    {
+      "arm": "baseline",
+      "edition": "classic",
+      "profile": "classic-orc-warrior-20-40",
+      "request": {
+        "class": "warrior",
+        "from_level": 20,
+        "race": "orc",
+        "to_level": 40
+      },
+      "seed": 1337
+    },
+    {
+      "arm": "exact",
+      "edition": "classic",
+      "profile": "classic-orc-warrior-20-40",
+      "request": {
+        "class": "warrior",
+        "from_level": 20,
+        "race": "orc",
+        "to_level": 40
+      },
+      "seed": 1337
+    },
+    {
+      "arm": "exact",
+      "edition": "classic",
+      "profile": "classic-gnome-mage-20-40",
+      "request": {
+        "class": "mage",
+        "from_level": 20,
+        "race": "gnome",
+        "to_level": 40
+      },
+      "seed": 42
+    },
+    {
+      "arm": "baseline",
+      "edition": "classic",
+      "profile": "classic-gnome-mage-20-40",
+      "request": {
+        "class": "mage",
+        "from_level": 20,
+        "race": "gnome",
+        "to_level": 40
+      },
+      "seed": 42
+    },
+    {
+      "arm": "chain",
+      "edition": "classic",
+      "profile": "classic-gnome-mage-20-40",
+      "request": {
+        "class": "mage",
+        "from_level": 20,
+        "race": "gnome",
+        "to_level": 40
+      },
+      "seed": 42
+    },
+    {
+      "arm": "hub",
+      "edition": "classic",
+      "profile": "classic-gnome-mage-20-40",
+      "request": {
+        "class": "mage",
+        "from_level": 20,
+        "race": "gnome",
+        "to_level": 40
+      },
+      "seed": 42
+    },
+    {
+      "arm": "exact",
+      "edition": "classic",
+      "profile": "classic-gnome-mage-20-40",
+      "request": {
+        "class": "mage",
+        "from_level": 20,
+        "race": "gnome",
+        "to_level": 40
+      },
+      "seed": 1337
+    },
+    {
+      "arm": "hub",
+      "edition": "classic",
+      "profile": "classic-gnome-mage-20-40",
+      "request": {
+        "class": "mage",
+        "from_level": 20,
+        "race": "gnome",
+        "to_level": 40
+      },
+      "seed": 1337
+    },
+    {
+      "arm": "chain",
+      "edition": "classic",
+      "profile": "classic-gnome-mage-20-40",
+      "request": {
+        "class": "mage",
+        "from_level": 20,
+        "race": "gnome",
+        "to_level": 40
+      },
+      "seed": 1337
+    },
+    {
+      "arm": "baseline",
+      "edition": "classic",
+      "profile": "classic-gnome-mage-20-40",
+      "request": {
+        "class": "mage",
+        "from_level": 20,
+        "race": "gnome",
+        "to_level": 40
+      },
+      "seed": 1337
+    },
+    {
+      "arm": "baseline",
+      "edition": "forever",
+      "profile": "forever-human-warrior-1-30",
+      "request": {
+        "class": "warrior",
+        "from_level": 1,
+        "race": "human",
+        "to_level": 30
+      },
+      "seed": 42
+    },
+    {
+      "arm": "chain",
+      "edition": "forever",
+      "profile": "forever-human-warrior-1-30",
+      "request": {
+        "class": "warrior",
+        "from_level": 1,
+        "race": "human",
+        "to_level": 30
+      },
+      "seed": 42
+    },
+    {
+      "arm": "hub",
+      "edition": "forever",
+      "profile": "forever-human-warrior-1-30",
+      "request": {
+        "class": "warrior",
+        "from_level": 1,
+        "race": "human",
+        "to_level": 30
+      },
+      "seed": 42
+    },
+    {
+      "arm": "exact",
+      "edition": "forever",
+      "profile": "forever-human-warrior-1-30",
+      "request": {
+        "class": "warrior",
+        "from_level": 1,
+        "race": "human",
+        "to_level": 30
+      },
+      "seed": 42
+    },
+    {
+      "arm": "baseline",
+      "edition": "forever",
+      "profile": "forever-human-warrior-1-30",
+      "request": {
+        "class": "warrior",
+        "from_level": 1,
+        "race": "human",
+        "to_level": 30
+      },
+      "seed": 1337
+    },
+    {
+      "arm": "exact",
+      "edition": "forever",
+      "profile": "forever-human-warrior-1-30",
+      "request": {
+        "class": "warrior",
+        "from_level": 1,
+        "race": "human",
+        "to_level": 30
+      },
+      "seed": 1337
+    },
+    {
+      "arm": "hub",
+      "edition": "forever",
+      "profile": "forever-human-warrior-1-30",
+      "request": {
+        "class": "warrior",
+        "from_level": 1,
+        "race": "human",
+        "to_level": 30
+      },
+      "seed": 1337
+    },
+    {
+      "arm": "chain",
+      "edition": "forever",
+      "profile": "forever-human-warrior-1-30",
+      "request": {
+        "class": "warrior",
+        "from_level": 1,
+        "race": "human",
+        "to_level": 30
+      },
+      "seed": 1337
+    },
+    {
+      "arm": "chain",
+      "edition": "forever",
+      "profile": "forever-undead-mage-1-40",
+      "request": {
+        "class": "mage",
+        "from_level": 1,
+        "race": "undead",
+        "to_level": 40
+      },
+      "seed": 42
+    },
+    {
+      "arm": "hub",
+      "edition": "forever",
+      "profile": "forever-undead-mage-1-40",
+      "request": {
+        "class": "mage",
+        "from_level": 1,
+        "race": "undead",
+        "to_level": 40
+      },
+      "seed": 42
+    },
+    {
+      "arm": "exact",
+      "edition": "forever",
+      "profile": "forever-undead-mage-1-40",
+      "request": {
+        "class": "mage",
+        "from_level": 1,
+        "race": "undead",
+        "to_level": 40
+      },
+      "seed": 42
+    },
+    {
+      "arm": "baseline",
+      "edition": "forever",
+      "profile": "forever-undead-mage-1-40",
+      "request": {
+        "class": "mage",
+        "from_level": 1,
+        "race": "undead",
+        "to_level": 40
+      },
+      "seed": 42
+    },
+    {
+      "arm": "chain",
+      "edition": "forever",
+      "profile": "forever-undead-mage-1-40",
+      "request": {
+        "class": "mage",
+        "from_level": 1,
+        "race": "undead",
+        "to_level": 40
+      },
+      "seed": 1337
+    },
+    {
+      "arm": "baseline",
+      "edition": "forever",
+      "profile": "forever-undead-mage-1-40",
+      "request": {
+        "class": "mage",
+        "from_level": 1,
+        "race": "undead",
+        "to_level": 40
+      },
+      "seed": 1337
+    },
+    {
+      "arm": "exact",
+      "edition": "forever",
+      "profile": "forever-undead-mage-1-40",
+      "request": {
+        "class": "mage",
+        "from_level": 1,
+        "race": "undead",
+        "to_level": 40
+      },
+      "seed": 1337
+    },
+    {
+      "arm": "hub",
+      "edition": "forever",
+      "profile": "forever-undead-mage-1-40",
+      "request": {
+        "class": "mage",
+        "from_level": 1,
+        "race": "undead",
+        "to_level": 40
+      },
+      "seed": 1337
+    },
+    {
+      "arm": "hub",
+      "edition": "forever",
+      "profile": "forever-orc-warrior-20-40",
+      "request": {
+        "class": "warrior",
+        "from_level": 20,
+        "race": "orc",
+        "to_level": 40
+      },
+      "seed": 42
+    },
+    {
+      "arm": "exact",
+      "edition": "forever",
+      "profile": "forever-orc-warrior-20-40",
+      "request": {
+        "class": "warrior",
+        "from_level": 20,
+        "race": "orc",
+        "to_level": 40
+      },
+      "seed": 42
+    },
+    {
+      "arm": "baseline",
+      "edition": "forever",
+      "profile": "forever-orc-warrior-20-40",
+      "request": {
+        "class": "warrior",
+        "from_level": 20,
+        "race": "orc",
+        "to_level": 40
+      },
+      "seed": 42
+    },
+    {
+      "arm": "chain",
+      "edition": "forever",
+      "profile": "forever-orc-warrior-20-40",
+      "request": {
+        "class": "warrior",
+        "from_level": 20,
+        "race": "orc",
+        "to_level": 40
+      },
+      "seed": 42
+    },
+    {
+      "arm": "hub",
+      "edition": "forever",
+      "profile": "forever-orc-warrior-20-40",
+      "request": {
+        "class": "warrior",
+        "from_level": 20,
+        "race": "orc",
+        "to_level": 40
+      },
+      "seed": 1337
+    },
+    {
+      "arm": "chain",
+      "edition": "forever",
+      "profile": "forever-orc-warrior-20-40",
+      "request": {
+        "class": "warrior",
+        "from_level": 20,
+        "race": "orc",
+        "to_level": 40
+      },
+      "seed": 1337
+    },
+    {
+      "arm": "baseline",
+      "edition": "forever",
+      "profile": "forever-orc-warrior-20-40",
+      "request": {
+        "class": "warrior",
+        "from_level": 20,
+        "race": "orc",
+        "to_level": 40
+      },
+      "seed": 1337
+    },
+    {
+      "arm": "exact",
+      "edition": "forever",
+      "profile": "forever-orc-warrior-20-40",
+      "request": {
+        "class": "warrior",
+        "from_level": 20,
+        "race": "orc",
+        "to_level": 40
+      },
+      "seed": 1337
+    },
+    {
+      "arm": "exact",
+      "edition": "forever",
+      "profile": "forever-gnome-mage-20-40",
+      "request": {
+        "class": "mage",
+        "from_level": 20,
+        "race": "gnome",
+        "to_level": 40
+      },
+      "seed": 42
+    },
+    {
+      "arm": "baseline",
+      "edition": "forever",
+      "profile": "forever-gnome-mage-20-40",
+      "request": {
+        "class": "mage",
+        "from_level": 20,
+        "race": "gnome",
+        "to_level": 40
+      },
+      "seed": 42
+    },
+    {
+      "arm": "chain",
+      "edition": "forever",
+      "profile": "forever-gnome-mage-20-40",
+      "request": {
+        "class": "mage",
+        "from_level": 20,
+        "race": "gnome",
+        "to_level": 40
+      },
+      "seed": 42
+    },
+    {
+      "arm": "hub",
+      "edition": "forever",
+      "profile": "forever-gnome-mage-20-40",
+      "request": {
+        "class": "mage",
+        "from_level": 20,
+        "race": "gnome",
+        "to_level": 40
+      },
+      "seed": 42
+    },
+    {
+      "arm": "exact",
+      "edition": "forever",
+      "profile": "forever-gnome-mage-20-40",
+      "request": {
+        "class": "mage",
+        "from_level": 20,
+        "race": "gnome",
+        "to_level": 40
+      },
+      "seed": 1337
+    },
+    {
+      "arm": "hub",
+      "edition": "forever",
+      "profile": "forever-gnome-mage-20-40",
+      "request": {
+        "class": "mage",
+        "from_level": 20,
+        "race": "gnome",
+        "to_level": 40
+      },
+      "seed": 1337
+    },
+    {
+      "arm": "chain",
+      "edition": "forever",
+      "profile": "forever-gnome-mage-20-40",
+      "request": {
+        "class": "mage",
+        "from_level": 20,
+        "race": "gnome",
+        "to_level": 40
+      },
+      "seed": 1337
+    },
+    {
+      "arm": "baseline",
+      "edition": "forever",
+      "profile": "forever-gnome-mage-20-40",
+      "request": {
+        "class": "mage",
+        "from_level": 20,
+        "race": "gnome",
+        "to_level": 40
+      },
+      "seed": 1337
+    }
+  ]
+}

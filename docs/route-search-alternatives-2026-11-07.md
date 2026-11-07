@@ -1,5 +1,11 @@
 # Route-search alternatives and comparison protocol
 
+Subsequent evidence: the [equal-budget measured comparison](route-algorithm-comparison-2026-11-07.md)
+tested chain insertion, bounded hub repair and exact evaluation. The selected
+chain arm failed its held-out promotion rule and remains off by default. The
+original research-stage assessment below is preserved; its unmeasured status
+describes that earlier stage.
+
 Date: 2026-11-07. Algorithm inspection at HEAD `ddfddb5`.
 
 **A different search design could find better routes within the same computation
