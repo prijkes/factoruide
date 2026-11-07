@@ -3,6 +3,7 @@ use crate::{
     job::{self, Overrides},
     xp::Edition,
 };
+use std::fmt::Write;
 
 /// Runtime fixtures use the real residual selector, without requiring item-stat fixtures
 /// for every independent scheduling case. Production has no test-only construction API.
@@ -16,8 +17,10 @@ pub(crate) fn select_test_sources(p: &mut job::Prepared, roots: &[u32], starts: 
         &p.model.known_class_prerequisites,
         starts,
     );
-    let mut bis = super::Bis::default();
-    bis.requires = vec![false; p.model.quests.len()];
+    let mut bis = super::Bis {
+        requires: vec![false; p.model.quests.len()],
+        ..super::Bis::default()
+    };
     for &root in roots {
         let (plan, closure) = selector.select(root).unwrap();
         selector.committed = closure;
@@ -73,7 +76,7 @@ rewards = [{ item = 990011 }]
 "#,
     );
     for (id, strength) in [(990010, 10), (990011, 1)] {
-        text.push_str(&format!(r#"
+        write!(text, r#"
 [[item]]
 id = {id}
 name = "Cap {id}"
@@ -82,7 +85,7 @@ class = 4
 [[row]]
 table = "m_item_stats"
 values = {{ id = {id}, quality = 1, inventory_type = 1, class = 4, subclass = 1, allowable_class = 0, required_level = 1, str = {strength}.0, agi = 0.0, sta = 0.0, int = 0.0, spi = 0.0, armor = 0.0, ap = 0.0, rap = 0.0, sp = 0.0, heal = 0.0, crit = 0.0, spell_crit = 0.0, hit = 0.0, mp5 = 0.0, dps = 0.0, speed = 0.0 }}
-"#));
+"#).unwrap();
     }
     let conn = Fixture::new(Edition::Classic).toml(&text).open();
     conn.execute_batch(sql).unwrap();
@@ -141,7 +144,7 @@ fn no_supported_alternative_is_explained() {
         "INSERT INTO m_quest_link (quest_id,kind,other_id,sources) VALUES (990004,'pre_all',999998,'test');",
     );
     assert!(p.model.bis.entries.is_empty());
-    assert!(p.model.bis.required_roots().is_empty());
+    assert_eq!(p.model.bis.required_roots(), &[] as &[u32]);
     assert_eq!(p.model.bis.fallback_notes().len(), 2);
     assert!(
         p.model

@@ -126,14 +126,13 @@ fn actual_completion_and_exclusive_representatives_drive_notes_and_counts() {
         .simulate_full(&[Stop::quest(1, Kind::Accept), Stop::quest(1, Kind::TurnIn)], None)
         .unwrap();
     assert_eq!(completed.mandatory_goal_counts, Some(MandatoryGoalCounts::default()));
-    assert!(
-        planner
-            .missing_class_quests(&[Stop::quest(1, Kind::Accept), Stop::quest(1, Kind::TurnIn)])
-            .is_empty()
+    assert_eq!(
+        planner.missing_class_quests(&[Stop::quest(1, Kind::Accept), Stop::quest(1, Kind::TurnIn)]),
+        Vec::<String>::new()
     );
     p.model.initial.turned = vec![1];
     let planner = Planner::new(&p.model, &p.world, &p.params, &p.profile);
-    assert!(planner.missing_class_quests(&[]).is_empty());
+    assert_eq!(planner.missing_class_quests(&[]), Vec::<String>::new());
     assert_eq!(
         planner.simulate_full(&[], None).unwrap().1.mandatory_goal_counts,
         Some(MandatoryGoalCounts::default())
@@ -380,5 +379,5 @@ fn accepted_and_completed_objectives_are_missing_until_actual_reward() {
         planner.simulate_full(&turnin, None).unwrap().1.mandatory_goal_counts,
         Some(MandatoryGoalCounts::default())
     );
-    assert!(planner.missing_mandatory_quests(&turnin).is_empty());
+    assert_eq!(planner.missing_mandatory_quests(&turnin), Vec::<String>::new());
 }

@@ -208,11 +208,11 @@ fn recorded_unbegun_source_and_held_parent_keep_real_acceptance() {
         }],
         ..Default::default()
     };
-    assert!(
+    assert_eq!(
         start
             .initial(&p.model, &p.world, &mut p.params.clone(), &mut Vec::new())
-            .accepted
-            .is_empty()
+            .accepted,
+        Vec::<usize>::new()
     );
     let p = prepared("prefer");
     assert_eq!(
@@ -515,7 +515,7 @@ fn prefer_retains_recorded_held_parent_without_fabricating_work() {
     let (_, end) = planner.simulate_state(&route, None).unwrap();
     assert!(end.rewarded(root as usize));
     assert!(!end.rewarded(parent));
-    assert!(p.model.bis.required_roots().is_empty());
+    assert_eq!(p.model.bis.required_roots(), &[] as &[u32]);
 }
 
 #[test]
