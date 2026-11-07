@@ -1,0 +1,13 @@
+# Explicit dungeon metadata correction
+
+The final branch reviewer found one Important diagnostic defect: `actual_dungeon_entries` projected only `Event::Enter`, omitting executed explicit dungeon stops recorded as `Event::Stop { kind: Dungeon }`. This affected the metadata list, not the saved complete traces, route/score/callback equality gates, search, cleanup, or production accounting.
+
+The new focused tests use real `testing::Scenario` routes and simulator-produced `Event` traces. One route performs an explicit-only dungeon run and verifies there is no implicit Enter event. The other first enters a dungeon implicitly, then executes its explicit stop, then an explicit-only second dungeon; the expected identity sequence contains each dungeon once in first-occurrence order. The tests also require the first observation's event kind and exact trace-event time.
+
+RED setup extracted the old Enter-only projection unchanged into the shared helper and added those two regressions. The first fixture attempt failed before the metadata assertions because its tiny world could not finish a level-60 fallback grind. The revised real routes use levels 18–20, zero dungeon XP/time, and an independent outdoor reward after every dungeon event. The coordinator then verified functional RED: all six existing helpers passed; both new tests passed their real-trace preconditions and failed exactly on omitted explicit identities (explicit-only `0` instead of `1`; mixed route `[(0,900)]` instead of `[(0,900),(1,901)]`).
+
+The fixed shared extractor now recognizes `Event::Enter` and executed `Event::Stop` dungeon stops, deduplicates by dungeon index and preserves the first actual occurrence in trace order. Both normal diagnosis and fixed-snapshot rescoring call this helper after search. Metadata retains `time` but labels it `observed_trace_event_time_not_run_start`, with an `observation_kind` distinguishing implicit entry from explicit dungeon stop. The implementation makes no simulator, accounting, search, or callback-gate change.
+
+This worker ran direct formatting and `git diff --check` for the example successfully; no Cargo, build, planner, raw-artifact or curated-data commands were run. Coordinator eight-helper GREEN, release build, new v2 fixed-route rescores and scoped rereview are pending.
+
+The authorized prose correction now identifies all five unchanged chain dungeon identities: 1581, 721, 16732, 16544 and 722. It explains the initial omission and distinguishes observed event time from a guaranteed dungeon-entry/start time. Original raw captures and hashes remain immutable. No curated archive data or raw JSON was edited by this worker.

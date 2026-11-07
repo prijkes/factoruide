@@ -1,5 +1,25 @@
 # Factoruide route-quality analysis: handoff to Astra
 
+Latest diagnostic continuation: autonomous fixed-attempt regeneration reproduced
+both saved cases, including all checked search callbacks and final route/score
+identities. The loss is now traced exactly to `DropDungeonless` removing quest
+387's accept and thereby losing a Mage-training opportunity. See the
+[cleanup diagnosis](docs/cleanup-loss-diagnosis-2026-11-07.md). Preserving useful
+training visits independently of unusable quests is the next routing change;
+it has not been implemented or counterfactually validated yet.
+
+A separate confirmed defect was corrected in `09752b6`: performed unrewarded
+objective work remains counted after abandonment, with actual route provenance
+excluding imported earlier work. All sixteen saved fixed-route stages retain
+identical score, player time, stops and full traces under that correction; the
+bug does not explain this captured training-loss case. Parameter defaults and
+game data are unchanged. The running desktop app and saved guides were not
+modified or redeployed. Release checks passed 321 library, 238 integration,
+eight diagnostic-example and three comparison-example tests. The known Windows
+newline test remains skipped and two doc examples ignored. Final review's
+explicit-dungeon metadata omission was fixed in `df96a30`, with raw captures
+preserved and corrected derived metadata re-reviewed as addressed.
+
 Latest measured continuation: the equal-budget algorithm comparison is complete
 on `experiment/route-quality-comparison` (experiment source `a3ce987`). See the
 [measured report](docs/route-algorithm-comparison-2026-11-07.md) and
@@ -8,8 +28,8 @@ Eight pilots, 64 tuning runs and 32 held-out runs passed execution/resource
 checks. The tuning-selected chain operator reduced aggregate held-out player
 time by 1.27%, but worsened weighted score by 0.46%, with a 30.99% worst-case
 score regression. It fails the declared promotion rule and remains off by
-default. Cleanup can erase raw-search gains; the worst regression is localized
-there, but its exact subpass is not established by the saved endpoints.
+default. Its saved endpoints alone did not establish the exact cleanup subpass;
+the subsequent diagnostic continuation above now supplies that evidence.
 
 This supplies a bounded measured answer, not proof that the current heuristic
 is optimal or that no faster/better algorithm exists. The experiment covers a

@@ -1,5 +1,12 @@
 # Route algorithm comparison: 2026-11-07
 
+Subsequent [fixed-attempt diagnostics](cleanup-loss-diagnosis-2026-11-07.md)
+reproduced the two saved cases and identified the cleanup pass and lost training
+opportunity behind the worst regression. A separate abandonment-accounting fix
+retains identical scores for all sixteen captured fixed-route stages. The timed
+comparison below remains historical evidence under its frozen model; the full
+algorithm panel has not been rerun with the corrected accounting.
+
 **The measured candidate did not reliably beat the baseline under the declared
 criteria.** Optional-chain insertion won tuning selection, then produced a
 0.456956% worse geometric-mean weighted score on the held-out panel. Its

@@ -1,0 +1,36 @@
+{
+  "accounting_model_source_revision": "09752b6",
+  "archive_sha256": {
+    "accounting-fix-review.md": "791ecc53231f82411e6288708a5138a4433152b92741272d51234cfb150a0f60",
+    "baseline-corrected-accounting.json": "54c43aeb727e69be8ff53a28170937138ef1ad14bad8bf0af7fbd46ab9e94d21",
+    "baseline-input.json": "6d83102f8c61608cfba1fa4c9bdee506d3cf7d4b1cd468be5211c065ae67b3a9",
+    "baseline-original-semantics.json": "ea5748fc1f399756e370a8f935d1f3f2a7a25b77778f8fc7ad415376f01a6cf9",
+    "chain-corrected-accounting.json": "0812df7e16cc3977cc219cd52bd4e5af5dd6dc08418b4390dcb1f5b7928dbb9f",
+    "chain-input.json": "ebebff3504f04e7be9b3e17c64a9bc069091e773116292d0006dd2879d7a8d31",
+    "chain-original-semantics.json": "f7a42eadda44aeb78f69512c9cb2d7234d512a473f0b9f936ea69a23e0ca9c1b",
+    "example-review.md": "5e2eb5ce966d911a2577247dfd3de1921a2eb3b75c94d2e461e2932de0d87963",
+    "fix-design-review.md": "178ccc38d177b034a4ca9fd7e1c403ec71f9b5e65e3c84254e3d1964538d944a",
+    "instrumentation.patch": "462ab60f2992a19e693cc5c8c4d7eb7dcca89fbf66cc311615f3cf5e2fc79f50",
+    "observer-review.md": "bc46eb0c624c2d376f3ae248e3f49350d1d715ea8da881dcd7f9bb0b6eb00159",
+    "profession-test-diagnosis.md": "d80323a1331234b8b0775e8b50957ceb9e1be79659f55a159e4a4303b73fc65c",
+    "profession-test-review.md": "ebb39e9d12c243dbb880082e2409d7b52830ac86750751994e5a2d1f1dfe3219",
+    "trace-analysis.md": "cd742e950c4adf4224969c7e9c1b88fce9ff85bfb87babe12cf2474595f6fe81",
+    "trace-review.md": "62a10ff8858a22e7fda501a117cdcf236999a99acca8c5b71c6f8da7e25cfc70"
+  },
+  "base_revision": "e73af02",
+  "current_instrumented_binary_sha256": "478b1b06696910c0798ae2b75b87c931302e96a2aa69d9426a377b66bec6d5d2",
+  "diagnostic_metadata_correction": "Explicit executed Dungeon stops included; first observed identity retained; no scoring/search/simulator change.",
+  "diagnostic_tool_source_revision": "df96a30",
+  "old_instrumented_binary_sha256": "890c9ec67399ea8a1f6d56b949dfbe66ea6a7847ccdbe6730057e347bc2098fd",
+  "pre_metadata_correction_binary_sha256": "ab7c7cb7dcd628f2c418d329046d979c98048f323da87382768fb16fb7f5b7a8",
+  "raw_artifacts": {
+    ".superpowers\\sdd\\2026-11-07-cleanup-loss-diagnosis\\baseline-corrected-accounting-v2.json": "7639db998b4c1f107a6f791da5ea6fa9a8b740ef209fe025efdc748ff844eb3d",
+    ".superpowers\\sdd\\2026-11-07-cleanup-loss-diagnosis\\baseline-corrected-accounting.json": "c5098bb2aea1f3b59e5f610c7ad409f45e3d034f4a1d7589888078b8c3aac031",
+    ".superpowers\\sdd\\2026-11-07-cleanup-loss-diagnosis\\baseline-original-semantics.json": "9791a548558fe626848e15c86657277bb24a66df77db36a3e80914f7b613a806",
+    ".superpowers\\sdd\\2026-11-07-cleanup-loss-diagnosis\\chain-corrected-accounting-v2.json": "e657f16924a6ee1918d66815c4284f59a7f6da8700c3977cc891d212cb740134",
+    ".superpowers\\sdd\\2026-11-07-cleanup-loss-diagnosis\\chain-corrected-accounting.json": "db74459d4550d90c3f0aa94344c1c57561b2a63784e14a551161cf43b0a5a89e",
+    ".superpowers\\sdd\\2026-11-07-cleanup-loss-diagnosis\\chain-original-semantics.json": "8d6715590cb809fa4305eadd78a104e1aa64568587f4f6eecd066b9a018d9c90",
+    ".superpowers\\sdd\\2026-11-07-route-algorithm-comparison\\results\\heldout-028-forever-gnome-mage-20-40-20261107-chain\\result.json": "ee5effbdf4d3f4313f9071d2f1ccd0a1d001f2e349b7f74c8ac446a30f5be935",
+    ".superpowers\\sdd\\2026-11-07-route-algorithm-comparison\\results\\heldout-029-forever-gnome-mage-20-40-20261107-baseline\\result.json": "161317ada9020dec721592089d6ca4af1c036ad09d5b8f086ef07c7864f66902"
+  }
+}

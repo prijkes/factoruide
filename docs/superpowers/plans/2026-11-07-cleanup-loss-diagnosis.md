@@ -53,10 +53,10 @@
 
 ## Task 4: Diagnose and review
 
-- [ ] Verify source/data provenance, snapshot equality and exact score reconciliation.
-- [ ] Obtain independent correctness review of instrumentation and conclusions.
-- [ ] Record whether the loss is a confirmed defect, intentional cleanup exposing a search-objective mismatch, or unresolved; propose only the evidence-supported correction.
-- [ ] Run appropriate checks, preserve artifacts, update handoff and commit the diagnostic result.
+- [x] Verify source/data provenance, snapshot equality and exact score reconciliation.
+- [x] Obtain independent correctness review of instrumentation and conclusions.
+- [x] Record whether the loss is a confirmed defect, intentional cleanup exposing a search-objective mismatch, or unresolved; propose only the evidence-supported correction.
+- [x] Run appropriate checks, preserve artifacts, update handoff and commit the diagnostic result.
 
 ## Initial evidence
 
@@ -67,3 +67,11 @@
 - The chain jump is exactly `DropDungeonless`, removing the sole Accept of quest387, Quell the Uprising (absent dungeon717): score159260.4500628052 to227141.55534933577, delta67881.10528653057; player time increases12345.748046475375. Later finalization improves4922.313538418384. Exact pass attribution is now established, superseding the previous endpoint-only uncertainty.
 - Independent trace analysis found that removing that accept also removes a nearby Mage training event; accounting causality remains separate. Do not keep an unusable quest as a speculative workaround.
 - Four authentic accounting oracles produced2PASS controls and2FAIL expiry cases: unrewarded four-kill grinding0vs96seconds for both direct and legacy work. Independent design review confirmed the defect and route-provenance correction; accounting source edits were held until both original-semantic captures finished.
+
+## Completion record
+
+- Implemented and committed source correction and opt-in diagnostics as `09752b6`; metadata correction is `df96a30`. Both are on `diagnostic/cleanup-loss`, authored prijkes.
+- Final release verification passed 321 library, 238 integration, eight diagnostic-example and three comparison-example tests, format and all-target Clippy with warnings denied. The known Windows fgstring newline check was explicitly skipped; two doc examples remain ignored. Fast-profile package verification also passed.
+- The full original chain and baseline fixed-attempt replays matched all recorded-observable gates. All sixteen fixed snapshot routes retain identical score/player/stops/full traces under corrected accounting; no new search or benchmark was inferred from rescoring.
+- Final source review approved observer/accounting/profession-test changes and requested one diagnostic completeness correction. Explicit Dungeon stops are now included alongside implicit entries, deduplicated by first identity occurrence; eight example tests pass. Corrected v2 snapshots and original captures have identical full traces and scores; derived metadata is transparently corrected while original raw JSON remains immutable. Scoped re-review marked the finding addressed with no new material issue.
+- The completed [diagnosis report](../../cleanup-loss-diagnosis-2026-11-07.md) and [evidence archive](../../cleanup-diagnosis-2026-11-07/README.md) record exact pass attribution, training cascade, accounting correction, coverage and remaining limits. The next routing feature is independent training/service preservation, not retaining an impossible dungeon quest. No such counterfactual feature, installer update, merge, push or new algorithm promotion was performed.

@@ -1,0 +1,9195 @@
+{
+  "anytime": [
+    {
+      "player_seconds": 161906.22146329362,
+      "score": 251896.69785715017,
+      "seconds": 2.9076408000000002,
+      "stage": "search",
+      "stops": 981
+    },
+    {
+      "player_seconds": 161803.64386428095,
+      "score": 251337.19227121613,
+      "seconds": 2.912859,
+      "stage": "search",
+      "stops": 967
+    },
+    {
+      "player_seconds": 161368.8917802639,
+      "score": 250939.12820820336,
+      "seconds": 2.9925791,
+      "stage": "search",
+      "stops": 967
+    },
+    {
+      "player_seconds": 161306.91175171416,
+      "score": 250577.04318679107,
+      "seconds": 3.1225673,
+      "stage": "search",
+      "stops": 967
+    },
+    {
+      "player_seconds": 159842.63141013813,
+      "score": 249414.9793384904,
+      "seconds": 3.2636084,
+      "stage": "search",
+      "stops": 967
+    },
+    {
+      "player_seconds": 159765.6733257867,
+      "score": 248961.01731730602,
+      "seconds": 3.274987,
+      "stage": "search",
+      "stops": 965
+    },
+    {
+      "player_seconds": 159936.0770619278,
+      "score": 248848.82011941186,
+      "seconds": 3.2797013,
+      "stage": "search",
+      "stops": 965
+    },
+    {
+      "player_seconds": 159917.07039815444,
+      "score": 248025.2429312242,
+      "seconds": 3.3602561,
+      "stage": "search",
+      "stops": 965
+    },
+    {
+      "player_seconds": 159906.23706609267,
+      "score": 248017.11793217788,
+      "seconds": 3.4019235,
+      "stage": "search",
+      "stops": 965
+    },
+    {
+      "player_seconds": 159831.40218308734,
+      "score": 247865.35424362432,
+      "seconds": 3.4835759,
+      "stage": "search",
+      "stops": 964
+    },
+    {
+      "player_seconds": 159796.38986013745,
+      "score": 247839.0950014119,
+      "seconds": 3.4853683,
+      "stage": "search",
+      "stops": 964
+    },
+    {
+      "player_seconds": 159762.93747845845,
+      "score": 247814.00571515263,
+      "seconds": 3.5036015000000003,
+      "stage": "search",
+      "stops": 964
+    },
+    {
+      "player_seconds": 159663.00300691338,
+      "score": 247739.05486149382,
+      "seconds": 3.5368886,
+      "stage": "search",
+      "stops": 964
+    },
+    {
+      "player_seconds": 159523.80960176367,
+      "score": 247275.85980763155,
+      "seconds": 3.5409566,
+      "stage": "search",
+      "stops": 965
+    },
+    {
+      "player_seconds": 159630.69464481573,
+      "score": 247237.0235899206,
+      "seconds": 3.5664282,
+      "stage": "search",
+      "stops": 965
+    },
+    {
+      "player_seconds": 159570.92166461816,
+      "score": 246465.4473603497,
+      "seconds": 3.6129186,
+      "stage": "search",
+      "stops": 965
+    },
+    {
+      "player_seconds": 159719.92736844474,
+      "score": 245909.98829684142,
+      "seconds": 3.7330949,
+      "stage": "search",
+      "stops": 963
+    },
+    {
+      "player_seconds": 159777.55879016264,
+      "score": 245863.03544097382,
+      "seconds": 3.7473533999999997,
+      "stage": "search",
+      "stops": 963
+    },
+    {
+      "player_seconds": 159742.79688394754,
+      "score": 245836.9640113125,
+      "seconds": 3.7785763,
+      "stage": "search",
+      "stops": 963
+    },
+    {
+      "player_seconds": 159726.69631235703,
+      "score": 245824.8885826196,
+      "seconds": 3.8517696,
+      "stage": "search",
+      "stops": 963
+    },
+    {
+      "player_seconds": 159723.7371507571,
+      "score": 245822.66921141968,
+      "seconds": 3.892808,
+      "stage": "search",
+      "stops": 963
+    },
+    {
+      "player_seconds": 159797.6305918458,
+      "score": 244902.09585311613,
+      "seconds": 3.9018778,
+      "stage": "search",
+      "stops": 963
+    },
+    {
+      "player_seconds": 160710.93739800536,
+      "score": 242624.1295109673,
+      "seconds": 3.9810624,
+      "stage": "search",
+      "stops": 963
+    },
+    {
+      "player_seconds": 160127.6725404413,
+      "score": 241759.70824748083,
+      "seconds": 4.0165419,
+      "stage": "search",
+      "stops": 965
+    },
+    {
+      "player_seconds": 160018.31653875852,
+      "score": 241429.2716803313,
+      "seconds": 4.1057138,
+      "stage": "search",
+      "stops": 963
+    },
+    {
+      "player_seconds": 159671.2815436502,
+      "score": 239358.3568255422,
+      "seconds": 4.1300822,
+      "stage": "search",
+      "stops": 963
+    },
+    {
+      "player_seconds": 160019.00756313273,
+      "score": 239322.53137255204,
+      "seconds": 4.1936747,
+      "stage": "search",
+      "stops": 963
+    },
+    {
+      "player_seconds": 159967.10222995337,
+      "score": 238921.38599134618,
+      "seconds": 4.2280626,
+      "stage": "search",
+      "stops": 963
+    },
+    {
+      "player_seconds": 159968.6492423127,
+      "score": 238773.30734772884,
+      "seconds": 4.2318837,
+      "stage": "search",
+      "stops": 964
+    },
+    {
+      "player_seconds": 159953.92914601305,
+      "score": 238709.51615343208,
+      "seconds": 4.2633787,
+      "stage": "search",
+      "stops": 964
+    },
+    {
+      "player_seconds": 159945.92914601305,
+      "score": 238681.51615343208,
+      "seconds": 4.3091217,
+      "stage": "search",
+      "stops": 963
+    },
+    {
+      "player_seconds": 160019.44380866035,
+      "score": 238375.01972654558,
+      "seconds": 4.4801912,
+      "stage": "search",
+      "stops": 963
+    },
+    {
+      "player_seconds": 160008.40110209247,
+      "score": 238363.9770199777,
+      "seconds": 4.4974126,
+      "stage": "search",
+      "stops": 963
+    },
+    {
+      "player_seconds": 159975.3871049387,
+      "score": 238330.96302282394,
+      "seconds": 4.5155715,
+      "stage": "search",
+      "stops": 963
+    },
+    {
+      "player_seconds": 159955.74424779587,
+      "score": 238291.3201656811,
+      "seconds": 4.5512234,
+      "stage": "search",
+      "stops": 961
+    },
+    {
+      "player_seconds": 159324.62518048726,
+      "score": 237665.65906891463,
+      "seconds": 4.618097,
+      "stage": "search",
+      "stops": 960
+    },
+    {
+      "player_seconds": 159195.33064625014,
+      "score": 237658.5645502631,
+      "seconds": 4.6269558,
+      "stage": "search",
+      "stops": 960
+    },
+    {
+      "player_seconds": 159187.33064625014,
+      "score": 237650.5645502631,
+      "seconds": 4.6717173,
+      "stage": "search",
+      "stops": 959
+    },
+    {
+      "player_seconds": 158930.64397025056,
+      "score": 237203.05511986476,
+      "seconds": 4.7094593,
+      "stage": "search",
+      "stops": 959
+    },
+    {
+      "player_seconds": 158927.8851528598,
+      "score": 237200.296302474,
+      "seconds": 4.7145987,
+      "stage": "search",
+      "stops": 959
+    },
+    {
+      "player_seconds": 158860.2801937579,
+      "score": 236890.47131264914,
+      "seconds": 4.7168054,
+      "stage": "search",
+      "stops": 957
+    },
+    {
+      "player_seconds": 158830.75201652173,
+      "score": 236872.3747409144,
+      "seconds": 4.8835062,
+      "stage": "search",
+      "stops": 957
+    },
+    {
+      "player_seconds": 158927.17672298083,
+      "score": 236728.79944737352,
+      "seconds": 4.9085236,
+      "stage": "search",
+      "stops": 957
+    },
+    {
+      "player_seconds": 158918.38561302063,
+      "score": 236726.50846813293,
+      "seconds": 5.0410381,
+      "stage": "search",
+      "stops": 957
+    },
+    {
+      "player_seconds": 158825.91626390078,
+      "score": 236628.0391190131,
+      "seconds": 5.0430279,
+      "stage": "search",
+      "stops": 955
+    },
+    {
+      "player_seconds": 158916.7448556092,
+      "score": 236603.26486337668,
+      "seconds": 5.0481792,
+      "stage": "search",
+      "stops": 955
+    },
+    {
+      "player_seconds": 158735.06061560288,
+      "score": 236529.81363507576,
+      "seconds": 5.103615,
+      "stage": "search",
+      "stops": 953
+    },
+    {
+      "player_seconds": 158771.12981505052,
+      "score": 236522.14112605472,
+      "seconds": 5.1349197,
+      "stage": "search",
+      "stops": 953
+    },
+    {
+      "player_seconds": 158717.0821945497,
+      "score": 235868.0935055539,
+      "seconds": 5.1547011,
+      "stage": "search",
+      "stops": 952
+    },
+    {
+      "player_seconds": 158707.0821945497,
+      "score": 235258.0935055539,
+      "seconds": 5.1597113,
+      "stage": "search",
+      "stops": 951
+    },
+    {
+      "player_seconds": 158369.67172897098,
+      "score": 234607.14683813328,
+      "seconds": 5.2384308,
+      "stage": "search",
+      "stops": 951
+    },
+    {
+      "player_seconds": 158539.8405885749,
+      "score": 234490.72085852548,
+      "seconds": 5.2418806,
+      "stage": "search",
+      "stops": 951
+    },
+    {
+      "player_seconds": 159085.54455040165,
+      "score": 234408.04425935738,
+      "seconds": 5.2825392,
+      "stage": "search",
+      "stops": 951
+    },
+    {
+      "player_seconds": 159077.46022278475,
+      "score": 234399.95993174048,
+      "seconds": 5.2957335,
+      "stage": "search",
+      "stops": 951
+    },
+    {
+      "player_seconds": 159018.412601194,
+      "score": 233740.9123101497,
+      "seconds": 5.3099994,
+      "stage": "search",
+      "stops": 950
+    },
+    {
+      "player_seconds": 158927.22140475528,
+      "score": 233648.9124809922,
+      "seconds": 5.3119981,
+      "stage": "search",
+      "stops": 950
+    },
+    {
+      "player_seconds": 158911.03197093523,
+      "score": 233482.2155590622,
+      "seconds": 5.368724,
+      "stage": "search",
+      "stops": 953
+    },
+    {
+      "player_seconds": 158889.69863614868,
+      "score": 233460.88222427564,
+      "seconds": 5.5176174,
+      "stage": "search",
+      "stops": 952
+    },
+    {
+      "player_seconds": 158847.07960451502,
+      "score": 233418.26319264199,
+      "seconds": 5.5567051,
+      "stage": "search",
+      "stops": 952
+    },
+    {
+      "player_seconds": 158845.3706484201,
+      "score": 233384.10704312834,
+      "seconds": 5.5903952,
+      "stage": "search",
+      "stops": 952
+    },
+    {
+      "player_seconds": 158576.18771983712,
+      "score": 233114.92411454537,
+      "seconds": 5.6602525,
+      "stage": "search",
+      "stops": 953
+    },
+    {
+      "player_seconds": 157820.1396955889,
+      "score": 218961.63192627,
+      "seconds": 5.6711325,
+      "stage": "search",
+      "stops": 958
+    },
+    {
+      "player_seconds": 157580.37779373344,
+      "score": 218481.87002441453,
+      "seconds": 5.6787733,
+      "stage": "search",
+      "stops": 958
+    },
+    {
+      "player_seconds": 157454.83156539802,
+      "score": 218116.7881626483,
+      "seconds": 5.6855255,
+      "stage": "search",
+      "stops": 958
+    },
+    {
+      "player_seconds": 157599.85712907964,
+      "score": 217650.3260004252,
+      "seconds": 5.6898164,
+      "stage": "search",
+      "stops": 958
+    },
+    {
+      "player_seconds": 157662.55101098563,
+      "score": 216894.64450269786,
+      "seconds": 5.6921581,
+      "stage": "search",
+      "stops": 958
+    },
+    {
+      "player_seconds": 157660.02992992656,
+      "score": 216695.67773199079,
+      "seconds": 5.7112085,
+      "stage": "search",
+      "stops": 945
+    },
+    {
+      "player_seconds": 157622.6977465737,
+      "score": 216658.34554863794,
+      "seconds": 5.7186412,
+      "stage": "search",
+      "stops": 945
+    },
+    {
+      "player_seconds": 156347.8912242961,
+      "score": 212765.05966941005,
+      "seconds": 5.7263554,
+      "stage": "search",
+      "stops": 945
+    },
+    {
+      "player_seconds": 156664.34761915338,
+      "score": 212761.26540339543,
+      "seconds": 5.7632717,
+      "stage": "search",
+      "stops": 945
+    },
+    {
+      "player_seconds": 156722.31837859153,
+      "score": 212632.84092691288,
+      "seconds": 5.8795217,
+      "stage": "search",
+      "stops": 947
+    },
+    {
+      "player_seconds": 156718.7469500201,
+      "score": 212629.26949834145,
+      "seconds": 5.9069611,
+      "stage": "search",
+      "stops": 947
+    },
+    {
+      "player_seconds": 156717.02427811985,
+      "score": 212627.5468264412,
+      "seconds": 5.9105595,
+      "stage": "search",
+      "stops": 947
+    },
+    {
+      "player_seconds": 156707.02427811985,
+      "score": 212617.5468264412,
+      "seconds": 5.9236644,
+      "stage": "search",
+      "stops": 947
+    },
+    {
+      "player_seconds": 157228.37523408083,
+      "score": 212560.00299437798,
+      "seconds": 5.9680422,
+      "stage": "search",
+      "stops": 947
+    },
+    {
+      "player_seconds": 156966.12733369382,
+      "score": 212159.1073357269,
+      "seconds": 5.9712125,
+      "stage": "search",
+      "stops": 949
+    },
+    {
+      "player_seconds": 156948.12733369382,
+      "score": 212141.1073357269,
+      "seconds": 5.9819316,
+      "stage": "search",
+      "stops": 949
+    },
+    {
+      "player_seconds": 156940.12733369382,
+      "score": 212133.1073357269,
+      "seconds": 5.9987871,
+      "stage": "search",
+      "stops": 948
+    },
+    {
+      "player_seconds": 156900.46484175717,
+      "score": 212069.59207351954,
+      "seconds": 6.0138796,
+      "stage": "search",
+      "stops": 948
+    },
+    {
+      "player_seconds": 156670.53757360362,
+      "score": 211451.06744220987,
+      "seconds": 6.0170367,
+      "stage": "search",
+      "stops": 950
+    },
+    {
+      "player_seconds": 156633.21700434262,
+      "score": 211371.81276062934,
+      "seconds": 6.2291827,
+      "stage": "search",
+      "stops": 950
+    },
+    {
+      "player_seconds": 156538.33604905521,
+      "score": 211189.43179008315,
+      "seconds": 6.2681626,
+      "stage": "search",
+      "stops": 950
+    },
+    {
+      "player_seconds": 156266.94801752552,
+      "score": 210573.8750384042,
+      "seconds": 6.2775173,
+      "stage": "search",
+      "stops": 950
+    },
+    {
+      "player_seconds": 156256.94801752552,
+      "score": 209963.8750384042,
+      "seconds": 6.3036068,
+      "stage": "search",
+      "stops": 949
+    },
+    {
+      "player_seconds": 156099.0696389843,
+      "score": 209604.76724015473,
+      "seconds": 6.3076909,
+      "stage": "search",
+      "stops": 949
+    },
+    {
+      "player_seconds": 156032.87916134062,
+      "score": 209538.57676251105,
+      "seconds": 6.3270184,
+      "stage": "search",
+      "stops": 949
+    },
+    {
+      "player_seconds": 155760.10636931573,
+      "score": 209221.66781962715,
+      "seconds": 6.334417,
+      "stage": "search",
+      "stops": 949
+    },
+    {
+      "player_seconds": 155747.8517983725,
+      "score": 208609.4132486839,
+      "seconds": 6.4375524,
+      "stage": "search",
+      "stops": 948
+    },
+    {
+      "player_seconds": 155736.6613218187,
+      "score": 207858.2227721301,
+      "seconds": 6.4557289,
+      "stage": "search",
+      "stops": 947
+    },
+    {
+      "player_seconds": 155809.3663085221,
+      "score": 207348.48317876656,
+      "seconds": 6.472526,
+      "stage": "search",
+      "stops": 943
+    },
+    {
+      "player_seconds": 155785.1446684542,
+      "score": 207321.76153869866,
+      "seconds": 6.4739085,
+      "stage": "search",
+      "stops": 941
+    },
+    {
+      "player_seconds": 155756.26028176755,
+      "score": 207045.81590469184,
+      "seconds": 6.510746,
+      "stage": "search",
+      "stops": 941
+    },
+    {
+      "player_seconds": 155740.6493662071,
+      "score": 207033.69627885392,
+      "seconds": 6.5436872,
+      "stage": "search",
+      "stops": 941
+    },
+    {
+      "player_seconds": 155886.8399483496,
+      "score": 206855.00303500175,
+      "seconds": 6.5519106,
+      "stage": "search",
+      "stops": 941
+    },
+    {
+      "player_seconds": 155628.31830984767,
+      "score": 206672.75177691586,
+      "seconds": 6.6021592,
+      "stage": "search",
+      "stops": 937
+    },
+    {
+      "player_seconds": 155584.50776408895,
+      "score": 206341.00246467767,
+      "seconds": 6.7599371999999995,
+      "stage": "search",
+      "stops": 937
+    },
+    {
+      "player_seconds": 155654.2162058798,
+      "score": 204835.28763219007,
+      "seconds": 6.7739304,
+      "stage": "search",
+      "stops": 937
+    },
+    {
+      "player_seconds": 155315.08732020913,
+      "score": 204056.16274736234,
+      "seconds": 6.8369606,
+      "stage": "search",
+      "stops": 937
+    },
+    {
+      "player_seconds": 155293.33927913138,
+      "score": 204050.6597724146,
+      "seconds": 6.9484365,
+      "stage": "search",
+      "stops": 935
+    },
+    {
+      "player_seconds": 154947.32869621908,
+      "score": 203676.4533204644,
+      "seconds": 7.0599879,
+      "stage": "search",
+      "stops": 932
+    },
+    {
+      "player_seconds": 155061.7737747277,
+      "score": 202407.8841590962,
+      "seconds": 7.1367786,
+      "stage": "search",
+      "stops": 932
+    },
+    {
+      "player_seconds": 155060.22615422687,
+      "score": 202406.33653859535,
+      "seconds": 7.1461098,
+      "stage": "search",
+      "stops": 932
+    },
+    {
+      "player_seconds": 155008.47507353075,
+      "score": 202347.95298583154,
+      "seconds": 7.1759322,
+      "stage": "search",
+      "stops": 929
+    },
+    {
+      "player_seconds": 154419.7597140557,
+      "score": 201766.7277821479,
+      "seconds": 7.1985823,
+      "stage": "search",
+      "stops": 927
+    },
+    {
+      "player_seconds": 154318.12356813834,
+      "score": 201665.09163623056,
+      "seconds": 7.2895362,
+      "stage": "search",
+      "stops": 927
+    },
+    {
+      "player_seconds": 154162.30060280033,
+      "score": 201493.85696720998,
+      "seconds": 7.3403821,
+      "stage": "search",
+      "stops": 927
+    },
+    {
+      "player_seconds": 154057.8604114568,
+      "score": 201417.5657243623,
+      "seconds": 7.3542509,
+      "stage": "search",
+      "stops": 925
+    },
+    {
+      "player_seconds": 154049.8604114568,
+      "score": 201409.5657243623,
+      "seconds": 7.386296,
+      "stage": "search",
+      "stops": 924
+    },
+    {
+      "player_seconds": 154022.95579780202,
+      "score": 201385.32883742778,
+      "seconds": 7.4225399,
+      "stage": "search",
+      "stops": 924
+    },
+    {
+      "player_seconds": 153874.9667875085,
+      "score": 201237.33982713427,
+      "seconds": 7.4252588,
+      "stage": "search",
+      "stops": 923
+    },
+    {
+      "player_seconds": 153783.73652862152,
+      "score": 201171.99048312323,
+      "seconds": 7.464243,
+      "stage": "search",
+      "stops": 921
+    },
+    {
+      "player_seconds": 153751.85425341787,
+      "score": 200432.10820791958,
+      "seconds": 7.4981829,
+      "stage": "search",
+      "stops": 920
+    },
+    {
+      "player_seconds": 153690.90186955902,
+      "score": 200371.15582406073,
+      "seconds": 7.5037231,
+      "stage": "search",
+      "stops": 920
+    },
+    {
+      "player_seconds": 153563.83513375348,
+      "score": 200024.9017442526,
+      "seconds": 7.5259566,
+      "stage": "search",
+      "stops": 920
+    },
+    {
+      "player_seconds": 153542.66943270076,
+      "score": 200000.35557653234,
+      "seconds": 7.5606455,
+      "stage": "search",
+      "stops": 920
+    },
+    {
+      "player_seconds": 153450.88371841508,
+      "score": 199308.56986224666,
+      "seconds": 7.6541589,
+      "stage": "search",
+      "stops": 919
+    },
+    {
+      "player_seconds": 153596.89523241264,
+      "score": 199216.39098460786,
+      "seconds": 7.6566213,
+      "stage": "search",
+      "stops": 915
+    },
+    {
+      "player_seconds": 153567.10445710502,
+      "score": 199165.8001051189,
+      "seconds": 7.7495836,
+      "stage": "search",
+      "stops": 915
+    },
+    {
+      "player_seconds": 153563.8616208754,
+      "score": 199162.55726888927,
+      "seconds": 7.8025945,
+      "stage": "search",
+      "stops": 915
+    },
+    {
+      "player_seconds": 153539.19495348216,
+      "score": 199117.89060149604,
+      "seconds": 7.8410123,
+      "stage": "search",
+      "stops": 914
+    },
+    {
+      "player_seconds": 153522.40246205332,
+      "score": 199094.2446870714,
+      "seconds": 7.8828472000000005,
+      "stage": "search",
+      "stops": 914
+    },
+    {
+      "player_seconds": 153419.56342538452,
+      "score": 198988.4798645496,
+      "seconds": 7.8874677,
+      "stage": "search",
+      "stops": 914
+    },
+    {
+      "player_seconds": 153371.0158092433,
+      "score": 198939.93224840838,
+      "seconds": 7.9519022,
+      "stage": "search",
+      "stops": 915
+    },
+    {
+      "player_seconds": 153362.85391941748,
+      "score": 198926.93863699448,
+      "seconds": 7.9563354,
+      "stage": "search",
+      "stops": 915
+    },
+    {
+      "player_seconds": 153313.49743060808,
+      "score": 198876.07057062874,
+      "seconds": 7.9632861,
+      "stage": "search",
+      "stops": 913
+    },
+    {
+      "player_seconds": 153288.73552003334,
+      "score": 198251.308660054,
+      "seconds": 7.9696995,
+      "stage": "search",
+      "stops": 912
+    },
+    {
+      "player_seconds": 153175.72490967112,
+      "score": 198142.1537442771,
+      "seconds": 7.9787719,
+      "stage": "search",
+      "stops": 912
+    },
+    {
+      "player_seconds": 152821.67730224924,
+      "score": 197788.10613685523,
+      "seconds": 8.0092102,
+      "stage": "search",
+      "stops": 913
+    },
+    {
+      "player_seconds": 152864.00186447502,
+      "score": 197516.94668906718,
+      "seconds": 8.0340713,
+      "stage": "search",
+      "stops": 910
+    },
+    {
+      "player_seconds": 152778.52567690524,
+      "score": 197463.1371677667,
+      "seconds": 8.1232954,
+      "stage": "search",
+      "stops": 910
+    },
+    {
+      "player_seconds": 152330.03899555898,
+      "score": 197306.72159049948,
+      "seconds": 8.1911042,
+      "stage": "search",
+      "stops": 910
+    },
+    {
+      "player_seconds": 152327.3649387667,
+      "score": 197284.13599316805,
+      "seconds": 8.2086725,
+      "stage": "search",
+      "stops": 910
+    },
+    {
+      "player_seconds": 151640.31686153865,
+      "score": 195209.63249174843,
+      "seconds": 8.210526,
+      "stage": "search",
+      "stops": 910
+    },
+    {
+      "player_seconds": 151638.83251912458,
+      "score": 195208.14814933436,
+      "seconds": 8.2163975,
+      "stage": "search",
+      "stops": 910
+    },
+    {
+      "player_seconds": 151735.3295736416,
+      "score": 195180.3464378101,
+      "seconds": 8.3057727,
+      "stage": "search",
+      "stops": 912
+    },
+    {
+      "player_seconds": 151560.06653757012,
+      "score": 194577.39955665363,
+      "seconds": 8.3206178,
+      "stage": "search",
+      "stops": 912
+    },
+    {
+      "player_seconds": 151493.78427186902,
+      "score": 194353.1755070635,
+      "seconds": 8.3343813,
+      "stage": "search",
+      "stops": 910
+    },
+    {
+      "player_seconds": 151489.42270649833,
+      "score": 194348.81394169282,
+      "seconds": 8.3359732,
+      "stage": "search",
+      "stops": 910
+    },
+    {
+      "player_seconds": 151095.53901284828,
+      "score": 193572.10575824685,
+      "seconds": 8.3542702,
+      "stage": "search",
+      "stops": 910
+    },
+    {
+      "player_seconds": 151014.31376261121,
+      "score": 193532.9994446163,
+      "seconds": 8.368553200000001,
+      "stage": "search",
+      "stops": 910
+    },
+    {
+      "player_seconds": 151048.06535656858,
+      "score": 193526.71591131628,
+      "seconds": 8.3745754,
+      "stage": "search",
+      "stops": 913
+    },
+    {
+      "player_seconds": 150880.14800033547,
+      "score": 193303.90066629671,
+      "seconds": 8.3997189,
+      "stage": "search",
+      "stops": 913
+    },
+    {
+      "player_seconds": 150841.82160370098,
+      "score": 193301.77969738326,
+      "seconds": 8.4210778,
+      "stage": "search",
+      "stops": 910
+    },
+    {
+      "player_seconds": 150838.8959133791,
+      "score": 193298.85400706137,
+      "seconds": 8.4239525,
+      "stage": "search",
+      "stops": 910
+    },
+    {
+      "player_seconds": 150753.8433185799,
+      "score": 192813.64240422688,
+      "seconds": 8.4414492,
+      "stage": "search",
+      "stops": 913
+    },
+    {
+      "player_seconds": 150742.77188782863,
+      "score": 192802.57097347564,
+      "seconds": 8.4590601,
+      "stage": "search",
+      "stops": 913
+    },
+    {
+      "player_seconds": 150724.77188782863,
+      "score": 192184.57097347564,
+      "seconds": 8.460926,
+      "stage": "search",
+      "stops": 911
+    },
+    {
+      "player_seconds": 150695.14985978886,
+      "score": 191808.07835737168,
+      "seconds": 8.4639087,
+      "stage": "search",
+      "stops": 911
+    },
+    {
+      "player_seconds": 150684.53135080167,
+      "score": 191800.69595485326,
+      "seconds": 8.5295366,
+      "stage": "search",
+      "stops": 911
+    },
+    {
+      "player_seconds": 150630.69928850068,
+      "score": 191745.66214602615,
+      "seconds": 8.5343332,
+      "stage": "search",
+      "stops": 911
+    },
+    {
+      "player_seconds": 150577.30459185026,
+      "score": 191632.44914185576,
+      "seconds": 8.561487,
+      "stage": "search",
+      "stops": 914
+    },
+    {
+      "player_seconds": 150488.98261996423,
+      "score": 191271.50258996282,
+      "seconds": 8.5905246,
+      "stage": "search",
+      "stops": 914
+    },
+    {
+      "player_seconds": 150480.98261996423,
+      "score": 191263.50258996282,
+      "seconds": 8.6017314,
+      "stage": "search",
+      "stops": 913
+    },
+    {
+      "player_seconds": 150286.64497858565,
+      "score": 190950.36494858423,
+      "seconds": 8.6060521,
+      "stage": "search",
+      "stops": 913
+    },
+    {
+      "player_seconds": 150276.64497858565,
+      "score": 190340.36494858423,
+      "seconds": 8.6286269,
+      "stage": "search",
+      "stops": 912
+    },
+    {
+      "player_seconds": 150266.7373547195,
+      "score": 190330.45732471807,
+      "seconds": 8.7022445,
+      "stage": "search",
+      "stops": 912
+    },
+    {
+      "player_seconds": 150263.8310364475,
+      "score": 190287.55100644607,
+      "seconds": 8.7168457,
+      "stage": "search",
+      "stops": 911
+    },
+    {
+      "player_seconds": 150183.2336850737,
+      "score": 190137.90057496776,
+      "seconds": 8.7446406,
+      "stage": "search",
+      "stops": 911
+    },
+    {
+      "player_seconds": 150115.7336850737,
+      "score": 190070.40057496776,
+      "seconds": 8.8190314,
+      "stage": "search",
+      "stops": 911
+    },
+    {
+      "player_seconds": 150076.92416271742,
+      "score": 190031.59105261147,
+      "seconds": 8.8208497,
+      "stage": "search",
+      "stops": 911
+    },
+    {
+      "player_seconds": 150001.48992468975,
+      "score": 190007.9722758807,
+      "seconds": 8.8584108,
+      "stage": "search",
+      "stops": 909
+    },
+    {
+      "player_seconds": 149992.93521790463,
+      "score": 189999.22902472428,
+      "seconds": 8.8721321,
+      "stage": "search",
+      "stops": 909
+    },
+    {
+      "player_seconds": 149971.47483810113,
+      "score": 189935.12680917358,
+      "seconds": 8.8881205,
+      "stage": "search",
+      "stops": 909
+    },
+    {
+      "player_seconds": 149969.17376209228,
+      "score": 189932.82573316473,
+      "seconds": 8.8946374,
+      "stage": "search",
+      "stops": 909
+    },
+    {
+      "player_seconds": 149954.64449230532,
+      "score": 189869.07429215556,
+      "seconds": 8.8988644,
+      "stage": "search",
+      "stops": 909
+    },
+    {
+      "player_seconds": 149826.15206135903,
+      "score": 189668.33564573614,
+      "seconds": 8.914689,
+      "stage": "search",
+      "stops": 911
+    },
+    {
+      "player_seconds": 149761.39015078425,
+      "score": 189003.57373516134,
+      "seconds": 8.9193811,
+      "stage": "search",
+      "stops": 910
+    },
+    {
+      "player_seconds": 149729.707648572,
+      "score": 188948.04998184295,
+      "seconds": 8.9233287,
+      "stage": "search",
+      "stops": 912
+    },
+    {
+      "player_seconds": 149636.73809237705,
+      "score": 188796.59564755054,
+      "seconds": 8.959534099999999,
+      "stage": "search",
+      "stops": 915
+    },
+    {
+      "player_seconds": 150674.1320579805,
+      "score": 188130.58665520806,
+      "seconds": 8.9633346,
+      "stage": "search",
+      "stops": 915
+    },
+    {
+      "player_seconds": 150658.10538041653,
+      "score": 188114.34426045287,
+      "seconds": 8.9660964,
+      "stage": "search",
+      "stops": 915
+    },
+    {
+      "player_seconds": 150514.41692564852,
+      "score": 187656.89688056818,
+      "seconds": 8.9800693,
+      "stage": "search",
+      "stops": 912
+    },
+    {
+      "player_seconds": 150095.55449390283,
+      "score": 186758.0344488225,
+      "seconds": 8.9905094,
+      "stage": "search",
+      "stops": 912
+    },
+    {
+      "player_seconds": 149685.17134865254,
+      "score": 184152.68064918433,
+      "seconds": 9.0067884,
+      "stage": "search",
+      "stops": 912
+    },
+    {
+      "player_seconds": 149676.48087536852,
+      "score": 184143.9901759003,
+      "seconds": 9.0086858,
+      "stage": "search",
+      "stops": 912
+    },
+    {
+      "player_seconds": 149495.10324854078,
+      "score": 183838.12011812627,
+      "seconds": 9.1027291,
+      "stage": "search",
+      "stops": 914
+    },
+    {
+      "player_seconds": 149471.35593195146,
+      "score": 183789.97768583347,
+      "seconds": 9.1144997,
+      "stage": "search",
+      "stops": 916
+    },
+    {
+      "player_seconds": 149461.3040567405,
+      "score": 183179.92581062252,
+      "seconds": 9.1292004,
+      "stage": "search",
+      "stops": 915
+    },
+    {
+      "player_seconds": 148879.76001721382,
+      "score": 182227.7692710958,
+      "seconds": 9.1336993,
+      "stage": "search",
+      "stops": 915
+    },
+    {
+      "player_seconds": 148886.06011714248,
+      "score": 182151.97313384185,
+      "seconds": 9.1454494,
+      "stage": "search",
+      "stops": 915
+    },
+    {
+      "player_seconds": 149016.6529677067,
+      "score": 182125.64355692975,
+      "seconds": 9.1788153,
+      "stage": "search",
+      "stops": 916
+    },
+    {
+      "player_seconds": 149015.40308225114,
+      "score": 182124.3936714742,
+      "seconds": 9.1801477,
+      "stage": "search",
+      "stops": 916
+    },
+    {
+      "player_seconds": 149014.90209667303,
+      "score": 182117.3905265035,
+      "seconds": 9.218869,
+      "stage": "search",
+      "stops": 918
+    },
+    {
+      "player_seconds": 149006.90209667303,
+      "score": 182109.3905265035,
+      "seconds": 9.2308827,
+      "stage": "search",
+      "stops": 917
+    },
+    {
+      "player_seconds": 149006.30296852032,
+      "score": 182108.7913983508,
+      "seconds": 9.2888667,
+      "stage": "search",
+      "stops": 917
+    },
+    {
+      "player_seconds": 149123.23416040797,
+      "score": 181704.47096510418,
+      "seconds": 9.3033576,
+      "stage": "search",
+      "stops": 911
+    },
+    {
+      "player_seconds": 149112.34502581536,
+      "score": 181693.58183051157,
+      "seconds": 9.3499885,
+      "stage": "search",
+      "stops": 911
+    },
+    {
+      "player_seconds": 149112.34502581536,
+      "score": 181453.58183051157,
+      "seconds": 9.3613682,
+      "stage": "search",
+      "stops": 911
+    },
+    {
+      "player_seconds": 149111.39265067584,
+      "score": 181452.62945537205,
+      "seconds": 9.4209205,
+      "stage": "search",
+      "stops": 911
+    },
+    {
+      "player_seconds": 149103.67485971906,
+      "score": 181430.2801444563,
+      "seconds": 9.4228971,
+      "stage": "search",
+      "stops": 911
+    },
+    {
+      "player_seconds": 149102.59482322275,
+      "score": 181424.95733798738,
+      "seconds": 9.4609466,
+      "stage": "search",
+      "stops": 909
+    },
+    {
+      "player_seconds": 149167.39125782196,
+      "score": 181394.07252258656,
+      "seconds": 9.5188812,
+      "stage": "search",
+      "stops": 909
+    },
+    {
+      "player_seconds": 148907.96342212806,
+      "score": 179969.5298704499,
+      "seconds": 9.5237815,
+      "stage": "search",
+      "stops": 908
+    },
+    {
+      "player_seconds": 148892.99571154045,
+      "score": 179354.56215986228,
+      "seconds": 9.5565272,
+      "stage": "search",
+      "stops": 907
+    },
+    {
+      "player_seconds": 148891.68618918414,
+      "score": 179353.25263750597,
+      "seconds": 9.5578156,
+      "stage": "search",
+      "stops": 907
+    },
+    {
+      "player_seconds": 148887.89861112303,
+      "score": 179349.46505944486,
+      "seconds": 9.590323,
+      "stage": "search",
+      "stops": 907
+    },
+    {
+      "player_seconds": 148846.09028869713,
+      "score": 178944.32571123153,
+      "seconds": 9.6294261,
+      "stage": "search",
+      "stops": 909
+    },
+    {
+      "player_seconds": 148821.65393420245,
+      "score": 178917.02815577766,
+      "seconds": 9.6564546,
+      "stage": "search",
+      "stops": 909
+    },
+    {
+      "player_seconds": 148795.14130302455,
+      "score": 178890.51552459976,
+      "seconds": 9.6640089,
+      "stage": "search",
+      "stops": 909
+    },
+    {
+      "player_seconds": 148788.7367887118,
+      "score": 178884.11101028702,
+      "seconds": 9.6716623,
+      "stage": "search",
+      "stops": 909
+    },
+    {
+      "player_seconds": 148775.16536014038,
+      "score": 178870.5395817156,
+      "seconds": 9.6764644,
+      "stage": "search",
+      "stops": 910
+    },
+    {
+      "player_seconds": 148751.59392284966,
+      "score": 178846.96814442487,
+      "seconds": 9.6811692,
+      "stage": "search",
+      "stops": 910
+    },
+    {
+      "player_seconds": 148734.5803948592,
+      "score": 178829.9546164344,
+      "seconds": 9.775432200000001,
+      "stage": "search",
+      "stops": 910
+    },
+    {
+      "player_seconds": 148723.55815199856,
+      "score": 178818.93237357377,
+      "seconds": 9.8113565,
+      "stage": "search",
+      "stops": 910
+    },
+    {
+      "player_seconds": 148722.46715869184,
+      "score": 178817.84138026705,
+      "seconds": 9.8303453,
+      "stage": "search",
+      "stops": 910
+    },
+    {
+      "player_seconds": 148640.8957306654,
+      "score": 178136.2699522406,
+      "seconds": 9.8477343,
+      "stage": "search",
+      "stops": 908
+    },
+    {
+      "player_seconds": 148622.8957306654,
+      "score": 177518.2699522406,
+      "seconds": 9.8597754,
+      "stage": "search",
+      "stops": 906
+    },
+    {
+      "player_seconds": 148627.5331264606,
+      "score": 177497.17842652247,
+      "seconds": 9.8624349,
+      "stage": "search",
+      "stops": 908
+    },
+    {
+      "player_seconds": 148623.48550160008,
+      "score": 177493.13080166196,
+      "seconds": 9.8728302,
+      "stage": "search",
+      "stops": 908
+    },
+    {
+      "player_seconds": 148562.75957277682,
+      "score": 177435.61396072834,
+      "seconds": 9.8753414,
+      "stage": "search",
+      "stops": 908
+    },
+    {
+      "player_seconds": 148434.26714183053,
+      "score": 177234.8753143089,
+      "seconds": 9.9214124,
+      "stage": "search",
+      "stops": 910
+    },
+    {
+      "player_seconds": 148373.0408483653,
+      "score": 177196.76780979507,
+      "seconds": 9.9463902,
+      "stage": "search",
+      "stops": 908
+    },
+    {
+      "player_seconds": 148280.617264005,
+      "score": 177097.7724196755,
+      "seconds": 9.9517185,
+      "stage": "search",
+      "stops": 908
+    },
+    {
+      "player_seconds": 148276.33154753945,
+      "score": 177093.48670320993,
+      "seconds": 9.9777504,
+      "stage": "search",
+      "stops": 908
+    },
+    {
+      "player_seconds": 148275.37918111923,
+      "score": 177092.53433678971,
+      "seconds": 9.996759,
+      "stage": "search",
+      "stops": 908
+    },
+    {
+      "player_seconds": 148259.9826897565,
+      "score": 176835.87901194615,
+      "seconds": 10.0028866,
+      "stage": "search",
+      "stops": 908
+    },
+    {
+      "player_seconds": 148160.22078790102,
+      "score": 176136.11711009068,
+      "seconds": 10.0349943,
+      "stage": "search",
+      "stops": 907
+    },
+    {
+      "player_seconds": 148310.76169757545,
+      "score": 176075.1685773005,
+      "seconds": 10.0634544,
+      "stage": "search",
+      "stops": 907
+    },
+    {
+      "player_seconds": 148242.3093180763,
+      "score": 176006.71618396766,
+      "seconds": 10.0946218,
+      "stage": "search",
+      "stops": 907
+    },
+    {
+      "player_seconds": 148075.079187428,
+      "score": 175976.59708414873,
+      "seconds": 10.1278042,
+      "stage": "search",
+      "stops": 908
+    },
+    {
+      "player_seconds": 148169.93491117595,
+      "score": 175854.28697026687,
+      "seconds": 10.1317807,
+      "stage": "search",
+      "stops": 908
+    },
+    {
+      "player_seconds": 147942.6946423333,
+      "score": 175751.71194132365,
+      "seconds": 10.1591463,
+      "stage": "search",
+      "stops": 908
+    },
+    {
+      "player_seconds": 147709.95684628544,
+      "score": 175507.90287211235,
+      "seconds": 10.1787181,
+      "stage": "search",
+      "stops": 908
+    },
+    {
+      "player_seconds": 147318.34958297652,
+      "score": 175253.29399448266,
+      "seconds": 10.1926677,
+      "stage": "search",
+      "stops": 906
+    },
+    {
+      "player_seconds": 147318.8723535223,
+      "score": 175233.42339511774,
+      "seconds": 10.203294,
+      "stage": "search",
+      "stops": 906
+    },
+    {
+      "player_seconds": 147330.96548552395,
+      "score": 175206.5035707639,
+      "seconds": 10.2117448,
+      "stage": "search",
+      "stops": 906
+    },
+    {
+      "player_seconds": 146969.34129735528,
+      "score": 174603.85403132663,
+      "seconds": 10.2334809,
+      "stage": "search",
+      "stops": 908
+    },
+    {
+      "player_seconds": 146934.57939985947,
+      "score": 174569.09213383083,
+      "seconds": 10.2623153,
+      "stage": "search",
+      "stops": 908
+    },
+    {
+      "player_seconds": 146818.7386143452,
+      "score": 174317.64874602744,
+      "seconds": 10.3016679,
+      "stage": "search",
+      "stops": 911
+    },
+    {
+      "player_seconds": 146793.38003920772,
+      "score": 174292.29017088996,
+      "seconds": 10.3161763,
+      "stage": "search",
+      "stops": 912
+    },
+    {
+      "player_seconds": 146719.53010340847,
+      "score": 174229.2771674117,
+      "seconds": 10.3433872,
+      "stage": "search",
+      "stops": 910
+    },
+    {
+      "player_seconds": 146717.86343819503,
+      "score": 174227.61050219822,
+      "seconds": 10.4164569,
+      "stage": "search",
+      "stops": 910
+    },
+    {
+      "player_seconds": 146667.97277361678,
+      "score": 174177.81121403596,
+      "seconds": 10.4491341,
+      "stage": "search",
+      "stops": 910
+    },
+    {
+      "player_seconds": 146623.44896990585,
+      "score": 174133.28741032502,
+      "seconds": 10.4542384,
+      "stage": "search",
+      "stops": 910
+    },
+    {
+      "player_seconds": 146610.59182268905,
+      "score": 174120.43026310822,
+      "seconds": 10.5014957,
+      "stage": "search",
+      "stops": 910
+    },
+    {
+      "player_seconds": 146600.59182268905,
+      "score": 173510.43026310822,
+      "seconds": 10.5515297,
+      "stage": "search",
+      "stops": 909
+    },
+    {
+      "player_seconds": 146575.4043797012,
+      "score": 173404.34354296062,
+      "seconds": 10.5687765,
+      "stage": "search",
+      "stops": 909
+    },
+    {
+      "player_seconds": 146564.7608646481,
+      "score": 173379.25078481287,
+      "seconds": 10.5712865,
+      "stage": "search",
+      "stops": 911
+    },
+    {
+      "player_seconds": 146213.32441789447,
+      "score": 172753.37476510063,
+      "seconds": 10.5750194,
+      "stage": "search",
+      "stops": 914
+    },
+    {
+      "player_seconds": 146255.73181961785,
+      "score": 172662.00193192082,
+      "seconds": 10.5787009,
+      "stage": "search",
+      "stops": 914
+    },
+    {
+      "player_seconds": 145738.84322982625,
+      "score": 172432.42701847444,
+      "seconds": 10.599146900000001,
+      "stage": "search",
+      "stops": 914
+    },
+    {
+      "player_seconds": 145710.86704661616,
+      "score": 172404.45083526435,
+      "seconds": 10.6448786,
+      "stage": "search",
+      "stops": 914
+    },
+    {
+      "player_seconds": 145707.07052320492,
+      "score": 172400.6543118531,
+      "seconds": 10.6793596,
+      "stage": "search",
+      "stops": 914
+    },
+    {
+      "player_seconds": 145685.38677939458,
+      "score": 172033.32451963847,
+      "seconds": 10.6872913,
+      "stage": "search",
+      "stops": 919
+    },
+    {
+      "player_seconds": 145648.65640728513,
+      "score": 171821.8625481509,
+      "seconds": 10.6943657,
+      "stage": "search",
+      "stops": 919
+    },
+    {
+      "player_seconds": 145289.42820283922,
+      "score": 171197.69673437555,
+      "seconds": 10.70542,
+      "stage": "search",
+      "stops": 918
+    },
+    {
+      "player_seconds": 145298.31600302338,
+      "score": 171194.86052838594,
+      "seconds": 10.7101165,
+      "stage": "search",
+      "stops": 918
+    },
+    {
+      "player_seconds": 145292.48266387716,
+      "score": 171189.0271892397,
+      "seconds": 10.742801,
+      "stage": "search",
+      "stops": 918
+    },
+    {
+      "player_seconds": 145373.03721391052,
+      "score": 171178.28944269166,
+      "seconds": 10.7690612,
+      "stage": "search",
+      "stops": 918
+    },
+    {
+      "player_seconds": 145291.16766208023,
+      "score": 171105.7860247562,
+      "seconds": 10.8077688,
+      "stage": "search",
+      "stops": 918
+    },
+    {
+      "player_seconds": 145289.3168632621,
+      "score": 171103.93522593807,
+      "seconds": 10.8158836,
+      "stage": "search",
+      "stops": 918
+    },
+    {
+      "player_seconds": 145279.98883521598,
+      "score": 171094.60719789195,
+      "seconds": 10.8697119,
+      "stage": "search",
+      "stops": 918
+    },
+    {
+      "player_seconds": 145205.6832720673,
+      "score": 171020.3016347433,
+      "seconds": 10.891225200000001,
+      "stage": "search",
+      "stops": 918
+    },
+    {
+      "player_seconds": 145196.27849072576,
+      "score": 171010.89685340173,
+      "seconds": 10.9519714,
+      "stage": "search",
+      "stops": 918
+    },
+    {
+      "player_seconds": 145189.64142856142,
+      "score": 171004.2597912374,
+      "seconds": 11.0062039,
+      "stage": "search",
+      "stops": 918
+    },
+    {
+      "player_seconds": 145151.665236632,
+      "score": 170966.28359930796,
+      "seconds": 11.0282534,
+      "stage": "search",
+      "stops": 918
+    },
+    {
+      "player_seconds": 145134.99857141855,
+      "score": 170949.61693409452,
+      "seconds": 11.0416639,
+      "stage": "search",
+      "stops": 918
+    },
+    {
+      "player_seconds": 144901.1202661374,
+      "score": 170711.19598291814,
+      "seconds": 11.0512133,
+      "stage": "search",
+      "stops": 918
+    },
+    {
+      "player_seconds": 144886.59645370717,
+      "score": 170640.6721857467,
+      "seconds": 11.0741492,
+      "stage": "search",
+      "stops": 918
+    },
+    {
+      "player_seconds": 144819.44831882717,
+      "score": 170573.5240508667,
+      "seconds": 11.0765879,
+      "stage": "search",
+      "stops": 918
+    },
+    {
+      "player_seconds": 144811.44831882717,
+      "score": 170565.5240508667,
+      "seconds": 11.0844372,
+      "stage": "search",
+      "stops": 917
+    },
+    {
+      "player_seconds": 144798.4721290776,
+      "score": 170552.5478611171,
+      "seconds": 11.1052681,
+      "stage": "search",
+      "stops": 917
+    },
+    {
+      "player_seconds": 144790.37689025572,
+      "score": 170544.45262229524,
+      "seconds": 11.1433931,
+      "stage": "search",
+      "stops": 917
+    },
+    {
+      "player_seconds": 144797.2259266711,
+      "score": 170481.48808313342,
+      "seconds": 11.2610943,
+      "stage": "search",
+      "stops": 919
+    },
+    {
+      "player_seconds": 141717.30991686,
+      "score": 170124.4641413567,
+      "seconds": 11.2816849,
+      "stage": "search",
+      "stops": 913
+    },
+    {
+      "player_seconds": 142240.82731159084,
+      "score": 170100.13809741643,
+      "seconds": 11.2987197,
+      "stage": "search",
+      "stops": 916
+    },
+    {
+      "player_seconds": 142188.36808906787,
+      "score": 170068.60070693848,
+      "seconds": 11.3880261,
+      "stage": "search",
+      "stops": 916
+    },
+    {
+      "player_seconds": 142099.50984747222,
+      "score": 169952.27762807946,
+      "seconds": 11.3920697,
+      "stage": "search",
+      "stops": 916
+    },
+    {
+      "player_seconds": 141776.46469217635,
+      "score": 169005.6707388327,
+      "seconds": 11.394821199999999,
+      "stage": "search",
+      "stops": 916
+    },
+    {
+      "player_seconds": 141605.77010829168,
+      "score": 168549.64494515472,
+      "seconds": 11.5008921,
+      "stage": "search",
+      "stops": 916
+    },
+    {
+      "player_seconds": 141256.41376953438,
+      "score": 167959.557083556,
+      "seconds": 11.5053854,
+      "stage": "search",
+      "stops": 912
+    },
+    {
+      "player_seconds": 141332.73784875503,
+      "score": 167904.13768833483,
+      "seconds": 11.6746578,
+      "stage": "search",
+      "stops": 914
+    },
+    {
+      "player_seconds": 141321.83568492252,
+      "score": 167775.1586715656,
+      "seconds": 11.707351,
+      "stage": "search",
+      "stops": 914
+    },
+    {
+      "player_seconds": 141247.1271880771,
+      "score": 167688.43672086953,
+      "seconds": 11.7208862,
+      "stage": "search",
+      "stops": 914
+    },
+    {
+      "player_seconds": 141182.75652371338,
+      "score": 167624.0660565058,
+      "seconds": 11.7226934,
+      "stage": "search",
+      "stops": 914
+    },
+    {
+      "player_seconds": 141110.1462949969,
+      "score": 167595.20422856923,
+      "seconds": 11.739556499999999,
+      "stage": "search",
+      "stops": 912
+    },
+    {
+      "player_seconds": 141055.65434277206,
+      "score": 167519.32271116303,
+      "seconds": 11.7504006,
+      "stage": "search",
+      "stops": 911
+    },
+    {
+      "player_seconds": 141036.38543676725,
+      "score": 167499.83808796696,
+      "seconds": 11.8311024,
+      "stage": "search",
+      "stops": 911
+    },
+    {
+      "player_seconds": 141037.29405563098,
+      "score": 167491.78477148773,
+      "seconds": 11.8342081,
+      "stage": "search",
+      "stops": 911
+    },
+    {
+      "player_seconds": 140998.1656047726,
+      "score": 167455.004219002,
+      "seconds": 11.9943294,
+      "stage": "search",
+      "stops": 911
+    },
+    {
+      "player_seconds": 140996.10672892194,
+      "score": 167452.94534315134,
+      "seconds": 12.0803369,
+      "stage": "search",
+      "stops": 911
+    },
+    {
+      "player_seconds": 140964.8826481857,
+      "score": 167421.7212624151,
+      "seconds": 12.11092,
+      "stage": "search",
+      "stops": 911
+    },
+    {
+      "player_seconds": 140802.69152866927,
+      "score": 167272.13697353876,
+      "seconds": 12.136487,
+      "stage": "search",
+      "stops": 911
+    },
+    {
+      "player_seconds": 140717.97870331316,
+      "score": 167187.42414818265,
+      "seconds": 12.162092,
+      "stage": "search",
+      "stops": 911
+    },
+    {
+      "player_seconds": 140711.36479788725,
+      "score": 167165.49404507643,
+      "seconds": 12.1730089,
+      "stage": "search",
+      "stops": 911
+    },
+    {
+      "player_seconds": 140709.03908121816,
+      "score": 167163.16832840734,
+      "seconds": 12.2392037,
+      "stage": "search",
+      "stops": 911
+    },
+    {
+      "player_seconds": 140130.5479404262,
+      "score": 165906.67404866015,
+      "seconds": 12.2602754,
+      "stage": "search",
+      "stops": 914
+    },
+    {
+      "player_seconds": 140093.1937107072,
+      "score": 165870.1125434468,
+      "seconds": 12.261813,
+      "stage": "search",
+      "stops": 914
+    },
+    {
+      "player_seconds": 139994.08733708214,
+      "score": 165771.00616982175,
+      "seconds": 12.323928,
+      "stage": "search",
+      "stops": 914
+    },
+    {
+      "player_seconds": 139906.48903348998,
+      "score": 165739.4078509708,
+      "seconds": 12.3655197,
+      "stage": "search",
+      "stops": 914
+    },
+    {
+      "player_seconds": 139847.5056473038,
+      "score": 165680.42446478462,
+      "seconds": 12.3674103,
+      "stage": "search",
+      "stops": 914
+    },
+    {
+      "player_seconds": 139846.19612603742,
+      "score": 165679.11494351825,
+      "seconds": 12.3721879,
+      "stage": "search",
+      "stops": 914
+    },
+    {
+      "player_seconds": 139794.87674503063,
+      "score": 165655.69846225437,
+      "seconds": 12.468866,
+      "stage": "search",
+      "stops": 914
+    },
+    {
+      "player_seconds": 139761.4040231082,
+      "score": 165595.6266713923,
+      "seconds": 12.610162,
+      "stage": "search",
+      "stops": 914
+    },
+    {
+      "player_seconds": 139461.7234600049,
+      "score": 165195.3954125972,
+      "seconds": 12.6241374,
+      "stage": "search",
+      "stops": 914
+    },
+    {
+      "player_seconds": 139432.40298523346,
+      "score": 165166.07493782576,
+      "seconds": 12.6504737,
+      "stage": "search",
+      "stops": 914
+    },
+    {
+      "player_seconds": 139407.40297324443,
+      "score": 165141.07492583673,
+      "seconds": 12.6690196,
+      "stage": "search",
+      "stops": 914
+    },
+    {
+      "player_seconds": 139250.59344652848,
+      "score": 164984.26539912078,
+      "seconds": 12.7510184,
+      "stage": "search",
+      "stops": 913
+    },
+    {
+      "player_seconds": 139228.47134032534,
+      "score": 164361.68697832403,
+      "seconds": 12.7766082,
+      "stage": "search",
+      "stops": 912
+    },
+    {
+      "player_seconds": 139185.31210267707,
+      "score": 164254.8980282859,
+      "seconds": 12.7930907,
+      "stage": "search",
+      "stops": 912
+    },
+    {
+      "player_seconds": 139147.87082035764,
+      "score": 163879.41122146134,
+      "seconds": 12.8571079,
+      "stage": "search",
+      "stops": 912
+    },
+    {
+      "player_seconds": 139126.35836634177,
+      "score": 163860.70295711426,
+      "seconds": 12.9188452,
+      "stage": "search",
+      "stops": 912
+    },
+    {
+      "player_seconds": 139074.52999331988,
+      "score": 163636.3157940617,
+      "seconds": 12.9254637,
+      "stage": "search",
+      "stops": 909
+    },
+    {
+      "player_seconds": 139073.81572068456,
+      "score": 163635.60152142638,
+      "seconds": 12.9659486,
+      "stage": "search",
+      "stops": 909
+    },
+    {
+      "player_seconds": 139017.53801021128,
+      "score": 163552.11434663535,
+      "seconds": 12.9786418,
+      "stage": "search",
+      "stops": 911
+    },
+    {
+      "player_seconds": 139001.8237266768,
+      "score": 163536.40006310088,
+      "seconds": 12.9968952,
+      "stage": "search",
+      "stops": 911
+    },
+    {
+      "player_seconds": 138998.49038753062,
+      "score": 163533.0667239547,
+      "seconds": 13.042662,
+      "stage": "search",
+      "stops": 911
+    },
+    {
+      "player_seconds": 138997.97919876807,
+      "score": 163532.55553519214,
+      "seconds": 13.0447859,
+      "stage": "search",
+      "stops": 911
+    },
+    {
+      "player_seconds": 138944.58321623912,
+      "score": 163444.20956385657,
+      "seconds": 13.1411652,
+      "stage": "search",
+      "stops": 914
+    },
+    {
+      "player_seconds": 138850.7840596688,
+      "score": 163327.18215724945,
+      "seconds": 13.1717882,
+      "stage": "search",
+      "stops": 914
+    },
+    {
+      "player_seconds": 138726.446752151,
+      "score": 163202.84484973166,
+      "seconds": 13.1744768,
+      "stage": "search",
+      "stops": 914
+    },
+    {
+      "player_seconds": 138694.75049587755,
+      "score": 163171.1485934582,
+      "seconds": 13.2578289,
+      "stage": "search",
+      "stops": 914
+    },
+    {
+      "player_seconds": 138684.08029742987,
+      "score": 163160.40820522493,
+      "seconds": 13.2662193,
+      "stage": "search",
+      "stops": 914
+    },
+    {
+      "player_seconds": 138673.59223515211,
+      "score": 163150.28722848633,
+      "seconds": 13.3124484,
+      "stage": "search",
+      "stops": 914
+    },
+    {
+      "player_seconds": 138602.1294905806,
+      "score": 163063.21215634167,
+      "seconds": 13.3342393,
+      "stage": "search",
+      "stops": 914
+    },
+    {
+      "player_seconds": 138599.17032898066,
+      "score": 163060.25299474172,
+      "seconds": 13.4515262,
+      "stage": "search",
+      "stops": 914
+    },
+    {
+      "player_seconds": 138564.53611205044,
+      "score": 163025.6187778115,
+      "seconds": 13.4854561,
+      "stage": "search",
+      "stops": 914
+    },
+    {
+      "player_seconds": 138473.9835359507,
+      "score": 162892.6422833997,
+      "seconds": 13.4913774,
+      "stage": "search",
+      "stops": 916
+    },
+    {
+      "player_seconds": 138468.26925241627,
+      "score": 162886.92799986526,
+      "seconds": 13.5004822,
+      "stage": "search",
+      "stops": 916
+    },
+    {
+      "player_seconds": 138466.60258284316,
+      "score": 162885.26133029215,
+      "seconds": 13.5730211,
+      "stage": "search",
+      "stops": 916
+    },
+    {
+      "player_seconds": 138132.82965777963,
+      "score": 162322.08447354045,
+      "seconds": 13.5912436,
+      "stage": "search",
+      "stops": 919
+    },
+    {
+      "player_seconds": 138131.40107463446,
+      "score": 162320.65589039528,
+      "seconds": 13.7543766,
+      "stage": "search",
+      "stops": 919
+    },
+    {
+      "player_seconds": 138108.49327267837,
+      "score": 162292.54146865543,
+      "seconds": 13.7724605,
+      "stage": "search",
+      "stops": 919
+    },
+    {
+      "player_seconds": 138039.27755101342,
+      "score": 162223.96454890532,
+      "seconds": 13.8692159,
+      "stage": "search",
+      "stops": 919
+    },
+    {
+      "player_seconds": 138024.505053529,
+      "score": 162209.1920514209,
+      "seconds": 13.9980788,
+      "stage": "search",
+      "stops": 919
+    },
+    {
+      "player_seconds": 138023.67171874244,
+      "score": 162208.35871663433,
+      "seconds": 14.0581148,
+      "stage": "search",
+      "stops": 919
+    },
+    {
+      "player_seconds": 138017.95743302815,
+      "score": 162202.64443092005,
+      "seconds": 14.0829278,
+      "stage": "search",
+      "stops": 919
+    },
+    {
+      "player_seconds": 138016.35225083577,
+      "score": 162201.03924872767,
+      "seconds": 14.1630896,
+      "stage": "search",
+      "stops": 919
+    },
+    {
+      "player_seconds": 138009.64612574005,
+      "score": 162194.33312363195,
+      "seconds": 14.1770008,
+      "stage": "search",
+      "stops": 919
+    },
+    {
+      "player_seconds": 138008.693745151,
+      "score": 162193.3807430429,
+      "seconds": 14.2091607,
+      "stage": "search",
+      "stops": 919
+    },
+    {
+      "player_seconds": 137919.51559481685,
+      "score": 162104.20259270875,
+      "seconds": 14.2743264,
+      "stage": "search",
+      "stops": 918
+    },
+    {
+      "player_seconds": 137907.03149177445,
+      "score": 162091.71848966635,
+      "seconds": 14.3451027,
+      "stage": "search",
+      "stops": 918
+    },
+    {
+      "player_seconds": 137815.73314202856,
+      "score": 162000.6086842917,
+      "seconds": 14.3677264,
+      "stage": "search",
+      "stops": 918
+    },
+    {
+      "player_seconds": 137770.49504442897,
+      "score": 161975.37058669212,
+      "seconds": 14.4427927,
+      "stage": "search",
+      "stops": 918
+    },
+    {
+      "player_seconds": 137762.08284502072,
+      "score": 161967.29584598256,
+      "seconds": 14.560099,
+      "stage": "search",
+      "stops": 918
+    },
+    {
+      "player_seconds": 137513.1189697269,
+      "score": 161735.7843330469,
+      "seconds": 14.6108734,
+      "stage": "search",
+      "stops": 920
+    },
+    {
+      "player_seconds": 137512.1242731976,
+      "score": 161734.7896365176,
+      "seconds": 14.6744503,
+      "stage": "search",
+      "stops": 920
+    },
+    {
+      "player_seconds": 137505.3506897239,
+      "score": 161728.01605304392,
+      "seconds": 14.7351819,
+      "stage": "search",
+      "stops": 920
+    },
+    {
+      "player_seconds": 137502.73163629198,
+      "score": 161725.39699961198,
+      "seconds": 14.7431168,
+      "stage": "search",
+      "stops": 920
+    },
+    {
+      "player_seconds": 137458.9221161155,
+      "score": 161681.5874794355,
+      "seconds": 14.7576554,
+      "stage": "search",
+      "stops": 920
+    },
+    {
+      "player_seconds": 137429.4627424239,
+      "score": 161611.23175095988,
+      "seconds": 14.9186222,
+      "stage": "search",
+      "stops": 923
+    },
+    {
+      "player_seconds": 137427.81898307666,
+      "score": 161607.4565884928,
+      "seconds": 14.981311,
+      "stage": "search",
+      "stops": 923
+    },
+    {
+      "player_seconds": 137009.79426234053,
+      "score": 160940.65305833795,
+      "seconds": 15.008244,
+      "stage": "search",
+      "stops": 925
+    },
+    {
+      "player_seconds": 136986.57997444642,
+      "score": 160917.43877044384,
+      "seconds": 15.0697033,
+      "stage": "search",
+      "stops": 925
+    },
+    {
+      "player_seconds": 136890.6519069669,
+      "score": 160821.51070296433,
+      "seconds": 15.1564101,
+      "stage": "search",
+      "stops": 925
+    },
+    {
+      "player_seconds": 136888.74713924926,
+      "score": 160819.60593524668,
+      "seconds": 15.3307032,
+      "stage": "search",
+      "stops": 925
+    },
+    {
+      "player_seconds": 136704.4559938418,
+      "score": 160652.18624353426,
+      "seconds": 15.3626513,
+      "stage": "search",
+      "stops": 925
+    },
+    {
+      "player_seconds": 136691.83689899318,
+      "score": 160639.56714868563,
+      "seconds": 15.458355300000001,
+      "stage": "search",
+      "stops": 925
+    },
+    {
+      "player_seconds": 136497.78520576877,
+      "score": 160461.88244855328,
+      "seconds": 15.6471102,
+      "stage": "search",
+      "stops": 925
+    },
+    {
+      "player_seconds": 136487.78520576877,
+      "score": 159851.88244855328,
+      "seconds": 15.7387826,
+      "stage": "search",
+      "stops": 924
+    },
+    {
+      "player_seconds": 136486.0738586241,
+      "score": 159849.93861374428,
+      "seconds": 16.0956382,
+      "stage": "search",
+      "stops": 924
+    },
+    {
+      "player_seconds": 136402.32953229026,
+      "score": 159769.89196395263,
+      "seconds": 16.1583734,
+      "stage": "search",
+      "stops": 924
+    },
+    {
+      "player_seconds": 136376.2350173758,
+      "score": 159743.79744903816,
+      "seconds": 16.2108211,
+      "stage": "search",
+      "stops": 924
+    },
+    {
+      "player_seconds": 136373.19268085886,
+      "score": 159740.75511252123,
+      "seconds": 16.2409591,
+      "stage": "search",
+      "stops": 924
+    },
+    {
+      "player_seconds": 136365.19268085886,
+      "score": 159732.75511252123,
+      "seconds": 16.2935253,
+      "stage": "search",
+      "stops": 923
+    },
+    {
+      "player_seconds": 136357.0706833946,
+      "score": 159724.56814795325,
+      "seconds": 16.3545093,
+      "stage": "search",
+      "stops": 923
+    },
+    {
+      "player_seconds": 136310.04687750383,
+      "score": 159677.5443420625,
+      "seconds": 16.513687,
+      "stage": "search",
+      "stops": 923
+    },
+    {
+      "player_seconds": 136307.0706899341,
+      "score": 159674.56815449276,
+      "seconds": 16.5378664,
+      "stage": "search",
+      "stops": 923
+    },
+    {
+      "player_seconds": 136295.91813646577,
+      "score": 159659.982183068,
+      "seconds": 16.5618596,
+      "stage": "search",
+      "stops": 923
+    },
+    {
+      "player_seconds": 136256.89748844356,
+      "score": 159621.02461893746,
+      "seconds": 16.5716634,
+      "stage": "search",
+      "stops": 923
+    },
+    {
+      "player_seconds": 136248.89748844356,
+      "score": 159613.02461893746,
+      "seconds": 16.5931629,
+      "stage": "search",
+      "stops": 922
+    },
+    {
+      "player_seconds": 136244.49272672046,
+      "score": 159608.61985721436,
+      "seconds": 16.5982139,
+      "stage": "search",
+      "stops": 922
+    },
+    {
+      "player_seconds": 136224.37367873813,
+      "score": 159588.50080923203,
+      "seconds": 16.6007155,
+      "stage": "search",
+      "stops": 922
+    },
+    {
+      "player_seconds": 136078.4519940389,
+      "score": 159437.79167800015,
+      "seconds": 16.7447158,
+      "stage": "search",
+      "stops": 922
+    },
+    {
+      "player_seconds": 136043.78646610674,
+      "score": 159403.126150068,
+      "seconds": 16.8344379,
+      "stage": "search",
+      "stops": 922
+    },
+    {
+      "player_seconds": 136004.74245147497,
+      "score": 159363.5482262649,
+      "seconds": 16.8531465,
+      "stage": "search",
+      "stops": 922
+    },
+    {
+      "player_seconds": 135999.266260363,
+      "score": 159358.0720351529,
+      "seconds": 16.9669946,
+      "stage": "search",
+      "stops": 922
+    },
+    {
+      "player_seconds": 147295.15028327564,
+      "score": 222219.2418109174,
+      "seconds": 17.317382,
+      "stage": "authoritative_final",
+      "stops": 916
+    }
+  ],
+  "arm": "chain",
+  "breakdown": {
+    "abandoned": 1,
+    "bag_overflow": 2504.9653214367027,
+    "catch_up": 0.0,
+    "desync": 0.0,
+    "dungeon_runs": 5,
+    "dungeons": 20700.0,
+    "explore_xp": 27967,
+    "farm_xp": 93526,
+    "farming": 10447.452620410455,
+    "fighting": 33850.89147200918,
+    "flight_cost": 9690,
+    "flight_gold": 2069.7813957725953,
+    "flights": 11252.047415746803,
+    "gold_earned": 164300,
+    "gold_start": 0,
+    "grind_over": 16089.716782810914,
+    "grind_xp": 80788,
+    "grinding": 18842.65308639989,
+    "hearths": 8,
+    "missing_class_quests": 0,
+    "missing_dungeons": 0,
+    "missing_profession_quests": 0,
+    "missing_zone_quests": 0,
+    "mob_xp": 246359,
+    "outside_preferred": 0.0,
+    "overhead": 7449.0,
+    "quest_xp": 540925,
+    "reputation_missing": -0.0,
+    "sync_time": 0.0,
+    "total": 147295.15028327564,
+    "training": 210.0,
+    "training_cost": 238000,
+    "travel": 44481.10568870906,
+    "unlock_delay": 0.0,
+    "vendor_cost": 0,
+    "waiting": 4348.719517380846,
+    "zone_changes": 62
+  },
+  "budget_seconds": 20.0,
+  "budget_violation": false,
+  "buy_count": 0,
+  "compact_evidence": {
+    "omitted_fields": [
+      "trace",
+      "guide"
+    ],
+    "original_path": ".superpowers\\sdd\\2026-11-07-route-algorithm-comparison\\results\\heldout-028-forever-gnome-mage-20-40-20261107-chain\\result.json",
+    "original_sha256": "ee5effbdf4d3f4313f9071d2f1ccd0a1d001f2e349b7f74c8ac446a30f5be935"
+  },
+  "completed_turnins": [
+    {
+      "level": 20,
+      "quest_id": 1920,
+      "time": 987.2237968420739
+    },
+    {
+      "level": 20,
+      "quest_id": 97234,
+      "time": 1234.1999876815687
+    },
+    {
+      "level": 20,
+      "quest_id": 97237,
+      "time": 1507.4725055463055
+    },
+    {
+      "level": 20,
+      "quest_id": 97220,
+      "time": 1809.4248850454683
+    },
+    {
+      "level": 20,
+      "quest_id": 97222,
+      "time": 1973.4725044563918
+    },
+    {
+      "level": 20,
+      "quest_id": 343,
+      "time": 2069.6867901706773
+    },
+    {
+      "level": 20,
+      "quest_id": 344,
+      "time": 2428.561075884963
+    },
+    {
+      "level": 20,
+      "quest_id": 345,
+      "time": 3317.237533795917
+    },
+    {
+      "level": 20,
+      "quest_id": 125,
+      "time": 4286.456733539321
+    },
+    {
+      "level": 20,
+      "quest_id": 92,
+      "time": 5856.914398959976
+    },
+    {
+      "level": 20,
+      "quest_id": 129,
+      "time": 5935.033448032242
+    },
+    {
+      "level": 20,
+      "quest_id": 130,
+      "time": 6161.438209210394
+    },
+    {
+      "level": 20,
+      "quest_id": 131,
+      "time": 6195.057257192746
+    },
+    {
+      "level": 21,
+      "quest_id": 3741,
+      "time": 6224.723924586022
+    },
+    {
+      "level": 21,
+      "quest_id": 244,
+      "time": 6286.23535315745
+    },
+    {
+      "level": 21,
+      "quest_id": 98407,
+      "time": 6294.23535315745
+    },
+    {
+      "level": 21,
+      "quest_id": 246,
+      "time": 7038.173332481986
+    },
+    {
+      "level": 21,
+      "quest_id": 89,
+      "time": 7791.66171314173
+    },
+    {
+      "level": 21,
+      "quest_id": 150,
+      "time": 7839.525774363324
+    },
+    {
+      "level": 21,
+      "quest_id": 127,
+      "time": 7847.525774363324
+    },
+    {
+      "level": 21,
+      "quest_id": 20,
+      "time": 7873.086065951731
+    },
+    {
+      "level": 21,
+      "quest_id": 98387,
+      "time": 8743.691403291585
+    },
+    {
+      "level": 21,
+      "quest_id": 98386,
+      "time": 8755.68743492002
+    },
+    {
+      "level": 21,
+      "quest_id": 118,
+      "time": 9140.949341135143
+    },
+    {
+      "level": 21,
+      "quest_id": 119,
+      "time": 9184.806483992286
+    },
+    {
+      "level": 21,
+      "quest_id": 122,
+      "time": 9458.451513241731
+    },
+    {
+      "level": 22,
+      "quest_id": 124,
+      "time": 11075.794770116452
+    },
+    {
+      "level": 22,
+      "quest_id": 91,
+      "time": 11118.699436543793
+    },
+    {
+      "level": 22,
+      "quest_id": 104,
+      "time": 15571.252929245351
+    },
+    {
+      "level": 22,
+      "quest_id": 3765,
+      "time": 16493.268025449368
+    },
+    {
+      "level": 22,
+      "quest_id": 97894,
+      "time": 16708.460539337215
+    },
+    {
+      "level": 22,
+      "quest_id": 3524,
+      "time": 16962.2462552578
+    },
+    {
+      "level": 22,
+      "quest_id": 984,
+      "time": 17010.27006550822
+    },
+    {
+      "level": 22,
+      "quest_id": 4761,
+      "time": 17063.793875758638
+    },
+    {
+      "level": 22,
+      "quest_id": 985,
+      "time": 17911.158199576435
+    },
+    {
+      "level": 22,
+      "quest_id": 965,
+      "time": 18141.086771005008
+    },
+    {
+      "level": 22,
+      "quest_id": 966,
+      "time": 18349.55435910732
+    },
+    {
+      "level": 22,
+      "quest_id": 4762,
+      "time": 18621.959126824953
+    },
+    {
+      "level": 22,
+      "quest_id": 982,
+      "time": 18650.816269682095
+    },
+    {
+      "level": 22,
+      "quest_id": 4681,
+      "time": 18726.292460521592
+    },
+    {
+      "level": 22,
+      "quest_id": 947,
+      "time": 19389.66534070071
+    },
+    {
+      "level": 22,
+      "quest_id": 948,
+      "time": 19633.16534070071
+    },
+    {
+      "level": 22,
+      "quest_id": 729,
+      "time": 20076.281592600608
+    },
+    {
+      "level": 22,
+      "quest_id": 944,
+      "time": 20155.19419003632
+    },
+    {
+      "level": 22,
+      "quest_id": 949,
+      "time": 20172.28541099311
+    },
+    {
+      "level": 23,
+      "quest_id": 4763,
+      "time": 20754.402192044578
+    },
+    {
+      "level": 23,
+      "quest_id": 98042,
+      "time": 20762.402192044578
+    },
+    {
+      "level": 23,
+      "quest_id": 731,
+      "time": 20784.449811455503
+    },
+    {
+      "level": 23,
+      "quest_id": 4740,
+      "time": 20812.949811455503
+    },
+    {
+      "level": 23,
+      "quest_id": 4730,
+      "time": 20839.759335991635
+    },
+    {
+      "level": 23,
+      "quest_id": 4728,
+      "time": 20847.759335991635
+    },
+    {
+      "level": 23,
+      "quest_id": 4731,
+      "time": 20855.759335991635
+    },
+    {
+      "level": 23,
+      "quest_id": 4732,
+      "time": 20863.759335991635
+    },
+    {
+      "level": 23,
+      "quest_id": 4733,
+      "time": 20871.759335991635
+    },
+    {
+      "level": 23,
+      "quest_id": 986,
+      "time": 20911.783146242054
+    },
+    {
+      "level": 23,
+      "quest_id": 993,
+      "time": 21217.783146242054
+    },
+    {
+      "level": 23,
+      "quest_id": 994,
+      "time": 21544.402199673976
+    },
+    {
+      "level": 23,
+      "quest_id": 34,
+      "time": 21698.219823509306
+    },
+    {
+      "level": 24,
+      "quest_id": 95999,
+      "time": 28410.733820569763
+    },
+    {
+      "level": 24,
+      "quest_id": 126,
+      "time": 29262.08642535542
+    },
+    {
+      "level": 24,
+      "quest_id": 219,
+      "time": 29276.246485173906
+    },
+    {
+      "level": 24,
+      "quest_id": 347,
+      "time": 29503.889342316765
+    },
+    {
+      "level": 24,
+      "quest_id": 373,
+      "time": 29612.746485173906
+    },
+    {
+      "level": 24,
+      "quest_id": 346,
+      "time": 29633.36553315626
+    },
+    {
+      "level": 24,
+      "quest_id": 168,
+      "time": 29723.88934449659
+    },
+    {
+      "level": 24,
+      "quest_id": 167,
+      "time": 29731.88934449659
+    },
+    {
+      "level": 24,
+      "quest_id": 2040,
+      "time": 29766.079819960458
+    },
+    {
+      "level": 24,
+      "quest_id": 389,
+      "time": 29825.746485173906
+    },
+    {
+      "level": 24,
+      "quest_id": 741,
+      "time": 30759.984575689043
+    },
+    {
+      "level": 24,
+      "quest_id": 180,
+      "time": 31278.892779463997
+    },
+    {
+      "level": 24,
+      "quest_id": 128,
+      "time": 31322.607065178283
+    },
+    {
+      "level": 25,
+      "quest_id": 226,
+      "time": 31971.568329866037
+    },
+    {
+      "level": 25,
+      "quest_id": 5,
+      "time": 32827.542857279215
+    },
+    {
+      "level": 25,
+      "quest_id": 93,
+      "time": 33215.66883655864
+    },
+    {
+      "level": 25,
+      "quest_id": 174,
+      "time": 33309.335502862
+    },
+    {
+      "level": 25,
+      "quest_id": 175,
+      "time": 33359.62121714772
+    },
+    {
+      "level": 25,
+      "quest_id": 177,
+      "time": 33511.507352976805
+    },
+    {
+      "level": 25,
+      "quest_id": 95,
+      "time": 33879.39909623383
+    },
+    {
+      "level": 25,
+      "quest_id": 240,
+      "time": 34741.12953603563
+    },
+    {
+      "level": 25,
+      "quest_id": 230,
+      "time": 35489.077900641525
+    },
+    {
+      "level": 25,
+      "quest_id": 79363,
+      "time": 35955.82534275688
+    },
+    {
+      "level": 25,
+      "quest_id": 79362,
+      "time": 35963.82534275688
+    },
+    {
+      "level": 25,
+      "quest_id": 96137,
+      "time": 35971.82534275688
+    },
+    {
+      "level": 25,
+      "quest_id": 245,
+      "time": 36118.03962847116
+    },
+    {
+      "level": 26,
+      "quest_id": 96139,
+      "time": 36259.61105704259
+    },
+    {
+      "level": 26,
+      "quest_id": 19,
+      "time": 36915.97483355811
+    },
+    {
+      "level": 26,
+      "quest_id": 65,
+      "time": 36970.508174295384
+    },
+    {
+      "level": 26,
+      "quest_id": 942,
+      "time": 38525.3234054187
+    },
+    {
+      "level": 26,
+      "quest_id": 98461,
+      "time": 38605.49960547865
+    },
+    {
+      "level": 26,
+      "quest_id": 98197,
+      "time": 39151.26150951395
+    },
+    {
+      "level": 26,
+      "quest_id": 1939,
+      "time": 39187.35674724588
+    },
+    {
+      "level": 26,
+      "quest_id": 94,
+      "time": 39781.061697508325
+    },
+    {
+      "level": 26,
+      "quest_id": 248,
+      "time": 39954.13472288645
+    },
+    {
+      "level": 26,
+      "quest_id": 1938,
+      "time": 39990.22996061838
+    },
+    {
+      "level": 26,
+      "quest_id": 1940,
+      "time": 40486.79223116895
+    },
+    {
+      "level": 26,
+      "quest_id": 1942,
+      "time": 40502.79223116895
+    },
+    {
+      "level": 26,
+      "quest_id": 305,
+      "time": 41238.07949570564
+    },
+    {
+      "level": 26,
+      "quest_id": 276,
+      "time": 46576.137017246314
+    },
+    {
+      "level": 26,
+      "quest_id": 277,
+      "time": 47456.00180996955
+    },
+    {
+      "level": 27,
+      "quest_id": 275,
+      "time": 48173.60122461228
+    },
+    {
+      "level": 27,
+      "quest_id": 469,
+      "time": 48950.86074994814
+    },
+    {
+      "level": 27,
+      "quest_id": 279,
+      "time": 48998.88114493045
+    },
+    {
+      "level": 27,
+      "quest_id": 98815,
+      "time": 49029.49605416968
+    },
+    {
+      "level": 27,
+      "quest_id": 306,
+      "time": 49062.73415013438
+    },
+    {
+      "level": 27,
+      "quest_id": 470,
+      "time": 49097.162721562956
+    },
+    {
+      "level": 27,
+      "quest_id": 98282,
+      "time": 49334.63614385602
+    },
+    {
+      "level": 27,
+      "quest_id": 288,
+      "time": 50256.339391811845
+    },
+    {
+      "level": 27,
+      "quest_id": 471,
+      "time": 50321.42343282543
+    },
+    {
+      "level": 27,
+      "quest_id": 98208,
+      "time": 50333.947242258415
+    },
+    {
+      "level": 27,
+      "quest_id": 281,
+      "time": 50455.46763969303
+    },
+    {
+      "level": 27,
+      "quest_id": 284,
+      "time": 50483.91911249814
+    },
+    {
+      "level": 27,
+      "quest_id": 285,
+      "time": 50535.771072079915
+    },
+    {
+      "level": 27,
+      "quest_id": 289,
+      "time": 51341.88799080028
+    },
+    {
+      "level": 27,
+      "quest_id": 286,
+      "time": 51411.54316991225
+    },
+    {
+      "level": 27,
+      "quest_id": 98189,
+      "time": 51465.400312769394
+    },
+    {
+      "level": 27,
+      "quest_id": 294,
+      "time": 51732.25745562654
+    },
+    {
+      "level": 28,
+      "quest_id": 295,
+      "time": 52245.92969083661
+    },
+    {
+      "level": 28,
+      "quest_id": 296,
+      "time": 52516.32439768415
+    },
+    {
+      "level": 28,
+      "quest_id": 98072,
+      "time": 53684.085863696775
+    },
+    {
+      "level": 28,
+      "quest_id": 464,
+      "time": 53731.03824537576
+    },
+    {
+      "level": 28,
+      "quest_id": 290,
+      "time": 54074.699589452095
+    },
+    {
+      "level": 28,
+      "quest_id": 292,
+      "time": 54260.58053602018
+    },
+    {
+      "level": 28,
+      "quest_id": 98240,
+      "time": 54564.913875166385
+    },
+    {
+      "level": 28,
+      "quest_id": 98245,
+      "time": 55183.241019628425
+    },
+    {
+      "level": 28,
+      "quest_id": 293,
+      "time": 55324.45530534271
+    },
+    {
+      "level": 28,
+      "quest_id": 1274,
+      "time": 55481.218419338635
+    },
+    {
+      "level": 28,
+      "quest_id": 98190,
+      "time": 55561.82550480966
+    },
+    {
+      "level": 28,
+      "quest_id": 1241,
+      "time": 55678.87312095085
+    },
+    {
+      "level": 28,
+      "quest_id": 1242,
+      "time": 55743.682643307155
+    },
+    {
+      "level": 28,
+      "quest_id": 1243,
+      "time": 55991.998143280725
+    },
+    {
+      "level": 28,
+      "quest_id": 96138,
+      "time": 57009.121173323496
+    },
+    {
+      "level": 28,
+      "quest_id": 1244,
+      "time": 57039.621173323496
+    },
+    {
+      "level": 29,
+      "quest_id": 181,
+      "time": 57090.8592692882
+    },
+    {
+      "level": 29,
+      "quest_id": 1245,
+      "time": 57172.66879164451
+    },
+    {
+      "level": 29,
+      "quest_id": 1246,
+      "time": 57242.12117114367
+    },
+    {
+      "level": 29,
+      "quest_id": 1447,
+      "time": 57286.12117114367
+    },
+    {
+      "level": 29,
+      "quest_id": 1247,
+      "time": 57357.35926492855
+    },
+    {
+      "level": 29,
+      "quest_id": 95772,
+      "time": 57591.430836123815
+    },
+    {
+      "level": 29,
+      "quest_id": 169,
+      "time": 58136.66668478798
+    },
+    {
+      "level": 29,
+      "quest_id": 249,
+      "time": 58417.642881077045
+    },
+    {
+      "level": 29,
+      "quest_id": 1248,
+      "time": 58436.56556209449
+    },
+    {
+      "level": 29,
+      "quest_id": 1249,
+      "time": 58484.6439004555
+    },
+    {
+      "level": 29,
+      "quest_id": 1250,
+      "time": 58504.72223881651
+    },
+    {
+      "level": 29,
+      "quest_id": 943,
+      "time": 58525.72223881651
+    },
+    {
+      "level": 29,
+      "quest_id": 98283,
+      "time": 59764.14517057378
+    },
+    {
+      "level": 29,
+      "quest_id": 87318,
+      "time": 60056.135275855006
+    },
+    {
+      "level": 29,
+      "quest_id": 637,
+      "time": 60501.132517334154
+    },
+    {
+      "level": 29,
+      "quest_id": 683,
+      "time": 60634.962853006444
+    },
+    {
+      "level": 29,
+      "quest_id": 686,
+      "time": 60825.72475922157
+    },
+    {
+      "level": 29,
+      "quest_id": 2945,
+      "time": 65460.796179073695
+    },
+    {
+      "level": 29,
+      "quest_id": 2951,
+      "time": 65484.796179073695
+    },
+    {
+      "level": 30,
+      "quest_id": 2952,
+      "time": 65492.796179073695
+    },
+    {
+      "level": 30,
+      "quest_id": 2953,
+      "time": 65500.796179073695
+    },
+    {
+      "level": 30,
+      "quest_id": 2926,
+      "time": 65677.01046042833
+    },
+    {
+      "level": 30,
+      "quest_id": 2927,
+      "time": 65807.15331539136
+    },
+    {
+      "level": 30,
+      "quest_id": 538,
+      "time": 67241.12998129247
+    },
+    {
+      "level": 30,
+      "quest_id": 536,
+      "time": 70507.2653136583
+    },
+    {
+      "level": 30,
+      "quest_id": 559,
+      "time": 71661.4099022931
+    },
+    {
+      "level": 30,
+      "quest_id": 560,
+      "time": 71688.36228288218
+    },
+    {
+      "level": 30,
+      "quest_id": 561,
+      "time": 71715.31466347126
+    },
+    {
+      "level": 31,
+      "quest_id": 562,
+      "time": 72311.21161725713
+    },
+    {
+      "level": 31,
+      "quest_id": 98059,
+      "time": 72385.06876011427
+    },
+    {
+      "level": 31,
+      "quest_id": 92432,
+      "time": 72801.11738316338
+    },
+    {
+      "level": 31,
+      "quest_id": 92457,
+      "time": 77841.47029633955
+    },
+    {
+      "level": 31,
+      "quest_id": 92458,
+      "time": 77849.47029633955
+    },
+    {
+      "level": 31,
+      "quest_id": 2924,
+      "time": 77946.65949184405
+    },
+    {
+      "level": 31,
+      "quest_id": 2925,
+      "time": 77954.65949184405
+    },
+    {
+      "level": 31,
+      "quest_id": 2930,
+      "time": 77965.29126376464
+    },
+    {
+      "level": 31,
+      "quest_id": 2929,
+      "time": 77992.16140492618
+    },
+    {
+      "level": 31,
+      "quest_id": 2922,
+      "time": 78001.44304535828
+    },
+    {
+      "level": 31,
+      "quest_id": 2923,
+      "time": 78009.44304535828
+    },
+    {
+      "level": 32,
+      "quest_id": 7807,
+      "time": 78022.80630971082
+    },
+    {
+      "level": 32,
+      "quest_id": 2947,
+      "time": 78058.18726172847
+    },
+    {
+      "level": 32,
+      "quest_id": 92456,
+      "time": 78211.5444045856
+    },
+    {
+      "level": 32,
+      "quest_id": 2928,
+      "time": 78336.80630644107
+    },
+    {
+      "level": 32,
+      "quest_id": 563,
+      "time": 78403.98262815633
+    },
+    {
+      "level": 32,
+      "quest_id": 92489,
+      "time": 78440.07786588826
+    },
+    {
+      "level": 32,
+      "quest_id": 583,
+      "time": 78972.59144066442
+    },
+    {
+      "level": 32,
+      "quest_id": 342,
+      "time": 79207.79500130628
+    },
+    {
+      "level": 32,
+      "quest_id": 341,
+      "time": 79500.84497550939
+    },
+    {
+      "level": 32,
+      "quest_id": 340,
+      "time": 79793.59807924245
+    },
+    {
+      "level": 32,
+      "quest_id": 339,
+      "time": 80086.48516110395
+    },
+    {
+      "level": 32,
+      "quest_id": 185,
+      "time": 80314.89353822333
+    },
+    {
+      "level": 32,
+      "quest_id": 190,
+      "time": 80782.29241411678
+    },
+    {
+      "level": 32,
+      "quest_id": 186,
+      "time": 81510.56363298163
+    },
+    {
+      "level": 32,
+      "quest_id": 191,
+      "time": 81544.75009408247
+    },
+    {
+      "level": 32,
+      "quest_id": 215,
+      "time": 81805.93600401524
+    },
+    {
+      "level": 33,
+      "quest_id": 200,
+      "time": 82929.91061550824
+    },
+    {
+      "level": 33,
+      "quest_id": 194,
+      "time": 83794.50550784793
+    },
+    {
+      "level": 33,
+      "quest_id": 338,
+      "time": 83829.66005796053
+    },
+    {
+      "level": 33,
+      "quest_id": 187,
+      "time": 84202.0505353666
+    },
+    {
+      "level": 33,
+      "quest_id": 204,
+      "time": 84280.16958443886
+    },
+    {
+      "level": 33,
+      "quest_id": 203,
+      "time": 84288.16958443886
+    },
+    {
+      "level": 33,
+      "quest_id": 210,
+      "time": 84857.00290614646
+    },
+    {
+      "level": 33,
+      "quest_id": 98463,
+      "time": 84884.45528700801
+    },
+    {
+      "level": 33,
+      "quest_id": 616,
+      "time": 84913.97741743267
+    },
+    {
+      "level": 33,
+      "quest_id": 575,
+      "time": 87981.44682138944
+    },
+    {
+      "level": 33,
+      "quest_id": 605,
+      "time": 88020.39613856074
+    },
+    {
+      "level": 33,
+      "quest_id": 189,
+      "time": 88041.49137629267
+    },
+    {
+      "level": 33,
+      "quest_id": 1947,
+      "time": 89709.15805295022
+    },
+    {
+      "level": 33,
+      "quest_id": 1132,
+      "time": 90008.87233266998
+    },
+    {
+      "level": 33,
+      "quest_id": 1264,
+      "time": 90057.82471216915
+    },
+    {
+      "level": 33,
+      "quest_id": 1282,
+      "time": 90067.31907658889
+    },
+    {
+      "level": 33,
+      "quest_id": 1265,
+      "time": 90256.02772236326
+    },
+    {
+      "level": 33,
+      "quest_id": 1266,
+      "time": 90485.12295464563
+    },
+    {
+      "level": 34,
+      "quest_id": 1324,
+      "time": 90742.93247264228
+    },
+    {
+      "level": 34,
+      "quest_id": 1267,
+      "time": 90760.50588449574
+    },
+    {
+      "level": 34,
+      "quest_id": 1219,
+      "time": 91145.28288718648
+    },
+    {
+      "level": 34,
+      "quest_id": 1218,
+      "time": 91363.33050550749
+    },
+    {
+      "level": 34,
+      "quest_id": 1252,
+      "time": 93820.48457050118
+    },
+    {
+      "level": 34,
+      "quest_id": 1220,
+      "time": 93878.72266646588
+    },
+    {
+      "level": 34,
+      "quest_id": 1253,
+      "time": 93886.72266646588
+    },
+    {
+      "level": 34,
+      "quest_id": 1284,
+      "time": 93894.72266646588
+    },
+    {
+      "level": 34,
+      "quest_id": 1259,
+      "time": 93921.54091044508
+    },
+    {
+      "level": 34,
+      "quest_id": 1285,
+      "time": 93940.35915442428
+    },
+    {
+      "level": 34,
+      "quest_id": 1319,
+      "time": 94009.93058299572
+    },
+    {
+      "level": 34,
+      "quest_id": 1320,
+      "time": 94079.50201156715
+    },
+    {
+      "level": 34,
+      "quest_id": 1286,
+      "time": 94403.93058299572
+    },
+    {
+      "level": 34,
+      "quest_id": 1287,
+      "time": 94734.45440414528
+    },
+    {
+      "level": 34,
+      "quest_id": 1206,
+      "time": 94914.95440414528
+    },
+    {
+      "level": 34,
+      "quest_id": 3523,
+      "time": 100053.54965386626
+    },
+    {
+      "level": 34,
+      "quest_id": 6626,
+      "time": 100073.21632016962
+    },
+    {
+      "level": 34,
+      "quest_id": 1949,
+      "time": 100736.9364806979
+    },
+    {
+      "level": 34,
+      "quest_id": 1179,
+      "time": 100945.43470484715
+    },
+    {
+      "level": 34,
+      "quest_id": 1950,
+      "time": 101098.65300928187
+    },
+    {
+      "level": 35,
+      "quest_id": 1176,
+      "time": 101525.67103380876
+    },
+    {
+      "level": 35,
+      "quest_id": 1105,
+      "time": 102791.91326794609
+    },
+    {
+      "level": 35,
+      "quest_id": 1110,
+      "time": 102827.84893189429
+    },
+    {
+      "level": 35,
+      "quest_id": 1104,
+      "time": 103671.04898556155
+    },
+    {
+      "level": 35,
+      "quest_id": 1175,
+      "time": 103703.09660388256
+    },
+    {
+      "level": 35,
+      "quest_id": 1111,
+      "time": 103747.28707934642
+    },
+    {
+      "level": 35,
+      "quest_id": 9267,
+      "time": 103788.62041195315
+    },
+    {
+      "level": 35,
+      "quest_id": 1178,
+      "time": 103831.38231598845
+    },
+    {
+      "level": 35,
+      "quest_id": 87491,
+      "time": 104833.98193905385
+    },
+    {
+      "level": 35,
+      "quest_id": 304,
+      "time": 104958.79155175206
+    },
+    {
+      "level": 35,
+      "quest_id": 631,
+      "time": 105044.457778431
+    },
+    {
+      "level": 35,
+      "quest_id": 88757,
+      "time": 105214.41227632469
+    },
+    {
+      "level": 35,
+      "quest_id": 88758,
+      "time": 105361.24560675159
+    },
+    {
+      "level": 35,
+      "quest_id": 632,
+      "time": 105392.81703532302
+    },
+    {
+      "level": 35,
+      "quest_id": 98297,
+      "time": 105497.24560675159
+    },
+    {
+      "level": 35,
+      "quest_id": 328,
+      "time": 106063.28334663277
+    },
+    {
+      "level": 35,
+      "quest_id": 329,
+      "time": 106237.43245084325
+    },
+    {
+      "level": 35,
+      "quest_id": 330,
+      "time": 106257.59578917935
+    },
+    {
+      "level": 36,
+      "quest_id": 195,
+      "time": 107865.99765896649
+    },
+    {
+      "level": 36,
+      "quest_id": 5762,
+      "time": 107891.45054267283
+    },
+    {
+      "level": 36,
+      "quest_id": 188,
+      "time": 108101.08239517827
+    },
+    {
+      "level": 36,
+      "quest_id": 201,
+      "time": 108498.2128619911
+    },
+    {
+      "level": 36,
+      "quest_id": 213,
+      "time": 108510.26048112955
+    },
+    {
+      "level": 36,
+      "quest_id": 577,
+      "time": 108533.26048112955
+    },
+    {
+      "level": 36,
+      "quest_id": 8553,
+      "time": 108590.68440455687
+    },
+    {
+      "level": 36,
+      "quest_id": 1180,
+      "time": 108601.55190443786
+    },
+    {
+      "level": 36,
+      "quest_id": 1181,
+      "time": 108666.59952493869
+    },
+    {
+      "level": 36,
+      "quest_id": 578,
+      "time": 110491.63014234045
+    },
+    {
+      "level": 36,
+      "quest_id": 1182,
+      "time": 110499.63014234045
+    },
+    {
+      "level": 36,
+      "quest_id": 331,
+      "time": 110928.8821504973
+    },
+    {
+      "level": 36,
+      "quest_id": 192,
+      "time": 111010.57262378134
+    },
+    {
+      "level": 36,
+      "quest_id": 574,
+      "time": 111539.34512110491
+    },
+    {
+      "level": 36,
+      "quest_id": 198,
+      "time": 111589.96417017718
+    },
+    {
+      "level": 36,
+      "quest_id": 601,
+      "time": 112936.78873779834
+    },
+    {
+      "level": 36,
+      "quest_id": 602,
+      "time": 114180.55793736888
+    },
+    {
+      "level": 36,
+      "quest_id": 564,
+      "time": 115754.61903935432
+    },
+    {
+      "level": 36,
+      "quest_id": 555,
+      "time": 115782.61903935432
+    },
+    {
+      "level": 36,
+      "quest_id": 505,
+      "time": 115820.52380107743
+    },
+    {
+      "level": 36,
+      "quest_id": 510,
+      "time": 115828.52380107743
+    },
+    {
+      "level": 37,
+      "quest_id": 511,
+      "time": 115853.4285633455
+    },
+    {
+      "level": 37,
+      "quest_id": 514,
+      "time": 115948.14284905979
+    },
+    {
+      "level": 37,
+      "quest_id": 98300,
+      "time": 116024.43886217254
+    },
+    {
+      "level": 37,
+      "quest_id": 707,
+      "time": 116891.86454082275
+    },
+    {
+      "level": 37,
+      "quest_id": 720,
+      "time": 117470.57530441706
+    },
+    {
+      "level": 37,
+      "quest_id": 719,
+      "time": 118931.18844345883
+    },
+    {
+      "level": 37,
+      "quest_id": 718,
+      "time": 118955.55552968648
+    },
+    {
+      "level": 37,
+      "quest_id": 603,
+      "time": 121339.49987120907
+    },
+    {
+      "level": 37,
+      "quest_id": 9259,
+      "time": 121698.12288194126
+    },
+    {
+      "level": 37,
+      "quest_id": 624,
+      "time": 122267.7069005904
+    },
+    {
+      "level": 37,
+      "quest_id": 1392,
+      "time": 123058.82566791479
+    },
+    {
+      "level": 37,
+      "quest_id": 1396,
+      "time": 123129.68281077193
+    },
+    {
+      "level": 38,
+      "quest_id": 1393,
+      "time": 123426.44548836273
+    },
+    {
+      "level": 38,
+      "quest_id": 1421,
+      "time": 123942.5443339184
+    },
+    {
+      "level": 39,
+      "quest_id": 79948,
+      "time": 139396.88006809755
+    },
+    {
+      "level": 39,
+      "quest_id": 81947,
+      "time": 139404.88006809755
+    },
+    {
+      "level": 39,
+      "quest_id": 79951,
+      "time": 139412.88006809755
+    },
+    {
+      "level": 39,
+      "quest_id": 1363,
+      "time": 139515.18959045387
+    },
+    {
+      "level": 39,
+      "quest_id": 610,
+      "time": 139865.53601899202
+    },
+    {
+      "level": 39,
+      "quest_id": 212,
+      "time": 140337.46679977834
+    },
+    {
+      "level": 39,
+      "quest_id": 695,
+      "time": 141054.96979743795
+    },
+    {
+      "level": 39,
+      "quest_id": 690,
+      "time": 141062.96979743795
+    },
+    {
+      "level": 39,
+      "quest_id": 659,
+      "time": 141653.3100529417
+    },
+    {
+      "level": 39,
+      "quest_id": 658,
+      "time": 141751.97040190184
+    },
+    {
+      "level": 39,
+      "quest_id": 657,
+      "time": 141768.3613191775
+    },
+    {
+      "level": 39,
+      "quest_id": 660,
+      "time": 141798.56175951572
+    },
+    {
+      "level": 39,
+      "quest_id": 691,
+      "time": 142718.429832614
+    },
+    {
+      "level": 39,
+      "quest_id": 642,
+      "time": 143388.42571596694
+    },
+    {
+      "level": 39,
+      "quest_id": 693,
+      "time": 143968.99942151917
+    },
+    {
+      "level": 39,
+      "quest_id": 651,
+      "time": 144253.9041805175
+    },
+    {
+      "level": 39,
+      "quest_id": 663,
+      "time": 144463.14512612607
+    },
+    {
+      "level": 39,
+      "quest_id": 665,
+      "time": 144501.49156631503
+    },
+    {
+      "level": 39,
+      "quest_id": 664,
+      "time": 144969.3935419431
+    },
+    {
+      "level": 39,
+      "quest_id": 2500,
+      "time": 145184.56243382668
+    },
+    {
+      "level": 39,
+      "quest_id": 525,
+      "time": 145511.02416333774
+    },
+    {
+      "level": 39,
+      "quest_id": 661,
+      "time": 145540.3574970344
+    },
+    {
+      "level": 39,
+      "quest_id": 540,
+      "time": 147232.48361642731
+    },
+    {
+      "level": 39,
+      "quest_id": 537,
+      "time": 147278.10266440967
+    },
+    {
+      "level": 40,
+      "quest_id": 500,
+      "time": 147295.15028327564
+    }
+  ],
+  "compute_seconds": 17.317382,
+  "copper_end": -83390,
+  "edition": "forever",
+  "effective_params": {
+    "abandon_weight": 600.0,
+    "all_class_quests": false,
+    "allow_elite": false,
+    "allow_grind": true,
+    "alns": 0.25,
+    "anneal": 0.0,
+    "approx_sources": false,
+    "assume_movement_talents": true,
+    "auction_house": false,
+    "auction_items": [
+      5770
+    ],
+    "bag_weight": 20.0,
+    "bis": "off",
+    "camp_radius": 0.0,
+    "candidates": 32,
+    "chain_insert": 0.05,
+    "child_glue": 0.5,
+    "class_power_slack": 600.0,
+    "common_item_sources": 100,
+    "common_item_time": 60.0,
+    "construction": "greedy",
+    "construction_random": false,
+    "continent_stay": 1.0,
+    "crowd_by_level": [
+      1.0,
+      0.9,
+      0.8,
+      0.6,
+      0.5
+    ],
+    "crowd_event_time": 900.0,
+    "crowd_players": 3.0,
+    "crowded": 0.0,
+    "death_skip_time": 45.0,
+    "death_skips": false,
+    "default_drop_chance": 0.6,
+    "default_item_count": 6.0,
+    "default_kill_count": 8.0,
+    "default_xp_difficulty": 5,
+    "detour": 1.0,
+    "dungeon_from": -3,
+    "dungeon_loot_share": 0.35,
+    "dungeon_pickup_ahead": 8,
+    "dungeon_quest_weight": 0.3,
+    "dungeon_to": 3,
+    "dungeon_xp_share": 0.35,
+    "dungeons": true,
+    "dynamic_respawn": 0.5,
+    "edition": "forever",
+    "efficiency_power": 0.0,
+    "effort": 1.0,
+    "elite_kill_factor": 3.0,
+    "elite_pull_levels": 1.0,
+    "eval_window": 150,
+    "excluded_dungeons": [],
+    "excluded_quests": [],
+    "excluded_sorts": [
+      22,
+      24,
+      101,
+      121,
+      181,
+      182,
+      201,
+      221,
+      264,
+      284,
+      304,
+      324,
+      344,
+      364,
+      365,
+      366,
+      367,
+      368,
+      369,
+      641,
+      644
+    ],
+    "excluded_zones": [],
+    "explore_radius": 250.0,
+    "farm_above": 1,
+    "farm_below": 3,
+    "farm_cap": 0.1,
+    "farm_corridor": 25.0,
+    "farm_on_way": true,
+    "farm_share": 0.8,
+    "final_routes": 1,
+    "final_tries": 195.0,
+    "fit_above_penalty": 0.4,
+    "fit_free_levels": 2,
+    "fit_penalty": 0.0,
+    "flight_learn_radius": 300.0,
+    "flight_overhead": 25.0,
+    "flight_speed": 30.0,
+    "flight_weight": 1.0,
+    "food_xp": false,
+    "forced_dungeon_quests": [],
+    "forced_dungeons": [],
+    "forced_starts": 0,
+    "forced_zones": [],
+    "gather_overlap": 0.4,
+    "gather_radius": 150.0,
+    "gather_share": 0.1,
+    "gear_floor": 0.75,
+    "gear_value": 0.5,
+    "gold_weight": 3600.0,
+    "grind_cap": 0.1,
+    "grind_kill_time": 53.0,
+    "grind_over_weight": 4.0,
+    "grind_weight": 1.5,
+    "group_kill_speed": 0.8,
+    "group_shared_drops": true,
+    "group_size": 1,
+    "group_sync_max": 1.0,
+    "group_sync_weight": 1.0,
+    "group_sync_window": 0.5,
+    "hearth_cast": 10.0,
+    "hearth_cooldown": 3600.0,
+    "hearth_min_saving": 180.0,
+    "hub_repair": 0.0,
+    "keep_gray": false,
+    "kill_time": 24.0,
+    "lahc": 0,
+    "link_wait": 120.0,
+    "loot_per_kill": 0.35,
+    "mandatory_penalty": 7200.0,
+    "max_object_loot": 20,
+    "max_quest_above": 60,
+    "min_efficiency": 0.5,
+    "min_start_chance": 0.1,
+    "mount_bonus": 0.6,
+    "mount_level": 40,
+    "object_time": 12.0,
+    "objective_alternatives": 2,
+    "pack_power": null,
+    "power_curve": [],
+    "power_gear": null,
+    "power_scale": 1.0,
+    "preferred_zone_weight": 0.5,
+    "preferred_zones": [],
+    "profession_quest_weight": 300.0,
+    "profession_trainers": false,
+    "progression": "normal",
+    "progression_margin": null,
+    "pull_levels": 1.0,
+    "pvp_mark_time": 900.0,
+    "pvp_quests": false,
+    "qualify_min_tries": 30000.0,
+    "qualify_tries": 16.5,
+    "quest_log_size": 40,
+    "race_mutants": 224,
+    "recall_cooldown": 900.0,
+    "reputation_goals": [],
+    "reputation_weight": 10.0,
+    "respawn_time": 300.0,
+    "round_tries": 0.0,
+    "run_speed": 7.0,
+    "screen": 8,
+    "seed": 20261107,
+    "sell_radius": 150.0,
+    "sell_time": 15.0,
+    "share_every": 500,
+    "shortcuts": true,
+    "sleeping_bag": false,
+    "solo_elite_kills": 2.0,
+    "start_zone": 0,
+    "stop_overhead": 8.0,
+    "teleport_cast": 10.0,
+    "threads": 8,
+    "tidy_radius": 100.0,
+    "tidy_slack": 30.0,
+    "train_every": 2,
+    "train_max_delay": 1,
+    "train_min_gain": 0.03,
+    "train_radius": 300.0,
+    "train_time": 30.0,
+    "train_trip_gain": 0.12,
+    "unlock_delay_weight": 300.0,
+    "zone_change_weight": 240.0,
+    "zone_detour": [],
+    "zone_detour_pull": 10.0,
+    "zone_gap": 8.0,
+    "zone_stay": 4.0,
+    "zone_stay_quests": 0.0
+  },
+  "effective_request": {
+    "class": "mage",
+    "from_level": 20,
+    "locale": null,
+    "mate_professions": [],
+    "mates": [],
+    "name": null,
+    "params": {
+      "abandon_weight": 600.0,
+      "all_class_quests": false,
+      "allow_elite": false,
+      "allow_grind": true,
+      "alns": 0.25,
+      "anneal": 0.0,
+      "approx_sources": false,
+      "assume_movement_talents": true,
+      "auction_house": false,
+      "auction_items": [
+        5770
+      ],
+      "bag_weight": 20.0,
+      "bis": "off",
+      "camp_radius": 0.0,
+      "candidates": 32,
+      "chain_insert": 0.05,
+      "child_glue": 0.5,
+      "class_power_slack": 600.0,
+      "common_item_sources": 100,
+      "common_item_time": 60.0,
+      "construction": "greedy",
+      "construction_random": false,
+      "continent_stay": 1.0,
+      "crowd_by_level": [
+        1.0,
+        0.9,
+        0.8,
+        0.6,
+        0.5
+      ],
+      "crowd_event_time": 900.0,
+      "crowd_players": 3.0,
+      "crowded": 0.0,
+      "death_skip_time": 45.0,
+      "death_skips": false,
+      "default_drop_chance": 0.6,
+      "default_item_count": 6.0,
+      "default_kill_count": 8.0,
+      "default_xp_difficulty": 5,
+      "detour": 1.0,
+      "dungeon_from": -3,
+      "dungeon_loot_share": 0.35,
+      "dungeon_pickup_ahead": 8,
+      "dungeon_quest_weight": 0.3,
+      "dungeon_to": 3,
+      "dungeon_xp_share": 0.35,
+      "dungeons": true,
+      "dynamic_respawn": 0.5,
+      "edition": "forever",
+      "efficiency_power": 0.0,
+      "effort": 1.0,
+      "elite_kill_factor": 3.0,
+      "elite_pull_levels": 1.0,
+      "eval_window": 150,
+      "excluded_dungeons": [],
+      "excluded_quests": [],
+      "excluded_sorts": [
+        22,
+        24,
+        101,
+        121,
+        181,
+        182,
+        201,
+        221,
+        264,
+        284,
+        304,
+        324,
+        344,
+        364,
+        365,
+        366,
+        367,
+        368,
+        369,
+        641,
+        644
+      ],
+      "excluded_zones": [],
+      "explore_radius": 250.0,
+      "farm_above": 1,
+      "farm_below": 3,
+      "farm_cap": 0.1,
+      "farm_corridor": 25.0,
+      "farm_on_way": true,
+      "farm_share": 0.8,
+      "final_routes": 1,
+      "final_tries": 195.0,
+      "fit_above_penalty": 0.4,
+      "fit_free_levels": 2,
+      "fit_penalty": 0.0,
+      "flight_learn_radius": 300.0,
+      "flight_overhead": 25.0,
+      "flight_speed": 30.0,
+      "flight_weight": 1.0,
+      "food_xp": false,
+      "forced_dungeon_quests": [],
+      "forced_dungeons": [],
+      "forced_starts": 0,
+      "forced_zones": [],
+      "gather_overlap": 0.4,
+      "gather_radius": 150.0,
+      "gather_share": 0.1,
+      "gear_floor": 0.75,
+      "gear_value": 0.5,
+      "gold_weight": 3600.0,
+      "grind_cap": 0.1,
+      "grind_kill_time": 53.0,
+      "grind_over_weight": 4.0,
+      "grind_weight": 1.5,
+      "group_kill_speed": 0.8,
+      "group_shared_drops": true,
+      "group_size": 1,
+      "group_sync_max": 1.0,
+      "group_sync_weight": 1.0,
+      "group_sync_window": 0.5,
+      "hearth_cast": 10.0,
+      "hearth_cooldown": 3600.0,
+      "hearth_min_saving": 180.0,
+      "hub_repair": 0.0,
+      "keep_gray": false,
+      "kill_time": 24.0,
+      "lahc": 0,
+      "link_wait": 120.0,
+      "loot_per_kill": 0.35,
+      "mandatory_penalty": 7200.0,
+      "max_object_loot": 20,
+      "max_quest_above": 60,
+      "min_efficiency": 0.5,
+      "min_start_chance": 0.1,
+      "mount_bonus": 0.6,
+      "mount_level": 40,
+      "object_time": 12.0,
+      "objective_alternatives": 2,
+      "pack_power": null,
+      "power_curve": [],
+      "power_gear": null,
+      "power_scale": 1.0,
+      "preferred_zone_weight": 0.5,
+      "preferred_zones": [],
+      "profession_quest_weight": 300.0,
+      "profession_trainers": false,
+      "progression": "normal",
+      "progression_margin": null,
+      "pull_levels": 1.0,
+      "pvp_mark_time": 900.0,
+      "pvp_quests": false,
+      "qualify_min_tries": 30000.0,
+      "qualify_tries": 16.5,
+      "quest_log_size": 40,
+      "race_mutants": 224,
+      "recall_cooldown": 900.0,
+      "reputation_goals": [],
+      "reputation_weight": 10.0,
+      "respawn_time": 300.0,
+      "round_tries": 0.0,
+      "run_speed": 7.0,
+      "screen": 8,
+      "seed": 20261107,
+      "sell_radius": 150.0,
+      "sell_time": 15.0,
+      "share_every": 500,
+      "shortcuts": true,
+      "sleeping_bag": false,
+      "solo_elite_kills": 2.0,
+      "start_zone": 0,
+      "stop_overhead": 8.0,
+      "teleport_cast": 10.0,
+      "threads": 8,
+      "tidy_radius": 100.0,
+      "tidy_slack": 30.0,
+      "train_every": 2,
+      "train_max_delay": 1,
+      "train_min_gain": 0.03,
+      "train_radius": 300.0,
+      "train_time": 30.0,
+      "train_trip_gain": 0.12,
+      "unlock_delay_weight": 300.0,
+      "zone_change_weight": 240.0,
+      "zone_detour": [],
+      "zone_detour_pull": 10.0,
+      "zone_gap": 8.0,
+      "zone_stay": 4.0,
+      "zone_stay_quests": 0.0
+    },
+    "professions": [],
+    "race": "gnome",
+    "required_class_quests": null,
+    "required_quests": [],
+    "start": null,
+    "to_level": 40
+  },
+  "experiment": "single_start_search_kernel_not_production_tournament",
+  "hidden_penalty_seconds": 74924.09152764175,
+  "player_seconds": 147295.15028327564,
+  "required_quest_count": 0,
+  "required_validation": "passed",
+  "reserve_seconds": 3.0,
+  "schema": 1,
+  "score": 222219.2418109174,
+  "search_log": [
+    "start: 981 stops, 69h58",
+    "improved: 916 stops, 63h06 (59526 tries, 367 improvements)"
+  ],
+  "seed": 20261107,
+  "stages_seconds": {
+    "construction": 1.5400494,
+    "data": 0.0026044,
+    "exact_replay": 0.0005059,
+    "export": 0.0057411,
+    "finalize": 0.2241056,
+    "prepare": 1.3640025,
+    "search_including_cleanup": 14.1793993,
+    "validate": 0.0009729
+  },
+  "stops": [
+    {
+      "index": 110,
+      "kind": "Accept",
+      "quest_id": 167
+    },
+    {
+      "index": 111,
+      "kind": "Accept",
+      "quest_id": 168
+    },
+    {
+      "index": 718,
+      "kind": "Accept",
+      "quest_id": 2040
+    },
+    {
+      "index": 772,
+      "kind": "Accept",
+      "quest_id": 2928
+    },
+    {
+      "index": 1042,
+      "kind": "Accept",
+      "quest_id": 97894
+    },
+    {
+      "index": 697,
+      "kind": "Accept",
+      "quest_id": 1920
+    },
+    {
+      "index": 697,
+      "kind": "Objective(1)",
+      "quest_id": 1920
+    },
+    {
+      "index": 697,
+      "kind": "Objective(2)",
+      "quest_id": 1920
+    },
+    {
+      "index": 697,
+      "kind": "Objective(0)",
+      "quest_id": 1920
+    },
+    {
+      "index": 697,
+      "kind": "TurnIn",
+      "quest_id": 1920
+    },
+    {
+      "index": 1038,
+      "kind": "Accept",
+      "quest_id": 97234
+    },
+    {
+      "index": 824,
+      "kind": "Accept",
+      "quest_id": 3765
+    },
+    {
+      "index": 1038,
+      "kind": "TurnIn",
+      "quest_id": 97234
+    },
+    {
+      "index": 304,
+      "kind": "Accept",
+      "quest_id": 538
+    },
+    {
+      "index": 1039,
+      "kind": "Accept",
+      "quest_id": 97237
+    },
+    {
+      "index": 1039,
+      "kind": "Objective(1)",
+      "quest_id": 97237
+    },
+    {
+      "index": 1039,
+      "kind": "Objective(0)",
+      "quest_id": 97237
+    },
+    {
+      "index": 1039,
+      "kind": "Objective(3)",
+      "quest_id": 97237
+    },
+    {
+      "index": 1039,
+      "kind": "Objective(2)",
+      "quest_id": 97237
+    },
+    {
+      "index": 1039,
+      "kind": "TurnIn",
+      "quest_id": 97237
+    },
+    {
+      "index": 1036,
+      "kind": "Accept",
+      "quest_id": 97220
+    },
+    {
+      "index": 1036,
+      "kind": "TurnIn",
+      "quest_id": 97220
+    },
+    {
+      "index": 1037,
+      "kind": "Accept",
+      "quest_id": 97222
+    },
+    {
+      "index": 1037,
+      "kind": "Objective(0)",
+      "quest_id": 97222
+    },
+    {
+      "index": 239,
+      "kind": "Accept",
+      "quest_id": 343
+    },
+    {
+      "index": 767,
+      "kind": "Accept",
+      "quest_id": 2923
+    },
+    {
+      "index": 1037,
+      "kind": "TurnIn",
+      "quest_id": 97222
+    },
+    {
+      "index": 239,
+      "kind": "TurnIn",
+      "quest_id": 343
+    },
+    {
+      "index": 240,
+      "kind": "Accept",
+      "quest_id": 344
+    },
+    {
+      "index": 240,
+      "kind": "TurnIn",
+      "quest_id": 344
+    },
+    {
+      "index": 241,
+      "kind": "Accept",
+      "quest_id": 345
+    },
+    {
+      "index": 51,
+      "kind": "Accept",
+      "quest_id": 94
+    },
+    {
+      "index": 2,
+      "kind": "LearnFlight",
+      "quest_id": null
+    },
+    {
+      "index": 1082,
+      "kind": "Accept",
+      "quest_id": 98407
+    },
+    {
+      "index": 823,
+      "kind": "Accept",
+      "quest_id": 3741
+    },
+    {
+      "index": 64,
+      "kind": "Accept",
+      "quest_id": 118
+    },
+    {
+      "index": 48,
+      "kind": "Accept",
+      "quest_id": 91
+    },
+    {
+      "index": 823,
+      "kind": "Objective(0)",
+      "quest_id": 3741
+    },
+    {
+      "index": 241,
+      "kind": "TurnIn",
+      "quest_id": 345
+    },
+    {
+      "index": 243,
+      "kind": "Accept",
+      "quest_id": 347
+    },
+    {
+      "index": 1077,
+      "kind": "Accept",
+      "quest_id": 98387
+    },
+    {
+      "index": 9,
+      "kind": "Accept",
+      "quest_id": 20
+    },
+    {
+      "index": 70,
+      "kind": "Accept",
+      "quest_id": 125
+    },
+    {
+      "index": 93,
+      "kind": "Accept",
+      "quest_id": 150
+    },
+    {
+      "index": 72,
+      "kind": "Accept",
+      "quest_id": 127
+    },
+    {
+      "index": 74,
+      "kind": "Accept",
+      "quest_id": 129
+    },
+    {
+      "index": 6,
+      "kind": "Bind",
+      "quest_id": null
+    },
+    {
+      "index": 49,
+      "kind": "Accept",
+      "quest_id": 92
+    },
+    {
+      "index": 72,
+      "kind": "Objective(0)",
+      "quest_id": 127
+    },
+    {
+      "index": 93,
+      "kind": "Objective(0)",
+      "quest_id": 150
+    },
+    {
+      "index": 70,
+      "kind": "Objective(0)",
+      "quest_id": 125
+    },
+    {
+      "index": 70,
+      "kind": "TurnIn",
+      "quest_id": 125
+    },
+    {
+      "index": 47,
+      "kind": "Accept",
+      "quest_id": 89
+    },
+    {
+      "index": 9,
+      "kind": "Objective(0)",
+      "quest_id": 20
+    },
+    {
+      "index": 49,
+      "kind": "Objective(1)",
+      "quest_id": 92
+    },
+    {
+      "index": 49,
+      "kind": "Objective(2)",
+      "quest_id": 92
+    },
+    {
+      "index": 49,
+      "kind": "Objective(0)",
+      "quest_id": 92
+    },
+    {
+      "index": 11,
+      "kind": "Accept",
+      "quest_id": 34
+    },
+    {
+      "index": 49,
+      "kind": "TurnIn",
+      "quest_id": 92
+    },
+    {
+      "index": 74,
+      "kind": "TurnIn",
+      "quest_id": 129
+    },
+    {
+      "index": 75,
+      "kind": "Accept",
+      "quest_id": 130
+    },
+    {
+      "index": 166,
+      "kind": "Accept",
+      "quest_id": 244
+    },
+    {
+      "index": 1082,
+      "kind": "Objective(0)",
+      "quest_id": 98407
+    },
+    {
+      "index": 75,
+      "kind": "TurnIn",
+      "quest_id": 130
+    },
+    {
+      "index": 76,
+      "kind": "Accept",
+      "quest_id": 131
+    },
+    {
+      "index": 76,
+      "kind": "TurnIn",
+      "quest_id": 131
+    },
+    {
+      "index": 823,
+      "kind": "TurnIn",
+      "quest_id": 3741
+    },
+    {
+      "index": 166,
+      "kind": "TurnIn",
+      "quest_id": 244
+    },
+    {
+      "index": 1082,
+      "kind": "TurnIn",
+      "quest_id": 98407
+    },
+    {
+      "index": 168,
+      "kind": "Accept",
+      "quest_id": 246
+    },
+    {
+      "index": 168,
+      "kind": "Objective(0)",
+      "quest_id": 246
+    },
+    {
+      "index": 168,
+      "kind": "Objective(1)",
+      "quest_id": 246
+    },
+    {
+      "index": 168,
+      "kind": "TurnIn",
+      "quest_id": 246
+    },
+    {
+      "index": 47,
+      "kind": "Objective(1)",
+      "quest_id": 89
+    },
+    {
+      "index": 47,
+      "kind": "Objective(0)",
+      "quest_id": 89
+    },
+    {
+      "index": 47,
+      "kind": "TurnIn",
+      "quest_id": 89
+    },
+    {
+      "index": 93,
+      "kind": "TurnIn",
+      "quest_id": 150
+    },
+    {
+      "index": 72,
+      "kind": "TurnIn",
+      "quest_id": 127
+    },
+    {
+      "index": 9,
+      "kind": "TurnIn",
+      "quest_id": 20
+    },
+    {
+      "index": 1076,
+      "kind": "Accept",
+      "quest_id": 98386
+    },
+    {
+      "index": 1076,
+      "kind": "Objective(1)",
+      "quest_id": 98386
+    },
+    {
+      "index": 1076,
+      "kind": "Objective(0)",
+      "quest_id": 98386
+    },
+    {
+      "index": 1077,
+      "kind": "Objective(0)",
+      "quest_id": 98387
+    },
+    {
+      "index": 1077,
+      "kind": "Objective(1)",
+      "quest_id": 98387
+    },
+    {
+      "index": 1077,
+      "kind": "TurnIn",
+      "quest_id": 98387
+    },
+    {
+      "index": 1076,
+      "kind": "TurnIn",
+      "quest_id": 98386
+    },
+    {
+      "index": 64,
+      "kind": "TurnIn",
+      "quest_id": 118
+    },
+    {
+      "index": 65,
+      "kind": "Accept",
+      "quest_id": 119
+    },
+    {
+      "index": 0,
+      "kind": "Hearth",
+      "quest_id": null
+    },
+    {
+      "index": 65,
+      "kind": "TurnIn",
+      "quest_id": 119
+    },
+    {
+      "index": 68,
+      "kind": "Accept",
+      "quest_id": 122
+    },
+    {
+      "index": 69,
+      "kind": "Accept",
+      "quest_id": 124
+    },
+    {
+      "index": 68,
+      "kind": "Objective(0)",
+      "quest_id": 122
+    },
+    {
+      "index": 68,
+      "kind": "TurnIn",
+      "quest_id": 122
+    },
+    {
+      "index": 69,
+      "kind": "Objective(0)",
+      "quest_id": 124
+    },
+    {
+      "index": 69,
+      "kind": "Objective(1)",
+      "quest_id": 124
+    },
+    {
+      "index": 48,
+      "kind": "Objective(0)",
+      "quest_id": 91
+    },
+    {
+      "index": 69,
+      "kind": "TurnIn",
+      "quest_id": 124
+    },
+    {
+      "index": 48,
+      "kind": "TurnIn",
+      "quest_id": 91
+    },
+    {
+      "index": 1,
+      "kind": "LearnFlight",
+      "quest_id": null
+    },
+    {
+      "index": 32,
+      "kind": "Accept",
+      "quest_id": 65
+    },
+    {
+      "index": 248,
+      "kind": "Accept",
+      "quest_id": 373
+    },
+    {
+      "index": 718,
+      "kind": "Objective(0)",
+      "quest_id": 2040
+    },
+    {
+      "index": 58,
+      "kind": "Accept",
+      "quest_id": 104
+    },
+    {
+      "index": 58,
+      "kind": "Objective(0)",
+      "quest_id": 104
+    },
+    {
+      "index": 58,
+      "kind": "TurnIn",
+      "quest_id": 104
+    },
+    {
+      "index": 824,
+      "kind": "TurnIn",
+      "quest_id": 3765
+    },
+    {
+      "index": 852,
+      "kind": "Accept",
+      "quest_id": 4740
+    },
+    {
+      "index": 815,
+      "kind": "Accept",
+      "quest_id": 3524
+    },
+    {
+      "index": 454,
+      "kind": "Accept",
+      "quest_id": 947
+    },
+    {
+      "index": 1087,
+      "kind": "Accept",
+      "quest_id": 98461
+    },
+    {
+      "index": 1043,
+      "kind": "Accept",
+      "quest_id": 97914
+    },
+    {
+      "index": 414,
+      "kind": "Accept",
+      "quest_id": 729
+    },
+    {
+      "index": 476,
+      "kind": "Accept",
+      "quest_id": 982
+    },
+    {
+      "index": 1042,
+      "kind": "Objective(0)",
+      "quest_id": 97894
+    },
+    {
+      "index": 1042,
+      "kind": "TurnIn",
+      "quest_id": 97894
+    },
+    {
+      "index": 478,
+      "kind": "Accept",
+      "quest_id": 984
+    },
+    {
+      "index": 468,
+      "kind": "Accept",
+      "quest_id": 965
+    },
+    {
+      "index": 815,
+      "kind": "Objective(0)",
+      "quest_id": 3524
+    },
+    {
+      "index": 478,
+      "kind": "Objective(0)",
+      "quest_id": 984
+    },
+    {
+      "index": 815,
+      "kind": "TurnIn",
+      "quest_id": 3524
+    },
+    {
+      "index": 842,
+      "kind": "Accept",
+      "quest_id": 4681
+    },
+    {
+      "index": 478,
+      "kind": "TurnIn",
+      "quest_id": 984
+    },
+    {
+      "index": 479,
+      "kind": "Accept",
+      "quest_id": 985
+    },
+    {
+      "index": 853,
+      "kind": "Accept",
+      "quest_id": 4761
+    },
+    {
+      "index": 853,
+      "kind": "TurnIn",
+      "quest_id": 4761
+    },
+    {
+      "index": 854,
+      "kind": "Accept",
+      "quest_id": 4762
+    },
+    {
+      "index": 476,
+      "kind": "Objective(0)",
+      "quest_id": 982
+    },
+    {
+      "index": 476,
+      "kind": "Objective(1)",
+      "quest_id": 982
+    },
+    {
+      "index": 842,
+      "kind": "Objective(0)",
+      "quest_id": 4681
+    },
+    {
+      "index": 479,
+      "kind": "Objective(0)",
+      "quest_id": 985
+    },
+    {
+      "index": 479,
+      "kind": "Objective(1)",
+      "quest_id": 985
+    },
+    {
+      "index": 479,
+      "kind": "TurnIn",
+      "quest_id": 985
+    },
+    {
+      "index": 480,
+      "kind": "Accept",
+      "quest_id": 986
+    },
+    {
+      "index": 468,
+      "kind": "TurnIn",
+      "quest_id": 965
+    },
+    {
+      "index": 469,
+      "kind": "Accept",
+      "quest_id": 966
+    },
+    {
+      "index": 469,
+      "kind": "Objective(0)",
+      "quest_id": 966
+    },
+    {
+      "index": 469,
+      "kind": "TurnIn",
+      "quest_id": 966
+    },
+    {
+      "index": 854,
+      "kind": "Objective(0)",
+      "quest_id": 4762
+    },
+    {
+      "index": 854,
+      "kind": "TurnIn",
+      "quest_id": 4762
+    },
+    {
+      "index": 855,
+      "kind": "Accept",
+      "quest_id": 4763
+    },
+    {
+      "index": 476,
+      "kind": "TurnIn",
+      "quest_id": 982
+    },
+    {
+      "index": 855,
+      "kind": "Objective(3)",
+      "quest_id": 4763
+    },
+    {
+      "index": 842,
+      "kind": "TurnIn",
+      "quest_id": 4681
+    },
+    {
+      "index": 855,
+      "kind": "Objective(1)",
+      "quest_id": 4763
+    },
+    {
+      "index": 855,
+      "kind": "Objective(2)",
+      "quest_id": 4763
+    },
+    {
+      "index": 855,
+      "kind": "Objective(0)",
+      "quest_id": 4763
+    },
+    {
+      "index": 855,
+      "kind": "Objective(4)",
+      "quest_id": 4763
+    },
+    {
+      "index": 454,
+      "kind": "Objective(0)",
+      "quest_id": 947
+    },
+    {
+      "index": 454,
+      "kind": "Objective(1)",
+      "quest_id": 947
+    },
+    {
+      "index": 454,
+      "kind": "TurnIn",
+      "quest_id": 947
+    },
+    {
+      "index": 455,
+      "kind": "Accept",
+      "quest_id": 948
+    },
+    {
+      "index": 455,
+      "kind": "TurnIn",
+      "quest_id": 948
+    },
+    {
+      "index": 452,
+      "kind": "Accept",
+      "quest_id": 944
+    },
+    {
+      "index": 480,
+      "kind": "Objective(0)",
+      "quest_id": 986
+    },
+    {
+      "index": 414,
+      "kind": "TurnIn",
+      "quest_id": 729
+    },
+    {
+      "index": 416,
+      "kind": "Accept",
+      "quest_id": 731
+    },
+    {
+      "index": 416,
+      "kind": "Objective(0)",
+      "quest_id": 731
+    },
+    {
+      "index": 452,
+      "kind": "Objective(0)",
+      "quest_id": 944
+    },
+    {
+      "index": 452,
+      "kind": "TurnIn",
+      "quest_id": 944
+    },
+    {
+      "index": 456,
+      "kind": "Accept",
+      "quest_id": 949
+    },
+    {
+      "index": 456,
+      "kind": "TurnIn",
+      "quest_id": 949
+    },
+    {
+      "index": 1048,
+      "kind": "Accept",
+      "quest_id": 98042
+    },
+    {
+      "index": 1048,
+      "kind": "Objective(0)",
+      "quest_id": 98042
+    },
+    {
+      "index": 848,
+      "kind": "Accept",
+      "quest_id": 4730
+    },
+    {
+      "index": 849,
+      "kind": "Accept",
+      "quest_id": 4731
+    },
+    {
+      "index": 850,
+      "kind": "Accept",
+      "quest_id": 4732
+    },
+    {
+      "index": 851,
+      "kind": "Accept",
+      "quest_id": 4733
+    },
+    {
+      "index": 852,
+      "kind": "Objective(0)",
+      "quest_id": 4740
+    },
+    {
+      "index": 847,
+      "kind": "Accept",
+      "quest_id": 4728
+    },
+    {
+      "index": 855,
+      "kind": "TurnIn",
+      "quest_id": 4763
+    },
+    {
+      "index": 1048,
+      "kind": "TurnIn",
+      "quest_id": 98042
+    },
+    {
+      "index": 416,
+      "kind": "TurnIn",
+      "quest_id": 731
+    },
+    {
+      "index": 424,
+      "kind": "Accept",
+      "quest_id": 741
+    },
+    {
+      "index": 852,
+      "kind": "TurnIn",
+      "quest_id": 4740
+    },
+    {
+      "index": 848,
+      "kind": "TurnIn",
+      "quest_id": 4730
+    },
+    {
+      "index": 847,
+      "kind": "TurnIn",
+      "quest_id": 4728
+    },
+    {
+      "index": 849,
+      "kind": "TurnIn",
+      "quest_id": 4731
+    },
+    {
+      "index": 850,
+      "kind": "TurnIn",
+      "quest_id": 4732
+    },
+    {
+      "index": 851,
+      "kind": "TurnIn",
+      "quest_id": 4733
+    },
+    {
+      "index": 480,
+      "kind": "TurnIn",
+      "quest_id": 986
+    },
+    {
+      "index": 484,
+      "kind": "Accept",
+      "quest_id": 993
+    },
+    {
+      "index": 484,
+      "kind": "TurnIn",
+      "quest_id": 993
+    },
+    {
+      "index": 485,
+      "kind": "Accept",
+      "quest_id": 994
+    },
+    {
+      "index": 485,
+      "kind": "Objective(0)",
+      "quest_id": 994
+    },
+    {
+      "index": 485,
+      "kind": "TurnIn",
+      "quest_id": 994
+    },
+    {
+      "index": 0,
+      "kind": "Hearth",
+      "quest_id": null
+    },
+    {
+      "index": 118,
+      "kind": "Accept",
+      "quest_id": 180
+    },
+    {
+      "index": 71,
+      "kind": "Accept",
+      "quest_id": 126
+    },
+    {
+      "index": 11,
+      "kind": "Objective(0)",
+      "quest_id": 34
+    },
+    {
+      "index": 11,
+      "kind": "TurnIn",
+      "quest_id": 34
+    },
+    {
+      "index": 71,
+      "kind": "Objective(0)",
+      "quest_id": 126
+    },
+    {
+      "index": 1020,
+      "kind": "Accept",
+      "quest_id": 95999
+    },
+    {
+      "index": 8,
+      "kind": "Accept",
+      "quest_id": 19
+    },
+    {
+      "index": 243,
+      "kind": "Objective(0)",
+      "quest_id": 347
+    },
+    {
+      "index": 1020,
+      "kind": "Objective(0)",
+      "quest_id": 95999
+    },
+    {
+      "index": 73,
+      "kind": "Accept",
+      "quest_id": 128
+    },
+    {
+      "index": 1020,
+      "kind": "TurnIn",
+      "quest_id": 95999
+    },
+    {
+      "index": 151,
+      "kind": "Accept",
+      "quest_id": 219
+    },
+    {
+      "index": 73,
+      "kind": "Objective(0)",
+      "quest_id": 128
+    },
+    {
+      "index": 151,
+      "kind": "Objective(0)",
+      "quest_id": 219
+    },
+    {
+      "index": 1017,
+      "kind": "Accept",
+      "quest_id": 95772
+    },
+    {
+      "index": 71,
+      "kind": "TurnIn",
+      "quest_id": 126
+    },
+    {
+      "index": 151,
+      "kind": "TurnIn",
+      "quest_id": 219
+    },
+    {
+      "index": 243,
+      "kind": "TurnIn",
+      "quest_id": 347
+    },
+    {
+      "index": 242,
+      "kind": "Accept",
+      "quest_id": 346
+    },
+    {
+      "index": 248,
+      "kind": "TurnIn",
+      "quest_id": 373
+    },
+    {
+      "index": 1043,
+      "kind": "TurnIn",
+      "quest_id": 97914
+    },
+    {
+      "index": 242,
+      "kind": "TurnIn",
+      "quest_id": 346
+    },
+    {
+      "index": 255,
+      "kind": "Accept",
+      "quest_id": 389
+    },
+    {
+      "index": 111,
+      "kind": "TurnIn",
+      "quest_id": 168
+    },
+    {
+      "index": 110,
+      "kind": "TurnIn",
+      "quest_id": 167
+    },
+    {
+      "index": 718,
+      "kind": "TurnIn",
+      "quest_id": 2040
+    },
+    {
+      "index": 255,
+      "kind": "TurnIn",
+      "quest_id": 389
+    },
+    {
+      "index": 987,
+      "kind": "Accept",
+      "quest_id": 92489
+    },
+    {
+      "index": 983,
+      "kind": "Accept",
+      "quest_id": 92456
+    },
+    {
+      "index": 424,
+      "kind": "TurnIn",
+      "quest_id": 741
+    },
+    {
+      "index": 450,
+      "kind": "Accept",
+      "quest_id": 942
+    },
+    {
+      "index": 769,
+      "kind": "Accept",
+      "quest_id": 2925
+    },
+    {
+      "index": 0,
+      "kind": "Hearth",
+      "quest_id": null
+    },
+    {
+      "index": 118,
+      "kind": "Objective(0)",
+      "quest_id": 180
+    },
+    {
+      "index": 118,
+      "kind": "TurnIn",
+      "quest_id": 180
+    },
+    {
+      "index": 73,
+      "kind": "TurnIn",
+      "quest_id": 128
+    },
+    {
+      "index": 52,
+      "kind": "Accept",
+      "quest_id": 95
+    },
+    {
+      "index": 157,
+      "kind": "Accept",
+      "quest_id": 226
+    },
+    {
+      "index": 157,
+      "kind": "Objective(1)",
+      "quest_id": 226
+    },
+    {
+      "index": 157,
+      "kind": "Objective(0)",
+      "quest_id": 226
+    },
+    {
+      "index": 157,
+      "kind": "TurnIn",
+      "quest_id": 226
+    },
+    {
+      "index": 0,
+      "kind": "Accept",
+      "quest_id": 5
+    },
+    {
+      "index": 0,
+      "kind": "TurnIn",
+      "quest_id": 5
+    },
+    {
+      "index": 50,
+      "kind": "Accept",
+      "quest_id": 93
+    },
+    {
+      "index": 1023,
+      "kind": "Accept",
+      "quest_id": 96139
+    },
+    {
+      "index": 50,
+      "kind": "Objective(0)",
+      "quest_id": 93
+    },
+    {
+      "index": 50,
+      "kind": "TurnIn",
+      "quest_id": 93
+    },
+    {
+      "index": 165,
+      "kind": "Accept",
+      "quest_id": 240
+    },
+    {
+      "index": 114,
+      "kind": "Accept",
+      "quest_id": 174
+    },
+    {
+      "index": 114,
+      "kind": "Objective(0)",
+      "quest_id": 174
+    },
+    {
+      "index": 114,
+      "kind": "TurnIn",
+      "quest_id": 174
+    },
+    {
+      "index": 115,
+      "kind": "Accept",
+      "quest_id": 175
+    },
+    {
+      "index": 115,
+      "kind": "TurnIn",
+      "quest_id": 175
+    },
+    {
+      "index": 117,
+      "kind": "Accept",
+      "quest_id": 177
+    },
+    {
+      "index": 117,
+      "kind": "Objective(0)",
+      "quest_id": 177
+    },
+    {
+      "index": 117,
+      "kind": "TurnIn",
+      "quest_id": 177
+    },
+    {
+      "index": 936,
+      "kind": "Accept",
+      "quest_id": 79363
+    },
+    {
+      "index": 52,
+      "kind": "TurnIn",
+      "quest_id": 95
+    },
+    {
+      "index": 161,
+      "kind": "Accept",
+      "quest_id": 230
+    },
+    {
+      "index": 936,
+      "kind": "Objective(1)",
+      "quest_id": 79363
+    },
+    {
+      "index": 936,
+      "kind": "Objective(0)",
+      "quest_id": 79363
+    },
+    {
+      "index": 167,
+      "kind": "Accept",
+      "quest_id": 245
+    },
+    {
+      "index": 1021,
+      "kind": "Accept",
+      "quest_id": 96137
+    },
+    {
+      "index": 1021,
+      "kind": "Objective(0)",
+      "quest_id": 96137
+    },
+    {
+      "index": 165,
+      "kind": "TurnIn",
+      "quest_id": 240
+    },
+    {
+      "index": 1023,
+      "kind": "Objective(0)",
+      "quest_id": 96139
+    },
+    {
+      "index": 167,
+      "kind": "Objective(0)",
+      "quest_id": 245
+    },
+    {
+      "index": 935,
+      "kind": "Accept",
+      "quest_id": 79362
+    },
+    {
+      "index": 935,
+      "kind": "Objective(0)",
+      "quest_id": 79362
+    },
+    {
+      "index": 161,
+      "kind": "TurnIn",
+      "quest_id": 230
+    },
+    {
+      "index": 1021,
+      "kind": "Objective(1)",
+      "quest_id": 96137
+    },
+    {
+      "index": 936,
+      "kind": "TurnIn",
+      "quest_id": 79363
+    },
+    {
+      "index": 935,
+      "kind": "TurnIn",
+      "quest_id": 79362
+    },
+    {
+      "index": 1021,
+      "kind": "TurnIn",
+      "quest_id": 96137
+    },
+    {
+      "index": 167,
+      "kind": "TurnIn",
+      "quest_id": 245
+    },
+    {
+      "index": 1023,
+      "kind": "TurnIn",
+      "quest_id": 96139
+    },
+    {
+      "index": 8,
+      "kind": "Objective(0)",
+      "quest_id": 19
+    },
+    {
+      "index": 8,
+      "kind": "TurnIn",
+      "quest_id": 19
+    },
+    {
+      "index": 32,
+      "kind": "TurnIn",
+      "quest_id": 65
+    },
+    {
+      "index": 768,
+      "kind": "Accept",
+      "quest_id": 2924
+    },
+    {
+      "index": 774,
+      "kind": "Accept",
+      "quest_id": 2930
+    },
+    {
+      "index": 766,
+      "kind": "Accept",
+      "quest_id": 2922
+    },
+    {
+      "index": 771,
+      "kind": "Accept",
+      "quest_id": 2927
+    },
+    {
+      "index": 897,
+      "kind": "Accept",
+      "quest_id": 7807
+    },
+    {
+      "index": 773,
+      "kind": "Accept",
+      "quest_id": 2929
+    },
+    {
+      "index": 700,
+      "kind": "Accept",
+      "quest_id": 1939
+    },
+    {
+      "index": 195,
+      "kind": "Accept",
+      "quest_id": 279
+    },
+    {
+      "index": 286,
+      "kind": "Accept",
+      "quest_id": 471
+    },
+    {
+      "index": 1089,
+      "kind": "Accept",
+      "quest_id": 98815
+    },
+    {
+      "index": 1059,
+      "kind": "Accept",
+      "quest_id": 98197
+    },
+    {
+      "index": 285,
+      "kind": "Accept",
+      "quest_id": 470
+    },
+    {
+      "index": 1069,
+      "kind": "Accept",
+      "quest_id": 98282
+    },
+    {
+      "index": 450,
+      "kind": "TurnIn",
+      "quest_id": 942
+    },
+    {
+      "index": 451,
+      "kind": "Accept",
+      "quest_id": 943
+    },
+    {
+      "index": 217,
+      "kind": "Accept",
+      "quest_id": 305
+    },
+    {
+      "index": 1087,
+      "kind": "TurnIn",
+      "quest_id": 98461
+    },
+    {
+      "index": 1059,
+      "kind": "Objective(1)",
+      "quest_id": 98197
+    },
+    {
+      "index": 1059,
+      "kind": "Objective(0)",
+      "quest_id": 98197
+    },
+    {
+      "index": 1059,
+      "kind": "TurnIn",
+      "quest_id": 98197
+    },
+    {
+      "index": 700,
+      "kind": "TurnIn",
+      "quest_id": 1939
+    },
+    {
+      "index": 699,
+      "kind": "Accept",
+      "quest_id": 1938
+    },
+    {
+      "index": 0,
+      "kind": "Hearth",
+      "quest_id": null
+    },
+    {
+      "index": 51,
+      "kind": "TurnIn",
+      "quest_id": 94
+    },
+    {
+      "index": 169,
+      "kind": "Accept",
+      "quest_id": 248
+    },
+    {
+      "index": 699,
+      "kind": "Objective(0)",
+      "quest_id": 1938
+    },
+    {
+      "index": 169,
+      "kind": "TurnIn",
+      "quest_id": 248
+    },
+    {
+      "index": 699,
+      "kind": "TurnIn",
+      "quest_id": 1938
+    },
+    {
+      "index": 701,
+      "kind": "Accept",
+      "quest_id": 1940
+    },
+    {
+      "index": 701,
+      "kind": "Objective(0)",
+      "quest_id": 1940
+    },
+    {
+      "index": 701,
+      "kind": "TurnIn",
+      "quest_id": 1940
+    },
+    {
+      "index": 703,
+      "kind": "Accept",
+      "quest_id": 1942
+    },
+    {
+      "index": 703,
+      "kind": "TurnIn",
+      "quest_id": 1942
+    },
+    {
+      "index": 217,
+      "kind": "TurnIn",
+      "quest_id": 305
+    },
+    {
+      "index": 218,
+      "kind": "Accept",
+      "quest_id": 306
+    },
+    {
+      "index": 451,
+      "kind": "Objective(1)",
+      "quest_id": 943
+    },
+    {
+      "index": 208,
+      "kind": "Accept",
+      "quest_id": 294
+    },
+    {
+      "index": 1069,
+      "kind": "Objective(0)",
+      "quest_id": 98282
+    },
+    {
+      "index": 26,
+      "kind": "Dungeon",
+      "quest_id": null
+    },
+    {
+      "index": 1017,
+      "kind": "Objective(0)",
+      "quest_id": 95772
+    },
+    {
+      "index": 1089,
+      "kind": "Objective(0)",
+      "quest_id": 98815
+    },
+    {
+      "index": 284,
+      "kind": "Accept",
+      "quest_id": 469
+    },
+    {
+      "index": 192,
+      "kind": "Accept",
+      "quest_id": 276
+    },
+    {
+      "index": 192,
+      "kind": "Objective(1)",
+      "quest_id": 276
+    },
+    {
+      "index": 192,
+      "kind": "Objective(0)",
+      "quest_id": 276
+    },
+    {
+      "index": 192,
+      "kind": "TurnIn",
+      "quest_id": 276
+    },
+    {
+      "index": 193,
+      "kind": "Accept",
+      "quest_id": 277
+    },
+    {
+      "index": 193,
+      "kind": "Objective(0)",
+      "quest_id": 277
+    },
+    {
+      "index": 285,
+      "kind": "Objective(0)",
+      "quest_id": 470
+    },
+    {
+      "index": 193,
+      "kind": "TurnIn",
+      "quest_id": 277
+    },
+    {
+      "index": 191,
+      "kind": "Accept",
+      "quest_id": 275
+    },
+    {
+      "index": 191,
+      "kind": "Objective(0)",
+      "quest_id": 275
+    },
+    {
+      "index": 191,
+      "kind": "TurnIn",
+      "quest_id": 275
+    },
+    {
+      "index": 451,
+      "kind": "Objective(0)",
+      "quest_id": 943
+    },
+    {
+      "index": 195,
+      "kind": "Objective(1)",
+      "quest_id": 279
+    },
+    {
+      "index": 195,
+      "kind": "Objective(0)",
+      "quest_id": 279
+    },
+    {
+      "index": 284,
+      "kind": "TurnIn",
+      "quest_id": 469
+    },
+    {
+      "index": 195,
+      "kind": "TurnIn",
+      "quest_id": 279
+    },
+    {
+      "index": 1060,
+      "kind": "Accept",
+      "quest_id": 98208
+    },
+    {
+      "index": 1089,
+      "kind": "TurnIn",
+      "quest_id": 98815
+    },
+    {
+      "index": 218,
+      "kind": "TurnIn",
+      "quest_id": 306
+    },
+    {
+      "index": 285,
+      "kind": "TurnIn",
+      "quest_id": 470
+    },
+    {
+      "index": 2,
+      "kind": "Bind",
+      "quest_id": null
+    },
+    {
+      "index": 1060,
+      "kind": "Objective(0)",
+      "quest_id": 98208
+    },
+    {
+      "index": 1069,
+      "kind": "TurnIn",
+      "quest_id": 98282
+    },
+    {
+      "index": 202,
+      "kind": "Accept",
+      "quest_id": 288
+    },
+    {
+      "index": 208,
+      "kind": "Objective(0)",
+      "quest_id": 294
+    },
+    {
+      "index": 208,
+      "kind": "Objective(1)",
+      "quest_id": 294
+    },
+    {
+      "index": 286,
+      "kind": "Objective(0)",
+      "quest_id": 471
+    },
+    {
+      "index": 202,
+      "kind": "Objective(0)",
+      "quest_id": 288
+    },
+    {
+      "index": 202,
+      "kind": "TurnIn",
+      "quest_id": 288
+    },
+    {
+      "index": 203,
+      "kind": "Accept",
+      "quest_id": 289
+    },
+    {
+      "index": 286,
+      "kind": "TurnIn",
+      "quest_id": 471
+    },
+    {
+      "index": 1060,
+      "kind": "TurnIn",
+      "quest_id": 98208
+    },
+    {
+      "index": 1053,
+      "kind": "Accept",
+      "quest_id": 98072
+    },
+    {
+      "index": 197,
+      "kind": "Accept",
+      "quest_id": 281
+    },
+    {
+      "index": 197,
+      "kind": "TurnIn",
+      "quest_id": 281
+    },
+    {
+      "index": 199,
+      "kind": "Accept",
+      "quest_id": 284
+    },
+    {
+      "index": 199,
+      "kind": "TurnIn",
+      "quest_id": 284
+    },
+    {
+      "index": 200,
+      "kind": "Accept",
+      "quest_id": 285
+    },
+    {
+      "index": 200,
+      "kind": "TurnIn",
+      "quest_id": 285
+    },
+    {
+      "index": 201,
+      "kind": "Accept",
+      "quest_id": 286
+    },
+    {
+      "index": 203,
+      "kind": "Objective(0)",
+      "quest_id": 289
+    },
+    {
+      "index": 203,
+      "kind": "Objective(2)",
+      "quest_id": 289
+    },
+    {
+      "index": 203,
+      "kind": "Objective(1)",
+      "quest_id": 289
+    },
+    {
+      "index": 203,
+      "kind": "TurnIn",
+      "quest_id": 289
+    },
+    {
+      "index": 204,
+      "kind": "Accept",
+      "quest_id": 290
+    },
+    {
+      "index": 201,
+      "kind": "TurnIn",
+      "quest_id": 286
+    },
+    {
+      "index": 1056,
+      "kind": "Accept",
+      "quest_id": 98189
+    },
+    {
+      "index": 1056,
+      "kind": "TurnIn",
+      "quest_id": 98189
+    },
+    {
+      "index": 279,
+      "kind": "Accept",
+      "quest_id": 464
+    },
+    {
+      "index": 1057,
+      "kind": "Accept",
+      "quest_id": 98190
+    },
+    {
+      "index": 208,
+      "kind": "TurnIn",
+      "quest_id": 294
+    },
+    {
+      "index": 209,
+      "kind": "Accept",
+      "quest_id": 295
+    },
+    {
+      "index": 209,
+      "kind": "Objective(1)",
+      "quest_id": 295
+    },
+    {
+      "index": 209,
+      "kind": "Objective(0)",
+      "quest_id": 295
+    },
+    {
+      "index": 209,
+      "kind": "TurnIn",
+      "quest_id": 295
+    },
+    {
+      "index": 210,
+      "kind": "Accept",
+      "quest_id": 296
+    },
+    {
+      "index": 210,
+      "kind": "Objective(0)",
+      "quest_id": 296
+    },
+    {
+      "index": 210,
+      "kind": "TurnIn",
+      "quest_id": 296
+    },
+    {
+      "index": 279,
+      "kind": "Objective(0)",
+      "quest_id": 464
+    },
+    {
+      "index": 1053,
+      "kind": "Objective(0)",
+      "quest_id": 98072
+    },
+    {
+      "index": 1070,
+      "kind": "Accept",
+      "quest_id": 98283
+    },
+    {
+      "index": 0,
+      "kind": "Hearth",
+      "quest_id": null
+    },
+    {
+      "index": 1053,
+      "kind": "TurnIn",
+      "quest_id": 98072
+    },
+    {
+      "index": 1067,
+      "kind": "Accept",
+      "quest_id": 98240
+    },
+    {
+      "index": 279,
+      "kind": "TurnIn",
+      "quest_id": 464
+    },
+    {
+      "index": 204,
+      "kind": "Objective(0)",
+      "quest_id": 290
+    },
+    {
+      "index": 204,
+      "kind": "TurnIn",
+      "quest_id": 290
+    },
+    {
+      "index": 206,
+      "kind": "Accept",
+      "quest_id": 292
+    },
+    {
+      "index": 206,
+      "kind": "TurnIn",
+      "quest_id": 292
+    },
+    {
+      "index": 207,
+      "kind": "Accept",
+      "quest_id": 293
+    },
+    {
+      "index": 1067,
+      "kind": "TurnIn",
+      "quest_id": 98240
+    },
+    {
+      "index": 1068,
+      "kind": "Accept",
+      "quest_id": 98245
+    },
+    {
+      "index": 1068,
+      "kind": "Objective(0)",
+      "quest_id": 98245
+    },
+    {
+      "index": 1068,
+      "kind": "TurnIn",
+      "quest_id": 98245
+    },
+    {
+      "index": 207,
+      "kind": "TurnIn",
+      "quest_id": 293
+    },
+    {
+      "index": 632,
+      "kind": "Accept",
+      "quest_id": 1274
+    },
+    {
+      "index": 632,
+      "kind": "TurnIn",
+      "quest_id": 1274
+    },
+    {
+      "index": 612,
+      "kind": "Accept",
+      "quest_id": 1241
+    },
+    {
+      "index": 1057,
+      "kind": "TurnIn",
+      "quest_id": 98190
+    },
+    {
+      "index": 612,
+      "kind": "TurnIn",
+      "quest_id": 1241
+    },
+    {
+      "index": 613,
+      "kind": "Accept",
+      "quest_id": 1242
+    },
+    {
+      "index": 613,
+      "kind": "TurnIn",
+      "quest_id": 1242
+    },
+    {
+      "index": 614,
+      "kind": "Accept",
+      "quest_id": 1243
+    },
+    {
+      "index": 119,
+      "kind": "Accept",
+      "quest_id": 181
+    },
+    {
+      "index": 614,
+      "kind": "TurnIn",
+      "quest_id": 1243
+    },
+    {
+      "index": 615,
+      "kind": "Accept",
+      "quest_id": 1244
+    },
+    {
+      "index": 1022,
+      "kind": "Accept",
+      "quest_id": 96138
+    },
+    {
+      "index": 1022,
+      "kind": "Objective(1)",
+      "quest_id": 96138
+    },
+    {
+      "index": 1022,
+      "kind": "Objective(0)",
+      "quest_id": 96138
+    },
+    {
+      "index": 119,
+      "kind": "Objective(0)",
+      "quest_id": 181
+    },
+    {
+      "index": 615,
+      "kind": "Objective(0)",
+      "quest_id": 1244
+    },
+    {
+      "index": 1022,
+      "kind": "TurnIn",
+      "quest_id": 96138
+    },
+    {
+      "index": 615,
+      "kind": "TurnIn",
+      "quest_id": 1244
+    },
+    {
+      "index": 616,
+      "kind": "Accept",
+      "quest_id": 1245
+    },
+    {
+      "index": 119,
+      "kind": "TurnIn",
+      "quest_id": 181
+    },
+    {
+      "index": 616,
+      "kind": "TurnIn",
+      "quest_id": 1245
+    },
+    {
+      "index": 617,
+      "kind": "Accept",
+      "quest_id": 1246
+    },
+    {
+      "index": 617,
+      "kind": "TurnIn",
+      "quest_id": 1246
+    },
+    {
+      "index": 664,
+      "kind": "Accept",
+      "quest_id": 1447
+    },
+    {
+      "index": 664,
+      "kind": "Objective(0)",
+      "quest_id": 1447
+    },
+    {
+      "index": 664,
+      "kind": "TurnIn",
+      "quest_id": 1447
+    },
+    {
+      "index": 618,
+      "kind": "Accept",
+      "quest_id": 1247
+    },
+    {
+      "index": 618,
+      "kind": "TurnIn",
+      "quest_id": 1247
+    },
+    {
+      "index": 619,
+      "kind": "Accept",
+      "quest_id": 1248
+    },
+    {
+      "index": 112,
+      "kind": "Accept",
+      "quest_id": 169
+    },
+    {
+      "index": 1017,
+      "kind": "TurnIn",
+      "quest_id": 95772
+    },
+    {
+      "index": 112,
+      "kind": "Objective(0)",
+      "quest_id": 169
+    },
+    {
+      "index": 170,
+      "kind": "Accept",
+      "quest_id": 249
+    },
+    {
+      "index": 170,
+      "kind": "Objective(0)",
+      "quest_id": 249
+    },
+    {
+      "index": 112,
+      "kind": "TurnIn",
+      "quest_id": 169
+    },
+    {
+      "index": 170,
+      "kind": "TurnIn",
+      "quest_id": 249
+    },
+    {
+      "index": 0,
+      "kind": "Hearth",
+      "quest_id": null
+    },
+    {
+      "index": 619,
+      "kind": "TurnIn",
+      "quest_id": 1248
+    },
+    {
+      "index": 620,
+      "kind": "Accept",
+      "quest_id": 1249
+    },
+    {
+      "index": 620,
+      "kind": "Objective(0)",
+      "quest_id": 1249
+    },
+    {
+      "index": 620,
+      "kind": "TurnIn",
+      "quest_id": 1249
+    },
+    {
+      "index": 621,
+      "kind": "Accept",
+      "quest_id": 1250
+    },
+    {
+      "index": 621,
+      "kind": "TurnIn",
+      "quest_id": 1250
+    },
+    {
+      "index": 627,
+      "kind": "Accept",
+      "quest_id": 1264
+    },
+    {
+      "index": 451,
+      "kind": "TurnIn",
+      "quest_id": 943
+    },
+    {
+      "index": 1070,
+      "kind": "Objective(1)",
+      "quest_id": 98283
+    },
+    {
+      "index": 1070,
+      "kind": "Objective(0)",
+      "quest_id": 98283
+    },
+    {
+      "index": 1070,
+      "kind": "TurnIn",
+      "quest_id": 98283
+    },
+    {
+      "index": 972,
+      "kind": "Accept",
+      "quest_id": 87318
+    },
+    {
+      "index": 972,
+      "kind": "TurnIn",
+      "quest_id": 87318
+    },
+    {
+      "index": 356,
+      "kind": "Accept",
+      "quest_id": 637
+    },
+    {
+      "index": 356,
+      "kind": "TurnIn",
+      "quest_id": 637
+    },
+    {
+      "index": 378,
+      "kind": "Accept",
+      "quest_id": 683
+    },
+    {
+      "index": 589,
+      "kind": "Accept",
+      "quest_id": 1179
+    },
+    {
+      "index": 378,
+      "kind": "TurnIn",
+      "quest_id": 683
+    },
+    {
+      "index": 381,
+      "kind": "Accept",
+      "quest_id": 686
+    },
+    {
+      "index": 381,
+      "kind": "TurnIn",
+      "quest_id": 686
+    },
+    {
+      "index": 770,
+      "kind": "Accept",
+      "quest_id": 2926
+    },
+    {
+      "index": 767,
+      "kind": "Objective(0)",
+      "quest_id": 2923
+    },
+    {
+      "index": 771,
+      "kind": "Objective(0)",
+      "quest_id": 2927
+    },
+    {
+      "index": 768,
+      "kind": "Objective(0)",
+      "quest_id": 2924
+    },
+    {
+      "index": 769,
+      "kind": "Objective(0)",
+      "quest_id": 2925
+    },
+    {
+      "index": 770,
+      "kind": "Objective(0)",
+      "quest_id": 2926
+    },
+    {
+      "index": 772,
+      "kind": "Objective(0)",
+      "quest_id": 2928
+    },
+    {
+      "index": 773,
+      "kind": "Objective(0)",
+      "quest_id": 2929
+    },
+    {
+      "index": 774,
+      "kind": "Objective(1)",
+      "quest_id": 2930
+    },
+    {
+      "index": 776,
+      "kind": "Accept",
+      "quest_id": 2945
+    },
+    {
+      "index": 779,
+      "kind": "Accept",
+      "quest_id": 2951
+    },
+    {
+      "index": 780,
+      "kind": "Accept",
+      "quest_id": 2952
+    },
+    {
+      "index": 781,
+      "kind": "Accept",
+      "quest_id": 2953
+    },
+    {
+      "index": 776,
+      "kind": "Objective(0)",
+      "quest_id": 2945
+    },
+    {
+      "index": 779,
+      "kind": "Objective(0)",
+      "quest_id": 2951
+    },
+    {
+      "index": 780,
+      "kind": "Objective(0)",
+      "quest_id": 2952
+    },
+    {
+      "index": 781,
+      "kind": "Objective(0)",
+      "quest_id": 2953
+    },
+    {
+      "index": 776,
+      "kind": "TurnIn",
+      "quest_id": 2945
+    },
+    {
+      "index": 777,
+      "kind": "Accept",
+      "quest_id": 2947
+    },
+    {
+      "index": 777,
+      "kind": "Objective(0)",
+      "quest_id": 2947
+    },
+    {
+      "index": 779,
+      "kind": "TurnIn",
+      "quest_id": 2951
+    },
+    {
+      "index": 780,
+      "kind": "TurnIn",
+      "quest_id": 2952
+    },
+    {
+      "index": 781,
+      "kind": "TurnIn",
+      "quest_id": 2953
+    },
+    {
+      "index": 770,
+      "kind": "TurnIn",
+      "quest_id": 2926
+    },
+    {
+      "index": 771,
+      "kind": "TurnIn",
+      "quest_id": 2927
+    },
+    {
+      "index": 0,
+      "kind": "Hearth",
+      "quest_id": null
+    },
+    {
+      "index": 574,
+      "kind": "Accept",
+      "quest_id": 1132
+    },
+    {
+      "index": 973,
+      "kind": "Accept",
+      "quest_id": 87491
+    },
+    {
+      "index": 973,
+      "kind": "Objective(0)",
+      "quest_id": 87491
+    },
+    {
+      "index": 975,
+      "kind": "Accept",
+      "quest_id": 88757
+    },
+    {
+      "index": 365,
+      "kind": "Accept",
+      "quest_id": 659
+    },
+    {
+      "index": 292,
+      "kind": "Accept",
+      "quest_id": 505
+    },
+    {
+      "index": 982,
+      "kind": "Accept",
+      "quest_id": 92432
+    },
+    {
+      "index": 302,
+      "kind": "Accept",
+      "quest_id": 536
+    },
+    {
+      "index": 1088,
+      "kind": "Accept",
+      "quest_id": 98463
+    },
+    {
+      "index": 310,
+      "kind": "Accept",
+      "quest_id": 555
+    },
+    {
+      "index": 316,
+      "kind": "Accept",
+      "quest_id": 564
+    },
+    {
+      "index": 304,
+      "kind": "TurnIn",
+      "quest_id": 538
+    },
+    {
+      "index": 310,
+      "kind": "Objective(1)",
+      "quest_id": 555
+    },
+    {
+      "index": 3,
+      "kind": "Bind",
+      "quest_id": null
+    },
+    {
+      "index": 310,
+      "kind": "Objective(0)",
+      "quest_id": 555
+    },
+    {
+      "index": 1050,
+      "kind": "Accept",
+      "quest_id": 98059
+    },
+    {
+      "index": 1050,
+      "kind": "Objective(0)",
+      "quest_id": 98059
+    },
+    {
+      "index": 302,
+      "kind": "Objective(1)",
+      "quest_id": 536
+    },
+    {
+      "index": 302,
+      "kind": "Objective(0)",
+      "quest_id": 536
+    },
+    {
+      "index": 302,
+      "kind": "TurnIn",
+      "quest_id": 536
+    },
+    {
+      "index": 311,
+      "kind": "Accept",
+      "quest_id": 559
+    },
+    {
+      "index": 311,
+      "kind": "Objective(0)",
+      "quest_id": 559
+    },
+    {
+      "index": 311,
+      "kind": "TurnIn",
+      "quest_id": 559
+    },
+    {
+      "index": 312,
+      "kind": "Accept",
+      "quest_id": 560
+    },
+    {
+      "index": 312,
+      "kind": "TurnIn",
+      "quest_id": 560
+    },
+    {
+      "index": 313,
+      "kind": "Accept",
+      "quest_id": 561
+    },
+    {
+      "index": 313,
+      "kind": "TurnIn",
+      "quest_id": 561
+    },
+    {
+      "index": 314,
+      "kind": "Accept",
+      "quest_id": 562
+    },
+    {
+      "index": 314,
+      "kind": "Objective(1)",
+      "quest_id": 562
+    },
+    {
+      "index": 314,
+      "kind": "Objective(0)",
+      "quest_id": 562
+    },
+    {
+      "index": 314,
+      "kind": "TurnIn",
+      "quest_id": 562
+    },
+    {
+      "index": 315,
+      "kind": "Accept",
+      "quest_id": 563
+    },
+    {
+      "index": 1050,
+      "kind": "TurnIn",
+      "quest_id": 98059
+    },
+    {
+      "index": 984,
+      "kind": "Accept",
+      "quest_id": 92457
+    },
+    {
+      "index": 982,
+      "kind": "TurnIn",
+      "quest_id": 92432
+    },
+    {
+      "index": 985,
+      "kind": "Accept",
+      "quest_id": 92458
+    },
+    {
+      "index": 983,
+      "kind": "Objective(0)",
+      "quest_id": 92456
+    },
+    {
+      "index": 984,
+      "kind": "Objective(0)",
+      "quest_id": 92457
+    },
+    {
+      "index": 984,
+      "kind": "Objective(1)",
+      "quest_id": 92457
+    },
+    {
+      "index": 984,
+      "kind": "Objective(2)",
+      "quest_id": 92457
+    },
+    {
+      "index": 985,
+      "kind": "Objective(0)",
+      "quest_id": 92458
+    },
+    {
+      "index": 987,
+      "kind": "Objective(0)",
+      "quest_id": 92489
+    },
+    {
+      "index": 25,
+      "kind": "Bind",
+      "quest_id": null
+    },
+    {
+      "index": 984,
+      "kind": "TurnIn",
+      "quest_id": 92457
+    },
+    {
+      "index": 985,
+      "kind": "TurnIn",
+      "quest_id": 92458
+    },
+    {
+      "index": 704,
+      "kind": "Accept",
+      "quest_id": 1947
+    },
+    {
+      "index": 768,
+      "kind": "TurnIn",
+      "quest_id": 2924
+    },
+    {
+      "index": 769,
+      "kind": "TurnIn",
+      "quest_id": 2925
+    },
+    {
+      "index": 774,
+      "kind": "TurnIn",
+      "quest_id": 2930
+    },
+    {
+      "index": 897,
+      "kind": "Objective(0)",
+      "quest_id": 7807
+    },
+    {
+      "index": 773,
+      "kind": "TurnIn",
+      "quest_id": 2929
+    },
+    {
+      "index": 766,
+      "kind": "TurnIn",
+      "quest_id": 2922
+    },
+    {
+      "index": 767,
+      "kind": "TurnIn",
+      "quest_id": 2923
+    },
+    {
+      "index": 897,
+      "kind": "TurnIn",
+      "quest_id": 7807
+    },
+    {
+      "index": 777,
+      "kind": "TurnIn",
+      "quest_id": 2947
+    },
+    {
+      "index": 983,
+      "kind": "TurnIn",
+      "quest_id": 92456
+    },
+    {
+      "index": 772,
+      "kind": "TurnIn",
+      "quest_id": 2928
+    },
+    {
+      "index": 315,
+      "kind": "TurnIn",
+      "quest_id": 563
+    },
+    {
+      "index": 987,
+      "kind": "TurnIn",
+      "quest_id": 92489
+    },
+    {
+      "index": 139,
+      "kind": "Accept",
+      "quest_id": 204
+    },
+    {
+      "index": 323,
+      "kind": "Accept",
+      "quest_id": 583
+    },
+    {
+      "index": 323,
+      "kind": "TurnIn",
+      "quest_id": 583
+    },
+    {
+      "index": 129,
+      "kind": "Accept",
+      "quest_id": 194
+    },
+    {
+      "index": 234,
+      "kind": "Accept",
+      "quest_id": 338
+    },
+    {
+      "index": 238,
+      "kind": "Accept",
+      "quest_id": 342
+    },
+    {
+      "index": 238,
+      "kind": "Objective(2)",
+      "quest_id": 342
+    },
+    {
+      "index": 238,
+      "kind": "Objective(1)",
+      "quest_id": 342
+    },
+    {
+      "index": 238,
+      "kind": "Objective(0)",
+      "quest_id": 342
+    },
+    {
+      "index": 238,
+      "kind": "TurnIn",
+      "quest_id": 342
+    },
+    {
+      "index": 234,
+      "kind": "Objective(3)",
+      "quest_id": 338
+    },
+    {
+      "index": 237,
+      "kind": "Accept",
+      "quest_id": 341
+    },
+    {
+      "index": 237,
+      "kind": "Objective(3)",
+      "quest_id": 341
+    },
+    {
+      "index": 237,
+      "kind": "Objective(2)",
+      "quest_id": 341
+    },
+    {
+      "index": 237,
+      "kind": "Objective(1)",
+      "quest_id": 341
+    },
+    {
+      "index": 237,
+      "kind": "Objective(0)",
+      "quest_id": 341
+    },
+    {
+      "index": 237,
+      "kind": "TurnIn",
+      "quest_id": 341
+    },
+    {
+      "index": 234,
+      "kind": "Objective(2)",
+      "quest_id": 338
+    },
+    {
+      "index": 236,
+      "kind": "Accept",
+      "quest_id": 340
+    },
+    {
+      "index": 236,
+      "kind": "Objective(1)",
+      "quest_id": 340
+    },
+    {
+      "index": 236,
+      "kind": "Objective(3)",
+      "quest_id": 340
+    },
+    {
+      "index": 236,
+      "kind": "Objective(2)",
+      "quest_id": 340
+    },
+    {
+      "index": 236,
+      "kind": "Objective(0)",
+      "quest_id": 340
+    },
+    {
+      "index": 236,
+      "kind": "TurnIn",
+      "quest_id": 340
+    },
+    {
+      "index": 234,
+      "kind": "Objective(1)",
+      "quest_id": 338
+    },
+    {
+      "index": 235,
+      "kind": "Accept",
+      "quest_id": 339
+    },
+    {
+      "index": 235,
+      "kind": "Objective(3)",
+      "quest_id": 339
+    },
+    {
+      "index": 235,
+      "kind": "Objective(2)",
+      "quest_id": 339
+    },
+    {
+      "index": 235,
+      "kind": "Objective(1)",
+      "quest_id": 339
+    },
+    {
+      "index": 235,
+      "kind": "Objective(0)",
+      "quest_id": 339
+    },
+    {
+      "index": 235,
+      "kind": "TurnIn",
+      "quest_id": 339
+    },
+    {
+      "index": 234,
+      "kind": "Objective(0)",
+      "quest_id": 338
+    },
+    {
+      "index": 120,
+      "kind": "Accept",
+      "quest_id": 185
+    },
+    {
+      "index": 125,
+      "kind": "Accept",
+      "quest_id": 190
+    },
+    {
+      "index": 120,
+      "kind": "Objective(0)",
+      "quest_id": 185
+    },
+    {
+      "index": 120,
+      "kind": "TurnIn",
+      "quest_id": 185
+    },
+    {
+      "index": 121,
+      "kind": "Accept",
+      "quest_id": 186
+    },
+    {
+      "index": 125,
+      "kind": "Objective(0)",
+      "quest_id": 190
+    },
+    {
+      "index": 125,
+      "kind": "TurnIn",
+      "quest_id": 190
+    },
+    {
+      "index": 126,
+      "kind": "Accept",
+      "quest_id": 191
+    },
+    {
+      "index": 121,
+      "kind": "Objective(0)",
+      "quest_id": 186
+    },
+    {
+      "index": 126,
+      "kind": "Objective(0)",
+      "quest_id": 191
+    },
+    {
+      "index": 121,
+      "kind": "TurnIn",
+      "quest_id": 186
+    },
+    {
+      "index": 122,
+      "kind": "Accept",
+      "quest_id": 187
+    },
+    {
+      "index": 126,
+      "kind": "TurnIn",
+      "quest_id": 191
+    },
+    {
+      "index": 149,
+      "kind": "Accept",
+      "quest_id": 215
+    },
+    {
+      "index": 149,
+      "kind": "TurnIn",
+      "quest_id": 215
+    },
+    {
+      "index": 138,
+      "kind": "Accept",
+      "quest_id": 203
+    },
+    {
+      "index": 135,
+      "kind": "Accept",
+      "quest_id": 200
+    },
+    {
+      "index": 145,
+      "kind": "Accept",
+      "quest_id": 210
+    },
+    {
+      "index": 129,
+      "kind": "Objective(0)",
+      "quest_id": 194
+    },
+    {
+      "index": 135,
+      "kind": "TurnIn",
+      "quest_id": 200
+    },
+    {
+      "index": 228,
+      "kind": "Accept",
+      "quest_id": 328
+    },
+    {
+      "index": 139,
+      "kind": "Objective(1)",
+      "quest_id": 204
+    },
+    {
+      "index": 139,
+      "kind": "Objective(0)",
+      "quest_id": 204
+    },
+    {
+      "index": 138,
+      "kind": "Objective(0)",
+      "quest_id": 203
+    },
+    {
+      "index": 129,
+      "kind": "TurnIn",
+      "quest_id": 194
+    },
+    {
+      "index": 130,
+      "kind": "Accept",
+      "quest_id": 195
+    },
+    {
+      "index": 234,
+      "kind": "TurnIn",
+      "quest_id": 338
+    },
+    {
+      "index": 122,
+      "kind": "Objective(0)",
+      "quest_id": 187
+    },
+    {
+      "index": 122,
+      "kind": "TurnIn",
+      "quest_id": 187
+    },
+    {
+      "index": 139,
+      "kind": "TurnIn",
+      "quest_id": 204
+    },
+    {
+      "index": 138,
+      "kind": "TurnIn",
+      "quest_id": 203
+    },
+    {
+      "index": 145,
+      "kind": "TurnIn",
+      "quest_id": 210
+    },
+    {
+      "index": 133,
+      "kind": "Accept",
+      "quest_id": 198
+    },
+    {
+      "index": 136,
+      "kind": "Accept",
+      "quest_id": 201
+    },
+    {
+      "index": 1088,
+      "kind": "TurnIn",
+      "quest_id": 98463
+    },
+    {
+      "index": 340,
+      "kind": "Accept",
+      "quest_id": 616
+    },
+    {
+      "index": 340,
+      "kind": "TurnIn",
+      "quest_id": 616
+    },
+    {
+      "index": 124,
+      "kind": "Accept",
+      "quest_id": 189
+    },
+    {
+      "index": 147,
+      "kind": "Accept",
+      "quest_id": 213
+    },
+    {
+      "index": 333,
+      "kind": "Accept",
+      "quest_id": 605
+    },
+    {
+      "index": 318,
+      "kind": "Accept",
+      "quest_id": 575
+    },
+    {
+      "index": 318,
+      "kind": "Objective(0)",
+      "quest_id": 575
+    },
+    {
+      "index": 136,
+      "kind": "Objective(0)",
+      "quest_id": 201
+    },
+    {
+      "index": 333,
+      "kind": "Objective(0)",
+      "quest_id": 605
+    },
+    {
+      "index": 124,
+      "kind": "Objective(0)",
+      "quest_id": 189
+    },
+    {
+      "index": 318,
+      "kind": "TurnIn",
+      "quest_id": 575
+    },
+    {
+      "index": 333,
+      "kind": "TurnIn",
+      "quest_id": 605
+    },
+    {
+      "index": 124,
+      "kind": "TurnIn",
+      "quest_id": 189
+    },
+    {
+      "index": 320,
+      "kind": "Accept",
+      "quest_id": 577
+    },
+    {
+      "index": 912,
+      "kind": "Accept",
+      "quest_id": 9267
+    },
+    {
+      "index": 912,
+      "kind": "Objective(0)",
+      "quest_id": 9267
+    },
+    {
+      "index": 912,
+      "kind": "Objective(1)",
+      "quest_id": 9267
+    },
+    {
+      "index": 14,
+      "kind": "Bind",
+      "quest_id": null
+    },
+    {
+      "index": 879,
+      "kind": "Accept",
+      "quest_id": 6626
+    },
+    {
+      "index": 704,
+      "kind": "TurnIn",
+      "quest_id": 1947
+    },
+    {
+      "index": 706,
+      "kind": "Accept",
+      "quest_id": 1949
+    },
+    {
+      "index": 634,
+      "kind": "Accept",
+      "quest_id": 1282
+    },
+    {
+      "index": 574,
+      "kind": "TurnIn",
+      "quest_id": 1132
+    },
+    {
+      "index": 627,
+      "kind": "TurnIn",
+      "quest_id": 1264
+    },
+    {
+      "index": 634,
+      "kind": "TurnIn",
+      "quest_id": 1282
+    },
+    {
+      "index": 628,
+      "kind": "Accept",
+      "quest_id": 1265
+    },
+    {
+      "index": 628,
+      "kind": "Objective(0)",
+      "quest_id": 1265
+    },
+    {
+      "index": 628,
+      "kind": "TurnIn",
+      "quest_id": 1265
+    },
+    {
+      "index": 629,
+      "kind": "Accept",
+      "quest_id": 1266
+    },
+    {
+      "index": 629,
+      "kind": "TurnIn",
+      "quest_id": 1266
+    },
+    {
+      "index": 643,
+      "kind": "Accept",
+      "quest_id": 1324
+    },
+    {
+      "index": 643,
+      "kind": "Objective(0)",
+      "quest_id": 1324
+    },
+    {
+      "index": 643,
+      "kind": "TurnIn",
+      "quest_id": 1324
+    },
+    {
+      "index": 630,
+      "kind": "Accept",
+      "quest_id": 1267
+    },
+    {
+      "index": 630,
+      "kind": "TurnIn",
+      "quest_id": 1267
+    },
+    {
+      "index": 607,
+      "kind": "Accept",
+      "quest_id": 1218
+    },
+    {
+      "index": 608,
+      "kind": "Accept",
+      "quest_id": 1219
+    },
+    {
+      "index": 608,
+      "kind": "TurnIn",
+      "quest_id": 1219
+    },
+    {
+      "index": 609,
+      "kind": "Accept",
+      "quest_id": 1220
+    },
+    {
+      "index": 607,
+      "kind": "Objective(0)",
+      "quest_id": 1218
+    },
+    {
+      "index": 607,
+      "kind": "TurnIn",
+      "quest_id": 1218
+    },
+    {
+      "index": 606,
+      "kind": "Accept",
+      "quest_id": 1206
+    },
+    {
+      "index": 606,
+      "kind": "Objective(0)",
+      "quest_id": 1206
+    },
+    {
+      "index": 635,
+      "kind": "Accept",
+      "quest_id": 1284
+    },
+    {
+      "index": 622,
+      "kind": "Accept",
+      "quest_id": 1252
+    },
+    {
+      "index": 623,
+      "kind": "Accept",
+      "quest_id": 1253
+    },
+    {
+      "index": 622,
+      "kind": "TurnIn",
+      "quest_id": 1252
+    },
+    {
+      "index": 609,
+      "kind": "TurnIn",
+      "quest_id": 1220
+    },
+    {
+      "index": 623,
+      "kind": "TurnIn",
+      "quest_id": 1253
+    },
+    {
+      "index": 635,
+      "kind": "TurnIn",
+      "quest_id": 1284
+    },
+    {
+      "index": 641,
+      "kind": "Accept",
+      "quest_id": 1319
+    },
+    {
+      "index": 625,
+      "kind": "Accept",
+      "quest_id": 1259
+    },
+    {
+      "index": 625,
+      "kind": "TurnIn",
+      "quest_id": 1259
+    },
+    {
+      "index": 636,
+      "kind": "Accept",
+      "quest_id": 1285
+    },
+    {
+      "index": 636,
+      "kind": "TurnIn",
+      "quest_id": 1285
+    },
+    {
+      "index": 637,
+      "kind": "Accept",
+      "quest_id": 1286
+    },
+    {
+      "index": 641,
+      "kind": "TurnIn",
+      "quest_id": 1319
+    },
+    {
+      "index": 642,
+      "kind": "Accept",
+      "quest_id": 1320
+    },
+    {
+      "index": 642,
+      "kind": "TurnIn",
+      "quest_id": 1320
+    },
+    {
+      "index": 637,
+      "kind": "TurnIn",
+      "quest_id": 1286
+    },
+    {
+      "index": 638,
+      "kind": "Accept",
+      "quest_id": 1287
+    },
+    {
+      "index": 638,
+      "kind": "TurnIn",
+      "quest_id": 1287
+    },
+    {
+      "index": 606,
+      "kind": "TurnIn",
+      "quest_id": 1206
+    },
+    {
+      "index": 814,
+      "kind": "Accept",
+      "quest_id": 3523
+    },
+    {
+      "index": 879,
+      "kind": "Objective(0)",
+      "quest_id": 6626
+    },
+    {
+      "index": 814,
+      "kind": "Objective(0)",
+      "quest_id": 3523
+    },
+    {
+      "index": 879,
+      "kind": "Objective(1)",
+      "quest_id": 6626
+    },
+    {
+      "index": 879,
+      "kind": "Objective(2)",
+      "quest_id": 6626
+    },
+    {
+      "index": 814,
+      "kind": "TurnIn",
+      "quest_id": 3523
+    },
+    {
+      "index": 879,
+      "kind": "TurnIn",
+      "quest_id": 6626
+    },
+    {
+      "index": 706,
+      "kind": "TurnIn",
+      "quest_id": 1949
+    },
+    {
+      "index": 586,
+      "kind": "Accept",
+      "quest_id": 1176
+    },
+    {
+      "index": 707,
+      "kind": "Accept",
+      "quest_id": 1950
+    },
+    {
+      "index": 558,
+      "kind": "Accept",
+      "quest_id": 1104
+    },
+    {
+      "index": 559,
+      "kind": "Accept",
+      "quest_id": 1105
+    },
+    {
+      "index": 589,
+      "kind": "TurnIn",
+      "quest_id": 1179
+    },
+    {
+      "index": 562,
+      "kind": "Accept",
+      "quest_id": 1110
+    },
+    {
+      "index": 867,
+      "kind": "Accept",
+      "quest_id": 5762
+    },
+    {
+      "index": 563,
+      "kind": "Accept",
+      "quest_id": 1111
+    },
+    {
+      "index": 707,
+      "kind": "Objective(0)",
+      "quest_id": 1950
+    },
+    {
+      "index": 707,
+      "kind": "TurnIn",
+      "quest_id": 1950
+    },
+    {
+      "index": 585,
+      "kind": "Accept",
+      "quest_id": 1175
+    },
+    {
+      "index": 586,
+      "kind": "Objective(0)",
+      "quest_id": 1176
+    },
+    {
+      "index": 586,
+      "kind": "TurnIn",
+      "quest_id": 1176
+    },
+    {
+      "index": 588,
+      "kind": "Accept",
+      "quest_id": 1178
+    },
+    {
+      "index": 559,
+      "kind": "Objective(0)",
+      "quest_id": 1105
+    },
+    {
+      "index": 562,
+      "kind": "Objective(0)",
+      "quest_id": 1110
+    },
+    {
+      "index": 585,
+      "kind": "Objective(1)",
+      "quest_id": 1175
+    },
+    {
+      "index": 585,
+      "kind": "Objective(2)",
+      "quest_id": 1175
+    },
+    {
+      "index": 559,
+      "kind": "TurnIn",
+      "quest_id": 1105
+    },
+    {
+      "index": 562,
+      "kind": "TurnIn",
+      "quest_id": 1110
+    },
+    {
+      "index": 558,
+      "kind": "Objective(0)",
+      "quest_id": 1104
+    },
+    {
+      "index": 585,
+      "kind": "Objective(0)",
+      "quest_id": 1175
+    },
+    {
+      "index": 558,
+      "kind": "TurnIn",
+      "quest_id": 1104
+    },
+    {
+      "index": 585,
+      "kind": "TurnIn",
+      "quest_id": 1175
+    },
+    {
+      "index": 0,
+      "kind": "Hearth",
+      "quest_id": null
+    },
+    {
+      "index": 563,
+      "kind": "TurnIn",
+      "quest_id": 1111
+    },
+    {
+      "index": 912,
+      "kind": "TurnIn",
+      "quest_id": 9267
+    },
+    {
+      "index": 588,
+      "kind": "TurnIn",
+      "quest_id": 1178
+    },
+    {
+      "index": 590,
+      "kind": "Accept",
+      "quest_id": 1180
+    },
+    {
+      "index": 1071,
+      "kind": "Accept",
+      "quest_id": 98297
+    },
+    {
+      "index": 1071,
+      "kind": "Objective(0)",
+      "quest_id": 98297
+    },
+    {
+      "index": 973,
+      "kind": "TurnIn",
+      "quest_id": 87491
+    },
+    {
+      "index": 216,
+      "kind": "Accept",
+      "quest_id": 304
+    },
+    {
+      "index": 216,
+      "kind": "Objective(0)",
+      "quest_id": 304
+    },
+    {
+      "index": 216,
+      "kind": "TurnIn",
+      "quest_id": 304
+    },
+    {
+      "index": 351,
+      "kind": "Accept",
+      "quest_id": 631
+    },
+    {
+      "index": 975,
+      "kind": "Objective(0)",
+      "quest_id": 88757
+    },
+    {
+      "index": 351,
+      "kind": "TurnIn",
+      "quest_id": 631
+    },
+    {
+      "index": 352,
+      "kind": "Accept",
+      "quest_id": 632
+    },
+    {
+      "index": 975,
+      "kind": "Objective(2)",
+      "quest_id": 88757
+    },
+    {
+      "index": 975,
+      "kind": "Objective(1)",
+      "quest_id": 88757
+    },
+    {
+      "index": 975,
+      "kind": "TurnIn",
+      "quest_id": 88757
+    },
+    {
+      "index": 976,
+      "kind": "Accept",
+      "quest_id": 88758
+    },
+    {
+      "index": 976,
+      "kind": "TurnIn",
+      "quest_id": 88758
+    },
+    {
+      "index": 352,
+      "kind": "TurnIn",
+      "quest_id": 632
+    },
+    {
+      "index": 1071,
+      "kind": "TurnIn",
+      "quest_id": 98297
+    },
+    {
+      "index": 1072,
+      "kind": "Accept",
+      "quest_id": 98300
+    },
+    {
+      "index": 228,
+      "kind": "TurnIn",
+      "quest_id": 328
+    },
+    {
+      "index": 229,
+      "kind": "Accept",
+      "quest_id": 329
+    },
+    {
+      "index": 317,
+      "kind": "Accept",
+      "quest_id": 574
+    },
+    {
+      "index": 142,
+      "kind": "Accept",
+      "quest_id": 207
+    },
+    {
+      "index": 229,
+      "kind": "TurnIn",
+      "quest_id": 329
+    },
+    {
+      "index": 230,
+      "kind": "Accept",
+      "quest_id": 330
+    },
+    {
+      "index": 230,
+      "kind": "TurnIn",
+      "quest_id": 330
+    },
+    {
+      "index": 231,
+      "kind": "Accept",
+      "quest_id": 331
+    },
+    {
+      "index": 320,
+      "kind": "Objective(0)",
+      "quest_id": 577
+    },
+    {
+      "index": 147,
+      "kind": "Objective(0)",
+      "quest_id": 213
+    },
+    {
+      "index": 130,
+      "kind": "Objective(0)",
+      "quest_id": 195
+    },
+    {
+      "index": 130,
+      "kind": "TurnIn",
+      "quest_id": 195
+    },
+    {
+      "index": 867,
+      "kind": "TurnIn",
+      "quest_id": 5762
+    },
+    {
+      "index": 123,
+      "kind": "Accept",
+      "quest_id": 188
+    },
+    {
+      "index": 127,
+      "kind": "Accept",
+      "quest_id": 192
+    },
+    {
+      "index": 123,
+      "kind": "Objective(0)",
+      "quest_id": 188
+    },
+    {
+      "index": 123,
+      "kind": "TurnIn",
+      "quest_id": 188
+    },
+    {
+      "index": 321,
+      "kind": "Accept",
+      "quest_id": 578
+    },
+    {
+      "index": 349,
+      "kind": "Accept",
+      "quest_id": 627
+    },
+    {
+      "index": 136,
+      "kind": "TurnIn",
+      "quest_id": 201
+    },
+    {
+      "index": 147,
+      "kind": "TurnIn",
+      "quest_id": 213
+    },
+    {
+      "index": 320,
+      "kind": "TurnIn",
+      "quest_id": 577
+    },
+    {
+      "index": 350,
+      "kind": "Accept",
+      "quest_id": 628
+    },
+    {
+      "index": 908,
+      "kind": "Accept",
+      "quest_id": 8553
+    },
+    {
+      "index": 908,
+      "kind": "TurnIn",
+      "quest_id": 8553
+    },
+    {
+      "index": 590,
+      "kind": "TurnIn",
+      "quest_id": 1180
+    },
+    {
+      "index": 591,
+      "kind": "Accept",
+      "quest_id": 1181
+    },
+    {
+      "index": 591,
+      "kind": "TurnIn",
+      "quest_id": 1181
+    },
+    {
+      "index": 592,
+      "kind": "Accept",
+      "quest_id": 1182
+    },
+    {
+      "index": 127,
+      "kind": "Objective(0)",
+      "quest_id": 192
+    },
+    {
+      "index": 592,
+      "kind": "Objective(1)",
+      "quest_id": 1182
+    },
+    {
+      "index": 592,
+      "kind": "Objective(0)",
+      "quest_id": 1182
+    },
+    {
+      "index": 321,
+      "kind": "Objective(0)",
+      "quest_id": 578
+    },
+    {
+      "index": 321,
+      "kind": "TurnIn",
+      "quest_id": 578
+    },
+    {
+      "index": 592,
+      "kind": "TurnIn",
+      "quest_id": 1182
+    },
+    {
+      "index": 329,
+      "kind": "Accept",
+      "quest_id": 601
+    },
+    {
+      "index": 231,
+      "kind": "TurnIn",
+      "quest_id": 331
+    },
+    {
+      "index": 127,
+      "kind": "TurnIn",
+      "quest_id": 192
+    },
+    {
+      "index": 317,
+      "kind": "Objective(0)",
+      "quest_id": 574
+    },
+    {
+      "index": 317,
+      "kind": "Objective(1)",
+      "quest_id": 574
+    },
+    {
+      "index": 317,
+      "kind": "TurnIn",
+      "quest_id": 574
+    },
+    {
+      "index": 133,
+      "kind": "TurnIn",
+      "quest_id": 198
+    },
+    {
+      "index": 142,
+      "kind": "Objective(2)",
+      "quest_id": 207
+    },
+    {
+      "index": 142,
+      "kind": "Objective(3)",
+      "quest_id": 207
+    },
+    {
+      "index": 329,
+      "kind": "Objective(0)",
+      "quest_id": 601
+    },
+    {
+      "index": 329,
+      "kind": "TurnIn",
+      "quest_id": 601
+    },
+    {
+      "index": 330,
+      "kind": "Accept",
+      "quest_id": 602
+    },
+    {
+      "index": 346,
+      "kind": "Accept",
+      "quest_id": 624
+    },
+    {
+      "index": 142,
+      "kind": "Objective(0)",
+      "quest_id": 207
+    },
+    {
+      "index": 330,
+      "kind": "TurnIn",
+      "quest_id": 602
+    },
+    {
+      "index": 331,
+      "kind": "Accept",
+      "quest_id": 603
+    },
+    {
+      "index": 316,
+      "kind": "Objective(0)",
+      "quest_id": 564
+    },
+    {
+      "index": 316,
+      "kind": "Objective(1)",
+      "quest_id": 564
+    },
+    {
+      "index": 292,
+      "kind": "Objective(1)",
+      "quest_id": 505
+    },
+    {
+      "index": 940,
+      "kind": "Accept",
+      "quest_id": 79948
+    },
+    {
+      "index": 292,
+      "kind": "Objective(0)",
+      "quest_id": 505
+    },
+    {
+      "index": 293,
+      "kind": "Accept",
+      "quest_id": 510
+    },
+    {
+      "index": 294,
+      "kind": "Accept",
+      "quest_id": 511
+    },
+    {
+      "index": 316,
+      "kind": "TurnIn",
+      "quest_id": 564
+    },
+    {
+      "index": 310,
+      "kind": "TurnIn",
+      "quest_id": 555
+    },
+    {
+      "index": 291,
+      "kind": "Accept",
+      "quest_id": 500
+    },
+    {
+      "index": 292,
+      "kind": "TurnIn",
+      "quest_id": 505
+    },
+    {
+      "index": 293,
+      "kind": "TurnIn",
+      "quest_id": 510
+    },
+    {
+      "index": 294,
+      "kind": "TurnIn",
+      "quest_id": 511
+    },
+    {
+      "index": 305,
+      "kind": "Accept",
+      "quest_id": 540
+    },
+    {
+      "index": 296,
+      "kind": "Accept",
+      "quest_id": 514
+    },
+    {
+      "index": 296,
+      "kind": "TurnIn",
+      "quest_id": 514
+    },
+    {
+      "index": 299,
+      "kind": "Accept",
+      "quest_id": 525
+    },
+    {
+      "index": 396,
+      "kind": "Accept",
+      "quest_id": 707
+    },
+    {
+      "index": 1072,
+      "kind": "TurnIn",
+      "quest_id": 98300
+    },
+    {
+      "index": 737,
+      "kind": "Accept",
+      "quest_id": 2500
+    },
+    {
+      "index": 396,
+      "kind": "TurnIn",
+      "quest_id": 707
+    },
+    {
+      "index": 406,
+      "kind": "Accept",
+      "quest_id": 720
+    },
+    {
+      "index": 404,
+      "kind": "Accept",
+      "quest_id": 718
+    },
+    {
+      "index": 943,
+      "kind": "Accept",
+      "quest_id": 79951
+    },
+    {
+      "index": 405,
+      "kind": "Accept",
+      "quest_id": 719
+    },
+    {
+      "index": 406,
+      "kind": "TurnIn",
+      "quest_id": 720
+    },
+    {
+      "index": 405,
+      "kind": "Objective(0)",
+      "quest_id": 719
+    },
+    {
+      "index": 404,
+      "kind": "Objective(0)",
+      "quest_id": 718
+    },
+    {
+      "index": 737,
+      "kind": "Objective(1)",
+      "quest_id": 2500
+    },
+    {
+      "index": 737,
+      "kind": "Objective(0)",
+      "quest_id": 2500
+    },
+    {
+      "index": 405,
+      "kind": "TurnIn",
+      "quest_id": 719
+    },
+    {
+      "index": 404,
+      "kind": "TurnIn",
+      "quest_id": 718
+    },
+    {
+      "index": 737,
+      "kind": "Objective(2)",
+      "quest_id": 2500
+    },
+    {
+      "index": 331,
+      "kind": "TurnIn",
+      "quest_id": 603
+    },
+    {
+      "index": 334,
+      "kind": "Accept",
+      "quest_id": 606
+    },
+    {
+      "index": 325,
+      "kind": "Accept",
+      "quest_id": 595
+    },
+    {
+      "index": 328,
+      "kind": "Accept",
+      "quest_id": 600
+    },
+    {
+      "index": 338,
+      "kind": "Accept",
+      "quest_id": 610
+    },
+    {
+      "index": 910,
+      "kind": "Accept",
+      "quest_id": 9259
+    },
+    {
+      "index": 910,
+      "kind": "Objective(0)",
+      "quest_id": 9259
+    },
+    {
+      "index": 910,
+      "kind": "Objective(1)",
+      "quest_id": 9259
+    },
+    {
+      "index": 910,
+      "kind": "TurnIn",
+      "quest_id": 9259
+    },
+    {
+      "index": 338,
+      "kind": "Objective(0)",
+      "quest_id": 610
+    },
+    {
+      "index": 346,
+      "kind": "TurnIn",
+      "quest_id": 624
+    },
+    {
+      "index": 654,
+      "kind": "Accept",
+      "quest_id": 1396
+    },
+    {
+      "index": 654,
+      "kind": "Objective(1)",
+      "quest_id": 1396
+    },
+    {
+      "index": 651,
+      "kind": "Accept",
+      "quest_id": 1392
+    },
+    {
+      "index": 654,
+      "kind": "Objective(2)",
+      "quest_id": 1396
+    },
+    {
+      "index": 654,
+      "kind": "Objective(0)",
+      "quest_id": 1396
+    },
+    {
+      "index": 651,
+      "kind": "TurnIn",
+      "quest_id": 1392
+    },
+    {
+      "index": 654,
+      "kind": "TurnIn",
+      "quest_id": 1396
+    },
+    {
+      "index": 656,
+      "kind": "Accept",
+      "quest_id": 1421
+    },
+    {
+      "index": 652,
+      "kind": "Accept",
+      "quest_id": 1393
+    },
+    {
+      "index": 656,
+      "kind": "Objective(0)",
+      "quest_id": 1421
+    },
+    {
+      "index": 652,
+      "kind": "Objective(0)",
+      "quest_id": 1393
+    },
+    {
+      "index": 652,
+      "kind": "TurnIn",
+      "quest_id": 1393
+    },
+    {
+      "index": 656,
+      "kind": "TurnIn",
+      "quest_id": 1421
+    },
+    {
+      "index": 949,
+      "kind": "Accept",
+      "quest_id": 81947
+    },
+    {
+      "index": 146,
+      "kind": "Accept",
+      "quest_id": 212
+    },
+    {
+      "index": 384,
+      "kind": "Accept",
+      "quest_id": 690
+    },
+    {
+      "index": 940,
+      "kind": "TurnIn",
+      "quest_id": 79948
+    },
+    {
+      "index": 949,
+      "kind": "TurnIn",
+      "quest_id": 81947
+    },
+    {
+      "index": 943,
+      "kind": "TurnIn",
+      "quest_id": 79951
+    },
+    {
+      "index": 647,
+      "kind": "Accept",
+      "quest_id": 1363
+    },
+    {
+      "index": 647,
+      "kind": "TurnIn",
+      "quest_id": 1363
+    },
+    {
+      "index": 338,
+      "kind": "TurnIn",
+      "quest_id": 610
+    },
+    {
+      "index": 339,
+      "kind": "Accept",
+      "quest_id": 611
+    },
+    {
+      "index": 146,
+      "kind": "Objective(0)",
+      "quest_id": 212
+    },
+    {
+      "index": 146,
+      "kind": "TurnIn",
+      "quest_id": 212
+    },
+    {
+      "index": 385,
+      "kind": "Accept",
+      "quest_id": 691
+    },
+    {
+      "index": 388,
+      "kind": "Accept",
+      "quest_id": 695
+    },
+    {
+      "index": 388,
+      "kind": "TurnIn",
+      "quest_id": 695
+    },
+    {
+      "index": 384,
+      "kind": "TurnIn",
+      "quest_id": 690
+    },
+    {
+      "index": 365,
+      "kind": "TurnIn",
+      "quest_id": 659
+    },
+    {
+      "index": 364,
+      "kind": "Accept",
+      "quest_id": 658
+    },
+    {
+      "index": 364,
+      "kind": "Objective(0)",
+      "quest_id": 658
+    },
+    {
+      "index": 364,
+      "kind": "TurnIn",
+      "quest_id": 658
+    },
+    {
+      "index": 363,
+      "kind": "Accept",
+      "quest_id": 657
+    },
+    {
+      "index": 363,
+      "kind": "TurnIn",
+      "quest_id": 657
+    },
+    {
+      "index": 366,
+      "kind": "Accept",
+      "quest_id": 660
+    },
+    {
+      "index": 366,
+      "kind": "Objective(0)",
+      "quest_id": 660
+    },
+    {
+      "index": 366,
+      "kind": "TurnIn",
+      "quest_id": 660
+    },
+    {
+      "index": 367,
+      "kind": "Accept",
+      "quest_id": 661
+    },
+    {
+      "index": 385,
+      "kind": "Objective(2)",
+      "quest_id": 691
+    },
+    {
+      "index": 385,
+      "kind": "Objective(0)",
+      "quest_id": 691
+    },
+    {
+      "index": 385,
+      "kind": "Objective(1)",
+      "quest_id": 691
+    },
+    {
+      "index": 385,
+      "kind": "TurnIn",
+      "quest_id": 691
+    },
+    {
+      "index": 387,
+      "kind": "Accept",
+      "quest_id": 693
+    },
+    {
+      "index": 357,
+      "kind": "Accept",
+      "quest_id": 642
+    },
+    {
+      "index": 357,
+      "kind": "Objective(0)",
+      "quest_id": 642
+    },
+    {
+      "index": 349,
+      "kind": "Objective(0)",
+      "quest_id": 627
+    },
+    {
+      "index": 357,
+      "kind": "TurnIn",
+      "quest_id": 642
+    },
+    {
+      "index": 359,
+      "kind": "Accept",
+      "quest_id": 651
+    },
+    {
+      "index": 359,
+      "kind": "Objective(1)",
+      "quest_id": 651
+    },
+    {
+      "index": 387,
+      "kind": "Objective(0)",
+      "quest_id": 693
+    },
+    {
+      "index": 359,
+      "kind": "Objective(2)",
+      "quest_id": 651
+    },
+    {
+      "index": 387,
+      "kind": "TurnIn",
+      "quest_id": 693
+    },
+    {
+      "index": 359,
+      "kind": "Objective(0)",
+      "quest_id": 651
+    },
+    {
+      "index": 359,
+      "kind": "TurnIn",
+      "quest_id": 651
+    },
+    {
+      "index": 369,
+      "kind": "Accept",
+      "quest_id": 663
+    },
+    {
+      "index": 369,
+      "kind": "TurnIn",
+      "quest_id": 663
+    },
+    {
+      "index": 371,
+      "kind": "Accept",
+      "quest_id": 665
+    },
+    {
+      "index": 371,
+      "kind": "Objective(0)",
+      "quest_id": 665
+    },
+    {
+      "index": 371,
+      "kind": "TurnIn",
+      "quest_id": 665
+    },
+    {
+      "index": 370,
+      "kind": "Accept",
+      "quest_id": 664
+    },
+    {
+      "index": 372,
+      "kind": "Accept",
+      "quest_id": 666
+    },
+    {
+      "index": 370,
+      "kind": "Objective(0)",
+      "quest_id": 664
+    },
+    {
+      "index": 370,
+      "kind": "Objective(1)",
+      "quest_id": 664
+    },
+    {
+      "index": 370,
+      "kind": "TurnIn",
+      "quest_id": 664
+    },
+    {
+      "index": 737,
+      "kind": "TurnIn",
+      "quest_id": 2500
+    },
+    {
+      "index": 299,
+      "kind": "TurnIn",
+      "quest_id": 525
+    },
+    {
+      "index": 303,
+      "kind": "Accept",
+      "quest_id": 537
+    },
+    {
+      "index": 367,
+      "kind": "TurnIn",
+      "quest_id": 661
+    },
+    {
+      "index": 303,
+      "kind": "Objective(0)",
+      "quest_id": 537
+    },
+    {
+      "index": 303,
+      "kind": "Objective(1)",
+      "quest_id": 537
+    },
+    {
+      "index": 305,
+      "kind": "Objective(1)",
+      "quest_id": 540
+    },
+    {
+      "index": 305,
+      "kind": "Objective(0)",
+      "quest_id": 540
+    },
+    {
+      "index": 291,
+      "kind": "Objective(0)",
+      "quest_id": 500
+    },
+    {
+      "index": 305,
+      "kind": "TurnIn",
+      "quest_id": 540
+    },
+    {
+      "index": 303,
+      "kind": "TurnIn",
+      "quest_id": 537
+    },
+    {
+      "index": 291,
+      "kind": "TurnIn",
+      "quest_id": 500
+    },
+    {
+      "index": 350,
+      "kind": "Objective(0)",
+      "quest_id": 628
+    },
+    {
+      "index": 339,
+      "kind": "Objective(0)",
+      "quest_id": 611
+    },
+    {
+      "index": 142,
+      "kind": "Objective(1)",
+      "quest_id": 207
+    },
+    {
+      "index": 142,
+      "kind": "TurnIn",
+      "quest_id": 207
+    },
+    {
+      "index": 140,
+      "kind": "Accept",
+      "quest_id": 205
+    },
+    {
+      "index": 137,
+      "kind": "Accept",
+      "quest_id": 202
+    },
+    {
+      "index": 334,
+      "kind": "Objective(0)",
+      "quest_id": 606
+    },
+    {
+      "index": 325,
+      "kind": "TurnIn",
+      "quest_id": 595
+    },
+    {
+      "index": 326,
+      "kind": "Accept",
+      "quest_id": 597
+    },
+    {
+      "index": 334,
+      "kind": "TurnIn",
+      "quest_id": 606
+    },
+    {
+      "index": 335,
+      "kind": "Accept",
+      "quest_id": 607
+    },
+    {
+      "index": 326,
+      "kind": "TurnIn",
+      "quest_id": 597
+    },
+    {
+      "index": 339,
+      "kind": "TurnIn",
+      "quest_id": 611
+    },
+    {
+      "index": 327,
+      "kind": "Accept",
+      "quest_id": 599
+    },
+    {
+      "index": 350,
+      "kind": "TurnIn",
+      "quest_id": 628
+    },
+    {
+      "index": 335,
+      "kind": "TurnIn",
+      "quest_id": 607
+    },
+    {
+      "index": 328,
+      "kind": "Objective(0)",
+      "quest_id": 600
+    },
+    {
+      "index": 140,
+      "kind": "Objective(0)",
+      "quest_id": 205
+    },
+    {
+      "index": 137,
+      "kind": "Objective(0)",
+      "quest_id": 202
+    },
+    {
+      "index": 137,
+      "kind": "Objective(1)",
+      "quest_id": 202
+    },
+    {
+      "index": 137,
+      "kind": "Objective(2)",
+      "quest_id": 202
+    },
+    {
+      "index": 131,
+      "kind": "Accept",
+      "quest_id": 196
+    },
+    {
+      "index": 128,
+      "kind": "Accept",
+      "quest_id": 193
+    },
+    {
+      "index": 131,
+      "kind": "Objective(0)",
+      "quest_id": 196
+    },
+    {
+      "index": 128,
+      "kind": "Objective(0)",
+      "quest_id": 193
+    },
+    {
+      "index": 131,
+      "kind": "TurnIn",
+      "quest_id": 196
+    },
+    {
+      "index": 128,
+      "kind": "TurnIn",
+      "quest_id": 193
+    },
+    {
+      "index": 328,
+      "kind": "TurnIn",
+      "quest_id": 600
+    },
+    {
+      "index": 349,
+      "kind": "TurnIn",
+      "quest_id": 627
+    },
+    {
+      "index": 344,
+      "kind": "Accept",
+      "quest_id": 622
+    },
+    {
+      "index": 327,
+      "kind": "TurnIn",
+      "quest_id": 599
+    },
+    {
+      "index": 137,
+      "kind": "TurnIn",
+      "quest_id": 202
+    },
+    {
+      "index": 140,
+      "kind": "TurnIn",
+      "quest_id": 205
+    },
+    {
+      "index": 344,
+      "kind": "TurnIn",
+      "quest_id": 622
+    }
+  ],
+  "valid": true,
+  "warning_quest_ids": {
+    "late_timed": [],
+    "missing_class": [],
+    "missing_zone": []
+  },
+  "warnings": {
+    "late_timed": [],
+    "missing_class": [],
+    "missing_zone": [],
+    "notes": [
+      "1095 plannable quests, start at Sten Stoutarm (Dun Morogh)",
+      "skipped 27: PvP (battleground) quest",
+      "skipped 4: elite objective",
+      "skipped 3: exploration area unknown",
+      "skipped 126: holiday/profession/event category",
+      "skipped 20: needs a profession, reputation or spell",
+      "skipped 200: no reachable quest giver",
+      "skipped 2: no reachable turn-in",
+      "skipped 7: objective item from elite mobs",
+      "skipped 1: objective item handed by quests left out",
+      "skipped 15: objective item source unknown",
+      "skipped 25: objectives unknown (only described)",
+      "skipped 2: reputation/spell objective",
+      "skipped 9: started by a rare drop"
+    ]
+  },
+  "zones": [
+    1,
+    3,
+    8,
+    10,
+    11,
+    12,
+    15,
+    17,
+    33,
+    36,
+    38,
+    40,
+    44,
+    45,
+    148,
+    267,
+    400,
+    1519,
+    1537,
+    1657
+  ]
+}
