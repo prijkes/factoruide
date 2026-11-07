@@ -6,6 +6,9 @@ under Unreleased; `scripts/release.sh` gives them the release's version.
 
 ## Unreleased
 
+- Warns when a planned quest offered during a conversation was left unaccepted, so you can return and accept it manually.
+- Required guide steps, including planned reputation work, are kept when your level is ahead of the guide.
+
 - WoW Forever: no more "ADDON_ACTION_BLOCKED: SetPassThroughButtons" message when the world map is open during a fight.
 - A dungeon's quests show together until each is done, even after leaving it; "Skip the dungeon" leaves the ones not finished aside.
 - WoW Forever: the Sleeping Bag XP reminder starts after its reward quest is completed.
