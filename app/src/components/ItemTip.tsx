@@ -4,10 +4,11 @@ import { SETTINGS_CHANGED, api, type ItemInfo } from "../api";
 import { useT } from "../i18n";
 import { Money } from "./Money";
 
-/** An item's icon (an object URL), fetched once per mount: null without one. */
+/** An item's icon (an object URL), fetched once per mount: null without one (or without an item). */
 export function useIcon(item: number): string | null {
   const [url, setUrl] = useState<string | null>(null);
   useEffect(() => {
+    if (item <= 0) return;
     let alive = true;
     let made: string | null = null;
     api.itemIcon(item).then((fresh) => {
@@ -42,10 +43,11 @@ const read = (item: number) => {
 // Another game version: what was read of the last one is read again.
 window.addEventListener(SETTINGS_CHANGED, () => ITEMS.clear());
 
-/** An item's details (`null` until read, or when the game's data has none of it). */
+/** An item's details (`null` until read, without an item, or when the game's data has none of it). */
 export function useItemInfo(item: number): ItemInfo | null {
   const [info, setInfo] = useState<ItemInfo | null>(null);
   useEffect(() => {
+    if (item <= 0) return;
     let alive = true;
     read(item).then((fresh) => {
       if (alive) setInfo(fresh);
@@ -103,8 +105,8 @@ const STAT_LABELS: Record<string, string> = {
   mp5: "Mana toutes les 5 secondes",
 };
 
-/** The name's color of each quality, as the game writes them. */
-const QUALITY = ["#9d9d9d", "#ffffff", "#1eff00", "#0070dd", "#a335ee", "#ff8000", "#e6cc80"];
+/** Each quality's color, as the game writes them. */
+export const QUALITY = ["#9d9d9d", "#ffffff", "#1eff00", "#0070dd", "#a335ee", "#ff8000", "#e6cc80"];
 
 /**
  * An item's details as the game's tooltip shows them: its picture beside its name colored by its

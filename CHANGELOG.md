@@ -15,6 +15,7 @@ An addon change also goes, in the same words, under Unreleased in that addon's o
 - A settings change made while the addon installs, or while a character is added back or forgotten, is no longer lost.
 - A dungeon quest with one objective inside shows its name in the guide ("An Ancient Grudge: Faldrim Anvilmar"), not the dungeon's ("The Hall of Thanes: Faldrim Anvilmar").
 - An item's details show on hover, as the game's tooltip: its picture beside its name colored by its quality, what it is, what it gives, the level it asks and what it sells for, in the game's own font, with the game's own money coins (the best gear's rows and a step's own tip; the picture, font and coins are the game's own, read from the client like the icons).
+- The best gear has its own tab in the guide view (Gear), laid out like the game's character sheet: one level band at a time, the game's own empty-slot pictures, the items' icons with their quality's border and details on hover, and where each comes from in the middle.
 
 ### Guides
 

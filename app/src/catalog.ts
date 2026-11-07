@@ -786,9 +786,7 @@ export const CATALOG: Record<string, Entry> = {
   "Or dépensé en vols": { en: "Gold spent on flights", de: "Für Flüge ausgegebenes Gold", es: "Oro gastado en vuelos", pt: "Ouro gasto em voos", ru: "Золото, потраченное на полёты", ko: "비행에 쓴 골드", zhCN: "飞行花费的金币", zhTW: "飛行花費的金幣" },
   "Or donné par la quête": { en: "Gold the quest gives", de: "Gold, das die Quest gibt", es: "Oro que da la misión", pt: "Ouro que a missão dá", ru: "Золото, которое даёт задание", ko: "퀘스트가 주는 골드", zhCN: "任务给的金币", zhTW: "任務給的金幣" },
   "Or des quêtes": { en: "Gold from quests", de: "Gold aus Quests", es: "Oro de las misiones", pt: "Ouro das missões", ru: "Золото с заданий", ko: "퀘스트 골드", zhCN: "任务金币", zhTW: "任務金幣" },
-  "Marchands": { en: "Vendors", de: "Händler", es: "Vendedores", pt: "Vendedores", ru: "Торговцы", ko: "상인", zhCN: "商人", zhTW: "商人" },
-  "Meilleur équipement par tranche de niveaux": { en: "Best gear by level bracket", de: "Beste Ausrüstung nach Stufenbereich", es: "Mejor equipo por banda de nivel", pt: "Melhor equipamento por faixa de nível", ru: "Лучшая экипировка по диапазонам уровней", ko: "레벨 구간별 최고 장비", zhCN: "各等级段最佳装备", zhTW: "各等級段最佳裝備" },
-  "Niveaux {from} – {to}": { en: "Levels {from} – {to}", de: "Stufen {from} – {to}", es: "Niveles {from} – {to}", pt: "Níveis {from} – {to}", ru: "Уровни {from} – {to}", ko: "{from} – {to}레벨", zhCN: "{from} – {to} 级", zhTW: "{from} – {to} 級" },
+  "Marchands": { en: "Vendors", de: "Händler", es: "Vendedores", pt: "Vendedores", ru: "Торговцы", ko: "상인", zhCN: "商人", zhTW: "商人" },  "Niveaux {from} – {to}": { en: "Levels {from} – {to}", de: "Stufen {from} – {to}", es: "Niveles {from} – {to}", pt: "Níveis {from} – {to}", ru: "Уровни {from} – {to}", ko: "{from} – {to}레벨", zhCN: "{from} – {to} 级", zhTW: "{from} – {to} 級" },
   "Quête : {name}": { en: "Quest: {name}", de: "Quest: {name}", es: "Misión: {name}", pt: "Missão: {name}", ru: "Задание: {name}", ko: "퀘스트: {name}", zhCN: "任务：{name}", zhTW: "任務：{name}" },
   "Marchands : {names}": { en: "Vendors: {names}", de: "Händler: {names}", es: "Vendedores: {names}", pt: "Vendedores: {names}", ru: "Продавцы: {names}", ko: "상인: {names}", zhCN: "商人：{names}", zhTW: "商人：{names}" },
   "Tête": { en: "Head", de: "Kopf", es: "Cabeza", pt: "Cabeça", ru: "Голова", ko: "머리", zhCN: "头部", zhTW: "頭部" },
@@ -1210,4 +1208,5 @@ export const CATALOG: Record<string, Entry> = {
   "{dps} dégâts par seconde (vitesse {speed})": { en: "{dps} damage per second (speed {speed})", de: "{dps} Schaden pro Sekunde (Tempo {speed})", es: "{dps} daño por segundo (velocidad {speed})", pt: "{dps} de dano por segundo (velocidade {speed})", ru: "{dps} урона в секунду (скорость {speed})", ko: "초당 {dps} 피해 (속도 {speed})", zhCN: "每秒伤害 {dps}（速度 {speed}）", zhTW: "每秒傷害 {dps}（速度 {speed}）" },
   "Niveau {n} requis": { en: "Requires Level {n}", de: "Benötigt Stufe {n}", es: "Requiere nivel {n}", pt: "Requer nível {n}", ru: "Требуется уровень {n}", ko: "요구 레벨 {n}", zhCN: "需要等级 {n}", zhTW: "需要等級 {n}" },
   "Prix de vente :": { en: "Sell Price:", de: "Verkaufspreis:", es: "Precio de venta:", pt: "Preço de venda:", ru: "Цена продажи:", ko: "판매 가격:", zhCN: "出售价格：", zhTW: "出售價格：" },
+  "Équipement": { en: "Gear", de: "Ausrüstung", es: "Equipo", pt: "Equipamento", ru: "Экипировка", ko: "장비", zhCN: "装备", zhTW: "裝備" },
 };
