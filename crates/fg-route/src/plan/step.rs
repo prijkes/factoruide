@@ -230,6 +230,7 @@ impl Simulator<'_> {
     pub(crate) fn abandon(&self, s: &mut State, i: u32, record: &mut impl FnMut(&State, Event)) {
         self.release(s, i);
         s.settle_kill_work(i, false);
+        s.settle_legacy_work(i, false);
         s.started.retain(|&(q, _, _)| q != i);
         s.timers.retain(|&(q, _)| q != i);
         s.accepted.set(i as usize, false);
@@ -321,6 +322,7 @@ impl Simulator<'_> {
         let q = self.quest(i);
         self.release(s, i);
         s.settle_kill_work(i, true);
+        s.settle_legacy_work(i, true);
         s.timers.retain(|&(q, _)| q != i);
         s.log -= 1;
         s.started.retain(|&(q, _, _)| q != i);
@@ -935,6 +937,11 @@ impl Simulator<'_> {
         s.spent.mob_xp += self.growth().gain_kills(s, mob_xp);
         if let Some(target) = o.shared_kill_target() {
             self.share_direct_kills(s, (quest, k), o, target, kills, (kill_work, extra));
+        } else {
+            // Record only executed work, using this place and the progress/inventory left.
+            // `hold` also imports completion and must not create new work. Gathering overlap
+            // remains accounted for by the aggregate fighting cap at the end of the route.
+            s.record_legacy_work(quest, kill_work + other);
         }
         self.hold(s, i, k);
         (kill_work, uses * self.params.object_time)
@@ -1138,17 +1145,9 @@ impl Simulator<'_> {
     /// reward): the time its done objectives took counts as grinding, in the optimizer's score and
     /// against the grind cap, instead of as a quest's fighting.
     fn count_unfinished_as_grind(&self, s: &mut State) {
-        let mut work: f64 = s.kill_work.iter().map(|w| w.seconds).sum();
-        for i in s.accepted.and_not(&s.turned) {
-            let q = &self.model.quests[i];
-            for (k, o) in q.objectives.iter().enumerate().take(8) {
-                if s.objectives[i] & (1 << k) != 0 && o.shared_kill_target().is_none() {
-                    work += o.kills * self.params.kill_time(q.level, 0.0, o.mob_level)
-                        + o.uses * self.params.object_time
-                        + o.extra;
-                }
-            }
-        }
+        let work = s.kill_work.iter().map(|w| w.seconds).sum::<f64>()
+            + s.legacy_work.iter().map(|&(_, seconds)| seconds).sum::<f64>()
+            + s.orphaned_work;
         let work = work.min((s.spent.fighting - s.rewarded_kill_work).max(0.0));
         if work <= 0.0 {
             return;

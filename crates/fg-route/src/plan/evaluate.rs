@@ -367,6 +367,8 @@ impl Planner<'_> {
                     && s.objectives == old.objectives
                     && s.started == old.started
                     && s.kill_work == old.kill_work
+                    && s.legacy_work == old.legacy_work
+                    && s.orphaned_work.to_bits() == old.orphaned_work.to_bits()
                     && s.rewarded_kill_work.to_bits() == old.rewarded_kill_work.to_bits()
                     && s.powers == old.powers
                     && s.gear == old.gear
