@@ -1,5 +1,35 @@
 # Factoruide route-quality analysis: handoff to Astra
 
+Current continuation, 2026-11-08: all previously completed local branches are
+merged into local `main` at `f9dde21`. Its tree is identical to the verified
+`fix/reachable-required-bis` tip; the extra merge records the already-applied
+required-gear route branch. Fresh merged-main release workspace verification
+passed 754 tests, with the previously documented exclusions. No push occurred.
+
+The new reputation/quest-acceptance work is diagnosed and awaiting review of the
+[concrete design](docs/superpowers/specs/2026-11-08-reputation-and-acceptance-design.md).
+The user selected required reputation outcomes, including detours/after 60,
+and warnings for any offered planned quest left unaccepted. Do not ask these
+policy questions again. Proof of Demise (374) directly rewards Undercity but
+is removed by the saved level-18 request's early lower-level filter. The Argent
+Emissary (96895) rewards Argent Dawn, which is not selected in that request.
+The skip banner is manual; a separate outdated-step rule ignores keep flags.
+Neither skip path currently guarantees preservation of reputation work.
+Ordinary accept steps already require quest-log/completion confirmation, but
+there is no post-interaction missing-quest warning.
+
+The current one-completion/direct-quest-reward model cannot meet any of the eight
+selected Exalted targets even under deliberately loose raw-data upper bounds;
+Undercity's optimistic endpoint is 25122 versus 42000. Seven bounds use snapshot
+standings; Horde's starting standing is absent and its bound is conditional on
+the existing race/class fallback. This does not prove game impossibility. Also,
+fractional stored rewards are currently rejected by an integer array parser.
+New product code has not changed. Work is on
+`fix/required-reputation-and-acceptance`; private diagnostic reports are in
+ignored `.superpowers/sdd/2026-11-08-reputation-and-acceptance/`. Saved inputs and
+the desktop executable remain unchanged. The older completion records below
+describe the previous task and retain their historical branch/merge wording.
+
 Current continuation: correcting the saved guide's misleading 25-class-quest
 warning and Required gear completion is in progress on `fix/reachable-required-bis`.
 The [supported gear assessment](docs/required-gear-assessment-2026-11-07.md) and
