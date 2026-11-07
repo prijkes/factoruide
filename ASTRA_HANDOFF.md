@@ -1,44 +1,52 @@
 # Factoruide route-quality analysis: handoff to Astra
 
-Current continuation, 2026-11-08: all previously completed local branches are
-merged into local `main` at `f9dde21`. Its tree is identical to the verified
-`fix/reachable-required-bis` tip; the extra merge records the already-applied
-required-gear route branch. Fresh merged-main release workspace verification
-passed 754 tests, with the previously documented exclusions. No push occurred.
+Latest continuation complete, 2026-11-08: required reputation, low-level quest
+eligibility, guide skip protection and missed-acceptance warnings are implemented,
+independently reviewed and merged into local `main`. All completed local branches
+are ancestors of main. Product source is `95356fd`; reviewed integration is
+`b0a588c`, followed only by final documentation. No push occurred.
 
-The new reputation/quest-acceptance work is implementing the user-approved
-[concrete design](docs/superpowers/specs/2026-11-08-reputation-and-acceptance-design.md).
-The user then delegated further review and approval while asleep. Do not stop
-for routine confirmation; complete implementation, independent review, checks,
-production build and local main integration. The
+The [assessment and delivery record](docs/reputation-and-acceptance-assessment-2026-11-08.md)
+and [machine-readable validation](docs/reputation-and-acceptance-validation-2026-11-08.json)
+contain the exact results, artifact identities and limits. The
 [implementation plan](docs/superpowers/plans/2026-11-08-reputation-and-acceptance.md)
-and ignored workspace ledger track progress. Export/frontend commit `e6a65eb`
-has clean spec/quality review. Addon commits `a7a796d` and `3fdc85d` pass smoke and
-independent review. Rust reputation commits `0fb2163` and `95356fd` pass 445 unit
-and 238 integration fast tests, Clippy, formatting and scoped review. Final whole
-workspace checks, real-data validation, production build and whole-branch review
-are in progress; read the ledger before dispatching any work again.
-The user selected required reputation outcomes, including detours/after 60,
-and warnings for any offered planned quest left unaccepted. Do not ask these
-policy questions again. Proof of Demise (374) directly rewards Undercity but
-is removed by the saved level-18 request's early lower-level filter. The Argent
-Emissary (96895) rewards Argent Dawn, which is not selected in that request.
-The skip banner is manual; a separate outdated-step rule ignores keep flags.
-Neither skip path currently guarantees preservation of reputation work.
-Ordinary accept steps already require quest-log/completion confirmation, but
-there is no post-interaction missing-quest warning.
+is complete. Do not repeat completed implementation or ask the resolved policies
+again: selected reputation totals are mandatory, including detours and work after level 60;
+warn for any identified offered planned quest left missing. The user approved
+the design and delegated subsequent reviews/approval while asleep.
 
-The current one-completion/direct-quest-reward model cannot meet any of the eight
-selected Exalted targets even under deliberately loose raw-data upper bounds;
-Undercity's optimistic endpoint is 25122 versus 42000. Seven bounds use snapshot
-standings; Horde's starting standing is absent and its bound is conditional on
-the existing race/class fallback. This does not prove game impossibility. Also,
-fractional stored rewards are currently rejected by an integer array parser.
-Work is on
-`fix/required-reputation-and-acceptance`; private diagnostic reports are in
-ignored `.superpowers/sdd/2026-11-08-reputation-and-acceptance/`. Saved inputs and
-the desktop executable remain unchanged. The older completion records below
-describe the previous task and retain their historical branch/merge wording.
+Final verification: 776 release workspace tests pass, no failures, with four
+known ignored tests/examples and one known Windows CRLF test filtered. Release
+all-target workspace Clippy, formatting, frontend tests (9), build, lint and i18n (1,206 texts),
+full addon and profile-only Lua smoke pass. Production desktop built with
+`tauri/custom-protocol`: `target/release/factoruide-app.exe`, 159,502,848 bytes,
+SHA256 `44cc211853b1cb987fb94054c0ad040b806053d771edde396ee08af59e3862bb`.
+Addon archive `target/release/Factoruide-addons-3fdc85d.zip`, 713,881 bytes,
+SHA256 `fa0512c6bb780aa85815c023134672f2b88b7c870e53a093450ee759c7fea445`.
+Both were independently verified. Install/update them before regenerating;
+active app sessions, game addon installs and original saved guides were untouched.
+
+Proof of Demise (374) now exists in the actual saved level-18 model with 100 Undercity
+reward and its 427 prerequisite, without being made mandatory. The Argent
+Emissary (96895) rewards 150 Argent Dawn, which that saved request does not select.
+A real-data positive reputation case (Gear Prefer) reaches 5,900 Thunder Bluff versus
+required 5,000: 21 actual turn-ins independently sum 1,900, all 68 quest steps kept,
+zero checkpoints. Combined Required gear/exact/reputation tests also pass.
+
+The original eight Exalted request now fails honestly with named actual deficits;
+its final bounded candidate reaches 19,797 Undercity versus 42,000. Even the deliberately
+loose direct-once quest bound reaches only 25,122. Seven faction bounds use measured
+starts; Horde (67) is missing from the snapshot and its bound uses a labeled estimated
+baseline. No repeatable farming or derived spillover is modeled. These are model
+limits, not proof of in-game impossibility. Generic bounded gear search can also
+fail; same missing sources were reproduced with no reputation and in the prior
+binary, so no unrelated gear scheduler was changed. No optimality claim is made.
+
+Ignored private evidence and the completion ledger remain in
+`.superpowers/sdd/2026-11-08-reputation-and-acceptance/` for continuation/audit.
+Final whole-branch spec/quality/delivery review passed with no unresolved findings.
+The earlier continuation records below are historical; their branch, authorization
+and merge wording describes those earlier stages.
 
 Current continuation: correcting the saved guide's misleading 25-class-quest
 warning and Required gear completion is in progress on `fix/reachable-required-bis`.

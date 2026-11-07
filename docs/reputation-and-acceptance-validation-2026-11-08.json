@@ -1,0 +1,368 @@
+{
+  "product_source": "95356fd",
+  "reviewed_branch_head": "b0a588c",
+  "workspace_release": {
+    "passed": 776,
+    "failed": 0,
+    "ignored": 4,
+    "filtered": 1
+  },
+  "frontend": {
+    "tests_passed": 9,
+    "i18n_texts": 1206,
+    "lint": "passed",
+    "build": "passed"
+  },
+  "addon_smoke": "passed",
+  "profile_only_smoke": "passed",
+  "release_all_target_workspace_clippy": "passed",
+  "formatting": "passed",
+  "production_build_features": [
+    "tauri/custom-protocol"
+  ],
+  "desktop": {
+    "path": "target/release/factoruide-app.exe",
+    "bytes": 159502848,
+    "sha256": "44cc211853b1cb987fb94054c0ad040b806053d771edde396ee08af59e3862bb"
+  },
+  "addon_archive": {
+    "path": "target/release/Factoruide-addons-3fdc85d.zip",
+    "bytes": 713881,
+    "sha256": "fa0512c6bb780aa85815c023134672f2b88b7c870e53a093450ee759c7fea445"
+  },
+  "positive_reputation_case": {
+    "faction": 81,
+    "faction_name": "Thunder Bluff",
+    "start": 4000,
+    "target": 5000,
+    "actual_reached": 5900,
+    "independently_summed_from_actual_unique_turnins": true,
+    "rewarding_quests": 21,
+    "quests": 21,
+    "checkpoints": 0,
+    "final_level": 10,
+    "gear_mode": "prefer",
+    "elapsed_seconds": 3.0067079,
+    "all_kept_steps": 75,
+    "kept_reputation_quest_steps": 68,
+    "direct_reward_sum": 1900
+  },
+  "saved_request_expected_failure": {
+    "case": "saved-95356fd",
+    "exit_code": 1,
+    "elapsed_seconds": 103.7634239,
+    "product_source": "95356fd",
+    "expected_exit_code": 1,
+    "reputation_shortfalls": [
+      {
+        "faction": 76,
+        "name": "Orgrimmar",
+        "start": 9306.0,
+        "start_provenance": "recorded standing",
+        "target": 42000,
+        "actual": 21964.75,
+        "deficit": 20035.25
+      },
+      {
+        "faction": 68,
+        "name": "Undercity",
+        "start": 1217.0,
+        "start_provenance": "recorded standing",
+        "target": 42000,
+        "actual": 19797.0,
+        "deficit": 22203.0
+      },
+      {
+        "faction": 81,
+        "name": "Thunder Bluff",
+        "start": 9426.0,
+        "start_provenance": "recorded standing",
+        "target": 42000,
+        "actual": 19919.75,
+        "deficit": 22080.25
+      },
+      {
+        "faction": 530,
+        "name": "Darkspear Trolls",
+        "start": 7937.0,
+        "start_provenance": "recorded standing",
+        "target": 42000,
+        "actual": 14845.75,
+        "deficit": 27154.25
+      },
+      {
+        "faction": 21,
+        "name": "Booty Bay",
+        "start": 1237.0,
+        "start_provenance": "recorded standing",
+        "target": 42000,
+        "actual": 6261.0,
+        "deficit": 35739.0
+      },
+      {
+        "faction": 470,
+        "name": "Ratchet",
+        "start": 2375.0,
+        "start_provenance": "recorded standing",
+        "target": 42000,
+        "actual": 6124.0,
+        "deficit": 35876.0
+      },
+      {
+        "faction": 369,
+        "name": "Gadgetzan",
+        "start": 1237.0,
+        "start_provenance": "recorded standing",
+        "target": 42000,
+        "actual": 4241.0,
+        "deficit": 37759.0
+      },
+      {
+        "faction": 67,
+        "name": "Horde",
+        "start": 3500.0,
+        "start_provenance": "estimated race/class baseline",
+        "target": 42000,
+        "actual": 5508.75,
+        "deficit": 36491.25
+      }
+    ]
+  },
+  "saved_profile_candidate_proof": {
+    "database_open_mode": "read_only",
+    "edition": "forever",
+    "operation": "prepare_only_no_optimizer",
+    "profile_from_level": 18,
+    "quests": [
+      {
+        "model_contains": true,
+        "modeled": {
+          "direct_rewards": [
+            [
+              68,
+              100.0
+            ]
+          ],
+          "mandatory": false,
+          "name": "Proof of Demise",
+          "pre_all": [],
+          "pre_any": [
+            427
+          ],
+          "pre_held": [],
+          "required": false
+        },
+        "quest_id": 374,
+        "recorded_direct_rewards": [
+          [
+            68,
+            100
+          ]
+        ]
+      },
+      {
+        "model_contains": true,
+        "modeled": {
+          "direct_rewards": [
+            [
+              529,
+              150.0
+            ]
+          ],
+          "mandatory": false,
+          "name": "The Argent Emissary",
+          "pre_all": [],
+          "pre_any": [],
+          "pre_held": [],
+          "required": false
+        },
+        "quest_id": 96895,
+        "recorded_direct_rewards": [
+          [
+            529,
+            150
+          ]
+        ]
+      }
+    ]
+  },
+  "original_saved_files_unchanged": true,
+  "database_sha256": "1c93c95bfa5d236728ce75d0d9059133a070cff9aa7fdaf62be902f7c3582db7",
+  "delivery_review": "passed: independent spec, quality and pre-merge delivery review",
+  "local_main_merge": {
+    "merged_head": "b0a588c205607855006ac7f9656df96fa1a0ed2c",
+    "reviewed_tree": "7909dc060a2566af3dae8f56e9bb24a0f08324c1",
+    "previous_main": "f9dde21e6408d8b47087985f2a74575234cec4a7",
+    "all_local_branches_merged": true,
+    "tree_matches_reviewed": true
+  },
+  "original_guide_integrity": {
+    "baseline_record": "docs/required-gear-validation-2026-11-07.json",
+    "baseline_field": "frozen_input_sha256",
+    "files": [
+      {
+        "role": "request",
+        "baseline_sha256": "5994c3890441c1445c6ee6e49d9245794156d41b7433d1ce601af7f8f78748db",
+        "observed_sha256": "5994c3890441c1445c6ee6e49d9245794156d41b7433d1ce601af7f8f78748db",
+        "unchanged": true
+      },
+      {
+        "role": "outcome",
+        "baseline_sha256": "8a434c84e57652054504dc338c820ffcc2d4971e3d66bd111138217f187a7479",
+        "observed_sha256": "8a434c84e57652054504dc338c820ffcc2d4971e3d66bd111138217f187a7479",
+        "unchanged": true
+      },
+      {
+        "role": "meta",
+        "baseline_sha256": "1dacced22eef90e4f713c1e9b39441e124e09318e20589071d1ecc8f63dd5dc7",
+        "observed_sha256": "1dacced22eef90e4f713c1e9b39441e124e09318e20589071d1ecc8f63dd5dc7",
+        "unchanged": true
+      }
+    ]
+  },
+  "positive_turnin_proof_sha256": "fee0fe070a5285ee678b481c55ac31109a113db82a9464ce9bca92416d50a96a",
+  "positive_actual_turnins": [
+    {
+      "quest": 743,
+      "name": "Dangers of the Windfury",
+      "direct_thunder_bluff_points": 100,
+      "all_exported_steps_kept": true
+    },
+    {
+      "quest": 745,
+      "name": "Sharing the Land",
+      "direct_thunder_bluff_points": 100,
+      "all_exported_steps_kept": true
+    },
+    {
+      "quest": 746,
+      "name": "Dwarven Digging",
+      "direct_thunder_bluff_points": 100,
+      "all_exported_steps_kept": true
+    },
+    {
+      "quest": 747,
+      "name": "The Hunt Begins",
+      "direct_thunder_bluff_points": 100,
+      "all_exported_steps_kept": true
+    },
+    {
+      "quest": 748,
+      "name": "Poison Water",
+      "direct_thunder_bluff_points": 100,
+      "all_exported_steps_kept": true
+    },
+    {
+      "quest": 749,
+      "name": "The Ravaged Caravan",
+      "direct_thunder_bluff_points": 75,
+      "all_exported_steps_kept": true
+    },
+    {
+      "quest": 750,
+      "name": "The Hunt Continues",
+      "direct_thunder_bluff_points": 100,
+      "all_exported_steps_kept": true
+    },
+    {
+      "quest": 751,
+      "name": "The Ravaged Caravan",
+      "direct_thunder_bluff_points": 75,
+      "all_exported_steps_kept": true
+    },
+    {
+      "quest": 752,
+      "name": "A Humble Task",
+      "direct_thunder_bluff_points": 50,
+      "all_exported_steps_kept": true
+    },
+    {
+      "quest": 754,
+      "name": "Winterhoof Cleansing",
+      "direct_thunder_bluff_points": 100,
+      "all_exported_steps_kept": true
+    },
+    {
+      "quest": 756,
+      "name": "Thunderhorn Totem",
+      "direct_thunder_bluff_points": 100,
+      "all_exported_steps_kept": true
+    },
+    {
+      "quest": 758,
+      "name": "Thunderhorn Cleansing",
+      "direct_thunder_bluff_points": 100,
+      "all_exported_steps_kept": true
+    },
+    {
+      "quest": 759,
+      "name": "Wildmane Totem",
+      "direct_thunder_bluff_points": 100,
+      "all_exported_steps_kept": true
+    },
+    {
+      "quest": 761,
+      "name": "Swoop Hunting",
+      "direct_thunder_bluff_points": 150,
+      "all_exported_steps_kept": true
+    },
+    {
+      "quest": 766,
+      "name": "Mazzranache",
+      "direct_thunder_bluff_points": 100,
+      "all_exported_steps_kept": true
+    },
+    {
+      "quest": 767,
+      "name": "Rite of Vision",
+      "direct_thunder_bluff_points": 25,
+      "all_exported_steps_kept": true
+    },
+    {
+      "quest": 771,
+      "name": "Rite of Vision",
+      "direct_thunder_bluff_points": 100,
+      "all_exported_steps_kept": true
+    },
+    {
+      "quest": 772,
+      "name": "Rite of Vision",
+      "direct_thunder_bluff_points": 75,
+      "all_exported_steps_kept": true
+    },
+    {
+      "quest": 780,
+      "name": "The Battleboars",
+      "direct_thunder_bluff_points": 150,
+      "all_exported_steps_kept": true
+    },
+    {
+      "quest": 1656,
+      "name": "A Task Unfinished",
+      "direct_thunder_bluff_points": 25,
+      "all_exported_steps_kept": true
+    },
+    {
+      "quest": 99108,
+      "name": "Sparring Match",
+      "direct_thunder_bluff_points": 75,
+      "all_exported_steps_kept": true
+    }
+  ],
+  "known_test_exclusions": [
+    "one pre-existing Windows CRLF-sensitive fgstring roundtrip test filtered",
+    "two client-directory-dependent contribution tests ignored",
+    "two documentation examples ignored",
+    "allocation stress suite platform-gated on Windows"
+  ],
+  "known_limits": [
+    "direct quest rewards, at most one completion per quest ID; no derived spillover or repeatable farming",
+    "seven optimistic Exalted bounds use recorded starts; Horde bound is conditional on estimated baseline",
+    "heuristic search may fail supported gear requests; bounded pre-feature/current controls recorded without claiming game impossibility",
+    "positive real-data case uses GearPrefer; combined Required gear/exact/reputation success covered separately by behavioral tests",
+    "Lua event behavior verified by smoke; no live client connected",
+    "desktop and addon archive prepared locally; active application/game install not replaced; no push"
+  ],
+  "cargo_lock_sha256": "aa2b1fdca5d9dc159b2ec7cc18986d999b5702a2659966c5684bb67854aba57c",
+  "final_documentation_only_after_reviewed_merge": true
+}

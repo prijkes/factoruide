@@ -69,9 +69,9 @@
 
 **Files:** Updated plan, handoff and changelog; sanitized validation record if useful. Private diagnostics remain in ignored plan workspace.
 
-- [ ] Review each task for spec compliance and code quality; fix consequential findings and obtain scoped verification.
-- [ ] Regenerate the saved Exalted request into ignored diagnostics and verify honest named failure with original inputs unchanged; also generate a bounded feasible reputation-target case and verify actual completion, keep flags and no false warning contract.
-- [ ] Run workspace release tests (document existing exclusions), all-target release Clippy and formatting; frontend checks; Lua smoke suite.
-- [ ] Build the production desktop executable with `cargo build --release --locked --offline -p factoruide-app --features tauri/custom-protocol` after frontend build.
-- [ ] Obtain independent whole-branch review; resolve material findings and rerun affected checks.
-- [ ] Update handoff/evidence, merge into local `main`, verify merged tree/status and report executable identity and remaining model limits.
+- [x] Review each task for spec compliance and code quality; fix consequential findings and obtain scoped verification.
+- [x] Regenerate the saved Exalted request into ignored diagnostics and verify honest named failure with original inputs unchanged; also generate a bounded feasible reputation-target case and verify actual completion, keep flags and no false warning contract.
+- [x] Run workspace release tests (document existing exclusions), all-target release Clippy and formatting; frontend checks; Lua smoke suite.
+- [x] Build the production desktop executable with `cargo build --release --locked --offline -p factoruide-app --features tauri/custom-protocol` after frontend build.
+- [x] Obtain independent whole-branch review; resolve material findings and rerun affected checks.
+- [x] Update handoff/evidence, merge into local `main`, verify merged tree/status and report executable identity and remaining model limits.
