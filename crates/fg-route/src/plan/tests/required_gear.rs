@@ -576,3 +576,302 @@ fn nearby_source_npc_actions_do_not_cross_a_dungeon_boundary_without_entry() {
     planner.validate_required(&repaired).unwrap();
     assert_eq!(planner.simulate_state(&repaired, None).unwrap().1.spent.dungeon_runs, 1);
 }
+
+#[test]
+fn merge_preserves_an_ordinary_dungeon_breadcrumb_before_its_source() {
+    let mut p = Scenario::new()
+        .levels(1, 30)
+        .dungeon("Shared", 1, 50.0, 50.0)
+        .quest(
+            Q::new(1, "Selected destination")
+                .xp(0)
+                .objective(Obj::visit("Source", HERE).inside(0)),
+        )
+        .quest(
+            Q::new(2, "Ordinary breadcrumb")
+                .xp(0)
+                .objective(Obj::visit("Companion", HERE).inside(0)),
+        )
+        .params(|p| p.camp_radius = 0.0)
+        .build();
+    p.model.quests[1].breadcrumb_for = Some(1);
+    p.model.dungeons[0].kills = 0.0;
+    select_test_sources(&mut p, &[0], &[]);
+    let planner = plan(&p);
+    let base = vec![
+        Stop::quest(1, Kind::Accept),
+        Stop::quest(1, Kind::Objective(0)),
+        Stop::quest(1, Kind::TurnIn),
+    ];
+    assert!(planner.simulate(&base, None).is_some());
+    let repaired = planner.repair_required_gear(base);
+    let (_, end) = planner.simulate_state(&repaired, None).unwrap();
+    assert!(end.rewarded(0), "source missing after companion merge");
+    assert!(end.rewarded(1), "ordinary breadcrumb was lost");
+    assert_eq!(end.spent.dungeon_runs, 1);
+}
+
+#[test]
+fn merge_keeps_realized_support_before_its_unchanged_external_dependent() {
+    let mut p = Scenario::new()
+        .levels(1, 30)
+        .quest(Q::new(1, "Early support").xp(0))
+        .quest(Q::new(2, "Existing dependent").xp(0).after(&[1]))
+        .quest(Q::new(3, "Later source").xp(0).level(20).min_level(20).after(&[1]))
+        .required(2)
+        .params(|p| p.camp_radius = 0.0)
+        .build();
+    p.model.quests[0].completion_window.max_level = Some(5);
+    p.model.quests[1].completion_window.max_level = Some(5);
+    select_test_sources(&mut p, &[2], &[]);
+    let planner = plan(&p);
+    let base = vec![
+        Stop::quest(0, Kind::Accept),
+        Stop::quest(0, Kind::TurnIn),
+        Stop::quest(1, Kind::Accept),
+        Stop::quest(1, Kind::TurnIn),
+    ];
+    assert!(planner.simulate(&base, None).is_some());
+    let repaired = planner.repair_required_gear(base);
+    let (_, end) = planner.simulate_state(&repaired, None).unwrap();
+    assert!(end.rewarded(2), "source missing after existing support merge");
+    assert!(end.rewarded(0) && end.rewarded(1));
+}
+
+#[test]
+fn merge_separates_early_deadline_from_later_work_around_forced_progression() {
+    let mut p = Scenario::new()
+        .levels(1, 30)
+        .dungeon("Early forced run", 1, 50.0, 50.0)
+        .quest(Q::new(1, "Early deadline").xp(0))
+        .quest(Q::new(2, "Later source").xp(0).level(20).min_level(20).after(&[1]))
+        .quest(Q::new(3, "Existing middle work").xp(0).level(10).min_level(10))
+        .required(3)
+        .params(|p| {
+            p.camp_radius = 0.0;
+            p.forced_dungeons = vec![900];
+        })
+        .build();
+    p.model.quests[0].completion_window.max_level = Some(5);
+    p.model.quests[2].completion_window.max_level = Some(15);
+    p.model.dungeons[0].min_level = 1;
+    p.model.dungeons[0].max_level = 5;
+    p.model.dungeons[0].kills = 0.0;
+    select_test_sources(&mut p, &[1], &[]);
+    let planner = plan(&p);
+    let base = vec![
+        Stop {
+            index: 0,
+            kind: Kind::Dungeon,
+        },
+        Stop::quest(2, Kind::Accept),
+        Stop::quest(2, Kind::TurnIn),
+    ];
+    assert!(planner.simulate(&base, None).is_some());
+    let repaired = planner.repair_required_gear(base);
+    let (_, end) = planner.simulate_state(&repaired, None).unwrap();
+    assert!(end.rewarded(1), "source missing across deadline/progression boundary");
+    assert!(end.rewarded(0) && end.rewarded(2));
+    assert_eq!(end.spent.dungeon_runs, 1);
+}
+
+#[test]
+fn merge_does_not_treat_a_recorded_accept_anchor_as_work_after_turnin() {
+    let mut p = Scenario::new()
+        .levels(1, 30)
+        .quest(Q::new(1, "Initially held support").xp(0))
+        .quest(Q::new(2, "Existing dependent").xp(0).after(&[1]))
+        .quest(Q::new(3, "Later source").xp(0).level(20).min_level(20).after(&[1]))
+        .required(2)
+        .params(|p| p.camp_radius = 0.0)
+        .build();
+    p.model.initial.accepted = vec![0];
+    p.model.quests[0].completion_window.max_level = Some(5);
+    p.model.quests[1].completion_window.max_level = Some(5);
+    select_test_sources(&mut p, &[2], &[]);
+    let planner = plan(&p);
+    let base = vec![
+        Stop::quest(0, Kind::TurnIn),
+        Stop::quest(1, Kind::Accept),
+        Stop::quest(1, Kind::TurnIn),
+        Stop::quest(0, Kind::Accept),
+    ];
+    assert!(planner.simulate(&base, None).is_some());
+    let repaired = planner.repair_required_gear(base);
+    let (_, end) = planner.simulate_state(&repaired, None).unwrap();
+    assert!(end.rewarded(2), "no-op Accept introduced a reverse dependency");
+    assert!(end.rewarded(0) && end.rewarded(1));
+}
+
+#[test]
+fn merge_keeps_an_early_forced_visit_before_new_high_level_combat() {
+    let mut p = Scenario::new()
+        .levels(1, 20)
+        .dungeon("Early visit", 1, 50.0, 50.0)
+        .quest(Q::new(1, "Early prerequisite").xp(0))
+        .quest(
+            Q::new(2, "Combat source")
+                .level(7)
+                .xp(0)
+                .after(&[1])
+                .objective(Obj::kill("Strong opponent", 10, 1, HERE)),
+        )
+        .quest(Q::new(3, "Base progression").level(4).min_level(4).xp(0))
+        .required(3)
+        .params(|p| {
+            p.camp_radius = 0.0;
+            p.forced_dungeons = vec![900];
+        })
+        .build();
+    p.model.quests[0].completion_window.max_level = Some(3);
+    p.model.dungeons[0].min_level = 4;
+    p.model.dungeons[0].max_level = 8;
+    p.model.dungeons[0].kills = 0.0;
+    select_test_sources(&mut p, &[1], &[]);
+    let planner = plan(&p);
+    let base = vec![
+        Stop::quest(2, Kind::Accept),
+        Stop::quest(2, Kind::TurnIn),
+        Stop {
+            index: 0,
+            kind: Kind::Dungeon,
+        },
+    ];
+    assert!(planner.simulate(&base, None).is_some());
+    let repaired = planner.repair_required_gear(base);
+    let (_, end) = planner.simulate_state(&repaired, None).unwrap();
+    assert!(
+        end.rewarded(1),
+        "repair must schedule combat after the earlier forced visit"
+    );
+    assert_eq!(end.spent.dungeon_runs, 1);
+}
+
+#[test]
+fn merge_finishes_timed_outside_work_before_resuming_the_base_route() {
+    let mut p = Scenario::new()
+        .levels(1, 20)
+        .quest(
+            Q::new(1, "Timed prerequisite")
+                .level(5)
+                .xp(0)
+                .objective(Obj::visit("Timed work", HERE)),
+        )
+        .quest(Q::new(2, "Late source").level(15).min_level(15).xp(0).after(&[1]))
+        .quest(
+            Q::new(3, "Existing detour")
+                .level(10)
+                .min_level(10)
+                .xp(0)
+                .objective(Obj::visit("Far away", At { x: 90.0, ..HERE })),
+        )
+        .required(3)
+        .params(|p| p.camp_radius = 0.0)
+        .build();
+    p.model.quests[0].time_limit = Some(60.0);
+    p.model.quests[0].completion_window.max_level = Some(5);
+    p.model.quests[2].completion_window.max_level = Some(10);
+    select_test_sources(&mut p, &[1], &[]);
+    let planner = plan(&p);
+    let base = vec![
+        Stop::quest(0, Kind::Accept),
+        Stop::quest(2, Kind::Accept),
+        Stop::quest(2, Kind::Objective(0)),
+        Stop::quest(2, Kind::TurnIn),
+    ];
+    assert!(planner.simulate(&base, None).is_some());
+    let repaired = planner.repair_required_gear(base);
+    let (_, end) = planner.simulate_state(&repaired, None).unwrap();
+    assert!(
+        end.rewarded(1),
+        "the imported timed Accept must stay with its missing work"
+    );
+    assert!(end.rewarded(2));
+}
+
+#[test]
+fn merge_preserves_an_already_rewarded_any_root_and_its_later_selected_support() {
+    let mut p = Scenario::new()
+        .levels(1, 30)
+        .quest(Q::new(1, "Selected later alternative").level(20).min_level(20).xp(0))
+        .quest(Q::new(2, "Actual early alternative").xp(0))
+        .quest(Q::new(3, "Already rewarded source").after_any(&[1, 2]).xp(0))
+        .quest(Q::new(4, "Existing early dependent").after(&[3]).xp(0))
+        .quest(Q::new(5, "Missing early support").xp(0))
+        .quest(
+            Q::new(6, "Missing later source")
+                .level(25)
+                .min_level(25)
+                .after(&[5])
+                .xp(0),
+        )
+        .required(4)
+        .params(|p| p.camp_radius = 0.0)
+        .build();
+    p.model.quests[3].completion_window.max_level = Some(5);
+    p.model.quests[4].completion_window.max_level = Some(5);
+    select_test_sources(&mut p, &[2, 5], &[]);
+    assert!(p.model.bis.requires(0), "fixture must select the later Any alternative");
+    let planner = plan(&p);
+    let base: Vec<_> = [1, 2, 3, 0]
+        .into_iter()
+        .flat_map(|q| [Stop::quest(q, Kind::Accept), Stop::quest(q, Kind::TurnIn)])
+        .collect();
+    let (_, before) = planner.simulate_state(&base, None).unwrap();
+    assert!(before.rewarded(2));
+    let repaired = planner.repair_required_gear(base);
+    let (_, end) = planner.simulate_state(&repaired, None).unwrap();
+    assert!(
+        end.rewarded(5),
+        "do not replay the satisfied Any relation using a different witness"
+    );
+    for q in 0..6 {
+        assert!(end.rewarded(q), "quest {q} lost, including selected support");
+    }
+}
+
+#[test]
+fn merge_exports_one_entry_for_inside_work_with_an_existing_explicit_run() {
+    let mut p = Scenario::new()
+        .levels(1, 20)
+        .dungeon("Shared run", 1, 50.0, 50.0)
+        .quest(
+            Q::new(1, "Source inside")
+                .xp(0)
+                .objective(Obj::visit("Source", HERE).inside(0)),
+        )
+        .quest(Q::new(2, "Existing progression").level(10).min_level(10).xp(0))
+        .required(2)
+        .params(|p| {
+            p.camp_radius = 0.0;
+            p.forced_dungeons = vec![900];
+        })
+        .build();
+    p.model.dungeons[0].min_level = 1;
+    p.model.dungeons[0].max_level = 19;
+    p.model.dungeons[0].kills = 0.0;
+    select_test_sources(&mut p, &[0], &[]);
+    let planner = plan(&p);
+    let base = vec![
+        Stop::quest(1, Kind::Accept),
+        Stop::quest(1, Kind::TurnIn),
+        Stop {
+            index: 0,
+            kind: Kind::Dungeon,
+        },
+    ];
+    assert!(planner.simulate(&base, None).is_some());
+    let repaired = planner.repair_required_gear(base);
+    planner.validate_required(&repaired).unwrap();
+    let exported = crate::export::build(&planner, &p.profile, &repaired);
+    assert_eq!(exported.breakdown.dungeon_runs, 1);
+    assert_eq!(
+        exported
+            .steps
+            .iter()
+            .filter(|s| s.kind == crate::export::StepKind::Dungeon)
+            .count(),
+        1,
+        "a continuous visit must not tell the player to run it twice"
+    );
+}
