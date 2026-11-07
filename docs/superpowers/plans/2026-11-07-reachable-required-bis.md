@@ -77,8 +77,12 @@
 - [x] Generate a bounded fresh version of the real profile in ignored output using explicit recorded budget overrides. Verify actual turn-ins for all accepted roots and no false class warning; if scheduling fails, diagnose and repair within scope rather than claiming the model check alone fixes the route.
 - [x] Verify old guide deserialization/view data preserves steps/time and produces neutral legacy warning behavior. Do not overwrite the user's original guide or publish private data.
 - [x] Run release Rust package tests, relevant workspace checks, fmt, release all-target Clippy, frontend tests/build/lint/i18n, and desktop application build. Known newline skip and ignored doc examples must be reported accurately.
-- [ ] Obtain final whole-branch source/evidence review; address findings, commit assessment/handoff as prijkes, verify clean status and source/artifact identity. Retain raw private diagnostics locally; no app launch/installer/push/merge.
+- [x] Obtain final whole-branch source/evidence review; address findings, commit assessment/handoff as prijkes, verify clean status and source/artifact identity. Retain raw private diagnostics locally; no app launch/installer/push/merge.
 
 ## Completion record
 
-Implementation and real-case validation are in progress.
+Completed on 2026-11-08. Final source `66d21231ecbf833155f247e4a370904c57c925e8` passes fresh real-profile generation with 71 source roots, 193 support quests, zero class/gear/other misses, and 20 applicable visits matching 20 entry markers at the unchanged 18–60 endpoint. Requested Stockade and Deadmines remain unplanned under the existing model rule.
+
+Final release workspace verification passes 754 tests, including 423 route unit and 238 integration tests. The named Windows CRLF fixture is filtered; two game-client contribution tests and two doc examples remain ignored, and allocator stress is gated to supported Wasi/Unix platforms. Release workspace all-target Clippy, formatting, frontend nine tests/build/lint/i18n and the strict actual saved-guide compatibility check pass.
+
+The production desktop build uses `--features tauri/custom-protocol` to embed the verified frontend. Its source and executable SHA-256 are recorded in the [sanitized validation artifact](../../required-gear-validation-2026-11-07.json). Original app-storage files retain their captured bytes. Final whole-branch review approved delivery after the single Important location/window finding was fixed and scoped re-reviewed; no unresolved blockers remain. All commits use prijkes, local branches/managed worktree and raw private diagnostics are retained, and no app launch, installer, push or merge was performed.

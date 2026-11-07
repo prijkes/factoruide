@@ -13,8 +13,9 @@ small budget. Original-guide compatibility, 754 release workspace tests and rele
 all-target Clippy pass, with documented test exclusions. The production desktop
 executable is built with the bundled frontend; its source/hash and sanitized route
 evidence are in the [validation record](docs/required-gear-validation-2026-11-07.json).
-The final delivery review and documentation commit remain pending. Original guides
-remain untouched; no app launch, installer, push or merge was performed.
+Final whole-branch source and evidence review approved local delivery with no
+unresolved blockers. This continuation is complete. Original guides remain
+untouched; no app launch, installer, push or merge was performed.
 
 Latest implementation continuation: useful class training survives dungeon-quest
 cleanup as an independent trainer action when full simulation scores it better
