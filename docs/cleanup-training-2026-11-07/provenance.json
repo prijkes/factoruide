@@ -1,0 +1,34 @@
+{
+  "source_revision": "10bb20af5c1afda0d43b49da2ede653651a92b18",
+  "source_status_at_archive": " M ASTRA_HANDOFF.md\n M CHANGELOG.md\n M docs/superpowers/plans/2026-11-07-cleanup-training.md\n?? docs/cleanup-training-2026-11-07/\n?? docs/cleanup-training-assessment-2026-11-07.md\n",
+  "binary_sha256": "c2f44c17d1481f405229744af2f5ff966151841f57a2b63baa057170135e36c3",
+  "database_sha256": "1c93c95bfa5d236728ce75d0d9059133a070cff9aa7fdaf62be902f7c3582db7",
+  "cargo_lock_sha256": "aa2b1fdca5d9dc159b2ec7cc18986d999b5702a2659966c5684bb67854aba57c",
+  "overrides_tree_oid": "d9e313e0aa78233771ed1dbd98ef23f7508ecf9a",
+  "search_performed": false,
+  "raw_artifacts": {
+    ".superpowers\\sdd\\2026-11-07-cleanup-training\\chain-cleanup-v2.json": "7f3f3ed63b598a5288e72e4c7fc6d67738ee3903274d6a57933085c987894925",
+    ".superpowers\\sdd\\2026-11-07-cleanup-training\\chain-control-v2.json": "798218baf6b361f8bbb9f5f416a8f4198481b5af99680141f93c946bc1b3484a",
+    ".superpowers\\sdd\\2026-11-07-cleanup-training\\baseline-cleanup-v2.json": "459c9ce3e8c9b2272b5de9480569a8dd2da597cbc7bdb4d2d1c978630ff2848e",
+    ".superpowers\\sdd\\2026-11-07-cleanup-training\\baseline-control-v2.json": "81580276b0f80350786dd74e26823dc2c90addfe8eca855585b6efe9a4243731"
+  },
+  "source_artifacts": {
+    ".superpowers\\sdd\\2026-11-07-cleanup-loss-diagnosis\\baseline-corrected-accounting-v2.json": "7639db998b4c1f107a6f791da5ea6fa9a8b740ef209fe025efdc748ff844eb3d",
+    ".superpowers\\sdd\\2026-11-07-cleanup-loss-diagnosis\\baseline-corrected-accounting.json": "c5098bb2aea1f3b59e5f610c7ad409f45e3d034f4a1d7589888078b8c3aac031",
+    ".superpowers\\sdd\\2026-11-07-cleanup-loss-diagnosis\\baseline-original-semantics.json": "9791a548558fe626848e15c86657277bb24a66df77db36a3e80914f7b613a806",
+    ".superpowers\\sdd\\2026-11-07-cleanup-loss-diagnosis\\chain-corrected-accounting-v2.json": "e657f16924a6ee1918d66815c4284f59a7f6da8700c3977cc891d212cb740134",
+    ".superpowers\\sdd\\2026-11-07-cleanup-loss-diagnosis\\chain-corrected-accounting.json": "db74459d4550d90c3f0aa94344c1c57561b2a63784e14a551161cf43b0a5a89e",
+    ".superpowers\\sdd\\2026-11-07-cleanup-loss-diagnosis\\chain-original-semantics.json": "8d6715590cb809fa4305eadd78a104e1aa64568587f4f6eecd066b9a018d9c90",
+    ".superpowers\\sdd\\2026-11-07-route-algorithm-comparison\\results\\heldout-028-forever-gnome-mage-20-40-20261107-chain\\result.json": "ee5effbdf4d3f4313f9071d2f1ccd0a1d001f2e349b7f74c8ac446a30f5be935",
+    ".superpowers\\sdd\\2026-11-07-route-algorithm-comparison\\results\\heldout-029-forever-gnome-mage-20-40-20261107-baseline\\result.json": "161317ada9020dec721592089d6ca4af1c036ad09d5b8f086ef07c7864f66902",
+    "docs\\cleanup-diagnosis-2026-11-07\\chain-input.json": "ebebff3504f04e7be9b3e17c64a9bc069091e773116292d0006dd2879d7a8d31",
+    "docs\\cleanup-diagnosis-2026-11-07\\chain-original-semantics.json": "f7a42eadda44aeb78f69512c9cb2d7234d512a473f0b9f936ea69a23e0ca9c1b",
+    "docs\\cleanup-diagnosis-2026-11-07\\baseline-input.json": "6d83102f8c61608cfba1fa4c9bdee506d3cf7d4b1cd468be5211c065ae67b3a9",
+    "docs\\cleanup-diagnosis-2026-11-07\\baseline-original-semantics.json": "ea5748fc1f399756e370a8f935d1f3f2a7a25b77778f8fc7ad415376f01a6cf9"
+  },
+  "archive_sha256": {
+    "baseline-cleanup.json": "7f53b434624656e31ac5af983b036b1f8bf5caf8523a80f84a24378227aae853",
+    "chain-cleanup.json": "1c7e746ce6d7129f8308d363d7c83a932980a7f020a30cbf4695c13c33975200",
+    "measurement-summary.json": "588f3da2a6d7c6877538ba957f62026f15d30ba854734c6568e4ce4c3798c491"
+  }
+}

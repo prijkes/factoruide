@@ -1,12 +1,33 @@
 # Factoruide route-quality analysis: handoff to Astra
 
-Latest diagnostic continuation: autonomous fixed-attempt regeneration reproduced
+Latest implementation continuation: useful class training survives dungeon-quest
+cleanup as an independent trainer action when full simulation scores it better
+than bare deletion. See the [training assessment](docs/cleanup-training-assessment-2026-11-07.md).
+The saved failing chain case improves from 222219.241811 to 158149.958372 weighted
+score and saves 11920.706890 simulated player seconds, about 3 hours 19 minutes.
+All sixteen old fixed-stage routes replay identically, both inputs match their
+old boundaries through TrimTarget, and all eight baseline boundaries are unchanged.
+Quest 387 is removed, Stockade 717 remains absent, and level-22 Mage training is
+restored. These are zero-search cleanup measurements, not a new algorithm ranking.
+The experimental chain operator remains off by default; reranking requires a
+new controlled comparison under the corrected model and cleanup.
+
+Source fix `be5bd00` has twelve focused regressions and independent approval.
+Fast and release package checks passed 333 library and 238 integration tests;
+the known Windows newline test remains skipped and two doc examples ignored.
+The diagnostic example adds cleanup-only replay with twelve passing tests.
+Diagnostic sources are `4fe8de4` and `10bb20a`. Final whole-branch source and
+evidence review approved the change with no outstanding findings, independently
+checking every summary field, compact/raw equivalence and all provenance hashes.
+The desktop app, saved guides and installer remain untouched.
+
+Earlier diagnostic continuation: autonomous fixed-attempt regeneration reproduced
 both saved cases, including all checked search callbacks and final route/score
 identities. The loss is now traced exactly to `DropDungeonless` removing quest
 387's accept and thereby losing a Mage-training opportunity. See the
-[cleanup diagnosis](docs/cleanup-loss-diagnosis-2026-11-07.md). Preserving useful
-training visits independently of unusable quests is the next routing change;
-it has not been implemented or counterfactually validated yet.
+[cleanup diagnosis](docs/cleanup-loss-diagnosis-2026-11-07.md). At that stage,
+preserving useful training independently was the next routing change; the
+implementation and counterfactual validation are now recorded above.
 
 A separate confirmed defect was corrected in `09752b6`: performed unrewarded
 objective work remains counted after abandonment, with actual route provenance

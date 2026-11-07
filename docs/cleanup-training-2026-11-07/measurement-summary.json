@@ -1,0 +1,3714 @@
+{
+  "search_performed": false,
+  "cases": {
+    "chain": {
+      "fixed_stage_controls_identical": 8,
+      "stages_through_trim_identical": 6,
+      "old_final_score": 222219.2418109174,
+      "new_final_score": 158149.95837158317,
+      "score_reduction": 64069.28343933422,
+      "score_reduction_percent": 28.831564232340284,
+      "old_final_player_seconds": 147295.15028327564,
+      "new_final_player_seconds": 135374.44339284918,
+      "player_seconds_saved": 11920.70689042646,
+      "old_turnins": 303,
+      "new_turnins": 319,
+      "old_final_breakdown": {
+        "abandoned": 1,
+        "bag_overflow": 2504.9653214367027,
+        "catch_up": 0.0,
+        "desync": 0.0,
+        "dungeon_runs": 5,
+        "dungeons": 20700.0,
+        "explore_xp": 27967,
+        "farm_xp": 93526,
+        "farming": 10447.452620410455,
+        "fighting": 33850.89147200918,
+        "flight_cost": 9690,
+        "flight_gold": 2069.7813957725953,
+        "flights": 11252.047415746803,
+        "gold_earned": 164300,
+        "gold_start": 0,
+        "grind_over": 16089.716782810914,
+        "grind_xp": 80788,
+        "grinding": 18842.65308639989,
+        "hearths": 8,
+        "missing_class_quests": 0,
+        "missing_dungeons": 0,
+        "missing_profession_quests": 0,
+        "missing_zone_quests": 0,
+        "mob_xp": 246359,
+        "outside_preferred": 0.0,
+        "overhead": 7449.0,
+        "quest_xp": 540925,
+        "reputation_missing": -0.0,
+        "sync_time": 0.0,
+        "total": 147295.15028327564,
+        "training": 210.0,
+        "training_cost": 238000,
+        "travel": 44481.10568870906,
+        "unlock_delay": 0.0,
+        "vendor_cost": 0,
+        "waiting": 4348.719517380846,
+        "zone_changes": 62
+      },
+      "new_final_breakdown": {
+        "abandoned": 0,
+        "bag_overflow": 466.4666677951812,
+        "catch_up": 0.0,
+        "desync": 0.0,
+        "dungeon_runs": 5,
+        "dungeons": 20700.0,
+        "explore_xp": 29575,
+        "farm_xp": 93839,
+        "farming": 10316.760188375243,
+        "fighting": 36383.30315425751,
+        "flight_cost": 10120,
+        "flight_gold": 2047.675145772595,
+        "flights": 11529.337983400002,
+        "gold_earned": 175300,
+        "gold_start": 0,
+        "grind_over": 0.0,
+        "grind_xp": 3985,
+        "grinding": 925.9861419571806,
+        "hearths": 8,
+        "missing_class_quests": 0,
+        "missing_dungeons": 0,
+        "missing_profession_quests": 0,
+        "missing_zone_quests": 0,
+        "mob_xp": 275541,
+        "outside_preferred": 0.0,
+        "overhead": 7759.0,
+        "quest_xp": 584260,
+        "reputation_missing": -0.0,
+        "sync_time": 0.0,
+        "total": 135374.44339284918,
+        "training": 240.0,
+        "training_cost": 238000,
+        "travel": 47460.055924858985,
+        "unlock_delay": 0.0,
+        "vendor_cost": 0,
+        "waiting": 4344.047967583788,
+        "zone_changes": 61
+      },
+      "stages": [
+        {
+          "stage": "SelectedInput",
+          "score": 159358.0720351529,
+          "player_seconds": 135999.266260363,
+          "stop_count": 922
+        },
+        {
+          "stage": "PowerFirst",
+          "score": 159358.0720351529,
+          "player_seconds": 135999.266260363,
+          "stop_count": 922
+        },
+        {
+          "stage": "Rebind",
+          "score": 159358.0720351529,
+          "player_seconds": 135999.266260363,
+          "stop_count": 922
+        },
+        {
+          "stage": "PlaceHearths",
+          "score": 159270.4986755163,
+          "player_seconds": 135909.57868231108,
+          "stop_count": 918
+        },
+        {
+          "stage": "DropUnfinished",
+          "score": 159260.4500628052,
+          "player_seconds": 135899.53006959998,
+          "stop_count": 917
+        },
+        {
+          "stage": "TrimTarget",
+          "score": 159260.4500628052,
+          "player_seconds": 135899.53006959998,
+          "stop_count": 917
+        },
+        {
+          "stage": "DropDungeonless",
+          "score": 158601.87862987412,
+          "player_seconds": 135840.9586366689,
+          "stop_count": 917
+        },
+        {
+          "stage": "Finalized",
+          "score": 158149.95837158317,
+          "player_seconds": 135374.44339284918,
+          "stop_count": 917
+        }
+      ],
+      "new_trainings": [
+        {
+          "event_index": 117,
+          "event": "Train { trainer: 7, outbound: 0.0, since: 20, abilities: 0 }",
+          "gear": 0.005221057800943071,
+          "level": 22,
+          "party": [],
+          "power": 22.00522105780094,
+          "time": 11399.663827812668,
+          "xp": 9730
+        },
+        {
+          "event_index": 244,
+          "event": "Train { trainer: 7, outbound: 41.66666521344866, since: 22, abilities: 0 }",
+          "gear": 0.5719403821141995,
+          "level": 24,
+          "party": [],
+          "power": 24.5719403821142,
+          "time": 24228.6216569754,
+          "xp": 5776
+        },
+        {
+          "event_index": 339,
+          "event": "Train { trainer: 7, outbound: 0.0, since: 24, abilities: 0 }",
+          "gear": 0.6966127592496874,
+          "level": 26,
+          "party": [],
+          "power": 26.69661275924969,
+          "time": 35248.033154649886,
+          "xp": 0
+        },
+        {
+          "event_index": 541,
+          "event": "Train { trainer: 4, outbound: 46.42857142857143, since: 26, abilities: 0 }",
+          "gear": 1.6714026243865954,
+          "level": 29,
+          "party": [],
+          "power": 30.671402624386594,
+          "time": 56744.31570071655,
+          "xp": 28046
+        },
+        {
+          "event_index": 571,
+          "event": "Train { trainer: 3, outbound: 22.619046892438615, since: 29, abilities: 0 }",
+          "gear": 1.6952503729826207,
+          "level": 30,
+          "party": [],
+          "power": 31.69525037298262,
+          "time": 61785.64902024432,
+          "xp": 6680
+        },
+        {
+          "event_index": 649,
+          "event": "Train { trainer: 8, outbound: 12.976190839494977, since: 30, abilities: 0 }",
+          "gear": 1.604920763935089,
+          "level": 32,
+          "party": [],
+          "power": 33.60492076393509,
+          "time": 74308.29580974662,
+          "xp": 21221
+        },
+        {
+          "event_index": 961,
+          "event": "Train { trainer: 10, outbound: 49.52380807059152, since: 32, abilities: 0 }",
+          "gear": 1.694354958521315,
+          "level": 36,
+          "party": [],
+          "power": 37.694354958521316,
+          "time": 110034.49325095162,
+          "xp": 48870
+        },
+        {
+          "event_index": 1044,
+          "event": "Train { trainer: 8, outbound: 11.071428571428571, since: 36, abilities: 0 }",
+          "gear": 1.564474690313136,
+          "level": 38,
+          "party": [],
+          "power": 39.56447469031313,
+          "time": 120041.56296895322,
+          "xp": 0
+        }
+      ],
+      "new_grinds": [
+        {
+          "event_index": 337,
+          "event": "Grind { to_level: 26, seconds: 468.4444611278465, near: Pos { continent: 0, x: -2969.5546875, y: -952.4135131835938, zone: 11, z: Some(4) }, zone: 11 }",
+          "gear": 0.6966127592496874,
+          "level": 26,
+          "party": [],
+          "power": 25.249738210497952,
+          "time": 35208.033154649886,
+          "xp": 0
+        },
+        {
+          "event_index": 1041,
+          "event": "Grind { to_level: 38, seconds: 389.2943486346377, near: Pos { continent: 0, x: -9968.5654296875, y: -3643.435791015625, zone: 8, z: Some(23) }, zone: 8 }",
+          "gear": 1.564474690313136,
+          "level": 38,
+          "party": [],
+          "power": 38.55868863225944,
+          "time": 119948.80106491793,
+          "xp": 0
+        },
+        {
+          "event_index": 1178,
+          "event": "Grind { to_level: 40, seconds: 68.24733219469648, near: Pos { continent: 0, x: -12858.0791015625, y: -774.525390625, zone: 33, z: Some(61) }, zone: 33 }",
+          "gear": 1.5914928622733246,
+          "level": 40,
+          "party": [],
+          "power": 41.00156414491951,
+          "time": 135374.44339284918,
+          "xp": 0
+        }
+      ],
+      "new_actual_turnins": [
+        {
+          "level": 20,
+          "quest_id": 1920,
+          "time": 987.2237968420739
+        },
+        {
+          "level": 20,
+          "quest_id": 97234,
+          "time": 1234.1999876815687
+        },
+        {
+          "level": 20,
+          "quest_id": 97237,
+          "time": 1507.4725055463055
+        },
+        {
+          "level": 20,
+          "quest_id": 97220,
+          "time": 1809.4248850454683
+        },
+        {
+          "level": 20,
+          "quest_id": 97222,
+          "time": 1973.4725044563918
+        },
+        {
+          "level": 20,
+          "quest_id": 343,
+          "time": 2069.6867901706773
+        },
+        {
+          "level": 20,
+          "quest_id": 344,
+          "time": 2428.561075884963
+        },
+        {
+          "level": 20,
+          "quest_id": 3741,
+          "time": 3349.785154296754
+        },
+        {
+          "level": 20,
+          "quest_id": 345,
+          "time": 3373.142297153897
+        },
+        {
+          "level": 20,
+          "quest_id": 92,
+          "time": 4536.6030064072975
+        },
+        {
+          "level": 20,
+          "quest_id": 129,
+          "time": 4624.779646403302
+        },
+        {
+          "level": 20,
+          "quest_id": 130,
+          "time": 4851.184407581454
+        },
+        {
+          "level": 20,
+          "quest_id": 131,
+          "time": 4884.803455563806
+        },
+        {
+          "level": 20,
+          "quest_id": 244,
+          "time": 4930.5415493486835
+        },
+        {
+          "level": 20,
+          "quest_id": 98407,
+          "time": 4938.5415493486835
+        },
+        {
+          "level": 20,
+          "quest_id": 246,
+          "time": 5370.47952867322
+        },
+        {
+          "level": 21,
+          "quest_id": 125,
+          "time": 6353.896878070227
+        },
+        {
+          "level": 21,
+          "quest_id": 150,
+          "time": 6588.960939291821
+        },
+        {
+          "level": 21,
+          "quest_id": 127,
+          "time": 6596.960939291821
+        },
+        {
+          "level": 21,
+          "quest_id": 89,
+          "time": 7833.3527722573435
+        },
+        {
+          "level": 21,
+          "quest_id": 20,
+          "time": 7871.647510219516
+        },
+        {
+          "level": 21,
+          "quest_id": 98387,
+          "time": 8742.25284755937
+        },
+        {
+          "level": 21,
+          "quest_id": 98386,
+          "time": 8754.248879187806
+        },
+        {
+          "level": 21,
+          "quest_id": 118,
+          "time": 9139.510785402928
+        },
+        {
+          "level": 21,
+          "quest_id": 119,
+          "time": 9183.367928260071
+        },
+        {
+          "level": 21,
+          "quest_id": 122,
+          "time": 9457.012957509516
+        },
+        {
+          "level": 22,
+          "quest_id": 124,
+          "time": 11074.356214384237
+        },
+        {
+          "level": 22,
+          "quest_id": 91,
+          "time": 11117.260880811578
+        },
+        {
+          "level": 22,
+          "quest_id": 104,
+          "time": 15701.09940563996
+        },
+        {
+          "level": 22,
+          "quest_id": 3765,
+          "time": 16623.11450184398
+        },
+        {
+          "level": 22,
+          "quest_id": 97894,
+          "time": 16838.307015731825
+        },
+        {
+          "level": 22,
+          "quest_id": 3524,
+          "time": 17092.09273165241
+        },
+        {
+          "level": 22,
+          "quest_id": 984,
+          "time": 17140.11654190283
+        },
+        {
+          "level": 22,
+          "quest_id": 4761,
+          "time": 17193.64035215325
+        },
+        {
+          "level": 22,
+          "quest_id": 985,
+          "time": 18024.43834567349
+        },
+        {
+          "level": 22,
+          "quest_id": 965,
+          "time": 18254.366917102063
+        },
+        {
+          "level": 22,
+          "quest_id": 966,
+          "time": 18451.507099872713
+        },
+        {
+          "level": 22,
+          "quest_id": 4762,
+          "time": 18723.91186759035
+        },
+        {
+          "level": 22,
+          "quest_id": 982,
+          "time": 18752.76901044749
+        },
+        {
+          "level": 22,
+          "quest_id": 4681,
+          "time": 18828.245201286987
+        },
+        {
+          "level": 22,
+          "quest_id": 947,
+          "time": 19491.618081466106
+        },
+        {
+          "level": 22,
+          "quest_id": 948,
+          "time": 19735.118081466106
+        },
+        {
+          "level": 22,
+          "quest_id": 729,
+          "time": 20162.41682009345
+        },
+        {
+          "level": 22,
+          "quest_id": 944,
+          "time": 20241.329417529163
+        },
+        {
+          "level": 22,
+          "quest_id": 949,
+          "time": 20258.420638485954
+        },
+        {
+          "level": 23,
+          "quest_id": 4763,
+          "time": 20837.16301670594
+        },
+        {
+          "level": 23,
+          "quest_id": 98042,
+          "time": 20845.16301670594
+        },
+        {
+          "level": 23,
+          "quest_id": 731,
+          "time": 20867.210636116866
+        },
+        {
+          "level": 23,
+          "quest_id": 4740,
+          "time": 20895.710636116866
+        },
+        {
+          "level": 23,
+          "quest_id": 4730,
+          "time": 20922.520160653
+        },
+        {
+          "level": 23,
+          "quest_id": 4728,
+          "time": 20930.520160653
+        },
+        {
+          "level": 23,
+          "quest_id": 4731,
+          "time": 20938.520160653
+        },
+        {
+          "level": 23,
+          "quest_id": 4732,
+          "time": 20946.520160653
+        },
+        {
+          "level": 23,
+          "quest_id": 4733,
+          "time": 20954.520160653
+        },
+        {
+          "level": 23,
+          "quest_id": 986,
+          "time": 20994.543970903418
+        },
+        {
+          "level": 23,
+          "quest_id": 993,
+          "time": 21300.543970903418
+        },
+        {
+          "level": 23,
+          "quest_id": 994,
+          "time": 21627.16302433534
+        },
+        {
+          "level": 23,
+          "quest_id": 34,
+          "time": 21834.591535512074
+        },
+        {
+          "level": 23,
+          "quest_id": 95999,
+          "time": 23515.902533161276
+        },
+        {
+          "level": 23,
+          "quest_id": 219,
+          "time": 23557.788326548503
+        },
+        {
+          "level": 23,
+          "quest_id": 347,
+          "time": 23785.431183691362
+        },
+        {
+          "level": 23,
+          "quest_id": 373,
+          "time": 23894.288326548503
+        },
+        {
+          "level": 23,
+          "quest_id": 97914,
+          "time": 23902.288326548503
+        },
+        {
+          "level": 23,
+          "quest_id": 346,
+          "time": 23922.907374530856
+        },
+        {
+          "level": 24,
+          "quest_id": 168,
+          "time": 24013.431185871188
+        },
+        {
+          "level": 24,
+          "quest_id": 167,
+          "time": 24021.431185871188
+        },
+        {
+          "level": 24,
+          "quest_id": 2040,
+          "time": 24055.621661335055
+        },
+        {
+          "level": 24,
+          "quest_id": 389,
+          "time": 24115.288326548503
+        },
+        {
+          "level": 24,
+          "quest_id": 741,
+          "time": 25162.859747490536
+        },
+        {
+          "level": 24,
+          "quest_id": 126,
+          "time": 25308.07617123696
+        },
+        {
+          "level": 24,
+          "quest_id": 180,
+          "time": 26651.572947376582
+        },
+        {
+          "level": 24,
+          "quest_id": 128,
+          "time": 26695.28723309087
+        },
+        {
+          "level": 24,
+          "quest_id": 226,
+          "time": 27344.248497778623
+        },
+        {
+          "level": 24,
+          "quest_id": 5,
+          "time": 27755.962780223166
+        },
+        {
+          "level": 24,
+          "quest_id": 93,
+          "time": 28202.556943489482
+        },
+        {
+          "level": 24,
+          "quest_id": 174,
+          "time": 28296.223609792843
+        },
+        {
+          "level": 24,
+          "quest_id": 175,
+          "time": 28346.509324078557
+        },
+        {
+          "level": 25,
+          "quest_id": 177,
+          "time": 28505.03657256612
+        },
+        {
+          "level": 25,
+          "quest_id": 95,
+          "time": 29406.572322337943
+        },
+        {
+          "level": 25,
+          "quest_id": 240,
+          "time": 29566.3818490539
+        },
+        {
+          "level": 25,
+          "quest_id": 79363,
+          "time": 31059.017567410065
+        },
+        {
+          "level": 25,
+          "quest_id": 96139,
+          "time": 31093.684233713426
+        },
+        {
+          "level": 25,
+          "quest_id": 96137,
+          "time": 31101.684233713426
+        },
+        {
+          "level": 25,
+          "quest_id": 245,
+          "time": 31247.898519427712
+        },
+        {
+          "level": 25,
+          "quest_id": 230,
+          "time": 31665.409958140182
+        },
+        {
+          "level": 25,
+          "quest_id": 79362,
+          "time": 32013.690849640665
+        },
+        {
+          "level": 25,
+          "quest_id": 19,
+          "time": 32512.72109916066
+        },
+        {
+          "level": 25,
+          "quest_id": 65,
+          "time": 32551.19728891024
+        },
+        {
+          "level": 25,
+          "quest_id": 942,
+          "time": 33994.94583855901
+        },
+        {
+          "level": 25,
+          "quest_id": 98461,
+          "time": 34059.06488763128
+        },
+        {
+          "level": 25,
+          "quest_id": 98197,
+          "time": 34604.82679166657
+        },
+        {
+          "level": 26,
+          "quest_id": 1939,
+          "time": 35283.40791495503
+        },
+        {
+          "level": 26,
+          "quest_id": 94,
+          "time": 35885.141440711326
+        },
+        {
+          "level": 26,
+          "quest_id": 248,
+          "time": 36129.5795815903
+        },
+        {
+          "level": 26,
+          "quest_id": 1938,
+          "time": 36165.67481932223
+        },
+        {
+          "level": 26,
+          "quest_id": 1940,
+          "time": 36612.2370898728
+        },
+        {
+          "level": 26,
+          "quest_id": 1942,
+          "time": 36644.32936062629
+        },
+        {
+          "level": 26,
+          "quest_id": 305,
+          "time": 37379.616625162984
+        },
+        {
+          "level": 26,
+          "quest_id": 276,
+          "time": 42717.674146703655
+        },
+        {
+          "level": 26,
+          "quest_id": 277,
+          "time": 43139.228207149055
+        },
+        {
+          "level": 26,
+          "quest_id": 275,
+          "time": 43842.99988699928
+        },
+        {
+          "level": 26,
+          "quest_id": 469,
+          "time": 44917.703034485276
+        },
+        {
+          "level": 26,
+          "quest_id": 279,
+          "time": 44965.72342946759
+        },
+        {
+          "level": 27,
+          "quest_id": 98815,
+          "time": 45004.33833870682
+        },
+        {
+          "level": 27,
+          "quest_id": 306,
+          "time": 45037.57643467152
+        },
+        {
+          "level": 27,
+          "quest_id": 470,
+          "time": 45072.005006100095
+        },
+        {
+          "level": 27,
+          "quest_id": 98282,
+          "time": 45309.47842839316
+        },
+        {
+          "level": 27,
+          "quest_id": 288,
+          "time": 45445.36161176388
+        },
+        {
+          "level": 27,
+          "quest_id": 471,
+          "time": 46309.90898095767
+        },
+        {
+          "level": 27,
+          "quest_id": 98208,
+          "time": 46322.43279039065
+        },
+        {
+          "level": 27,
+          "quest_id": 281,
+          "time": 46418.78993025053
+        },
+        {
+          "level": 27,
+          "quest_id": 284,
+          "time": 46447.24140305564
+        },
+        {
+          "level": 27,
+          "quest_id": 285,
+          "time": 46499.09336263742
+        },
+        {
+          "level": 27,
+          "quest_id": 289,
+          "time": 47305.21028135778
+        },
+        {
+          "level": 27,
+          "quest_id": 286,
+          "time": 47374.86546046975
+        },
+        {
+          "level": 27,
+          "quest_id": 98189,
+          "time": 47428.722603326896
+        },
+        {
+          "level": 27,
+          "quest_id": 294,
+          "time": 47695.57974618404
+        },
+        {
+          "level": 27,
+          "quest_id": 295,
+          "time": 48209.25198139411
+        },
+        {
+          "level": 27,
+          "quest_id": 296,
+          "time": 48438.57628356841
+        },
+        {
+          "level": 28,
+          "quest_id": 98072,
+          "time": 49612.01402124713
+        },
+        {
+          "level": 28,
+          "quest_id": 464,
+          "time": 49658.96640292612
+        },
+        {
+          "level": 28,
+          "quest_id": 290,
+          "time": 50061.19529430506
+        },
+        {
+          "level": 28,
+          "quest_id": 292,
+          "time": 50247.07624087314
+        },
+        {
+          "level": 28,
+          "quest_id": 98240,
+          "time": 50551.409580019346
+        },
+        {
+          "level": 28,
+          "quest_id": 98245,
+          "time": 51169.73672448139
+        },
+        {
+          "level": 28,
+          "quest_id": 293,
+          "time": 51310.95101019567
+        },
+        {
+          "level": 28,
+          "quest_id": 1274,
+          "time": 51467.714124191596
+        },
+        {
+          "level": 28,
+          "quest_id": 98190,
+          "time": 51548.32120966262
+        },
+        {
+          "level": 28,
+          "quest_id": 1241,
+          "time": 51665.36882580381
+        },
+        {
+          "level": 28,
+          "quest_id": 1242,
+          "time": 51730.178348160116
+        },
+        {
+          "level": 28,
+          "quest_id": 1243,
+          "time": 51978.49384813369
+        },
+        {
+          "level": 28,
+          "quest_id": 96138,
+          "time": 52995.61687817646
+        },
+        {
+          "level": 28,
+          "quest_id": 1244,
+          "time": 53026.11687817646
+        },
+        {
+          "level": 28,
+          "quest_id": 181,
+          "time": 53077.35497414116
+        },
+        {
+          "level": 28,
+          "quest_id": 1245,
+          "time": 53159.16449649747
+        },
+        {
+          "level": 28,
+          "quest_id": 1246,
+          "time": 53228.61687599663
+        },
+        {
+          "level": 28,
+          "quest_id": 1447,
+          "time": 53272.61687599663
+        },
+        {
+          "level": 28,
+          "quest_id": 1247,
+          "time": 53343.85496978151
+        },
+        {
+          "level": 29,
+          "quest_id": 95772,
+          "time": 53577.926540976776
+        },
+        {
+          "level": 29,
+          "quest_id": 169,
+          "time": 54123.162389640944
+        },
+        {
+          "level": 29,
+          "quest_id": 249,
+          "time": 54404.138585930006
+        },
+        {
+          "level": 29,
+          "quest_id": 1248,
+          "time": 54423.06126694745
+        },
+        {
+          "level": 29,
+          "quest_id": 1249,
+          "time": 54471.13960530846
+        },
+        {
+          "level": 29,
+          "quest_id": 1250,
+          "time": 54491.21794366947
+        },
+        {
+          "level": 29,
+          "quest_id": 943,
+          "time": 54512.21794366947
+        },
+        {
+          "level": 29,
+          "quest_id": 98283,
+          "time": 55750.64087542674
+        },
+        {
+          "level": 29,
+          "quest_id": 87318,
+          "time": 56042.63098070797
+        },
+        {
+          "level": 29,
+          "quest_id": 637,
+          "time": 56487.628222187115
+        },
+        {
+          "level": 29,
+          "quest_id": 683,
+          "time": 56621.458557859405
+        },
+        {
+          "level": 29,
+          "quest_id": 686,
+          "time": 56812.22046407453
+        },
+        {
+          "level": 29,
+          "quest_id": 2945,
+          "time": 61447.29188392666
+        },
+        {
+          "level": 29,
+          "quest_id": 2951,
+          "time": 61471.29188392666
+        },
+        {
+          "level": 29,
+          "quest_id": 2952,
+          "time": 61479.29188392666
+        },
+        {
+          "level": 30,
+          "quest_id": 2953,
+          "time": 61487.29188392666
+        },
+        {
+          "level": 30,
+          "quest_id": 2926,
+          "time": 61663.50616528129
+        },
+        {
+          "level": 30,
+          "quest_id": 2927,
+          "time": 61793.64902024432
+        },
+        {
+          "level": 30,
+          "quest_id": 538,
+          "time": 63227.62568614543
+        },
+        {
+          "level": 30,
+          "quest_id": 536,
+          "time": 66493.76101851124
+        },
+        {
+          "level": 30,
+          "quest_id": 559,
+          "time": 67647.90560714605
+        },
+        {
+          "level": 30,
+          "quest_id": 560,
+          "time": 67674.85798773513
+        },
+        {
+          "level": 30,
+          "quest_id": 561,
+          "time": 67701.81036832421
+        },
+        {
+          "level": 30,
+          "quest_id": 562,
+          "time": 68297.70732211007
+        },
+        {
+          "level": 30,
+          "quest_id": 98059,
+          "time": 68371.56446496722
+        },
+        {
+          "level": 30,
+          "quest_id": 92432,
+          "time": 68717.74508737103
+        },
+        {
+          "level": 31,
+          "quest_id": 92457,
+          "time": 73735.64061751725
+        },
+        {
+          "level": 31,
+          "quest_id": 92458,
+          "time": 73743.64061751725
+        },
+        {
+          "level": 31,
+          "quest_id": 2947,
+          "time": 73787.25838554022
+        },
+        {
+          "level": 31,
+          "quest_id": 2924,
+          "time": 73855.73457746963
+        },
+        {
+          "level": 31,
+          "quest_id": 2925,
+          "time": 73863.73457746963
+        },
+        {
+          "level": 31,
+          "quest_id": 2930,
+          "time": 73874.36634939021
+        },
+        {
+          "level": 31,
+          "quest_id": 2929,
+          "time": 73901.23649055176
+        },
+        {
+          "level": 31,
+          "quest_id": 2922,
+          "time": 73910.51813098385
+        },
+        {
+          "level": 31,
+          "quest_id": 2923,
+          "time": 73918.51813098385
+        },
+        {
+          "level": 31,
+          "quest_id": 7807,
+          "time": 73931.8813953364
+        },
+        {
+          "level": 32,
+          "quest_id": 92456,
+          "time": 74023.80996676497
+        },
+        {
+          "level": 32,
+          "quest_id": 2928,
+          "time": 74149.07186862043
+        },
+        {
+          "level": 32,
+          "quest_id": 563,
+          "time": 74216.2481903357
+        },
+        {
+          "level": 32,
+          "quest_id": 92489,
+          "time": 74252.34342806763
+        },
+        {
+          "level": 32,
+          "quest_id": 583,
+          "time": 74840.80938452277
+        },
+        {
+          "level": 32,
+          "quest_id": 341,
+          "time": 75286.11851524253
+        },
+        {
+          "level": 32,
+          "quest_id": 340,
+          "time": 75578.89590548415
+        },
+        {
+          "level": 32,
+          "quest_id": 339,
+          "time": 75871.80347942252
+        },
+        {
+          "level": 32,
+          "quest_id": 342,
+          "time": 76163.06446156757
+        },
+        {
+          "level": 32,
+          "quest_id": 185,
+          "time": 76179.72183074952
+        },
+        {
+          "level": 32,
+          "quest_id": 190,
+          "time": 76647.12070664296
+        },
+        {
+          "level": 32,
+          "quest_id": 186,
+          "time": 77706.34018257944
+        },
+        {
+          "level": 32,
+          "quest_id": 194,
+          "time": 77740.9706223377
+        },
+        {
+          "level": 32,
+          "quest_id": 191,
+          "time": 77758.8420706375
+        },
+        {
+          "level": 32,
+          "quest_id": 215,
+          "time": 78020.02798057027
+        },
+        {
+          "level": 32,
+          "quest_id": 200,
+          "time": 78198.83618940428
+        },
+        {
+          "level": 33,
+          "quest_id": 338,
+          "time": 79049.3993056937
+        },
+        {
+          "level": 33,
+          "quest_id": 187,
+          "time": 79634.07806734301
+        },
+        {
+          "level": 33,
+          "quest_id": 204,
+          "time": 79761.33788464541
+        },
+        {
+          "level": 33,
+          "quest_id": 203,
+          "time": 79769.33788464541
+        },
+        {
+          "level": 33,
+          "quest_id": 210,
+          "time": 80503.90473601109
+        },
+        {
+          "level": 33,
+          "quest_id": 98463,
+          "time": 80531.35711687263
+        },
+        {
+          "level": 33,
+          "quest_id": 616,
+          "time": 80560.8792472973
+        },
+        {
+          "level": 33,
+          "quest_id": 575,
+          "time": 83667.760893063
+        },
+        {
+          "level": 33,
+          "quest_id": 605,
+          "time": 83706.71021023429
+        },
+        {
+          "level": 33,
+          "quest_id": 189,
+          "time": 83727.80544796622
+        },
+        {
+          "level": 33,
+          "quest_id": 1947,
+          "time": 85395.47212462378
+        },
+        {
+          "level": 33,
+          "quest_id": 1132,
+          "time": 85695.18640434353
+        },
+        {
+          "level": 33,
+          "quest_id": 1264,
+          "time": 85744.1387838427
+        },
+        {
+          "level": 33,
+          "quest_id": 1282,
+          "time": 85753.63314826244
+        },
+        {
+          "level": 33,
+          "quest_id": 1265,
+          "time": 85942.34179403681
+        },
+        {
+          "level": 33,
+          "quest_id": 1266,
+          "time": 86171.43702631918
+        },
+        {
+          "level": 33,
+          "quest_id": 1324,
+          "time": 86429.24654431583
+        },
+        {
+          "level": 33,
+          "quest_id": 1267,
+          "time": 86446.81995616929
+        },
+        {
+          "level": 33,
+          "quest_id": 1219,
+          "time": 86772.21281319008
+        },
+        {
+          "level": 34,
+          "quest_id": 1218,
+          "time": 86990.2604315111
+        },
+        {
+          "level": 34,
+          "quest_id": 1252,
+          "time": 89447.41449650479
+        },
+        {
+          "level": 34,
+          "quest_id": 1220,
+          "time": 89505.65259246949
+        },
+        {
+          "level": 34,
+          "quest_id": 1253,
+          "time": 89513.65259246949
+        },
+        {
+          "level": 34,
+          "quest_id": 1284,
+          "time": 89521.65259246949
+        },
+        {
+          "level": 34,
+          "quest_id": 1259,
+          "time": 89548.47083644869
+        },
+        {
+          "level": 34,
+          "quest_id": 1285,
+          "time": 89567.28908042789
+        },
+        {
+          "level": 34,
+          "quest_id": 1319,
+          "time": 89636.86050899932
+        },
+        {
+          "level": 34,
+          "quest_id": 1320,
+          "time": 89706.43193757076
+        },
+        {
+          "level": 34,
+          "quest_id": 1286,
+          "time": 90030.86050899932
+        },
+        {
+          "level": 34,
+          "quest_id": 1287,
+          "time": 90361.38433014888
+        },
+        {
+          "level": 34,
+          "quest_id": 1206,
+          "time": 90541.88433014888
+        },
+        {
+          "level": 34,
+          "quest_id": 3523,
+          "time": 95680.47957986986
+        },
+        {
+          "level": 34,
+          "quest_id": 6626,
+          "time": 95700.14624617323
+        },
+        {
+          "level": 34,
+          "quest_id": 1949,
+          "time": 96363.8664067015
+        },
+        {
+          "level": 34,
+          "quest_id": 1179,
+          "time": 96736.79587899508
+        },
+        {
+          "level": 34,
+          "quest_id": 1176,
+          "time": 97126.65511826485
+        },
+        {
+          "level": 35,
+          "quest_id": 1105,
+          "time": 98306.37213216705
+        },
+        {
+          "level": 35,
+          "quest_id": 1950,
+          "time": 98346.04447240171
+        },
+        {
+          "level": 35,
+          "quest_id": 1110,
+          "time": 98371.9832889619
+        },
+        {
+          "level": 35,
+          "quest_id": 1104,
+          "time": 99320.0215415456
+        },
+        {
+          "level": 35,
+          "quest_id": 1175,
+          "time": 99418.41208261842
+        },
+        {
+          "level": 35,
+          "quest_id": 1111,
+          "time": 99497.12636833271
+        },
+        {
+          "level": 35,
+          "quest_id": 9267,
+          "time": 99538.45970093943
+        },
+        {
+          "level": 35,
+          "quest_id": 1178,
+          "time": 99581.22160497474
+        },
+        {
+          "level": 35,
+          "quest_id": 87491,
+          "time": 100583.82122804013
+        },
+        {
+          "level": 35,
+          "quest_id": 304,
+          "time": 100708.63084073835
+        },
+        {
+          "level": 35,
+          "quest_id": 631,
+          "time": 100794.29706741728
+        },
+        {
+          "level": 35,
+          "quest_id": 88757,
+          "time": 100964.25156531097
+        },
+        {
+          "level": 35,
+          "quest_id": 88758,
+          "time": 101111.08489573788
+        },
+        {
+          "level": 35,
+          "quest_id": 632,
+          "time": 101142.65632430931
+        },
+        {
+          "level": 35,
+          "quest_id": 98297,
+          "time": 101247.08489573788
+        },
+        {
+          "level": 35,
+          "quest_id": 328,
+          "time": 101813.12263561906
+        },
+        {
+          "level": 35,
+          "quest_id": 329,
+          "time": 102040.50988771679
+        },
+        {
+          "level": 35,
+          "quest_id": 330,
+          "time": 102060.6732260529
+        },
+        {
+          "level": 35,
+          "quest_id": 331,
+          "time": 102080.836564389
+        },
+        {
+          "level": 36,
+          "quest_id": 195,
+          "time": 103545.71240128392
+        },
+        {
+          "level": 36,
+          "quest_id": 5762,
+          "time": 103553.71240128392
+        },
+        {
+          "level": 36,
+          "quest_id": 188,
+          "time": 103762.57708506664
+        },
+        {
+          "level": 36,
+          "quest_id": 201,
+          "time": 104159.70755187947
+        },
+        {
+          "level": 36,
+          "quest_id": 213,
+          "time": 104171.75517101793
+        },
+        {
+          "level": 36,
+          "quest_id": 577,
+          "time": 104194.75517101793
+        },
+        {
+          "level": 36,
+          "quest_id": 8553,
+          "time": 104252.17909444525
+        },
+        {
+          "level": 36,
+          "quest_id": 1180,
+          "time": 104263.04659432624
+        },
+        {
+          "level": 36,
+          "quest_id": 1181,
+          "time": 104328.09421482707
+        },
+        {
+          "level": 36,
+          "quest_id": 578,
+          "time": 106277.61306334505
+        },
+        {
+          "level": 36,
+          "quest_id": 1182,
+          "time": 106315.85115821984
+        },
+        {
+          "level": 36,
+          "quest_id": 192,
+          "time": 106765.69841609769
+        },
+        {
+          "level": 36,
+          "quest_id": 574,
+          "time": 107294.47091342126
+        },
+        {
+          "level": 36,
+          "quest_id": 198,
+          "time": 107345.08996249353
+        },
+        {
+          "level": 36,
+          "quest_id": 601,
+          "time": 108691.9145301147
+        },
+        {
+          "level": 36,
+          "quest_id": 602,
+          "time": 109905.44563481044
+        },
+        {
+          "level": 36,
+          "quest_id": 564,
+          "time": 111513.21240019801
+        },
+        {
+          "level": 36,
+          "quest_id": 555,
+          "time": 111541.21240019801
+        },
+        {
+          "level": 36,
+          "quest_id": 505,
+          "time": 111579.11716192112
+        },
+        {
+          "level": 36,
+          "quest_id": 510,
+          "time": 111587.11716192112
+        },
+        {
+          "level": 36,
+          "quest_id": 511,
+          "time": 111612.02192418919
+        },
+        {
+          "level": 36,
+          "quest_id": 514,
+          "time": 111706.73620990348
+        },
+        {
+          "level": 36,
+          "quest_id": 98300,
+          "time": 111783.03222301623
+        },
+        {
+          "level": 36,
+          "quest_id": 707,
+          "time": 112650.45790166644
+        },
+        {
+          "level": 37,
+          "quest_id": 720,
+          "time": 113028.04467019338
+        },
+        {
+          "level": 37,
+          "quest_id": 719,
+          "time": 114562.05789578246
+        },
+        {
+          "level": 37,
+          "quest_id": 718,
+          "time": 114586.42498201011
+        },
+        {
+          "level": 37,
+          "quest_id": 603,
+          "time": 116970.36932353271
+        },
+        {
+          "level": 37,
+          "quest_id": 9259,
+          "time": 117328.9923342649
+        },
+        {
+          "level": 37,
+          "quest_id": 624,
+          "time": 117898.57635291404
+        },
+        {
+          "level": 37,
+          "quest_id": 1396,
+          "time": 118686.51876596209
+        },
+        {
+          "level": 37,
+          "quest_id": 1392,
+          "time": 118880.98802983672
+        },
+        {
+          "level": 37,
+          "quest_id": 1393,
+          "time": 119160.79168864629
+        },
+        {
+          "level": 37,
+          "quest_id": 1421,
+          "time": 119250.57814485474
+        },
+        {
+          "level": 38,
+          "quest_id": 79948,
+          "time": 120081.70108801097
+        },
+        {
+          "level": 38,
+          "quest_id": 81947,
+          "time": 120089.70108801097
+        },
+        {
+          "level": 38,
+          "quest_id": 79951,
+          "time": 120097.70108801097
+        },
+        {
+          "level": 38,
+          "quest_id": 1363,
+          "time": 120200.01061036727
+        },
+        {
+          "level": 38,
+          "quest_id": 610,
+          "time": 120550.35703890544
+        },
+        {
+          "level": 38,
+          "quest_id": 212,
+          "time": 120926.51851843059
+        },
+        {
+          "level": 38,
+          "quest_id": 695,
+          "time": 121644.0215160902
+        },
+        {
+          "level": 38,
+          "quest_id": 690,
+          "time": 121652.0215160902
+        },
+        {
+          "level": 38,
+          "quest_id": 659,
+          "time": 122158.55258938714
+        },
+        {
+          "level": 38,
+          "quest_id": 658,
+          "time": 122256.97240687719
+        },
+        {
+          "level": 38,
+          "quest_id": 657,
+          "time": 122273.36332415286
+        },
+        {
+          "level": 38,
+          "quest_id": 660,
+          "time": 122303.56376449112
+        },
+        {
+          "level": 38,
+          "quest_id": 691,
+          "time": 123399.95261117573
+        },
+        {
+          "level": 38,
+          "quest_id": 642,
+          "time": 124064.17573924639
+        },
+        {
+          "level": 38,
+          "quest_id": 693,
+          "time": 124634.98009117317
+        },
+        {
+          "level": 38,
+          "quest_id": 651,
+          "time": 124919.8848501715
+        },
+        {
+          "level": 38,
+          "quest_id": 663,
+          "time": 125129.12579578007
+        },
+        {
+          "level": 38,
+          "quest_id": 665,
+          "time": 125167.47223596905
+        },
+        {
+          "level": 38,
+          "quest_id": 664,
+          "time": 125663.4981594633
+        },
+        {
+          "level": 38,
+          "quest_id": 2500,
+          "time": 125878.66705134687
+        },
+        {
+          "level": 38,
+          "quest_id": 525,
+          "time": 126205.12878085792
+        },
+        {
+          "level": 38,
+          "quest_id": 661,
+          "time": 126234.46211455455
+        },
+        {
+          "level": 39,
+          "quest_id": 540,
+          "time": 127917.6079941129
+        },
+        {
+          "level": 39,
+          "quest_id": 537,
+          "time": 127982.99906839905
+        },
+        {
+          "level": 39,
+          "quest_id": 500,
+          "time": 128000.04668726501
+        },
+        {
+          "level": 39,
+          "quest_id": 207,
+          "time": 128976.77804309291
+        },
+        {
+          "level": 39,
+          "quest_id": 595,
+          "time": 130408.39067586248
+        },
+        {
+          "level": 39,
+          "quest_id": 606,
+          "time": 130640.30498007768
+        },
+        {
+          "level": 39,
+          "quest_id": 597,
+          "time": 130678.20974125584
+        },
+        {
+          "level": 39,
+          "quest_id": 627,
+          "time": 130726.4579573092
+        },
+        {
+          "level": 39,
+          "quest_id": 611,
+          "time": 130745.74199285908
+        },
+        {
+          "level": 39,
+          "quest_id": 599,
+          "time": 130831.69141320355
+        },
+        {
+          "level": 39,
+          "quest_id": 628,
+          "time": 130873.21215174455
+        },
+        {
+          "level": 39,
+          "quest_id": 607,
+          "time": 130907.11384284815
+        },
+        {
+          "level": 39,
+          "quest_id": 196,
+          "time": 134221.18904146427
+        },
+        {
+          "level": 39,
+          "quest_id": 193,
+          "time": 134231.06048976406
+        },
+        {
+          "level": 39,
+          "quest_id": 600,
+          "time": 134606.64501644674
+        },
+        {
+          "level": 39,
+          "quest_id": 202,
+          "time": 135027.8970246036
+        },
+        {
+          "level": 39,
+          "quest_id": 205,
+          "time": 135039.74897633106
+        },
+        {
+          "level": 39,
+          "quest_id": 622,
+          "time": 135049.52939980067
+        }
+      ]
+    },
+    "baseline": {
+      "fixed_stage_controls_identical": 8,
+      "stages_through_trim_identical": 6,
+      "old_final_score": 169640.2243407399,
+      "new_final_score": 169640.2243407399,
+      "score_reduction": 0.0,
+      "score_reduction_percent": 0.0,
+      "old_final_player_seconds": 143100.83768878752,
+      "new_final_player_seconds": 143100.83768878752,
+      "player_seconds_saved": 0.0,
+      "old_turnins": 318,
+      "new_turnins": 318,
+      "old_final_breakdown": {
+        "abandoned": 0,
+        "bag_overflow": 972.9259022932789,
+        "catch_up": 0.0,
+        "desync": 0.0,
+        "dungeon_runs": 6,
+        "dungeons": 25080.0,
+        "explore_xp": 27812,
+        "farm_xp": 94613,
+        "farming": 10416.036451171723,
+        "fighting": 35320.11976977266,
+        "flight_cost": 11780,
+        "flight_gold": 2555.500473760934,
+        "flights": 10683.316747224315,
+        "gold_earned": 178250,
+        "gold_start": 0,
+        "grind_over": 9.63352460101406,
+        "grind_xp": 20366,
+        "grinding": 4357.7164776195605,
+        "hearths": 10,
+        "missing_class_quests": 0,
+        "missing_dungeons": 0,
+        "missing_profession_quests": 0,
+        "missing_zone_quests": 0,
+        "mob_xp": 260199,
+        "outside_preferred": 0.0,
+        "overhead": 7758.0,
+        "quest_xp": 584210,
+        "reputation_missing": -0.0,
+        "sync_time": 0.0,
+        "total": 143100.83768878752,
+        "training": 210.0,
+        "training_cost": 238000,
+        "travel": 49210.64824299907,
+        "unlock_delay": 0.0,
+        "vendor_cost": 0,
+        "waiting": 5009.863704982975,
+        "zone_changes": 65
+      },
+      "new_final_breakdown": {
+        "abandoned": 0,
+        "bag_overflow": 972.9259022932789,
+        "catch_up": 0.0,
+        "desync": 0.0,
+        "dungeon_runs": 6,
+        "dungeons": 25080.0,
+        "explore_xp": 27812,
+        "farm_xp": 94613,
+        "farming": 10416.036451171723,
+        "fighting": 35320.11976977266,
+        "flight_cost": 11780,
+        "flight_gold": 2555.500473760934,
+        "flights": 10683.316747224315,
+        "gold_earned": 178250,
+        "gold_start": 0,
+        "grind_over": 9.63352460101406,
+        "grind_xp": 20366,
+        "grinding": 4357.7164776195605,
+        "hearths": 10,
+        "missing_class_quests": 0,
+        "missing_dungeons": 0,
+        "missing_profession_quests": 0,
+        "missing_zone_quests": 0,
+        "mob_xp": 260199,
+        "outside_preferred": 0.0,
+        "overhead": 7758.0,
+        "quest_xp": 584210,
+        "reputation_missing": -0.0,
+        "sync_time": 0.0,
+        "total": 143100.83768878752,
+        "training": 210.0,
+        "training_cost": 238000,
+        "travel": 49210.64824299907,
+        "unlock_delay": 0.0,
+        "vendor_cost": 0,
+        "waiting": 5009.863704982975,
+        "zone_changes": 65
+      },
+      "stages": [
+        {
+          "stage": "SelectedInput",
+          "score": 170622.3497908,
+          "player_seconds": 143647.06768188428,
+          "stop_count": 923
+        },
+        {
+          "stage": "PowerFirst",
+          "score": 170622.3497908,
+          "player_seconds": 143647.06768188428,
+          "stop_count": 923
+        },
+        {
+          "stage": "Rebind",
+          "score": 170622.3497908,
+          "player_seconds": 143647.06768188428,
+          "stop_count": 923
+        },
+        {
+          "stage": "PlaceHearths",
+          "score": 170622.3497908,
+          "player_seconds": 143647.06768188428,
+          "stop_count": 923
+        },
+        {
+          "stage": "DropUnfinished",
+          "score": 169992.92121937143,
+          "player_seconds": 143617.6391104557,
+          "stop_count": 921
+        },
+        {
+          "stage": "TrimTarget",
+          "score": 169992.92121937143,
+          "player_seconds": 143617.6391104557,
+          "stop_count": 921
+        },
+        {
+          "stage": "DropDungeonless",
+          "score": 169992.92121937143,
+          "player_seconds": 143617.6391104557,
+          "stop_count": 921
+        },
+        {
+          "stage": "Finalized",
+          "score": 169640.2243407399,
+          "player_seconds": 143100.83768878752,
+          "stop_count": 921
+        }
+      ],
+      "new_trainings": [
+        {
+          "event_index": 238,
+          "event": "Train { trainer: 7, outbound: 0.0, since: 20, abilities: 0 }",
+          "gear": 0.29604097082897907,
+          "level": 24,
+          "party": [],
+          "power": 24.29604097082898,
+          "time": 24924.990213896934,
+          "xp": 532
+        },
+        {
+          "event_index": 327,
+          "event": "Train { trainer: 7, outbound: 0.0, since: 24, abilities: 0 }",
+          "gear": 0.8124685404530904,
+          "level": 26,
+          "party": [],
+          "power": 26.81246854045309,
+          "time": 35813.56072620949,
+          "xp": 1093
+        },
+        {
+          "event_index": 550,
+          "event": "Train { trainer: 4, outbound: 46.42857142857143, since: 26, abilities: 0 }",
+          "gear": 1.6903369490330415,
+          "level": 29,
+          "party": [],
+          "power": 30.690336949033043,
+          "time": 58523.00049551762,
+          "xp": 34886
+        },
+        {
+          "event_index": 580,
+          "event": "Train { trainer: 3, outbound: 22.619046892438615, since: 29, abilities: 0 }",
+          "gear": 1.70006039829499,
+          "level": 30,
+          "party": [],
+          "power": 31.70006039829499,
+          "time": 63573.61953805041,
+          "xp": 13876
+        },
+        {
+          "event_index": 645,
+          "event": "Train { trainer: 10, outbound: 146.19047328404017, since: 30, abilities: 0 }",
+          "gear": 1.5646899586523622,
+          "level": 32,
+          "party": [],
+          "power": 33.56468995865236,
+          "time": 76874.21971878188,
+          "xp": 5792
+        },
+        {
+          "event_index": 953,
+          "event": "Train { trainer: 10, outbound: 49.52380807059152, since: 32, abilities: 0 }",
+          "gear": 1.7044933655586272,
+          "level": 36,
+          "party": [],
+          "power": 37.704493365558626,
+          "time": 116875.69289071109,
+          "xp": 44923
+        },
+        {
+          "event_index": 1057,
+          "event": "Train { trainer: 8, outbound: 11.071428571428571, since: 36, abilities: 0 }",
+          "gear": 1.5745250289533081,
+          "level": 38,
+          "party": [],
+          "power": 39.57452502895331,
+          "time": 128158.72111500466,
+          "xp": 0
+        }
+      ],
+      "new_grinds": [
+        {
+          "event_index": 268,
+          "event": "Grind { to_level: 25, seconds: 963.9545553889693, near: Pos { continent: 0, x: -8754.251953125, y: -2365.496826171875, zone: 44, z: None }, zone: 44 }",
+          "gear": 0.6112525235780768,
+          "level": 25,
+          "party": [],
+          "power": 25.611252523578077,
+          "time": 28566.640027453286,
+          "xp": 0
+        },
+        {
+          "event_index": 597,
+          "event": "Grind { to_level: 31, seconds: 688.9377290252837, near: Pos { continent: 0, x: -878.2933349609375, y: -2055.386474609375, zone: 45, z: Some(35) }, zone: 45 }",
+          "gear": 1.3290914465002412,
+          "level": 31,
+          "party": [],
+          "power": 32.32909144650024,
+          "time": 65527.539591178975,
+          "xp": 0
+        },
+        {
+          "event_index": 905,
+          "event": "Grind { to_level: 36, seconds: 764.3219391089821, near: Pos { continent: 0, x: -12155.291015625, y: 853.3314208984375, zone: 33, z: Some(22) }, zone: 33 }",
+          "gear": 1.7044933655586272,
+          "level": 36,
+          "party": [],
+          "power": 37.139102280860605,
+          "time": 110887.14743352894,
+          "xp": 0
+        },
+        {
+          "event_index": 1054,
+          "event": "Grind { to_level: 38, seconds: 428.5722495855486, near: Pos { continent: 0, x: -12155.291015625, y: 853.3314208984375, zone: 33, z: Some(22) }, zone: 33 }",
+          "gear": 1.5745250289533081,
+          "level": 38,
+          "party": [],
+          "power": 38.56873897089961,
+          "time": 128065.95921096938,
+          "xp": 0
+        },
+        {
+          "event_index": 1175,
+          "event": "Grind { to_level: 40, seconds: 1511.9300045107768, near: Pos { continent: 0, x: -12968.6875, y: -435.6810302734375, zone: 33, z: Some(45) }, zone: 33 }",
+          "gear": 1.6828699537378498,
+          "level": 40,
+          "party": [],
+          "power": 41.09294123638404,
+          "time": 143100.83768878752,
+          "xp": 0
+        }
+      ],
+      "new_actual_turnins": [
+        {
+          "level": 20,
+          "quest_id": 96391,
+          "time": 1009.2597589983261
+        },
+        {
+          "level": 20,
+          "quest_id": 1920,
+          "time": 1863.7454664151765
+        },
+        {
+          "level": 20,
+          "quest_id": 97220,
+          "time": 2311.840706326937
+        },
+        {
+          "level": 20,
+          "quest_id": 97234,
+          "time": 2406.38832246812
+        },
+        {
+          "level": 20,
+          "quest_id": 343,
+          "time": 2428.1026081824057
+        },
+        {
+          "level": 20,
+          "quest_id": 344,
+          "time": 2786.9768938966913
+        },
+        {
+          "level": 20,
+          "quest_id": 3741,
+          "time": 3322.456210040416
+        },
+        {
+          "level": 20,
+          "quest_id": 345,
+          "time": 3345.8133528975586
+        },
+        {
+          "level": 20,
+          "quest_id": 129,
+          "time": 4289.705874624456
+        },
+        {
+          "level": 20,
+          "quest_id": 92,
+          "time": 4751.641709027031
+        },
+        {
+          "level": 20,
+          "quest_id": 130,
+          "time": 4766.9373980953005
+        },
+        {
+          "level": 20,
+          "quest_id": 131,
+          "time": 4800.556446077652
+        },
+        {
+          "level": 20,
+          "quest_id": 244,
+          "time": 4846.29453986253
+        },
+        {
+          "level": 20,
+          "quest_id": 98407,
+          "time": 4854.29453986253
+        },
+        {
+          "level": 21,
+          "quest_id": 125,
+          "time": 6087.504270938528
+        },
+        {
+          "level": 21,
+          "quest_id": 127,
+          "time": 6330.568332160122
+        },
+        {
+          "level": 21,
+          "quest_id": 150,
+          "time": 6338.568332160122
+        },
+        {
+          "level": 21,
+          "quest_id": 89,
+          "time": 7233.746235176171
+        },
+        {
+          "level": 21,
+          "quest_id": 20,
+          "time": 8104.044986728231
+        },
+        {
+          "level": 21,
+          "quest_id": 98386,
+          "time": 8116.041018356667
+        },
+        {
+          "level": 21,
+          "quest_id": 98387,
+          "time": 8704.182931148876
+        },
+        {
+          "level": 21,
+          "quest_id": 246,
+          "time": 8735.99245568501
+        },
+        {
+          "level": 21,
+          "quest_id": 118,
+          "time": 9100.182933328704
+        },
+        {
+          "level": 21,
+          "quest_id": 226,
+          "time": 9773.36979799571
+        },
+        {
+          "level": 22,
+          "quest_id": 5,
+          "time": 10601.655735340628
+        },
+        {
+          "level": 22,
+          "quest_id": 93,
+          "time": 11192.527461527183
+        },
+        {
+          "level": 22,
+          "quest_id": 174,
+          "time": 11286.194127830546
+        },
+        {
+          "level": 22,
+          "quest_id": 175,
+          "time": 11388.421444971667
+        },
+        {
+          "level": 22,
+          "quest_id": 240,
+          "time": 11663.564302114524
+        },
+        {
+          "level": 22,
+          "quest_id": 96139,
+          "time": 11933.707153807814
+        },
+        {
+          "level": 22,
+          "quest_id": 3765,
+          "time": 12737.329046651803
+        },
+        {
+          "level": 22,
+          "quest_id": 97894,
+          "time": 12821.005507134618
+        },
+        {
+          "level": 22,
+          "quest_id": 3524,
+          "time": 13085.145564535576
+        },
+        {
+          "level": 22,
+          "quest_id": 984,
+          "time": 13133.169374785995
+        },
+        {
+          "level": 22,
+          "quest_id": 4761,
+          "time": 13186.693185036414
+        },
+        {
+          "level": 22,
+          "quest_id": 982,
+          "time": 13464.359854609516
+        },
+        {
+          "level": 22,
+          "quest_id": 985,
+          "time": 13989.417481493978
+        },
+        {
+          "level": 22,
+          "quest_id": 963,
+          "time": 14190.774624351121
+        },
+        {
+          "level": 22,
+          "quest_id": 4681,
+          "time": 14216.155576368768
+        },
+        {
+          "level": 22,
+          "quest_id": 965,
+          "time": 14577.349690516274
+        },
+        {
+          "level": 22,
+          "quest_id": 966,
+          "time": 14784.582943381442
+        },
+        {
+          "level": 22,
+          "quest_id": 4762,
+          "time": 15025.815737719819
+        },
+        {
+          "level": 22,
+          "quest_id": 2118,
+          "time": 15135.629673039617
+        },
+        {
+          "level": 22,
+          "quest_id": 947,
+          "time": 15776.740651363265
+        },
+        {
+          "level": 22,
+          "quest_id": 948,
+          "time": 16020.240651363265
+        },
+        {
+          "level": 22,
+          "quest_id": 729,
+          "time": 16461.778011706174
+        },
+        {
+          "level": 22,
+          "quest_id": 944,
+          "time": 16540.690609141886
+        },
+        {
+          "level": 23,
+          "quest_id": 949,
+          "time": 16557.781830098676
+        },
+        {
+          "level": 23,
+          "quest_id": 4730,
+          "time": 17044.274277987482
+        },
+        {
+          "level": 23,
+          "quest_id": 4728,
+          "time": 17052.274277987482
+        },
+        {
+          "level": 23,
+          "quest_id": 4727,
+          "time": 17060.274277987482
+        },
+        {
+          "level": 23,
+          "quest_id": 4731,
+          "time": 17068.274277987482
+        },
+        {
+          "level": 23,
+          "quest_id": 4732,
+          "time": 17076.274277987482
+        },
+        {
+          "level": 23,
+          "quest_id": 4733,
+          "time": 17084.274277987482
+        },
+        {
+          "level": 23,
+          "quest_id": 4740,
+          "time": 17110.96475345135
+        },
+        {
+          "level": 23,
+          "quest_id": 731,
+          "time": 17129.440944290844
+        },
+        {
+          "level": 23,
+          "quest_id": 4763,
+          "time": 17159.48856370177
+        },
+        {
+          "level": 23,
+          "quest_id": 986,
+          "time": 17197.012373952188
+        },
+        {
+          "level": 23,
+          "quest_id": 993,
+          "time": 17503.012373952188
+        },
+        {
+          "level": 23,
+          "quest_id": 994,
+          "time": 17829.63142738411
+        },
+        {
+          "level": 23,
+          "quest_id": 119,
+          "time": 17932.37419340233
+        },
+        {
+          "level": 23,
+          "quest_id": 124,
+          "time": 18422.69275310041
+        },
+        {
+          "level": 23,
+          "quest_id": 122,
+          "time": 19789.99342711792
+        },
+        {
+          "level": 23,
+          "quest_id": 91,
+          "time": 19832.89809354526
+        },
+        {
+          "level": 24,
+          "quest_id": 104,
+          "time": 24523.237015188733
+        },
+        {
+          "level": 24,
+          "quest_id": 373,
+          "time": 25048.490210627195
+        },
+        {
+          "level": 24,
+          "quest_id": 2040,
+          "time": 25109.490210627195
+        },
+        {
+          "level": 24,
+          "quest_id": 167,
+          "time": 25143.680686091062
+        },
+        {
+          "level": 24,
+          "quest_id": 168,
+          "time": 25151.680686091062
+        },
+        {
+          "level": 24,
+          "quest_id": 389,
+          "time": 25211.34735130451
+        },
+        {
+          "level": 24,
+          "quest_id": 34,
+          "time": 25310.28188846887
+        },
+        {
+          "level": 24,
+          "quest_id": 126,
+          "time": 26206.03486157771
+        },
+        {
+          "level": 24,
+          "quest_id": 219,
+          "time": 26232.896094030646
+        },
+        {
+          "level": 24,
+          "quest_id": 128,
+          "time": 27426.566420812225
+        },
+        {
+          "level": 24,
+          "quest_id": 180,
+          "time": 27469.447373919786
+        },
+        {
+          "level": 24,
+          "quest_id": 95999,
+          "time": 27477.447373919786
+        },
+        {
+          "level": 25,
+          "quest_id": 19,
+          "time": 29351.701427112726
+        },
+        {
+          "level": 25,
+          "quest_id": 347,
+          "time": 29915.942452684
+        },
+        {
+          "level": 25,
+          "quest_id": 346,
+          "time": 30013.132930327694
+        },
+        {
+          "level": 25,
+          "quest_id": 741,
+          "time": 30902.942452684
+        },
+        {
+          "level": 25,
+          "quest_id": 95,
+          "time": 31491.253466165952
+        },
+        {
+          "level": 25,
+          "quest_id": 79363,
+          "time": 32754.612631906875
+        },
+        {
+          "level": 25,
+          "quest_id": 96137,
+          "time": 32789.27929821024
+        },
+        {
+          "level": 25,
+          "quest_id": 245,
+          "time": 33321.374465746725
+        },
+        {
+          "level": 25,
+          "quest_id": 230,
+          "time": 33511.27923346436
+        },
+        {
+          "level": 25,
+          "quest_id": 79362,
+          "time": 34097.56073111411
+        },
+        {
+          "level": 25,
+          "quest_id": 177,
+          "time": 34135.3226351494
+        },
+        {
+          "level": 25,
+          "quest_id": 65,
+          "time": 34159.51311115822
+        },
+        {
+          "level": 25,
+          "quest_id": 942,
+          "time": 35056.44168040697
+        },
+        {
+          "level": 26,
+          "quest_id": 98197,
+          "time": 35773.56072620949
+        },
+        {
+          "level": 26,
+          "quest_id": 1939,
+          "time": 35848.93548651464
+        },
+        {
+          "level": 26,
+          "quest_id": 94,
+          "time": 36286.09921424688
+        },
+        {
+          "level": 26,
+          "quest_id": 248,
+          "time": 36897.88958254599
+        },
+        {
+          "level": 26,
+          "quest_id": 1938,
+          "time": 36933.984820277925
+        },
+        {
+          "level": 26,
+          "quest_id": 1940,
+          "time": 37378.78836984187
+        },
+        {
+          "level": 26,
+          "quest_id": 1942,
+          "time": 37410.88064059536
+        },
+        {
+          "level": 26,
+          "quest_id": 305,
+          "time": 38407.0321021513
+        },
+        {
+          "level": 26,
+          "quest_id": 276,
+          "time": 44645.89753837341
+        },
+        {
+          "level": 26,
+          "quest_id": 277,
+          "time": 45064.8771601773
+        },
+        {
+          "level": 26,
+          "quest_id": 275,
+          "time": 45766.18961477645
+        },
+        {
+          "level": 27,
+          "quest_id": 469,
+          "time": 46352.90779261778
+        },
+        {
+          "level": 27,
+          "quest_id": 279,
+          "time": 46371.16628247488
+        },
+        {
+          "level": 27,
+          "quest_id": 98815,
+          "time": 46397.42477233198
+        },
+        {
+          "level": 27,
+          "quest_id": 98282,
+          "time": 46497.87394608114
+        },
+        {
+          "level": 27,
+          "quest_id": 470,
+          "time": 46509.17606809312
+        },
+        {
+          "level": 27,
+          "quest_id": 943,
+          "time": 46563.091131249
+        },
+        {
+          "level": 27,
+          "quest_id": 288,
+          "time": 46836.18414966109
+        },
+        {
+          "level": 27,
+          "quest_id": 306,
+          "time": 46911.42507797939
+        },
+        {
+          "level": 27,
+          "quest_id": 281,
+          "time": 46977.520314621404
+        },
+        {
+          "level": 27,
+          "quest_id": 284,
+          "time": 47005.97178742651
+        },
+        {
+          "level": 27,
+          "quest_id": 285,
+          "time": 47057.565257326605
+        },
+        {
+          "level": 27,
+          "quest_id": 286,
+          "time": 48037.938167473985
+        },
+        {
+          "level": 27,
+          "quest_id": 471,
+          "time": 48084.46551049756
+        },
+        {
+          "level": 27,
+          "quest_id": 289,
+          "time": 48121.89408192613
+        },
+        {
+          "level": 27,
+          "quest_id": 98189,
+          "time": 48175.63217571101
+        },
+        {
+          "level": 27,
+          "quest_id": 294,
+          "time": 48585.626971347454
+        },
+        {
+          "level": 27,
+          "quest_id": 295,
+          "time": 49098.4825666273
+        },
+        {
+          "level": 27,
+          "quest_id": 296,
+          "time": 49327.73481233717
+        },
+        {
+          "level": 28,
+          "quest_id": 98072,
+          "time": 50499.384520682106
+        },
+        {
+          "level": 28,
+          "quest_id": 98208,
+          "time": 50511.90833011509
+        },
+        {
+          "level": 28,
+          "quest_id": 464,
+          "time": 50563.38452122706
+        },
+        {
+          "level": 28,
+          "quest_id": 290,
+          "time": 50965.16531421352
+        },
+        {
+          "level": 28,
+          "quest_id": 292,
+          "time": 51151.0462607816
+        },
+        {
+          "level": 28,
+          "quest_id": 98240,
+          "time": 51455.37959992781
+        },
+        {
+          "level": 28,
+          "quest_id": 98245,
+          "time": 52072.997727946065
+        },
+        {
+          "level": 28,
+          "quest_id": 293,
+          "time": 52214.21201366035
+        },
+        {
+          "level": 28,
+          "quest_id": 1274,
+          "time": 52370.975127656275
+        },
+        {
+          "level": 28,
+          "quest_id": 98190,
+          "time": 52451.5822131273
+        },
+        {
+          "level": 28,
+          "quest_id": 1241,
+          "time": 52568.62982926849
+        },
+        {
+          "level": 28,
+          "quest_id": 1242,
+          "time": 52633.439351624795
+        },
+        {
+          "level": 28,
+          "quest_id": 1243,
+          "time": 52849.02770368914
+        },
+        {
+          "level": 28,
+          "quest_id": 96138,
+          "time": 54159.72009226894
+        },
+        {
+          "level": 28,
+          "quest_id": 225,
+          "time": 54167.72009226894
+        },
+        {
+          "level": 28,
+          "quest_id": 1244,
+          "time": 54198.22009226894
+        },
+        {
+          "level": 28,
+          "quest_id": 181,
+          "time": 54249.45818823364
+        },
+        {
+          "level": 28,
+          "quest_id": 1245,
+          "time": 54331.26771058995
+        },
+        {
+          "level": 28,
+          "quest_id": 1246,
+          "time": 54400.72009008911
+        },
+        {
+          "level": 29,
+          "quest_id": 1447,
+          "time": 54444.72009008911
+        },
+        {
+          "level": 29,
+          "quest_id": 1247,
+          "time": 54515.95818387399
+        },
+        {
+          "level": 29,
+          "quest_id": 95772,
+          "time": 54750.029755069256
+        },
+        {
+          "level": 29,
+          "quest_id": 169,
+          "time": 55282.65127047135
+        },
+        {
+          "level": 29,
+          "quest_id": 249,
+          "time": 55563.627466760416
+        },
+        {
+          "level": 29,
+          "quest_id": 1248,
+          "time": 55582.55014777786
+        },
+        {
+          "level": 29,
+          "quest_id": 1249,
+          "time": 55630.62848613887
+        },
+        {
+          "level": 29,
+          "quest_id": 1250,
+          "time": 55650.70682449988
+        },
+        {
+          "level": 29,
+          "quest_id": 98283,
+          "time": 56891.954339105134
+        },
+        {
+          "level": 29,
+          "quest_id": 87318,
+          "time": 57183.893833893584
+        },
+        {
+          "level": 29,
+          "quest_id": 647,
+          "time": 57789.1795481793
+        },
+        {
+          "level": 29,
+          "quest_id": 538,
+          "time": 57830.98907162552
+        },
+        {
+          "level": 29,
+          "quest_id": 7807,
+          "time": 58267.429064766366
+        },
+        {
+          "level": 29,
+          "quest_id": 637,
+          "time": 58296.85763619494
+        },
+        {
+          "level": 29,
+          "quest_id": 683,
+          "time": 58400.143352660474
+        },
+        {
+          "level": 29,
+          "quest_id": 686,
+          "time": 58590.9052588756
+        },
+        {
+          "level": 29,
+          "quest_id": 467,
+          "time": 58712.97668744703
+        },
+        {
+          "level": 30,
+          "quest_id": 2945,
+          "time": 63235.26240173275
+        },
+        {
+          "level": 30,
+          "quest_id": 2951,
+          "time": 63259.26240173275
+        },
+        {
+          "level": 30,
+          "quest_id": 2952,
+          "time": 63267.26240173275
+        },
+        {
+          "level": 30,
+          "quest_id": 2953,
+          "time": 63275.26240173275
+        },
+        {
+          "level": 30,
+          "quest_id": 2926,
+          "time": 63451.47668308738
+        },
+        {
+          "level": 30,
+          "quest_id": 2947,
+          "time": 63617.23730607339
+        },
+        {
+          "level": 30,
+          "quest_id": 2924,
+          "time": 63685.7134980028
+        },
+        {
+          "level": 30,
+          "quest_id": 2925,
+          "time": 63693.7134980028
+        },
+        {
+          "level": 30,
+          "quest_id": 2930,
+          "time": 63704.34526992339
+        },
+        {
+          "level": 30,
+          "quest_id": 2929,
+          "time": 63713.73017265495
+        },
+        {
+          "level": 30,
+          "quest_id": 2922,
+          "time": 63723.01181308703
+        },
+        {
+          "level": 31,
+          "quest_id": 536,
+          "time": 67094.90347907302
+        },
+        {
+          "level": 31,
+          "quest_id": 559,
+          "time": 68287.15578001596
+        },
+        {
+          "level": 31,
+          "quest_id": 560,
+          "time": 68314.10816060504
+        },
+        {
+          "level": 31,
+          "quest_id": 561,
+          "time": 68341.06054119412
+        },
+        {
+          "level": 31,
+          "quest_id": 562,
+          "time": 71229.6068572255
+        },
+        {
+          "level": 31,
+          "quest_id": 98059,
+          "time": 71282.74971436836
+        },
+        {
+          "level": 31,
+          "quest_id": 92432,
+          "time": 71698.7267583234
+        },
+        {
+          "level": 31,
+          "quest_id": 92457,
+          "time": 76543.8387722138
+        },
+        {
+          "level": 32,
+          "quest_id": 92458,
+          "time": 76551.8387722138
+        },
+        {
+          "level": 32,
+          "quest_id": 2928,
+          "time": 77005.31495978356
+        },
+        {
+          "level": 32,
+          "quest_id": 563,
+          "time": 77072.49128149882
+        },
+        {
+          "level": 32,
+          "quest_id": 92489,
+          "time": 77108.58651923075
+        },
+        {
+          "level": 32,
+          "quest_id": 92456,
+          "time": 77217.91985401731
+        },
+        {
+          "level": 32,
+          "quest_id": 583,
+          "time": 77669.5878142947
+        },
+        {
+          "level": 32,
+          "quest_id": 185,
+          "time": 77898.47962985087
+        },
+        {
+          "level": 32,
+          "quest_id": 340,
+          "time": 78398.2783037642
+        },
+        {
+          "level": 32,
+          "quest_id": 339,
+          "time": 78679.6248487452
+        },
+        {
+          "level": 32,
+          "quest_id": 215,
+          "time": 79176.04487803955
+        },
+        {
+          "level": 32,
+          "quest_id": 200,
+          "time": 79364.43587150377
+        },
+        {
+          "level": 32,
+          "quest_id": 190,
+          "time": 80310.71983206128
+        },
+        {
+          "level": 32,
+          "quest_id": 342,
+          "time": 80500.55306243777
+        },
+        {
+          "level": 32,
+          "quest_id": 341,
+          "time": 80516.55306243777
+        },
+        {
+          "level": 33,
+          "quest_id": 191,
+          "time": 81239.6363490443
+        },
+        {
+          "level": 33,
+          "quest_id": 338,
+          "time": 81248.64645652252
+        },
+        {
+          "level": 33,
+          "quest_id": 186,
+          "time": 81257.30382570447
+        },
+        {
+          "level": 33,
+          "quest_id": 194,
+          "time": 82172.21072842006
+        },
+        {
+          "level": 33,
+          "quest_id": 204,
+          "time": 82646.38177751853
+        },
+        {
+          "level": 33,
+          "quest_id": 203,
+          "time": 82654.38177751853
+        },
+        {
+          "level": 33,
+          "quest_id": 210,
+          "time": 83223.21509922613
+        },
+        {
+          "level": 33,
+          "quest_id": 616,
+          "time": 83266.49913477601
+        },
+        {
+          "level": 33,
+          "quest_id": 98463,
+          "time": 83291.90389649912
+        },
+        {
+          "level": 33,
+          "quest_id": 187,
+          "time": 83887.88610120818
+        },
+        {
+          "level": 33,
+          "quest_id": 575,
+          "time": 86360.21058952453
+        },
+        {
+          "level": 33,
+          "quest_id": 605,
+          "time": 86407.15990669583
+        },
+        {
+          "level": 33,
+          "quest_id": 189,
+          "time": 86428.25514442776
+        },
+        {
+          "level": 33,
+          "quest_id": 1221,
+          "time": 92129.30276492861
+        },
+        {
+          "level": 33,
+          "quest_id": 1947,
+          "time": 92797.9456166219
+        },
+        {
+          "level": 34,
+          "quest_id": 1132,
+          "time": 93104.6599110555
+        },
+        {
+          "level": 34,
+          "quest_id": 1264,
+          "time": 93163.04086252819
+        },
+        {
+          "level": 34,
+          "quest_id": 1282,
+          "time": 93180.53522694792
+        },
+        {
+          "level": 34,
+          "quest_id": 1265,
+          "time": 93360.22570459162
+        },
+        {
+          "level": 34,
+          "quest_id": 1266,
+          "time": 93609.30872693383
+        },
+        {
+          "level": 34,
+          "quest_id": 1324,
+          "time": 93887.10603499031
+        },
+        {
+          "level": 34,
+          "quest_id": 1267,
+          "time": 93904.67944684377
+        },
+        {
+          "level": 34,
+          "quest_id": 1219,
+          "time": 94721.95176888452
+        },
+        {
+          "level": 34,
+          "quest_id": 1218,
+          "time": 94888.78510803073
+        },
+        {
+          "level": 34,
+          "quest_id": 1252,
+          "time": 97341.28119160791
+        },
+        {
+          "level": 34,
+          "quest_id": 1220,
+          "time": 97399.5192875726
+        },
+        {
+          "level": 34,
+          "quest_id": 1253,
+          "time": 97407.5192875726
+        },
+        {
+          "level": 34,
+          "quest_id": 1284,
+          "time": 97415.5192875726
+        },
+        {
+          "level": 34,
+          "quest_id": 1259,
+          "time": 97442.3375315518
+        },
+        {
+          "level": 34,
+          "quest_id": 1285,
+          "time": 97461.155775531
+        },
+        {
+          "level": 34,
+          "quest_id": 1319,
+          "time": 97530.72720410244
+        },
+        {
+          "level": 34,
+          "quest_id": 1286,
+          "time": 97824.7034003915
+        },
+        {
+          "level": 34,
+          "quest_id": 1320,
+          "time": 98155.22722154106
+        },
+        {
+          "level": 34,
+          "quest_id": 1287,
+          "time": 98163.22722154106
+        },
+        {
+          "level": 34,
+          "quest_id": 1206,
+          "time": 98343.72722154106
+        },
+        {
+          "level": 34,
+          "quest_id": 3523,
+          "time": 103482.32247126204
+        },
+        {
+          "level": 34,
+          "quest_id": 6626,
+          "time": 103501.98913756541
+        },
+        {
+          "level": 35,
+          "quest_id": 1179,
+          "time": 104145.21772177616
+        },
+        {
+          "level": 35,
+          "quest_id": 1949,
+          "time": 104219.37444352821
+        },
+        {
+          "level": 35,
+          "quest_id": 1950,
+          "time": 104332.21375589352
+        },
+        {
+          "level": 35,
+          "quest_id": 1176,
+          "time": 104761.5756327956
+        },
+        {
+          "level": 35,
+          "quest_id": 1105,
+          "time": 106027.05336753199
+        },
+        {
+          "level": 35,
+          "quest_id": 1110,
+          "time": 106062.97763412674
+        },
+        {
+          "level": 35,
+          "quest_id": 1104,
+          "time": 106760.67876907773
+        },
+        {
+          "level": 35,
+          "quest_id": 1175,
+          "time": 106792.72638739874
+        },
+        {
+          "level": 35,
+          "quest_id": 328,
+          "time": 107350.76412727992
+        },
+        {
+          "level": 35,
+          "quest_id": 329,
+          "time": 107505.21651113874
+        },
+        {
+          "level": 35,
+          "quest_id": 330,
+          "time": 107525.37984947485
+        },
+        {
+          "level": 35,
+          "quest_id": 331,
+          "time": 107545.54318781095
+        },
+        {
+          "level": 35,
+          "quest_id": 195,
+          "time": 108446.36727974493
+        },
+        {
+          "level": 35,
+          "quest_id": 5762,
+          "time": 108471.82016345127
+        },
+        {
+          "level": 35,
+          "quest_id": 188,
+          "time": 108649.5445310192
+        },
+        {
+          "level": 35,
+          "quest_id": 577,
+          "time": 109561.74805215816
+        },
+        {
+          "level": 35,
+          "quest_id": 201,
+          "time": 109585.70043274724
+        },
+        {
+          "level": 35,
+          "quest_id": 213,
+          "time": 109637.41471737162
+        },
+        {
+          "level": 36,
+          "quest_id": 9267,
+          "time": 111738.77946126126
+        },
+        {
+          "level": 36,
+          "quest_id": 1111,
+          "time": 111800.54710589338
+        },
+        {
+          "level": 36,
+          "quest_id": 1178,
+          "time": 111833.78520185807
+        },
+        {
+          "level": 36,
+          "quest_id": 1180,
+          "time": 112254.79357661481
+        },
+        {
+          "level": 36,
+          "quest_id": 8553,
+          "time": 112273.6610764958
+        },
+        {
+          "level": 36,
+          "quest_id": 1181,
+          "time": 112327.8515541395
+        },
+        {
+          "level": 36,
+          "quest_id": 578,
+          "time": 112335.8515541395
+        },
+        {
+          "level": 36,
+          "quest_id": 1182,
+          "time": 114054.95350527142
+        },
+        {
+          "level": 36,
+          "quest_id": 192,
+          "time": 114698.34838800976
+        },
+        {
+          "level": 36,
+          "quest_id": 574,
+          "time": 114780.0388612938
+        },
+        {
+          "level": 36,
+          "quest_id": 198,
+          "time": 114830.65791036606
+        },
+        {
+          "level": 36,
+          "quest_id": 601,
+          "time": 116221.24715402677
+        },
+        {
+          "level": 36,
+          "quest_id": 602,
+          "time": 116746.6452745699
+        },
+        {
+          "level": 36,
+          "quest_id": 555,
+          "time": 118393.86858870092
+        },
+        {
+          "level": 36,
+          "quest_id": 510,
+          "time": 118431.77335042403
+        },
+        {
+          "level": 36,
+          "quest_id": 505,
+          "time": 118447.77335042403
+        },
+        {
+          "level": 36,
+          "quest_id": 564,
+          "time": 118482.44001781731
+        },
+        {
+          "level": 36,
+          "quest_id": 511,
+          "time": 118500.91620865681
+        },
+        {
+          "level": 36,
+          "quest_id": 514,
+          "time": 118595.6304943711
+        },
+        {
+          "level": 36,
+          "quest_id": 689,
+          "time": 118733.58287496018
+        },
+        {
+          "level": 36,
+          "quest_id": 690,
+          "time": 119417.2024571833
+        },
+        {
+          "level": 36,
+          "quest_id": 695,
+          "time": 119440.07064805788
+        },
+        {
+          "level": 37,
+          "quest_id": 681,
+          "time": 119890.50225741394
+        },
+        {
+          "level": 37,
+          "quest_id": 691,
+          "time": 121247.6485276229
+        },
+        {
+          "level": 37,
+          "quest_id": 304,
+          "time": 121597.71255800471
+        },
+        {
+          "level": 37,
+          "quest_id": 87491,
+          "time": 121617.16570024102
+        },
+        {
+          "level": 37,
+          "quest_id": 631,
+          "time": 121691.85829764164
+        },
+        {
+          "level": 37,
+          "quest_id": 632,
+          "time": 121779.30947586914
+        },
+        {
+          "level": 37,
+          "quest_id": 88757,
+          "time": 121934.33327958008
+        },
+        {
+          "level": 37,
+          "quest_id": 88758,
+          "time": 122081.16661000699
+        },
+        {
+          "level": 37,
+          "quest_id": 98297,
+          "time": 122634.4316475951
+        },
+        {
+          "level": 37,
+          "quest_id": 624,
+          "time": 123120.59142387123
+        },
+        {
+          "level": 37,
+          "quest_id": 1392,
+          "time": 123929.5901374815
+        },
+        {
+          "level": 37,
+          "quest_id": 1396,
+          "time": 124000.44728033865
+        },
+        {
+          "level": 37,
+          "quest_id": 1421,
+          "time": 126397.0467399104
+        },
+        {
+          "level": 37,
+          "quest_id": 1393,
+          "time": 126533.51672913473
+        },
+        {
+          "level": 37,
+          "quest_id": 603,
+          "time": 126908.74411296028
+        },
+        {
+          "level": 37,
+          "quest_id": 9259,
+          "time": 127254.76792539052
+        },
+        {
+          "level": 38,
+          "quest_id": 79949,
+          "time": 128179.57825786181
+        },
+        {
+          "level": 38,
+          "quest_id": 79952,
+          "time": 128187.57825786181
+        },
+        {
+          "level": 38,
+          "quest_id": 81947,
+          "time": 128195.57825786181
+        },
+        {
+          "level": 38,
+          "quest_id": 79948,
+          "time": 128203.57825786181
+        },
+        {
+          "level": 38,
+          "quest_id": 1363,
+          "time": 128305.88778021811
+        },
+        {
+          "level": 38,
+          "quest_id": 610,
+          "time": 128840.1793790721
+        },
+        {
+          "level": 38,
+          "quest_id": 2948,
+          "time": 129211.07691526317
+        },
+        {
+          "level": 38,
+          "quest_id": 212,
+          "time": 129251.6959621556
+        },
+        {
+          "level": 38,
+          "quest_id": 659,
+          "time": 130001.70821305667
+        },
+        {
+          "level": 38,
+          "quest_id": 658,
+          "time": 130099.99194806739
+        },
+        {
+          "level": 38,
+          "quest_id": 657,
+          "time": 130116.38286534305
+        },
+        {
+          "level": 38,
+          "quest_id": 660,
+          "time": 130146.58330568131
+        },
+        {
+          "level": 38,
+          "quest_id": 642,
+          "time": 130705.50083118919
+        },
+        {
+          "level": 38,
+          "quest_id": 693,
+          "time": 131588.62132951707
+        },
+        {
+          "level": 38,
+          "quest_id": 651,
+          "time": 131891.72478202282
+        },
+        {
+          "level": 38,
+          "quest_id": 663,
+          "time": 132100.96572763138
+        },
+        {
+          "level": 38,
+          "quest_id": 665,
+          "time": 132149.18549232482
+        },
+        {
+          "level": 38,
+          "quest_id": 664,
+          "time": 132623.56529481694
+        },
+        {
+          "level": 38,
+          "quest_id": 525,
+          "time": 132984.77293444664
+        },
+        {
+          "level": 38,
+          "quest_id": 661,
+          "time": 133006.10626814328
+        },
+        {
+          "level": 38,
+          "quest_id": 512,
+          "time": 135141.52285310312
+        },
+        {
+          "level": 38,
+          "quest_id": 537,
+          "time": 135149.52285310312
+        },
+        {
+          "level": 39,
+          "quest_id": 500,
+          "time": 135166.57047196908
+        },
+        {
+          "level": 39,
+          "quest_id": 540,
+          "time": 135201.2339626983
+        },
+        {
+          "level": 39,
+          "quest_id": 595,
+          "time": 136519.74638015297
+        },
+        {
+          "level": 39,
+          "quest_id": 606,
+          "time": 136750.0727479891
+        },
+        {
+          "level": 39,
+          "quest_id": 207,
+          "time": 137814.19582309082
+        },
+        {
+          "level": 39,
+          "quest_id": 196,
+          "time": 140667.46874298112
+        },
+        {
+          "level": 39,
+          "quest_id": 193,
+          "time": 140694.79307498725
+        },
+        {
+          "level": 39,
+          "quest_id": 202,
+          "time": 140776.4835482713
+        },
+        {
+          "level": 39,
+          "quest_id": 205,
+          "time": 140788.33549999876
+        },
+        {
+          "level": 39,
+          "quest_id": 627,
+          "time": 141163.3247889495
+        },
+        {
+          "level": 39,
+          "quest_id": 607,
+          "time": 141181.0866940747
+        },
+        {
+          "level": 39,
+          "quest_id": 600,
+          "time": 141200.75336037806
+        },
+        {
+          "level": 39,
+          "quest_id": 597,
+          "time": 141223.75336037806
+        },
+        {
+          "level": 39,
+          "quest_id": 599,
+          "time": 141261.42002777132
+        },
+        {
+          "level": 39,
+          "quest_id": 611,
+          "time": 141270.4315054263
+        },
+        {
+          "level": 39,
+          "quest_id": 628,
+          "time": 141290.57436256917
+        }
+      ]
+    }
+  }
+}
