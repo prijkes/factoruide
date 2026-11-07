@@ -20,6 +20,7 @@ mod required;
 mod routes;
 mod services;
 mod start;
+pub(crate) use start::objective_progress;
 mod starts;
 mod timeline;
 

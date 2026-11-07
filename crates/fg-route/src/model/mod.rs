@@ -10,6 +10,7 @@ pub use dungeons::dungeon_levels;
 mod entities;
 mod explore;
 mod farm;
+mod feasibility;
 #[cfg(any(test, feature = "testing"))]
 pub mod fixture;
 mod givers;
@@ -31,6 +32,7 @@ pub mod testing;
 mod types;
 
 pub use bis::{Bis, BisEntry, BisSource};
+pub use feasibility::{BisQuestAction, BisQuestPlan};
 
 pub(crate) use chains::class_sort;
 pub use farm::{FarmMobs, Met};
@@ -118,6 +120,11 @@ pub fn load(
         logged,
         class_quests: std::mem::take(&mut sources.class_quest_ids),
         assumed: starts.is_empty(),
+        satisfied_objectives: if params.bis == crate::params::BisMode::Off {
+            HashSet::new()
+        } else {
+            feasibility::recorded_objectives(&quests, starts)
+        },
     };
     let levels = dungeon_levels(conn, &profile.dungeons)?;
     let known_names = derive::settle(
@@ -213,17 +220,27 @@ pub fn load(
     // The best item of each slot at each level band (`Params::bis`): nothing without the
     // character power data.
     let bis = match &power {
-        Some(p) => bis::load(conn, p, &quests, &rewards, profile, world, &sources, params)?,
+        Some(p) => bis::load(
+            conn,
+            p,
+            &quests,
+            &rewards,
+            profile,
+            world,
+            &sources,
+            params,
+            &skipped,
+            &known_prerequisites,
+            starts,
+        )?,
         None => Bis::default(),
     };
-    // Required: the quests giving a best item are kept even when slower, like the required class
-    // quests (they are left out with a report when they cannot be done). Their prerequisites
-    // follow, as the required quests' did above.
+    // Only selected completion support is mandatory. A held-only parent's accept does not
+    // fabricate a completion goal, and unchosen N-of-M alternatives remain optional.
     if params.bis == crate::params::BisMode::Required {
-        for (gives, q) in bis.gives.iter().zip(&mut quests) {
-            q.mandatory |= gives;
+        for (i, q) in quests.iter_mut().enumerate() {
+            q.mandatory |= bis.requires(i);
         }
-        chains::require_prerequisites(&mut quests);
     }
     Ok(Model {
         known_class_powers,

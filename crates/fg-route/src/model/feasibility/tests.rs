@@ -1,0 +1,302 @@
+use super::*;
+use crate::{
+    job::{LogObjective, LogQuest, Prepared},
+    testing::{Q, Scenario},
+};
+
+fn scenario(n: usize) -> Prepared {
+    (0..n)
+        .fold(Scenario::new().levels(1, 60), |s, i| {
+            s.quest(Q::new(i as i64 + 1, &format!("Quest {}", i + 1)))
+        })
+        .build()
+}
+fn selector<'a>(p: &'a Prepared, starts: &'a [&'a StartState]) -> Selector<'a> {
+    Selector::new(
+        &p.model.quests,
+        &p.model.dungeons,
+        &p.model.skipped,
+        &p.profile,
+        &p.params,
+        &p.model.known_class_prerequisites,
+        starts,
+    )
+}
+
+#[test]
+fn original_cardinality_and_global_backtracking() {
+    let mut p = scenario(4);
+    p.model.quests[3].pre_any = vec![1, 2, 3];
+    p.model.quests[3].pre_need = 2;
+    p.model.quests[0].exclusive = vec![2, 3];
+    let plan = selector(&p, &[]).select(3).unwrap().0;
+    assert!(!plan.quests.contains(&0));
+    assert!(plan.quests.contains(&1) && plan.quests.contains(&2));
+    p.model.quests[3].pre_any = vec![1, 1, 999];
+    assert!(
+        selector(&p, &[]).select(3).is_err(),
+        "neither duplicates nor absent alternatives reduce the original need"
+    );
+}
+
+#[test]
+fn choices_backtrack_when_a_later_all_dependency_conflicts() {
+    let mut p = scenario(4);
+    p.model.quests[3].pre_any = vec![1, 2];
+    p.model.quests[3].pre_all = vec![3];
+    p.model.quests[0].exclusive = vec![3];
+    let plan = selector(&p, &[]).select(3).unwrap().0;
+    assert!(!plan.quests.contains(&0));
+    assert!(plan.quests.contains(&1));
+}
+
+#[test]
+fn growing_library_tiers_share_twenty_five_of_thirty_eight_books() {
+    let mut p = scenario(41);
+    for (i, need) in [(38, 10), (39, 20), (40, 25)] {
+        p.model.quests[i].pre_any = (1..=38).rev().collect();
+        p.model.quests[i].pre_need = need;
+    }
+    let mut s = selector(&p, &[]);
+    for (root, need) in [(38, 10), (39, 20), (40, 25)] {
+        let (plan, closure) = s.select(root).unwrap();
+        assert_eq!(
+            plan.actions
+                .iter()
+                .filter(|a| matches!(a,BisQuestAction::TurnIn(i) if *i<38))
+                .count(),
+            need
+        );
+        s.committed = closure;
+    }
+    assert_eq!(
+        s.committed
+            .nodes
+            .keys()
+            .filter(|a| matches!(a,BisQuestAction::TurnIn(i) if *i<38))
+            .count(),
+        25
+    );
+}
+
+#[test]
+fn held_parent_is_only_accepted_and_valid_held_item_cycle_is_ordered() {
+    use BisQuestAction::*;
+    let mut p = scenario(2);
+    p.model.quests[1].pre_held = vec![1];
+    let plan = selector(&p, &[]).select(1).unwrap().0;
+    assert_eq!(plan.actions, vec![Accept(0), Accept(1), TurnIn(1)]);
+    let objective = Scenario::new()
+        .quest(Q::new(10, "Objective").kill("thing", 1, 1, 1, 50.0, 50.0))
+        .build()
+        .model
+        .quests[0]
+        .objectives[0]
+        .clone();
+    p.model.quests[0].objectives = vec![objective];
+    p.model.quests[0].objectives[0].handed_by = vec![2];
+    let plan = selector(&p, &[]).select(0).unwrap().0;
+    assert_eq!(
+        plan.actions,
+        vec![
+            Accept(0),
+            Accept(1),
+            TurnIn(1),
+            Objective { quest: 0, objective: 0 },
+            TurnIn(0)
+        ]
+    );
+    p.model.quests[1].pre_held.clear();
+    p.model.quests[1].pre_all = vec![1];
+    assert!(selector(&p, &[]).select(0).unwrap_err().contains("cyclic"));
+}
+
+#[test]
+fn recorded_accept_and_objective_cut_historical_dependencies() {
+    use BisQuestAction::*;
+    let mut p = Scenario::new()
+        .levels(1, 60)
+        .quest(Q::new(1, "logged").members(1).kill("thing", 1, 1, 1, 50.0, 50.0))
+        .build();
+    p.model.quests[0].pre_all = vec![999];
+    p.model.quests[0].objectives[0].handed_by = vec![998];
+    let start = StartState {
+        level: 1,
+        log: vec![LogQuest {
+            id: 1.into(),
+            objectives: vec![LogObjective {
+                text: "thing".into(),
+                done: 1,
+                need: 1,
+                finished: true,
+            }],
+            ..Default::default()
+        }],
+        ..Default::default()
+    };
+    assert!(selector(&p, &[]).select(0).is_err());
+    assert_eq!(selector(&p, &[&start]).select(0).unwrap().0.actions, vec![TurnIn(0)]);
+    let satisfied = recorded_objectives(&p.model.quests, &[&start]);
+    super::super::chains::drop_unhanded(&mut p.model.quests, &mut p.model.skipped, &satisfied);
+    assert_eq!(
+        p.model.quests.len(),
+        1,
+        "logged finished item survives the pre-selector filter"
+    );
+}
+
+#[test]
+fn member_completion_is_not_a_group_union() {
+    let mut p = scenario(1);
+    p.model.quests[0].members = 3;
+    p.model.quests[0].pre_all = vec![999];
+    let done = StartState {
+        completed: vec![999.into()],
+        ..Default::default()
+    };
+    let missing = StartState::default();
+    p.profile.completed_quests.insert(999);
+    assert!(selector(&p, &[&done, &missing]).select(0).is_err());
+    assert!(selector(&p, &[&done, &done]).select(0).is_ok());
+}
+
+#[test]
+fn completion_cycles_target_floors_and_exact_conflicts_reject() {
+    let mut p = scenario(2);
+    p.model.quests[0].pre_all = vec![2];
+    p.model.quests[1].pre_all = vec![1];
+    assert!(selector(&p, &[]).select(0).unwrap_err().contains("cyclic"));
+    p.model.quests[0].pre_all.clear();
+    p.model.quests[1].pre_all.clear();
+    p.model.quests[0].min_level = 60;
+    assert!(selector(&p, &[]).select(0).unwrap_err().contains("level 60"));
+    p.model.quests[0].min_level = 59;
+    assert!(selector(&p, &[]).select(0).is_ok());
+    p.model.quests[1].required = true;
+    p.model.quests[1].exclusive = vec![1];
+    assert!(selector(&p, &[]).select(0).unwrap_err().contains("conflicts"));
+}
+
+#[test]
+fn branching_limit_is_reported_as_uncertainty() {
+    let mut p = scenario(132);
+    p.model.quests[131].pre_any = (1..=131).collect();
+    p.model.quests[131].pre_need = 130;
+    assert_eq!(selector(&p, &[]).select(131).unwrap_err(), LIMIT);
+}
+
+#[test]
+fn members_can_have_different_completed_alternatives() {
+    let mut p = scenario(1);
+    p.model.quests[0].members = 3;
+    p.model.quests[0].pre_any = vec![998, 999];
+    let a = StartState {
+        completed: vec![998.into()],
+        ..Default::default()
+    };
+    let b = StartState {
+        completed: vec![999.into()],
+        ..Default::default()
+    };
+    assert!(selector(&p, &[&a, &b]).select(0).is_ok());
+}
+
+#[test]
+fn selected_class_constraints_and_breadcrumb_order_are_respected() {
+    let mut p = scenario(3);
+    p.model.quests[0].mandatory = true;
+    p.profile.class_requirements = vec![crate::model::ClassRequirement {
+        class_id: 1,
+        name: "Class power".into(),
+        spell: None,
+        max_level: None,
+        quests: vec![1],
+        quest_names: vec![],
+        selected: true,
+    }];
+    p.model.quests[2].exclusive = vec![1];
+    assert!(selector(&p, &[]).select(2).unwrap_err().contains("selected class"));
+    p.model.quests[2].exclusive = vec![2];
+    p.model.quests[0].pre_all = vec![2];
+    assert!(selector(&p, &[]).select(2).unwrap_err().contains("selected class"));
+    p.model.quests[0].pre_all.clear();
+    p.model.quests[2].exclusive.clear();
+    p.model.quests[0].breadcrumb_for = Some(2);
+    p.model.quests[2].pre_all = vec![1, 2];
+    let plan = selector(&p, &[]).select(2).unwrap().0;
+    let at = |a| plan.actions.iter().position(|b| *b == a).unwrap();
+    assert!(at(BisQuestAction::TurnIn(0)) < at(BisQuestAction::Accept(1)));
+    let start = StartState {
+        log: vec![LogQuest {
+            id: 2.into(),
+            ..Default::default()
+        }],
+        ..Default::default()
+    };
+    assert!(
+        selector(&p, &[&start])
+            .select(0)
+            .unwrap_err()
+            .contains("recorded quest")
+    );
+}
+
+#[test]
+fn expired_dungeon_and_explicit_window_are_not_supported() {
+    let mut p = Scenario::new()
+        .levels(20, 60)
+        .dungeon("Test dungeon", 1, 50.0, 50.0)
+        .quest(Q::new(1, "Dungeon quest").level(20))
+        .build();
+    p.model.quests[0].start_dungeon = Some(0);
+    p.model.dungeons[0].min_level = 5;
+    p.model.dungeons[0].max_level = 19;
+    assert!(selector(&p, &[]).select(0).unwrap_err().contains("window"));
+    p.model.dungeons[0].max_level = 30;
+    assert!(selector(&p, &[]).select(0).is_ok());
+    p.model.quests[0].completion_window.min_level = Some(31);
+    assert!(selector(&p, &[]).select(0).unwrap_err().contains("window"));
+}
+
+#[test]
+fn storage_order_does_not_change_alternative_choice() {
+    let mut p = scenario(4);
+    p.model.quests[3].pre_any = vec![3, 2, 1];
+    let selected = selector(&p, &[]).select(3).unwrap().0;
+    let ids: Vec<_> = selected.quests.iter().map(|&i| p.model.quests[i as usize].id).collect();
+    assert_eq!(ids, vec![1, 4]);
+    p.model.quests.reverse();
+    let selected = selector(&p, &[]).select(0).unwrap().0;
+    let mut ids: Vec<_> = selected.quests.iter().map(|&i| p.model.quests[i as usize].id).collect();
+    ids.sort_unstable();
+    assert_eq!(ids, vec![1, 4]);
+}
+
+#[test]
+fn final_global_graph_keeps_cross_root_held_order_and_recorded_participants() {
+    use BisQuestAction::*;
+    let mut p = scenario(2);
+    p.model.quests[1].pre_held = vec![1];
+    let mut s = selector(&p, &[]);
+    s.committed = s.select(0).unwrap().1;
+    s.committed = s.select(1).unwrap().1;
+    let graph = s.finalize().unwrap();
+    assert!(graph.edges.contains(&(Accept(1), TurnIn(0))));
+    assert!(
+        graph.actions.iter().position(|a| *a == Accept(1)).unwrap()
+            < graph.actions.iter().position(|a| *a == TurnIn(0)).unwrap()
+    );
+    let start = StartState {
+        log: vec![LogQuest {
+            id: 1.into(),
+            ..Default::default()
+        }],
+        ..Default::default()
+    };
+    let starts = [&start];
+    let mut s = selector(&p, &starts);
+    s.committed = s.select(1).unwrap().1;
+    let graph = s.finalize().unwrap();
+    assert_eq!(graph.quests, vec![0, 1]);
+    assert!(!graph.actions.contains(&Accept(0)) && !graph.actions.contains(&TurnIn(0)));
+}

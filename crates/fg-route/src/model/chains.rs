@@ -352,13 +352,25 @@ pub(super) fn require_prerequisites(quests: &mut [Quest]) {
 
 /// Quests asking for an item that only quests left out hand (`Objective::handed_by`) cannot be
 /// finished: left out too, until none is left (a chain of them).
-pub(super) fn drop_unhanded(quests: &mut Vec<Quest>, skipped: &mut Vec<(i64, String, String)>) {
+pub(super) fn drop_unhanded(
+    quests: &mut Vec<Quest>,
+    skipped: &mut Vec<(i64, String, String)>,
+    satisfied: &HashSet<(i64, u8)>,
+) {
     loop {
         let ids: HashSet<i64> = quests.iter().map(|q| q.id).collect();
         let before = quests.len();
         quests.retain_mut(|q| {
             let mut ok = true;
-            for o in q.objectives.iter_mut().filter(|o| !o.handed_by.is_empty()) {
+            for (k, o) in q
+                .objectives
+                .iter_mut()
+                .enumerate()
+                .filter(|(_, o)| !o.handed_by.is_empty())
+            {
+                if satisfied.contains(&(q.id, k as u8)) {
+                    continue;
+                }
                 o.handed_by.retain(|g| ids.contains(g));
                 ok &= !o.handed_by.is_empty();
             }
