@@ -817,9 +817,13 @@ impl Scenario {
                 }
             }
         }
-        // Quests outside the levels of the character are not built, but for the must-haves.
+        let reputation = super::chains::reputation_candidates(&quests, &self.params);
+        // Use the loader's lower-level exception for selected faction reward ancestry.
         quests.retain(|q| {
             self.required.contains(&q.id)
+                || reputation.contains(&q.id)
+                    && q.min_level <= self.profile.to_level
+                    && q.level <= self.profile.to_level + self.params.max_quest_above
                 || self
                     .profile
                     .within_levels(q.level, q.min_level, self.params.max_quest_above)

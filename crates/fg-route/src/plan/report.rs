@@ -45,6 +45,12 @@ impl Planner<'_> {
     }
 
     pub fn validate_required(&self, route: &[Stop]) -> anyhow::Result<()> {
+        if !self.params.reputation_goals.is_empty() {
+            let (_, state) = self
+                .simulate_state(route, None)
+                .ok_or_else(|| anyhow::anyhow!("route cannot be simulated for required reputation"))?;
+            self.validate_reputation(&state.reputation)?;
+        }
         let gear = self.missing_required_gear(route);
         anyhow::ensure!(
             gear.is_empty(),
@@ -79,20 +85,36 @@ impl Planner<'_> {
     /// replay that could insert automatic actions or finish at a different time.
     pub(crate) fn validate_required_trace(&self, trace: &[super::Timed]) -> anyhow::Result<()> {
         let initial = self.sim().initial_state();
-        let turned: HashSet<_> = trace
-            .iter()
-            .filter_map(|t| match t.event {
-                Event::Stop {
-                    stop:
-                        Stop {
-                            index,
-                            kind: Kind::TurnIn,
-                        },
-                    ..
-                } => Some(index as usize),
-                _ => None,
-            })
-            .collect();
+        let turnins = trace.iter().filter_map(|t| match t.event {
+            Event::Stop {
+                stop: Stop {
+                    index,
+                    kind: Kind::TurnIn,
+                },
+                ..
+            } => Some(index as usize),
+            _ => None,
+        });
+        let mut turned = HashSet::new();
+        let mut reputation = initial.reputation.clone();
+        // Follow actual turn-in order: floating-point sums must match simulation exactly.
+        for i in turnins {
+            if !turned.insert(i)
+                || initial.rewarded(i)
+                || self.model.quests[i].members & 1 == 0
+                || self.model.initial.need(i) & 1 == 0
+            {
+                continue;
+            }
+            for (g, goal) in self.params.reputation_goals.iter().enumerate() {
+                for &(faction, points) in &self.model.quests[i].reputation {
+                    if faction == goal.faction {
+                        reputation[g] += points;
+                    }
+                }
+            }
+        }
+        self.validate_reputation(&reputation)?;
         let missing: Vec<_> = self
             .model
             .quests
