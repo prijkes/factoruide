@@ -193,7 +193,11 @@ impl StartState {
             // giver's step is done in a moment when it is already in the log), instead of being tied
             // to a quest the character has not begun. Done or begun ones are finished or given up.
             let begun = q.complete || q.objectives.iter().any(|o| o.finished || o.done > 0);
-            if !begun {
+            let selected = model
+                .index
+                .get(&q.id.0)
+                .is_some_and(|&i| model.bis.source_quests().contains(&(i as u32)));
+            if !begun && !selected {
                 continue;
             }
             if let Some(&i) = model.index.get(&q.id.0) {

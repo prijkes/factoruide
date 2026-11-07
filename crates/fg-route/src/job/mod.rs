@@ -228,9 +228,16 @@ pub(crate) fn plan_prepared(
 /// Shared production finalization, also used by the single-start comparison harness.
 /// Merge returns, settle visits, group objectives, then validate required content.
 pub fn finalize_route(planner: &Planner<'_>, best: Vec<Stop>) -> Result<Vec<Stop>, JobError> {
+    let best = planner.repair_required_gear(best);
+    let saved = (!planner.model.bis.required_roots().is_empty()).then(|| best.clone());
     let best = planner.merge_visits(&best).map_or(best, |(merged, _)| merged);
     let best = planner.tidy(&best).map_or(best, |(tidied, _)| tidied);
     let best = planner.route_together(best);
+    let best = if let Some(old) = saved {
+        planner.keep_hard_goals(old, best)
+    } else {
+        best
+    };
     planner.validate_required(&best)?;
     Ok(best)
 }

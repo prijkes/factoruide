@@ -1,6 +1,8 @@
 //! The quests a character can do, built from the merged database (`m_*` tables).
 
 mod bis;
+#[cfg(test)]
+pub(crate) use bis::tests::select_test_sources;
 mod builder;
 mod chains;
 mod crowd;

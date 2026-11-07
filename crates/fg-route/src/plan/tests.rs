@@ -15,6 +15,7 @@ mod dungeons;
 mod movement;
 mod moves;
 mod profession_trainers;
+mod required_gear;
 mod shared_kills;
 mod xp_buffs;
 

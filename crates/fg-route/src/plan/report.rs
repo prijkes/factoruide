@@ -45,6 +45,18 @@ impl Planner<'_> {
     }
 
     pub fn validate_required(&self, route: &[Stop]) -> anyhow::Result<()> {
+        let gear = self.missing_required_gear(route);
+        anyhow::ensure!(
+            gear.is_empty(),
+            "no route completing every required gear source was found: {}",
+            gear.iter()
+                .map(|&i| {
+                    let q = self.quest(i);
+                    format!("{} ({})", q.name, q.id)
+                })
+                .collect::<Vec<_>>()
+                .join(", ")
+        );
         let dungeons = self.forced_dungeons_missing(route);
         anyhow::ensure!(
             dungeons.is_empty(),
@@ -89,6 +101,23 @@ impl Planner<'_> {
             .filter(|(i, q)| q.required && !initial.rewarded(*i) && !turned.contains(i))
             .map(|(_, q)| format!("{} ({})", q.name, q.id))
             .collect();
+        let gear: Vec<_> = self
+            .model
+            .bis
+            .required_roots()
+            .iter()
+            .copied()
+            .filter(|&i| !initial.rewarded(i as usize) && !turned.contains(&(i as usize)))
+            .map(|i| {
+                let q = self.quest(i);
+                format!("{} ({})", q.name, q.id)
+            })
+            .collect();
+        anyhow::ensure!(
+            gear.is_empty(),
+            "required gear sources are missing: {}",
+            gear.join(", ")
+        );
         anyhow::ensure!(
             missing.is_empty(),
             "required quests are missing: {}",

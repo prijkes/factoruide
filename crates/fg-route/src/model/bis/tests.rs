@@ -4,6 +4,42 @@ use crate::{
     xp::Edition,
 };
 
+/// Runtime fixtures use the real residual selector, without requiring item-stat fixtures
+/// for every independent scheduling case. Production has no test-only construction API.
+pub(crate) fn select_test_sources(p: &mut job::Prepared, roots: &[u32], starts: &[&job::StartState]) {
+    let mut selector = super::Selector::new(
+        &p.model.quests,
+        &p.model.dungeons,
+        &p.model.skipped,
+        &p.profile,
+        &p.params,
+        &p.model.known_class_prerequisites,
+        starts,
+    );
+    let mut bis = super::Bis::default();
+    bis.requires = vec![false; p.model.quests.len()];
+    for &root in roots {
+        let (plan, closure) = selector.select(root).unwrap();
+        selector.committed = closure;
+        bis.required_roots.push(root);
+        bis.required_plans.push(plan);
+    }
+    let graph = selector.finalize().unwrap();
+    bis.source_actions = graph.actions;
+    bis.source_edges = graph.edges;
+    bis.source_quests = graph.quests;
+    bis.source_visits = graph.visits;
+    for &a in &bis.source_actions {
+        if let super::BisQuestAction::TurnIn(i) = a {
+            bis.requires[i as usize] = true;
+        }
+    }
+    for (i, q) in p.model.quests.iter_mut().enumerate() {
+        q.mandatory |= bis.requires(i);
+    }
+    p.model.bis = bis;
+}
+
 fn prepared(completed: bool) -> job::Prepared {
     prepared_with(completed, "required", "")
 }

@@ -64,9 +64,14 @@ pub struct Bis {
     source_actions: Vec<BisQuestAction>,
     source_edges: Vec<(BisQuestAction, BisQuestAction)>,
     source_quests: Vec<u32>,
+    source_visits: std::collections::BTreeMap<BisQuestAction, Option<usize>>,
 }
 
 impl Bis {
+    /// Chosen visit of a residual source action: absent, outside, or inside one dungeon.
+    pub fn source_visit(&self, action: BisQuestAction) -> Option<Option<usize>> {
+        self.source_visits.get(&action).copied()
+    }
     /// Final coherent selected source actions in dependency order (Prefer and Required).
     pub fn source_actions(&self) -> &[BisQuestAction] {
         &self.source_actions
@@ -285,6 +290,7 @@ pub(super) fn load(
     bis.source_actions = graph.actions;
     bis.source_edges = graph.edges;
     bis.source_quests = graph.quests;
+    bis.source_visits = graph.visits;
     // The best items vendors sell, each once, in the entries' order: the stops the search may
     // add (`Kind::Buy`), with their sellers ready.
     let mut vendor_items = Vec::new();
@@ -302,4 +308,4 @@ pub(super) fn load(
 }
 
 #[cfg(test)]
-mod tests;
+pub(crate) mod tests;

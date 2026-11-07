@@ -69,6 +69,7 @@ pub(super) struct SourceGraph {
     pub(super) actions: Vec<BisQuestAction>,
     pub(super) edges: Vec<(BisQuestAction, BisQuestAction)>,
     pub(super) quests: Vec<u32>,
+    pub(super) visits: BTreeMap<BisQuestAction, Option<usize>>,
 }
 
 #[derive(Clone)]
@@ -217,8 +218,10 @@ impl<'a> Selector<'a> {
     }
 
     pub(super) fn finalize(&self) -> Result<SourceGraph, String> {
+        let (actions, visits) = self.order_with_visits(&self.committed)?;
         Ok(SourceGraph {
-            actions: self.order(&self.committed)?,
+            actions,
+            visits,
             edges: self
                 .committed
                 .edges
@@ -636,6 +639,13 @@ impl<'a> Selector<'a> {
 
     /// Topological scheduling with level intervals catches cycles and elapsed windows together.
     fn order(&self, state: &Closure) -> Result<Vec<BisQuestAction>, String> {
+        self.order_with_visits(state).map(|(actions, _)| actions)
+    }
+
+    fn order_with_visits(
+        &self,
+        state: &Closure,
+    ) -> Result<(Vec<BisQuestAction>, BTreeMap<BisQuestAction, Option<usize>>), String> {
         let mut incoming: BTreeMap<_, usize> = state.nodes.keys().map(|&a| (a, 0)).collect();
         let mut following: BTreeMap<_, Vec<_>> = BTreeMap::new();
         for &(a, b) in &state.edges {
@@ -694,7 +704,11 @@ impl<'a> Selector<'a> {
 
     /// Contract each dungeon to one continuous visit. Internal quest order is retained, so
     /// only a path through another place and back is rejected, not sequential inside work.
-    fn visit_order(&self, state: &Closure, ordered: &[BisQuestAction]) -> Result<Vec<BisQuestAction>, String> {
+    fn visit_order(
+        &self,
+        state: &Closure,
+        ordered: &[BisQuestAction],
+    ) -> Result<(Vec<BisQuestAction>, BTreeMap<BisQuestAction, Option<usize>>), String> {
         let options: Vec<_> = ordered
             .iter()
             .map(|&a| {
@@ -720,7 +734,7 @@ impl<'a> Selector<'a> {
             })
             .collect();
         if options.iter().all(|p| p == &[None]) {
-            return Ok(ordered.to_vec());
+            return Ok((ordered.to_vec(), ordered.iter().map(|&a| (a, None)).collect()));
         }
         let mut chosen: BTreeMap<_, _> = ordered.iter().zip(&options).map(|(&a, p)| (a, p[0])).collect();
         let choices: Vec<_> = ordered
@@ -729,7 +743,8 @@ impl<'a> Selector<'a> {
             .zip(options)
             .filter(|(_, p)| p.len() > 1)
             .collect();
-        self.choose_visits(state, ordered, &choices, 0, &mut chosen, &mut 0)
+        let actions = self.choose_visits(state, ordered, &choices, 0, &mut chosen, &mut 0)?;
+        Ok((actions, chosen))
     }
 
     fn choose_visits(

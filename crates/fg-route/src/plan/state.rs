@@ -625,9 +625,9 @@ pub(crate) struct Planned {
 }
 
 impl Planned {
-    /// No objective nor turn-in of quest `i`: one in the log at the start is given up.
+    /// No objective, turn-in or selected held-state retention: abandon the logged quest.
     pub(crate) fn left(&self, i: usize) -> bool {
-        self.flags[i] & 6 == 0
+        self.flags[i] & 14 == 0
     }
 }
 
