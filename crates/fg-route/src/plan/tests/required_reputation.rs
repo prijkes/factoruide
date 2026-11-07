@@ -2,7 +2,7 @@ use crate::{
     job,
     params::ReputationGoal,
     plan::{Kind, Planner, Stop},
-    testing::{Q, Scenario},
+    testing::{At, Obj, Q, Scenario},
 };
 
 fn goals(p: &mut crate::params::Params) {
@@ -322,5 +322,55 @@ fn unavailable_or_blocked_held_child_does_not_hold_its_rewarding_parent() {
         let planner = Planner::new(&p.model, &p.world, &p.params, &p.profile);
         let repaired = job::finalize_route(&planner, Vec::new()).unwrap();
         assert_eq!(planner.reputation_reached(&repaired), vec![100.0]);
+    }
+}
+
+#[test]
+fn accepted_reputation_child_releases_parent_needed_for_its_handed_item() {
+    for camp_radius in [0.0, 100.0] {
+        let p = Scenario::new()
+            .levels(60, 60)
+            .quest(Q::new(1, "Held parent and item supplier").level(1).xp(0))
+            .quest(
+                Q::new(2, "Child needing supplied item")
+                    .level(1)
+                    .xp(0)
+                    .while_in_log(&[1])
+                    .objective(
+                        Obj::visit(
+                            "Use supplied item",
+                            At {
+                                zone: 1,
+                                x: 50.0,
+                                y: 50.0,
+                            },
+                        )
+                        .handed_by(&[1]),
+                    )
+                    .reputation(68, 100.0),
+            )
+            .params(|p| {
+                goals(p);
+                p.camp_radius = camp_radius;
+            })
+            .build();
+        let planner = Planner::new(&p.model, &p.world, &p.params, &p.profile);
+        let witness = vec![
+            Stop::quest(0, Kind::Accept),
+            Stop::quest(1, Kind::Accept),
+            Stop::quest(0, Kind::TurnIn),
+            Stop::quest(1, Kind::Objective(0)),
+            Stop::quest(1, Kind::TurnIn),
+        ];
+        assert_eq!(planner.reputation_reached(&witness), vec![100.0]);
+        planner.validate_required(&witness).unwrap();
+        let constructed = planner.greedy();
+        assert_eq!(
+            planner.reputation_reached(&constructed),
+            vec![100.0],
+            "camp radius {camp_radius}, route {constructed:?}"
+        );
+        let finalized = job::finalize_route(&planner, Vec::new()).unwrap();
+        assert_eq!(planner.reputation_reached(&finalized), vec![100.0]);
     }
 }

@@ -149,7 +149,12 @@ impl Availability<'_> {
     pub(crate) fn reputation_child_ready(&self, s: &State, i: u32) -> bool {
         !self.params.reputation_goals.is_empty()
             && self.followers[i as usize].iter().any(|&child| {
-                self.quest_at(child).pre_held.contains(&self.quest_at(i).id)
+                // valid(Accept) also allows already-done replay no-ops. Only an actual
+                // pending acceptance needs its parent held; the child's work may need
+                // that parent's turn-in to supply an item afterwards.
+                !s.accepted[child as usize]
+                    && !s.turned[child as usize]
+                    && self.quest_at(child).pre_held.contains(&self.quest_at(i).id)
                     && self.missing_reputation(s, child)
                     && self.valid(s, Stop::quest(child, Kind::Accept))
             })
