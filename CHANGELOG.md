@@ -10,6 +10,7 @@ An addon change also goes, in the same words, under Unreleased in that addon's o
 
 ### App
 
+- Reputation warnings describe the saved guide's shortfall, and missing starting standings are labeled as estimates for each faction.
 - Quest warnings separate class, gear and other mandatory goals, with neutral wording for older guides.
 - The steps inside a dungeon are a block of their own on the guide page, shown on the map of the dungeon's floor they are on (Classic and WoW Forever dungeons, from the game's own dungeon maps).
 - The first guide of a game version no longer fails now and then because another command removed its data while unpacking it.
@@ -20,6 +21,9 @@ An addon change also goes, in the same words, under Unreleased in that addon's o
 
 ### Guides
 
+- Selected reputation targets must be reached, even with detours or work after the target level; failed calculations name the missing points.
+- Useful low-level reputation quests and their prerequisites remain eligible when planning from a higher level.
+- Fractional quest reputation rewards are retained, including other rewards in the same quest.
 - With best gear Required, unsupported quest rewards get an explained alternative, and a guide succeeds only when every selected source is completed.
 - Required gear chains keep prerequisites, timed work and dungeon quests in order with the rest of the route.
 - Removing an unusable dungeon quest keeps its useful class-training visit when that makes the route better.
@@ -45,6 +49,8 @@ An addon change also goes, in the same words, under Unreleased in that addon's o
 
 ### Addon
 
+- Warns when a planned quest offered during a conversation was left unaccepted, so you can return and accept it manually.
+- Required guide steps, including planned reputation work, are kept when your level is ahead of the guide.
 - WoW Forever: the Sleeping Bag XP reminder starts after its reward quest is completed.
 
 ### WoW data

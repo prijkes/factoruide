@@ -36,11 +36,11 @@
 
 **Interfaces:** Consume `Params.reputation_goals`, quest direct rewards and existing initial reputation. Produce actual-state reputation hard rank, search/cleanup preservation, contribution repair and final/edited-trace validation. Existing `Quest.reputation` remains the export-facing direct reward interface; report new starting-value fallback notes through existing notes plumbing. Do not edit exporter or frontend in this task.
 
-- [ ] Write and run functional failing tests for low-level useful rewards/zero-reward ancestors, fractional rewards, costly progress, gear-Off goals, per-faction preservation and unmet-target final/trace validation.
-- [ ] Retain narrow goal-relevant candidates and prerequisite alternatives, preserving all unrelated availability rules.
-- [ ] Extend construction/repair and hard-goal ranking through search, sharing, tournaments, cleanup/finalization and invalid replay fallback.
-- [ ] Validate actual outcomes and emit named shortfalls with starting provenance; label selected-faction fallback starts.
-- [ ] Run focused tests, formatting and appropriate lint checks; self-review; report exact evidence and remaining limits.
+- [x] Write and run functional failing tests for low-level useful rewards/zero-reward ancestors, fractional rewards, costly progress, gear-Off goals, per-faction preservation and unmet-target final/trace validation.
+- [x] Retain narrow goal-relevant candidates and prerequisite alternatives, preserving all unrelated availability rules.
+- [x] Extend construction/repair and hard-goal ranking through search, sharing, tournaments, cleanup/finalization and invalid replay fallback.
+- [x] Validate actual outcomes and emit named shortfalls with starting provenance; label selected-faction fallback starts.
+- [x] Run focused tests, formatting and appropriate lint checks; self-review; report exact evidence and remaining limits.
 
 ### Task 2: Addon protection and interaction audit
 
@@ -48,11 +48,11 @@
 
 **Interfaces:** Consume existing `kp` keep flags (export expanded in Task 3), planned accept indexes, `FG.QuestLog` and `FG:On` events. Produce a single warning per closed interaction about identified offered planned missing quests. Keep ordinary acceptance confirmation and manual navigation unchanged.
 
-- [ ] Write and run failing smoke regressions for `kp` under outdated-step skipping and all-offered missing-quest warnings.
-- [ ] Honor keep protection in automatic outdated-step policy as well as existing checkpoint offer.
-- [ ] Track bounded route/NPC interaction tokens and offered ID unions, independently of auto-accept/Shift; handle close transitions and deferred log confirmation.
-- [ ] Warn through yellow screen text plus chat, respect `uiShown`, deduplicate callbacks; cancel stale route/mark/completion state. Normalize accepted event payloads.
-- [ ] Cover two offers/one accepted, delayed confirmation, manual/Shift, close/reopen/different NPC, route change, skips, compatibility and unidentified legacy metadata; run the full Lua smoke suite and self-review.
+- [x] Write and run failing smoke regressions for `kp` under outdated-step skipping and all-offered missing-quest warnings.
+- [x] Honor keep protection in automatic outdated-step policy as well as existing checkpoint offer.
+- [x] Track bounded route/NPC interaction tokens and offered ID unions, independently of auto-accept/Shift; handle close transitions and deferred log confirmation.
+- [x] Warn through yellow screen text plus chat, respect `uiShown`, deduplicate callbacks; cancel stale route/mark/completion state. Normalize accepted event payloads.
+- [x] Cover two offers/one accepted, delayed confirmation, manual/Shift, close/reopen/different NPC, route change, skips, compatibility and unidentified legacy metadata; run the full Lua smoke suite and self-review.
 
 ### Task 3: Export protection and truthful frontend messaging
 
@@ -60,10 +60,10 @@
 
 **Interfaces:** Consume goal faction IDs, modeled direct quest rewards and the actual exported route steps. Mark selected-faction contribution quests and their planned prerequisite/held/handed support `Step.keep`, including guides with no checkpoints; preserve existing keep flags. Describe required outcomes and legacy route shortfalls using existing UI patterns.
 
-- [ ] Write and run failing export regressions for relevant quest support with/without checkpoints and unrelated quest behavior.
-- [ ] Implement global reputation keep marking without making unused alternative quests mandatory.
-- [ ] Update reputation goal/weight help and old shortfall wording; keep old guide schemas compatible.
-- [ ] Run focused Rust tests, frontend tests/build/lint and localization checks; self-review.
+- [x] Write and run failing export regressions for relevant quest support with/without checkpoints and unrelated quest behavior.
+- [x] Implement global reputation keep marking without making unused alternative quests mandatory.
+- [x] Update reputation goal/weight help and old shortfall wording; keep old guide schemas compatible.
+- [x] Run focused Rust tests, frontend tests/build/lint and localization checks; self-review.
 
 ### Task 4: Integration, review and delivery
 

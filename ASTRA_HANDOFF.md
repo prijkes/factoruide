@@ -6,8 +6,18 @@ merged into local `main` at `f9dde21`. Its tree is identical to the verified
 required-gear route branch. Fresh merged-main release workspace verification
 passed 754 tests, with the previously documented exclusions. No push occurred.
 
-The new reputation/quest-acceptance work is diagnosed and awaiting review of the
+The new reputation/quest-acceptance work is implementing the user-approved
 [concrete design](docs/superpowers/specs/2026-11-08-reputation-and-acceptance-design.md).
+The user then delegated further review and approval while asleep. Do not stop
+for routine confirmation; complete implementation, independent review, checks,
+production build and local main integration. The
+[implementation plan](docs/superpowers/plans/2026-11-08-reputation-and-acceptance.md)
+and ignored workspace ledger track progress. Export/frontend commit `e6a65eb`
+has clean spec/quality review. Addon commits `a7a796d` and `3fdc85d` pass smoke and
+independent review. Rust reputation commits `0fb2163` and `95356fd` pass 445 unit
+and 238 integration fast tests, Clippy, formatting and scoped review. Final whole
+workspace checks, real-data validation, production build and whole-branch review
+are in progress; read the ledger before dispatching any work again.
 The user selected required reputation outcomes, including detours/after 60,
 and warnings for any offered planned quest left unaccepted. Do not ask these
 policy questions again. Proof of Demise (374) directly rewards Undercity but
@@ -24,7 +34,7 @@ Undercity's optimistic endpoint is 25122 versus 42000. Seven bounds use snapshot
 standings; Horde's starting standing is absent and its bound is conditional on
 the existing race/class fallback. This does not prove game impossibility. Also,
 fractional stored rewards are currently rejected by an integer array parser.
-New product code has not changed. Work is on
+Work is on
 `fix/required-reputation-and-acceptance`; private diagnostic reports are in
 ignored `.superpowers/sdd/2026-11-08-reputation-and-acceptance/`. Saved inputs and
 the desktop executable remain unchanged. The older completion records below
