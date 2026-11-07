@@ -409,7 +409,9 @@ end
 -- Factoruide_Data (written by the desktop app) loads first. Alone with the profile part: what the
 -- server has (its FactoruideSent) still drops the collector's rows.
 if profileOnly then
-    FactoruideData = 'Factoruide.Routes = { x = { steps = {} } }\nFactoruideSent = { ["Brouz-Realm"] = 1 }\n'
+    -- As the apps write it: the table last, one character a line (read as text, not run).
+    FactoruideData = 'Factoruide.Routes = { x = { steps = {}, note = "FactoruideSent" } }\n'
+        .. 'FactoruideSent = {\n  ["Brouz-Realm"] = 1,\n  ["Other-Realm"] = 9,\n}\n'
     FactoruideDataTime = 1700000000
 end
 load("Factoruide_Profile")
@@ -1487,6 +1489,22 @@ end
 local seen = points(profile.reputation)
 assert(seen[69] == 4200 and seen[21] == 2900 and not seen[469] and not seen[169], "reputations, collapsed ones too")
 assert(factionRows[3].collapsed, "the collapsed header closed again")
+-- The minute's snapshot: the panel is not opened again (the game would tell every addon) until
+-- the game says a reputation changed.
+do
+    local expanded, expand = 0, C_Reputation.ExpandFactionHeader
+    C_Reputation.ExpandFactionHeader = function(i)
+        expanded = expanded + 1
+        expand(i)
+    end
+    factionRows[2].value = 4250
+    FG.Profile:Snapshot(false)
+    assert(expanded == 0 and points(profile.reputation)[69] == 4200, "not read again without a change")
+    fire("CHAT_MSG_COMBAT_FACTION_CHANGE", "Reputation with Darnassus increased by 50.")
+    FG.Profile:Snapshot(false)
+    assert(expanded == 1 and points(profile.reputation)[69] == 4250, "read again after a gain")
+    C_Reputation.ExpandFactionHeader = expand
+end
 C_Reputation = nil
 -- Classic Era and TBC: the older globals.
 GetNumFactions = function() return #visibleFactions() end
@@ -2115,6 +2133,56 @@ fire("ZONE_CHANGED_NEW_AREA")
 assert(char.guide.step == 2, "an old run is done back out, step " .. char.guide.step)
 onQuest[8001] = nil
 print("dungeon ok")
+
+-- A dungeon's steps are one group, however far apart: shown together until each is done (out of
+-- the instance again too), or left aside at once with their quests, and taken back by undoing.
+FG.Routes["dungeon-group"] = {
+    race = 7,
+    class = 8,
+    faction = "Alliance",
+    fromLevel = 1,
+    toLevel = 60,
+    time = 1,
+    steps = {
+        {
+            k = "dungeon",
+            t = "Dungeon: The Deadmines with a group",
+            n = "The Deadmines",
+            m = 1436,
+            x = 42,
+            y = 72,
+            lvl = 18,
+        },
+        { k = "accept", t = "Accept The Defias Brotherhood", q = 8101, di = true, m = 1436, x = 10, y = 10, lvl = 18 },
+        { k = "objective", t = "Edwin VanCleef", q = 8102, di = true, m = 1436, x = 90, y = 90, lvl = 18 },
+        { k = "turnin", t = "Turn in The Defias Brotherhood", q = 8101, di = true, m = 1436, x = 50, y = 20, lvl = 19 },
+        { k = "grind", t = "Grind", lvl = 60 },
+    },
+}
+useRoute("dungeon-group")
+do
+    local view = FG.Guide.view
+    assert(#view.tasks == 4, "the dungeon's steps shown together, " .. #view.tasks)
+    assert(view.dungeon and view.dungeon.name == "The Deadmines" and view.dungeon.steps == 4, "the dungeon bar")
+end
+inside = true
+fire("ZONE_CHANGED_NEW_AREA")
+onQuest[8101] = true
+FG.Guide:Advance()
+assert(char.guide.step == 3, "on the dungeon's next step, step " .. char.guide.step)
+assert(FG.Guide.view.dungeon.steps == 2, "two steps left, " .. FG.Guide.view.dungeon.steps)
+inside = false
+fire("ZONE_CHANGED_NEW_AREA")
+assert(char.guide.step == 3, "still in the dungeon out of the instance, step " .. char.guide.step)
+FG.Guide:SkipDungeon()
+assert(char.guide.skippedQuests[8101] and char.guide.skippedQuests[8102], "its quests left aside")
+assert(char.guide.step == 5, "past the dungeon, step " .. char.guide.step)
+assert(FG.Guide.view.dungeon == nil, "no dungeon bar after it")
+FG.Guide:UndoLastMark()
+assert(not char.guide.skippedQuests[8101] and not char.guide.skippedQuests[8102], "taken back")
+assert(char.guide.step == 3, "back in the dungeon, step " .. char.guide.step)
+onQuest[8101] = nil
+print("dungeon group ok")
 
 -- Only the guide's quests: those it still takes, not those it abandons, marked done by hand or
 -- out of it, nor escorts shared by the group (the event does not tell which quest).
@@ -3394,6 +3462,24 @@ UIErrorsFrame, UnitHealth, UnitHealthMax, UnitIsDeadOrGhost = nil, nil, nil, nil
 StaticPopup_Hide = nil
 print("whole addon hide and show ok")
 
+-- WoW Forever's map sets each pin it acquires to let right clicks through, with a function the
+-- game blocks from our code in combat: not done then, on the steps' pins and the walk's dots.
+do
+    local passthrough = 0
+    MapCanvasPinMixin = { CheckMouseButtonPassthrough = function() passthrough = passthrough + 1 end }
+    InCombatLockdown = function() return true end
+    FGStepPinMixin.CheckMouseButtonPassthrough({}, "RightButton")
+    FGWalkDotMixin.CheckMouseButtonPassthrough({}, "RightButton")
+    assert(passthrough == 0, "not in combat")
+    InCombatLockdown = function() return false end
+    FGStepPinMixin.CheckMouseButtonPassthrough({}, "RightButton")
+    FGWalkDotMixin.CheckMouseButtonPassthrough({}, "RightButton")
+    assert(passthrough == 2, "done out of combat")
+    MapCanvasPinMixin = nil
+    FGStepPinMixin.CheckMouseButtonPassthrough({}, "RightButton")
+    assert(passthrough == 2, "Classic Era and TBC: nothing to do")
+end
+
 -- XP buffs the guide counts on (WoW Forever): a warning when one is missing, not in combat, not
 -- twice within ten minutes, nothing when the game hides the aura.
 do
@@ -3584,7 +3670,11 @@ local allCompleted = C_QuestLog.GetAllCompletedQuestIDs
 C_QuestLog.GetAllCompletedQuestIDs = nil
 GetQuestsCompleted = function() return { [33] = true, [12] = true } end
 fire("PLAYER_LOGOUT")
-assert(char.completed[1] == 12 and char.completed[2] == 33 and #char.completed == 2, "Classic completed quests")
+do
+    local done = FactoruideDB.profiles["Brouz-Realm"].completed
+    assert(done[1] == 12 and done[2] == 33 and #done == 2, "Classic completed quests")
+end
+assert(char.completed == nil and char.questLog == nil, "not copied into the collector's table")
 C_QuestLog.GetAllCompletedQuestIDs = allCompleted
 for name, fn in pairs(modern) do
     C_QuestLog[name] = fn
@@ -4247,21 +4337,22 @@ local function ExportImport()
     assert(char.guide.route == "solo", "back to the only gnome mage guide: " .. tostring(char.guide.route))
 
     -- Factoruide_Data, written by the desktop app: its guides beside the imported ones, of two with
-    -- the same name the one computed last. Its text runs in the profile part (Data.lua), before
-    -- the guide part loads.
+    -- the same name the one computed last. The profile part (Data.lua) only reads its sent seqs,
+    -- as text; the guide part runs it (its memory counted to the guide part, not the profile's).
     local dataLua = GuideLua("solo", 5000)
         .. GuideLua("desk-mage", 5000):gsub("local FG = Factoruide\nFG.Routes = FG.Routes or {}\n", "")
         .. 'FactoruideSent = { ["Brouz-Realm"] = 170 }\nFactoruide.Config = { compassShown = false }\n'
     local function LoadData(lua, when)
         FactoruideData, FactoruideDataTime = lua, when
         assert(loadfile("addon/Factoruide_Profile/Data.lua"))("Factoruide_Profile", FG)
-        assert(FactoruideData == nil and FG.DataGuide and FG.DataGuide.time == when, "data run, its text let go")
+        assert(FactoruideData == lua, "not run by the profile part, left to the guide part")
     end
     LoadData(dataLua, 6000)
     FG.Import:ApplySaved()
     assert(FG.Routes["desk-mage"] and FG.Routes.warrior and FG.Routes.solo.created == 5000, "union, newer data wins")
     assert(FG.Import.info.solo.source == "app" and FG.Import.info.warrior.source == "import", "sources")
-    assert(FG.DataGuide == nil and FG.DataSent["Brouz-Realm"] == 170, "data taken, its sent seqs kept")
+    assert(FactoruideData == nil and FG.Import.data.time == 6000, "data run by the guide part, its text let go")
+    assert(FG.DataSent["Brouz-Realm"] == 170, "its sent seqs read by the profile part")
     assert(FG:Get("compassShown") == true, "data's Config ignored")
     FG.Options:Refresh()
     assert(Row("desk-mage") and not Row("desk-mage").delete:IsShown(), "the app's guides are not deleted in game")
@@ -4282,10 +4373,12 @@ local function ExportImport()
     FG.Import:ApplySaved()
     assert(FG.Import.info["old-desk"].created == 7000, "data's time")
     -- Data that is not data: nothing kept, the error counted.
+    FG.Import.data = nil
     FactoruideData, FactoruideDataTime = "Factoruide.f = function() end", 3000
     assert(loadfile("addon/Factoruide_Profile/Data.lua"))("Factoruide_Profile", FG)
-    assert(FG.DataGuide == nil and FG.DataFailed, "functions refused in the data")
-    FG.DataFailed = nil
+    FG.Import:ApplySaved()
+    assert(FG.Import.data == nil and FactoruideData == nil, "functions refused in the data")
+    assert(FactoruideDB.errors["Factoruide_Data: functions are not allowed"], "the error counted")
 
     -- An older app's text: the whole text kept before (guideImport) moves to one guide each, its
     -- assignments are the first choice of the characters they name when several guides fit.
@@ -4363,9 +4456,9 @@ local function ReleasedGuides()
             else
                 FactoruideData, FactoruideDataTime = lua, 1700000000
                 assert(loadfile("addon/Factoruide_Profile/Data.lua"))("Factoruide_Profile", FG)
-                assert(FG.DataGuide and not FG.DataFailed, file .. " in Factoruide_Data: " .. tostring(FG.DataFailed))
             end
             FG.Import:ApplySaved()
+            assert(way == "import" or FG.Import.data, file .. " in Factoruide_Data")
             local listed = {}
             for _, guide in ipairs(FG.Import:List()) do
                 listed[guide.name] = guide

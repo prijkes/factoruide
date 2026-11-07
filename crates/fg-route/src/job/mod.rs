@@ -173,7 +173,10 @@ pub(crate) fn plan_prepared(
     if interrupt.cancelled() {
         return Err(JobError::Cancelled);
     }
-    // Objectives at the same place one after the other, done at once.
+    // The returns to a place merged into an earlier visit, what can be done in a place before
+    // leaving it, then objectives at the same place one after the other, done at once.
+    let best = planner.merge_visits(&best).map_or(best, |(merged, _)| merged);
+    let best = planner.tidy(&best).map_or(best, |(tidied, _)| tidied);
     let best = planner.route_together(best);
     planner.validate_required(&best)?;
     let route = export::build(&planner, &prepared.profile, &best);

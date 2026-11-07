@@ -375,3 +375,18 @@ reason = "A Missing Hand: offered before its giver's other quests are done (seen
 check = "chain-order"
 key = "quest 99267"
 reason = "An Unfortunate End (the other version of the same find): a one-click roadside find, no prerequisite"
+
+[[accept]]
+check = "chain-order"
+key = "quest 97558"
+reason = "Hides for the Forsaken: a collecting errand of Shelene Rhobart (who stands beside Deathguard Linnea at the Ruins of Lordaeron), no Previous on its wiki page"
+
+# islands (2026-11-07): the item data is complete: Small Eggs drop from the Strigid Owls of
+# Teldrassil too, and the Skyborne quest asking for them inherits their spawns among its
+# places. It takes them in its own Shen'dar Highlands (eleven droppers there); the places on
+# Teldrassil no Horde reaches.
+
+[[accept]]
+check = "islands"
+key = "Teldrassil: "
+reason = "Restocking the Larders' Small Eggs: the item's droppers live on Teldrassil as well, but the Skyborne takes them in the Shen'dar Highlands, its own zone"

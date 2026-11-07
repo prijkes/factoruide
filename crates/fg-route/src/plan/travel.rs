@@ -23,12 +23,13 @@ pub(crate) type FlightTables = RefCell<FxHashMap<u128, Rc<FlightTable>>>;
 type PosKey = [u64; 4];
 
 /// Trips already computed (from with mounted or not and the links opened, to, known flight
-/// paths): a replay asks the same trips again and again. Emptied when full.
+/// paths): a replay asks the same trips again and again. Half of them go when full, the rest
+/// only if it is still full.
 pub(crate) type Legs = RefCell<FxHashMap<(PosKey, PosKey, u128, u64, u64), (f64, Hop)>>;
 pub(crate) type Grounds = RefCell<FxHashMap<(PosKey, PosKey, u8), bool>>;
 
-/// What a table of 2^18 buckets holds (7/8 of them): it never grows past them.
-const LEGS_MAX: usize = (1 << 18) / 8 * 7;
+/// What a table of 2^16 buckets holds (7/8 of them): it never grows past them.
+const LEGS_MAX: usize = (1 << 16) / 8 * 7;
 
 /// A `Leg` as remembered (flight path and link indexes on 16 bits).
 #[derive(Clone, Copy)]

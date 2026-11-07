@@ -41,10 +41,17 @@ An addon change also goes, in the same words, under Unreleased in that addon's o
 
 ### WoW data
 
+- WoW Forever: the latest quest data and the game's new build, with 26 more contributions from players (quests seen in game, measured XP, creature places) and 90 contributed facts checked: Spanish and French names, seven Lordaeron and Undercity quests open at level 15, Khan Hratha asks only for the Maraudine Key Fragment.
 - WoW Forever's Hall of Thanes: Underground Map is planned (the Dark Iron Map drops from the Dark Iron Spies and Captain Beld), and Old Ironforge Incursion after it (GitHub #98).
 - WoW Forever: the warlocks' pets and the Theramore Emissaries no longer count as hostile creatures in Stormwind (they kept low-level characters from its auction house), and A Dynamite Plan asks for its 10 Rough Dynamite.
 - WoW Forever: The Wrath of Rath'mael and The New Plague (Ruins of Lordaeron) ask for the chains of their zones done first (Rear Guard Patrol, both its parts, and A Recipe For Death), as in the game, so the guide plans the chains before them.
 - WoW Forever: more chains the sources list without a prerequisite are corrected, as in the game: Heart of Disruption (after An Alarming Request), Murloc Gills (after Testing the Wells), The Gurubashi Legends of Old, Highland Hides, the Buying Friendship quests and every starting zone's The Great Outdoors (after their zone's first quest).
+- The players' latest contributions: more quests seen in game, creature ranks and object names (WoW Forever).
+- WoW Forever: the library's books (Friend of the Library) are planned again, the game files them with the event quests.
+- The XP players measure in game where the quest data was off (TBC: Your Place In The World and Rude Awakening give 40, not 60), with the latest quest data and the game's new builds.
+- WoW Forever: the latest quest data (the priests' Divine Grace and Confounding Flash versions exclude each other, An Enticing Offer's objectives in the game's order) and more object and creature names checked from players' reports.
+- Names checked from players' reports: the Spanish names and titles of the Classic game (not the Latin American ones), German names in TBC, French titles in WoW Forever.
+- WoW Forever: the latest quest data and creature places, the XP players measure in game for 60 more quests, Latin American Spanish names and pet names checked from players' reports, and Khan Hratha from level 35.
 
 ## 0.15.0 (2026-11-01)
 
