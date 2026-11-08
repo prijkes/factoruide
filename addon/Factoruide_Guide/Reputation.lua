@@ -165,7 +165,7 @@ local function Allowed(source, standings)
     end
     for _, condition in ipairs(eligibility.standing or {}) do
         local value, range = standings[condition.faction_id], condition.standing or {}
-        if value == nil or range.minimum and value < range.minimum or range.maximum and value > range.maximum then
+        if value == nil or range.minimum and value < range.minimum or range.maximum and value >= range.maximum then
             return false
         end
     end
@@ -351,13 +351,13 @@ function Rep:Poll(step, index)
     return false
 end
 
-function Rep:Active()
+local function ActiveSnapshot()
     local guide = FG.Guide
     local route, index = guide and guide:Route(), guide and guide:CurrentStep()
     local step = route and route.steps[index]
-    if not step or step.k ~= "reputation" or self:Poll(step, index) then return end
+    if not step or step.k ~= "reputation" then return end
     local program, progress = Context(step, index, false)
-    if not program or not progress then return end
+    if not program or not progress or progress.done then return end
     local phase = (program.phases or {})[progress.phase]
     local action = phase and (phase.actions or {})[progress.action]
     return {
@@ -368,6 +368,14 @@ function Rep:Active()
         source = action and Source(program, action.source_id),
         waiting = progress.waiting,
     }
+end
+
+function Rep:Active()
+    local guide = FG.Guide
+    local route, index = guide and guide:Route(), guide and guide:CurrentStep()
+    local step = route and route.steps[index]
+    if not step or step.k ~= "reputation" or self:Poll(step, index) then return end
+    return ActiveSnapshot()
 end
 
 function Rep:WantsQuest(id)
@@ -399,11 +407,19 @@ function Rep:AutomationAllowed(id)
 end
 
 local function Count(kind, id)
-    local active = Rep:Active()
+    -- The reward may update standing or daily flags before QUEST_TURNED_IN. Attribute
+    -- its event to the saved run before polling can advance to another run.
+    local active = ActiveSnapshot()
     if not active or active.waiting or not active.source or active.action.kind ~= kind then return end
     local identity = active.source.identity or {}
     if (kind == "turnin" and identity.quest_id or identity.npc_id) ~= id then return end
     local progress, action = active.state, active.action
+    if
+        (progress.units[action.id] or 0) >= (action.total_unit_limit or 0)
+        or (progress.cycleUnits[action.id] or 0) >= (action.units_per_cycle or 0)
+    then
+        return
+    end
     progress.units[action.id] = (progress.units[action.id] or 0) + 1
     progress.cycleUnits[action.id] = (progress.cycleUnits[action.id] or 0) + 1
     if active.source.reset and active.source.reset.kind == "daily" then

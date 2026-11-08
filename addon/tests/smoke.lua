@@ -5424,7 +5424,7 @@ local function ReputationProgramTest()
             version = 1,
             sources = sources,
             phases = phases,
-            result = { targets = { ["69"] = target or 100 }, warnings = {} },
+            result = { targets = type(target) == "table" and target or { ["69"] = target or 100 }, warnings = {} },
         }
         local name = "reputation-playback-" .. serial
         FG.Routes[name] = {
@@ -5490,6 +5490,28 @@ local function ReputationProgramTest()
         FG.Routes[name].time = version + 1000
         useRoute(name)
         assert(char.guide.step == 1, "new route version cannot inherit incompatible counters")
+    end)
+    check("standing eligibility stops at its exclusive upper gate", function()
+        local src = source("repair", 99101)
+        src.eligibility = { standing = { { faction_id = 69, standing = { maximum = 0 } } } }
+        setup({ src }, { batch({ action("repair", "repair") }) })
+        assert(char.guide.step == 2, "a below-Neutral repair source is unavailable exactly at Neutral")
+    end)
+    check("a reward updating standings before its event still belongs to the active run", function()
+        local first, second = action("first", "one"), action("second", "two")
+        first.completion_targets = { { kind = "reputation", faction_id = 69, standing = 100 } }
+        setup(
+            { source("one", 99101), source("two", 99102) },
+            { batch({ first, second }) },
+            { ["69"] = 100, ["70"] = 100 }
+        )
+        local progress = current().state
+        actual = 100
+        fire("QUEST_TURNED_IN", 99101, 0, 0)
+        assert(
+            progress.units.first == 1 and not progress.units.second,
+            "event is attributed before its reward can advance the run"
+        )
     end)
     check("actual target stops unnecessary work; XP cannot prove standing", function()
         setup({ source("kill", nil) }, { batch({ action("kills", "kill", "kill", 2) }) })
