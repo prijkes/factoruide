@@ -135,7 +135,12 @@ impl Planner<'_> {
 
     /// Refresh generated notes after an edit while preserving other preparation/user notes.
     pub(crate) fn refresh_reputation_notes(&self, notes: &mut Vec<String>, reached: &[f64]) {
-        notes.retain(|note| !note.starts_with(SHORTFALL_PREFIX));
+        notes.retain(|note| {
+            let completion_shortfall = note.starts_with("Reputation ")
+                && note.contains(": best-found result is ")
+                && note.ends_with("This bounded search does not prove a maximum.");
+            !(note.starts_with(SHORTFALL_PREFIX) || completion_shortfall)
+        });
         notes.extend(self.reputation_warnings(reached));
     }
 }
