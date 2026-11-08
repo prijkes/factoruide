@@ -484,8 +484,8 @@ pub struct Player {
 pub struct ReputationReached {
     pub faction: i64,
     pub name: String,
-    pub start: i64,
-    pub reached: i64,
+    pub start: f64,
+    pub reached: f64,
     pub target: i64,
 }
 

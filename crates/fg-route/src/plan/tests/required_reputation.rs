@@ -73,27 +73,102 @@ fn cleanup_preserves_each_satisfied_faction_even_when_another_improves() {
 }
 
 #[test]
-fn unsupported_target_fails_finalization_with_named_actual_shortfall() {
+fn unsupported_target_returns_leveling_guide_with_named_actual_shortfall() {
     let mut p = Scenario::new().levels(20, 21).params(goals).build();
     p.model.faction_names.insert(68, "Undercity".into());
-    let planner = Planner::new(&p.model, &p.world, &p.params, &p.profile);
-    let error = job::finalize_route(&planner, Vec::new()).unwrap_err().to_string();
-    assert!(error.contains("Undercity") && error.contains("100"), "{error}");
+    let request = serde_json::from_value(serde_json::json!({
+        "race":"human", "class":"warrior", "from_level":20, "to_level":21,
+    }))
+    .unwrap();
+    let (outcome, _) = job::plan_prepared(p, &request, &|_| {}, &job::Interrupt::default(), None).unwrap();
+    assert_eq!(outcome.route.to_level, 21);
+    assert!(outcome.route.total_time.is_finite());
+    let warning = outcome.notes.join("; ");
+    for expected in [
+        "Undercity (68)",
+        "start 0",
+        "estimated race/class baseline",
+        "target 100",
+        "actual 0",
+        "deficit 100",
+        "no supported",
+        "best-found",
+    ] {
+        assert!(warning.contains(expected), "missing {expected:?}: {warning}");
+    }
 }
 
 #[test]
-fn edited_trace_requires_actual_turnin_and_retains_fractional_deficit() {
+fn unsupported_target_does_not_discard_another_factions_reachable_reward() {
     let p = Scenario::new()
-        .levels(20, 21)
-        .quest(Q::new(1, "Almost enough").level(20).xp(0).reputation(68, 99.9999999))
-        .params(goals)
+        .levels(60, 60)
+        .quest(Q::new(1, "Reachable faction").level(1).xp(0).reputation(67, 100.0))
+        .params(|p| {
+            goals(p);
+            p.reputation_goals.push(ReputationGoal {
+                faction: 67,
+                target: 100,
+            });
+        })
         .build();
     let planner = Planner::new(&p.model, &p.world, &p.params, &p.profile);
-    assert!(planner.validate_required_trace(&[]).is_err());
-    let mut trace = Vec::new();
-    planner.simulate(&route(0), Some(&mut trace)).unwrap();
-    assert!(planner.validate_required_trace(&trace).is_err());
-    assert!(planner.validate_required(&route(0)).is_err());
+    let best = job::finalize_route(&planner, Vec::new()).unwrap();
+    assert_eq!(planner.reputation_reached(&best), vec![0.0, 100.0]);
+}
+
+#[test]
+fn edited_trace_reports_actual_turnin_and_retains_fractional_deficit() {
+    let mut p = Scenario::new()
+        .levels(20, 21)
+        .quest(Q::new(1, "Almost enough").level(20).xp(0).reputation(68, 99.5))
+        .params(goals)
+        .build();
+    p.model.initial.reputation_recorded.insert(68);
+    p.model.initial.reputation = vec![0.25];
+    let editor = job::Editor::from_prepared(p);
+    let accepted = editor.save(&[job::RouteStep::Accept { quest: 1 }], vec![]).unwrap();
+    assert!(
+        accepted
+            .notes
+            .iter()
+            .any(|note| note.contains("actual 0.25, deficit 99.75"))
+    );
+    let summary = serde_json::to_value(&accepted.route.reputation).unwrap();
+    assert_eq!(summary[0]["start"].as_f64(), Some(0.25));
+    assert_eq!(summary[0]["reached"].as_f64(), Some(0.25));
+    let completed = editor
+        .save(
+            &[job::RouteStep::Accept { quest: 1 }, job::RouteStep::TurnIn { quest: 1 }],
+            vec![],
+        )
+        .unwrap();
+    let warning = completed.notes.join("; ");
+    assert!(warning.contains("actual 99.75, deficit 0.25"), "{warning}");
+    assert!(warning.contains("recorded standing"), "{warning}");
+    let summary = serde_json::to_value(&completed.route.reputation).unwrap();
+    assert_eq!(summary[0]["reached"].as_f64(), Some(99.75));
+}
+
+#[test]
+fn unmet_reputation_does_not_hide_or_relax_missing_required_gear() {
+    let mut p = Scenario::new()
+        .levels(20, 21)
+        .quest(Q::new(1, "Mandatory equipment").level(20).xp(0))
+        .params(goals)
+        .build();
+    crate::model::select_test_sources(&mut p, &[0], &[]);
+    let planner = Planner::new(&p.model, &p.world, &p.params, &p.profile);
+    let error = planner.validate_required(&[]).unwrap_err().to_string();
+    assert!(
+        error.contains("required gear source") && error.contains("Mandatory equipment"),
+        "{error}"
+    );
+    let editor = job::Editor::from_prepared(p);
+    let error = editor.save(&[], vec![]).unwrap_err().to_string();
+    assert!(
+        error.contains("required gear sources") && error.contains("Mandatory equipment"),
+        "{error}"
+    );
 }
 
 #[test]
@@ -212,11 +287,12 @@ fn recorded_completions_are_not_counted_twice_and_exclusions_stay_excluded() {
     p.model.initial.reputation = vec![50.0];
     let planner = Planner::new(&p.model, &p.world, &p.params, &p.profile);
     assert_eq!(planner.reputation_reached(&route(0)), vec![50.0]);
-    assert!(job::finalize_route(&planner, Vec::new()).is_err());
+    let best = job::finalize_route(&planner, Vec::new()).unwrap();
+    assert_eq!(planner.reputation_reached(&best), vec![50.0]);
 }
 
 #[test]
-fn satisfied_explicit_trace_passes_but_acceptance_alone_does_not() {
+fn satisfied_explicit_trace_and_partial_acceptance_both_validate_structurally() {
     let p = Scenario::new()
         .levels(20, 21)
         .quest(Q::new(1, "Reward").level(20).xp(0).reputation(68, 100.0))
@@ -229,7 +305,7 @@ fn satisfied_explicit_trace_passes_but_acceptance_alone_does_not() {
         spot: None,
     };
     let accepted = planner.edit(&[edit(Kind::Accept)]);
-    assert!(planner.validate_required_trace(&accepted.trace).is_err());
+    planner.validate_required_trace(&accepted.trace).unwrap();
     let completed = planner.edit(&[edit(Kind::Accept), edit(Kind::TurnIn)]);
     planner.validate_required_trace(&completed.trace).unwrap();
 }
@@ -247,7 +323,7 @@ fn mate_only_turnin_does_not_satisfy_the_characters_reputation() {
     assert_eq!(planner.reputation_reached(&route(0)), vec![0.0]);
     let mut trace = Vec::new();
     planner.simulate(&route(0), Some(&mut trace)).unwrap();
-    assert!(planner.validate_required_trace(&trace).is_err());
+    planner.validate_required_trace(&trace).unwrap();
 }
 
 #[test]

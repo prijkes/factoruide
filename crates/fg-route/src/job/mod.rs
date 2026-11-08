@@ -176,6 +176,7 @@ pub(crate) fn plan_prepared(
     }
     let best = finalize_route(&planner, best)?;
     let route = export::build(&planner, &prepared.profile, &best);
+    planner.refresh_reputation_notes(&mut prepared.notes, &planner.reputation_reached(&best));
     for missing in planner.missing_mandatory_quests(&best) {
         prepared.notes.push(missing);
     }
