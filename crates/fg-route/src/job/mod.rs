@@ -50,7 +50,9 @@ pub use routes::{
 };
 pub(crate) use services::profession_of;
 pub use services::{Place, Service, places, services_lua};
-pub use start::{Bind, LogObjective, LogQuest, MapPos, QuestId, Skill, Standing, StartState};
+pub use start::{
+    Bind, DailyState, InventoryItem, LogObjective, LogQuest, MapPos, QuestId, Skill, Standing, StartState,
+};
 #[cfg(any(test, feature = "testing"))]
 pub(crate) use starts::preview_starts_of;
 pub use starts::{StartCandidate, StartOption, StartPreview, preview_starts};

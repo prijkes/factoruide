@@ -265,6 +265,11 @@ export interface StartState {
   spells: number[];
   /** Points with each faction the game lists (none: recorded by an older addon). */
   reputation?: { id: number; value: number }[];
+  /** Known carried materials; absent or invalid in older snapshots. */
+  inventory?: { item: number; count: number }[];
+  inventory_valid?: boolean;
+  daily?: { completed: number[]; reset_at?: number | null } | null;
+  daily_valid?: boolean;
   /** Copper. */
   money: number;
   /** When it was recorded (unix seconds). */

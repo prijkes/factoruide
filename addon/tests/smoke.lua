@@ -1426,6 +1426,63 @@ assert(#profile.completed == 2, "quests done")
 assert(profile.log[1].id == 233 and profile.log[1].objectives[1].done == 3, "log with its objectives")
 print("profile ok")
 
+-- Reputation supplies are real bag contents, not assumed stock; daily state uses the server clock.
+do
+    local oldContainer, oldBagCount = C_Container, NUM_BAG_SLOTS
+    local oldSlots, oldInfo, oldID = GetContainerNumSlots, GetContainerItemInfo, GetContainerItemID
+    local oldServerTime, oldResetTime = GetServerTime, GetQuestResetTime
+    local oldDateAndTime, oldFlagged = C_DateAndTime, C_QuestLog.IsQuestFlaggedCompleted
+    NUM_BAG_SLOTS = 4
+    local bags = {
+        [0] = { { itemID = 14047, stackCount = 20 }, { itemID = 264014, stackCount = 1 } },
+        [1] = { { itemID = 14047, stackCount = 40 } },
+        [4] = { { itemID = 6048, stackCount = 2 } },
+        [-1] = { { itemID = 14047, stackCount = 900 } }, -- Bank stock is not carried.
+    }
+    C_Container = {
+        GetContainerNumSlots = function(bag) return bags[bag] and #bags[bag] or 0 end,
+        GetContainerItemInfo = function(bag, slot) return bags[bag] and bags[bag][slot] end,
+    }
+    GetServerTime = function() return 1000 end
+    C_DateAndTime = { GetSecondsUntilDailyReset = function() return 4000 end }
+    C_QuestLog.IsQuestFlaggedCompleted = function(id) return id == 94004 end
+    FG.Profile:Snapshot()
+    assert(profile.inventory_valid and profile.inventory, "profile records current carried reputation materials")
+    local stock = {}
+    for _, item in ipairs(profile.inventory) do
+        stock[item.item] = item.count
+    end
+    assert(
+        stock[14047] == 60 and stock[264014] == 1 and stock[6048] == 2,
+        "stacks are combined across carried bags, without bank stock"
+    )
+    assert(profile.daily and profile.daily.reset_at == 5000, "next daily reset uses server time plus reset API")
+    assert(
+        #profile.daily.completed == 1 and profile.daily.completed[1] == 94004,
+        "only completed known daily sources are captured"
+    )
+    C_Container = nil
+    GetContainerNumSlots = function(bag) return bag == 0 and 1 or 0 end
+    GetContainerItemInfo = function() return nil, 7 end
+    GetContainerItemID = function() return 14047 end
+    C_DateAndTime = nil
+    GetQuestResetTime = function() return 4000 end
+    FG.Profile:Snapshot()
+    assert(
+        profile.inventory_valid and profile.inventory[1].item == 14047 and profile.inventory[1].count == 7,
+        "older container APIs preserve real stack counts"
+    )
+    GetContainerNumSlots, GetContainerItemInfo, GetContainerItemID = nil, nil, nil
+    FG.Profile:Snapshot()
+    assert(not profile.inventory_valid, "unavailable inventory is not usable stale stock")
+    C_Container, NUM_BAG_SLOTS = oldContainer, oldBagCount
+    GetContainerNumSlots, GetContainerItemInfo, GetContainerItemID = oldSlots, oldInfo, oldID
+    GetServerTime, GetQuestResetTime = oldServerTime, oldResetTime
+    C_DateAndTime, C_QuestLog.IsQuestFlaggedCompleted = oldDateAndTime, oldFlagged
+    FG.Profile:Snapshot()
+    print("reputation inventory and daily snapshot ok")
+end
+
 -- Window size: Ctrl + mouse wheel over a window, or the setting; saved, nothing: the default.
 FG:Save("scale", 1.3)
 assert(FG:Get("scale") == 1.3 and FactoruideDB.settings.scale == 1.3, "scale saved")

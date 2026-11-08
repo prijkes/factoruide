@@ -75,6 +75,13 @@ pub struct StartState {
     /// Points with each faction the game lists for the character (none: recorded by an older
     /// addon).
     pub reputation: Vec<Standing>,
+    /// Carried bag supplies, aggregated by item ID; never includes bank or equipped items.
+    pub inventory: Vec<InventoryItem>,
+    /// False for older snapshots or a failed inventory read: stale stock cannot fund turn-ins.
+    pub inventory_valid: bool,
+    /// Daily quest/reset observations, when the client supplied them.
+    pub daily: Option<DailyState>,
+    pub daily_valid: bool,
     /// When it was recorded (unix seconds).
     pub time: i64,
 }
@@ -85,6 +92,22 @@ pub struct StartState {
 pub struct Standing {
     pub id: i64,
     pub value: i64,
+}
+
+/// A known carried quantity, not an assumed future supply.
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
+#[serde(default)]
+pub struct InventoryItem {
+    pub item: i64,
+    pub count: u32,
+}
+
+/// Daily completions from the same snapshot and the next observed server reset timestamp.
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
+#[serde(default)]
+pub struct DailyState {
+    pub completed: Vec<QuestId>,
+    pub reset_at: Option<i64>,
 }
 
 /// A quest of the log.

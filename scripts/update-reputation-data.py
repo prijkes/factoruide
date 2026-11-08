@@ -342,6 +342,25 @@ def verify_classic_db(path, audit):
         assert len(selected) == 352
 
 
+def profile_daily_ids(path, forever, check):
+    """Keep the profile's queried daily IDs in sync without embedding quest prose."""
+    import re
+
+    ids = sorted(row["quest"] for row in forever["daily_records"])
+    content = path.read_text(encoding="utf-8")
+    pattern = re.compile(r"(local DAILY_QUESTS = \{ -- DAILY_QUEST_IDS\n)(.*?)(\n\})", re.S)
+    match = pattern.search(content)
+    if not match:
+        raise ValueError(f"{path}: missing daily quest ID markers")
+    if check:
+        if [int(value) for value in re.findall(r"\d+", match.group(2))] != ids:
+            raise ValueError(f"{path}: daily IDs differ from the catalog")
+    else:
+        lines = "\n".join(f"    {quest}," for quest in ids)
+        path.write_text(content[:match.start(2)] + lines + content[match.end(2):], encoding="utf-8")
+    print(f"Validated {len(ids)} profile daily quest IDs.")
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--audit-dir", type=Path, required=True)
@@ -349,12 +368,15 @@ def main():
     parser.add_argument("--check", action="store_true")
     parser.add_argument("--verify-upstream", action="store_true")
     parser.add_argument("--verify-classic-db", type=Path)
+    parser.add_argument("--profile-daily-ids", type=Path, help="update/check the profile's numeric daily ID list")
     args = parser.parse_args()
     classic_audit = read_audit(args.audit_dir, "classic-estimate-kill-spillover-catalog.json")
     repeatable_audit = read_audit(args.audit_dir, "repeatable-verified-records.json")
     classic = classic_catalog(classic_audit)
     forever = forever_catalog(repeatable_audit)
     validate(classic, forever, classic_audit, repeatable_audit)
+    if args.profile_daily_ids:
+        profile_daily_ids(args.profile_daily_ids, forever, args.check)
     if args.verify_upstream:
         verify_upstream(forever)
     if args.verify_classic_db:
