@@ -123,3 +123,25 @@ fn reputation_completion_stop_keeps_best_route_and_finishes_supported_sources() 
         0
     );
 }
+
+#[test]
+fn reputation_completion_late_cancellation_cannot_return_a_finished_guide() {
+    let (prepared, req) = fixture();
+    let interrupt = Interrupt::default();
+    let completing = AtomicBool::new(false);
+    let cancelled = AtomicBool::new(false);
+    let progress = |event: &JobEvent<'_>| {
+        if matches!(event, JobEvent::Status("Planning reputation activities")) {
+            completing.store(true, Ordering::Relaxed);
+        } else if matches!(event, JobEvent::Status(_)) && completing.load(Ordering::Relaxed) {
+            cancelled.store(true, Ordering::Relaxed);
+            interrupt.cancel();
+        }
+    };
+    let outcome = plan_prepared(prepared, &req, &progress, &interrupt, None);
+    assert!(cancelled.load(Ordering::Relaxed));
+    assert!(
+        matches!(outcome, Err(JobError::Cancelled)),
+        "late cancellation must be checked before returning a finished guide"
+    );
+}

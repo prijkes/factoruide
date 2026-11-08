@@ -182,11 +182,13 @@ pub(crate) fn plan_prepared(
     let members = req.members(prepared.params.edition.rules());
     let start = members.first().copied().or(req.start.as_ref());
     let cancelled = || interrupt.cancelled();
-    let planner = planner.abortable(&cancelled);
     if !planner.params.reputation_goals.is_empty() {
         progress(&JobEvent::Status("Planning reputation activities"));
     }
-    let completed = planner.complete_reputation(&best, start);
+    let completed = Planner::new(&prepared.model, &prepared.world, &prepared.params, &prepared.profile)
+        .diagnosed(&prepared.diagnostics)
+        .abortable(&cancelled)
+        .complete_reputation(&best, start);
     if interrupt.cancelled() {
         return Err(JobError::Cancelled);
     }
@@ -264,6 +266,9 @@ pub(crate) fn plan_prepared(
         start: start.cloned(),
     };
     editor.set_walks(&mut outcome);
+    if interrupt.cancelled() {
+        return Err(JobError::Cancelled);
+    }
     Ok((outcome, editor.prepared))
 }
 
