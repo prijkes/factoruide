@@ -181,6 +181,12 @@ pub struct SourceIdentity {
     pub npc_id: Option<i64>,
     pub giver_npc_id: Option<i64>,
     pub ender_npc_id: Option<i64>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub npc_name: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub giver_npc_name: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub ender_npc_name: Option<String>,
 }
 
 #[derive(Debug, Clone, Default, PartialEq, Eq, Serialize, Deserialize)]
