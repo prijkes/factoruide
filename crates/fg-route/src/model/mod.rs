@@ -26,7 +26,11 @@ mod places;
 mod provenance_tests;
 mod pvp;
 mod quest;
+mod reputation_sources;
 mod required;
+pub(crate) use reputation_sources::{
+    BoundAcquisition, BoundCreature, BoundReputationCatalog, BoundReputationSource, BoundSourceKind,
+};
 pub mod requirements;
 mod rewards;
 mod selection;
@@ -249,7 +253,9 @@ pub fn load(
             }
         }
     }
+    let reputation_sources = BoundReputationCatalog::load(conn, world, &sources, profile, params)?;
     Ok(Model {
+        reputation_sources,
         known_class_powers,
         abilities,
         quests,

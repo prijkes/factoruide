@@ -277,6 +277,8 @@ pub struct SourceAcquisition {
     pub item_id: i64,
     pub units_per_acquisition: u32,
     pub npc_id: Option<i64>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub npc_name: Option<String>,
     pub location: Option<SourceLocation>,
     pub unit_price_copper: Option<i64>,
     pub drop_chance: Option<f64>,
