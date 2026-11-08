@@ -25,6 +25,11 @@ test("only used estimate sources warn and duplicate warnings appear once", () =>
   assert.deepEqual(facts.warnings, ["Known source cap"]);
 });
 
+test("identified prefix kill forecasts retain the visible Classic estimate notice", () => {
+  const p = program({ phases: [], result: result({ warnings: ["Classic-derived reputation rules are forecasts; gray-level scaling, per-kill rounding and live server behavior may differ."] }) });
+  assert.equal(reputationFacts([{ reputation_program: p }]).estimates, true);
+});
+
 test("editing cannot delete or move the reputation suffix into mandatory prefix work", () => {
   const a = { key: 1, step: { kind: "accept", quest: 1 } };
   const b = { key: 2, step: { kind: "turn_in", quest: 1 } };

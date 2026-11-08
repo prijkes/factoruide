@@ -214,7 +214,12 @@ export function RouteSummary({ route, notes, compare }: Props) {
             </>
           )}
           {reputation.estimates && <p className="notice warn">{t("Estimation Classic : les gains prévus ne sont pas garantis. L'addon vérifie vos sacs et vos réputations réelles.")}</p>}
-          {reputation.warnings.map((warning) => <p className="notice warn" key={warning}>{warning}</p>)}
+          {reputation.warnings.length > 0 && (
+            <details className="notes">
+              <summary>{t("Notes du calcul ({n})", { n: reputation.warnings.length })}</summary>
+              {reputation.warnings.map((warning) => <p className="muted" key={warning}>{warning}</p>)}
+            </details>
+          )}
         </section>
       )}
 

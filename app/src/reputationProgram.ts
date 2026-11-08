@@ -16,6 +16,8 @@ export function reputationFacts(steps: Pick<Step, "reputation_program">[]) {
     facts.calendar_wait_seconds = facts.calendar_wait_seconds == null || result.calendar_wait_seconds == null ? null : facts.calendar_wait_seconds + result.calendar_wait_seconds;
     const used = new Set(program.phases.flatMap((phase) => phase.actions.map((action) => action.source_id)));
     facts.estimates ||= program.sources.some((source) => used.has(source.id) && source.confidence === "classic_estimate");
+    // Prefix kills are reported by the combined replay without becoming suffix actions.
+    facts.estimates ||= result.warnings.some((warning) => warning.startsWith("Classic-derived reputation rules are forecasts"));
     for (const warning of result.warnings) warnings.add(warning);
   }
   facts.warnings = [...warnings];

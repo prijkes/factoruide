@@ -270,6 +270,8 @@ export interface StartState {
   /** Known carried materials; absent or invalid in older snapshots. */
   inventory?: { item: number; count: number }[];
   inventory_valid?: boolean;
+    /** Standing values forecast by a previous guide rather than a fresh game snapshot. */
+    reputation_inferred?: boolean;
   daily?: { completed: number[]; reset_at?: number | null } | null;
   daily_valid?: boolean;
   /** Copper. */
