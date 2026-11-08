@@ -1,0 +1,131 @@
+{
+  "source_head": "20c96ab8e07858eebc5aebc598cd86b43f6f6413",
+  "base_main": "9f84593843b33887a98e068e6880fbcee15f523c",
+  "fetched_upstream": "c27f59d1804367fe367407b74483ac89a5d4f64b",
+  "refs_integrated_before_main_advance": {
+    "refs/heads/diagnostic/cleanup-loss": "4ae4e9addc893acdc5261c798bce3d5ae46e149f",
+    "refs/heads/experiment/route-quality-comparison": "e73af02a582853403b51d408541c6596ebca9ed0",
+    "refs/heads/fix/bis-search-dispatch": "ddfddb5778dda16e5a006def8db0e1c24e385765",
+    "refs/heads/fix/preserve-cleanup-training": "f6fe4522dcb06ca114d6de3266082b2203222f98",
+    "refs/heads/fix/reachable-required-bis": "41dde85739829289789670b4af73c3cdadf1674b",
+    "refs/heads/fix/required-gear-route-merge": "c88f19ec1c28827990ff9fb16cdbe7975c5c6dbd",
+    "refs/heads/fix/required-reputation-and-acceptance": "b0a588c205607855006ac7f9656df96fa1a0ed2c",
+    "refs/heads/fix/shared-kill-credit": "d1c733cd6ba14834acf1682d677c4843e992bd7e",
+    "refs/heads/integrate/all-branches-2026-11-08": "20c96ab8e07858eebc5aebc598cd86b43f6f6413",
+    "refs/heads/main": "9f84593843b33887a98e068e6880fbcee15f523c",
+    "refs/remotes/origin/HEAD": "c27f59d1804367fe367407b74483ac89a5d4f64b",
+    "refs/remotes/origin/dependabot/npm_and_yarn/app/types/node-26.6.6": "0369a76279999e9c3f825364a5e3bbf695874547",
+    "refs/remotes/origin/group-guides": "db01257ba3350477336cc697f2dbb97de9e9840f",
+    "refs/remotes/origin/main": "c27f59d1804367fe367407b74483ac89a5d4f64b"
+  },
+  "all_ref_tips_ancestral": true,
+  "tests": {
+    "passed": 788,
+    "failed": 0,
+    "ignored": 4,
+    "filtered": 1
+  },
+  "known_exclusions": [
+    "Windows CRLF-sensitive fgstring roundtrip filtered",
+    "two client-dependent contrib tests ignored",
+    "two documentation examples ignored",
+    "allocation stress platform-gated on Windows"
+  ],
+  "frontend": {
+    "tests_passed": 9,
+    "i18n_texts": 1214,
+    "build": "passed",
+    "lint": "passed"
+  },
+  "addon_smoke": "passed; 3 released-guide fixtures",
+  "profile_smoke": "passed",
+  "release_workspace_all_target_clippy": "passed",
+  "format": "passed",
+  "production_build_features": [
+    "tauri/custom-protocol"
+  ],
+  "desktop": {
+    "path": "target/release/factoruide-app.exe",
+    "bytes": 159678464,
+    "sha256": "4f655ad9c6618103f50cfdec4a428c3fdbdcf3b921ed655ff8de3822d936f05e"
+  },
+  "addon_archive": {
+    "source": "20c96ab",
+    "path": "target/release/Factoruide-addons-20c96ab.zip",
+    "bytes": 713975,
+    "sha256": "a975a525fac9be3340444886e05d6aae587bd55165b208dc54e6e958af9baf74",
+    "zip_integrity": "passed",
+    "version": "0.16.0",
+    "provisional_until_final_review": false,
+    "addon_file_count": 68,
+    "archive_file_entries": 69
+  },
+  "database": {
+    "upstream_commit": "c27f59d1804367fe367407b74483ac89a5d4f64b",
+    "fork_commit": "9f84593843b33887a98e068e6880fbcee15f523c",
+    "all_62_upstream_table_rowsets_preserved_bidirectionally": true,
+    "only_overlays": [
+      "m_quest.reward_money",
+      "m_item_stats.buy_price",
+      "m_item_stats.sell_price",
+      "existing vmangos-money source attribution"
+    ],
+    "attribution_rows": 820,
+    "quest_rows": 5812,
+    "money_counts": {
+      "m_quest.reward_money": {
+        "negative": 71,
+        "zero": 3542,
+        "positive": 820,
+        "null": 1379
+      },
+      "m_item_stats.buy_price": {
+        "negative": 0,
+        "zero": 273,
+        "positive": 9274,
+        "null": 7
+      },
+      "m_item_stats.sell_price": {
+        "negative": 0,
+        "zero": 282,
+        "positive": 9265,
+        "null": 7
+      }
+    },
+    "upstream_raw_sha256": "d77568022626c19a0bcff82267934b240f31541ca2cced4eb021b8594b6eb869",
+    "fork_raw_sha256": "1c93c95bfa5d236728ce75d0d9059133a070cff9aa7fdaf62be902f7c3582db7",
+    "merged_raw_sha256": "64b05f5c05046ca404a4b81a3585a29fffbea674fdc7168a6d93c8c768ed2d14",
+    "merged_packed_sha256": "4bead5dfc7e8b9a3ef3f8a2ea98a901ae01ebecdd91d16e62dbfad28025c0d60",
+    "merged_packed_bytes": 12410204,
+    "zstd_level": 19,
+    "sqlite_integrity": "ok",
+    "roundtrip_exact": true
+  },
+  "original_saved_files_unchanged": {
+    "request": true,
+    "outcome": true,
+    "meta": true
+  },
+  "delivery_review": "passed: independent specification, code/data quality and local delivery review",
+  "main_advance": {
+    "previous_main": "9f84593843b33887a98e068e6880fbcee15f523c",
+    "integrated_head": "20c96ab8e07858eebc5aebc598cd86b43f6f6413",
+    "all_local_and_fetched_refs_integrated": true
+  },
+  "installed_addons": {
+    "target": "F:\\Program Files (x86)\\World of Warcraft\\_forever_\\Interface\\AddOns",
+    "version": "0.16.0",
+    "payload_files_verified": 68,
+    "backup_files_verified": 70,
+    "all_payload_matches_archive": true,
+    "legacy_files_preserved": [
+      "Factoruide_Guide/Config.lua",
+      "Factoruide_Guide/Routes.lua",
+      "Factoruide_Guide/Services.lua",
+      "Factoruide_Profile/Sent.lua"
+    ],
+    "savedvariables_and_generated_data_untouched": true,
+    "independent_check": "passed"
+  },
+  "post_review_changes": "documentation only: duplicate changelog heading, final plan/handoff/validation records"
+}

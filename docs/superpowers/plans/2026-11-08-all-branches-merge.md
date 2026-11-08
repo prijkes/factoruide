@@ -21,10 +21,10 @@
 
 ## Tasks
 
-- [ ] Audit remote branch equivalence and upstream semantic/data changes.
-- [ ] Resolve four Rust conflicts and any demonstrated integration defects; preserve both behaviors and test dungeon-only normalization of fork settings.
-- [ ] Resolve changelogs with fork additions under Unreleased; merge updated data with fork money columns and verify all other incoming data remains exact.
-- [ ] Run focused and full Rust, frontend and addon checks, formatting and release Clippy; refresh the production build and addon archive.
-- [ ] Independently review the integrated diff and database evidence; fix consequential findings and verify the corrections.
-- [ ] Commit the upstream merge, record superseded/equivalent side-branch ancestry without tree changes, advance local main and verify every ref is integrated.
-- [ ] Record final validation and handoff state, retaining private diagnostic evidence and backups.
+- [x] Audit remote branch equivalence and upstream semantic/data changes.
+- [x] Resolve four Rust conflicts and any demonstrated integration defects; preserve both behaviors and test dungeon-only normalization of fork settings.
+- [x] Resolve changelogs with fork additions under Unreleased; merge updated data with fork money columns and verify all other incoming data remains exact.
+- [x] Run focused and full Rust, frontend and addon checks, formatting and release Clippy; refresh the production build and addon archive.
+- [x] Independently review the integrated diff and database evidence; fix consequential findings and verify the corrections.
+- [x] Commit the upstream merge, record superseded/equivalent side-branch ancestry without tree changes, advance local main and verify every ref is integrated.
+- [x] Record final validation and handoff state, retaining private diagnostic evidence and backups.

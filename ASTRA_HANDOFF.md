@@ -1,5 +1,45 @@
 # Factoruide route-quality analysis: handoff to Astra
 
+Latest all-branch integration complete, 2026-11-08: local main now includes every
+local and fetched remote branch. The refreshed upstream had 15 new commits through
+`c27f59d`; normal merge `d0f7ccc` preserves the fork features and incoming data.
+Obsolete pre-rebase group guides and the already-equivalent dependency update are
+recorded by tree-preserving ancestry merges `b6a3561` and `20c96ab`. No obsolete
+profile-sharing behavior was restored. Branches/worktrees were retained; no push.
+
+See the [integration report](docs/all-branches-integration-2026-11-08.md),
+[validation record](docs/all-branches-validation-2026-11-08.json) and
+[completed plan](docs/superpowers/plans/2026-11-08-all-branches-merge.md).
+Product source is `20c96ab`, followed only by final documentation. Independent
+specification, code/data quality and delivery review passed without unresolved
+consequential findings. Do not repeat completed merge work.
+
+Verification: 788 release workspace tests pass, zero failures, with the same four
+ignored tests/examples and one known Windows CRLF test filtered. Release workspace
+all-target Clippy, formatting, frontend nine tests/build/lint/i18n (1,214 texts),
+and full addon/profile Lua smoke pass. Three released-guide fixtures are covered.
+The updated 5,812-quest Forever database preserves all 62 incoming table rowsets,
+plus the three fork money columns and 820 source attributions. Signed quest costs
+and NULLs remain intact. Raw DB SHA256 is
+`64b05f5c05046ca404a4b81a3585a29fffbea674fdc7168a6d93c8c768ed2d14`.
+Single-dungeon mode now clears inherited fork BiS goals and retains correct
+mandatory provenance; both integration defects have RED/GREEN regressions.
+
+Current production executable `target/release/factoruide-app.exe`: 159,678,464 bytes,
+SHA256 `4f655ad9c6618103f50cfdec4a428c3fdbdcf3b921ed655ff8de3822d936f05e`,
+built with `tauri/custom-protocol`. Current addon archive
+`target/release/Factoruide-addons-20c96ab.zip`: 713,975 bytes, SHA256
+`a975a525fac9be3340444886e05d6aae587bd55165b208dc54e6e958af9baf74`.
+The two addons in the explicitly requested Forever AddOns folder were refreshed to
+0.16.0 after review. All 68 installed payload files and all 70 backup files were
+independently verified. Legacy guide/settings files, generated data and
+SavedVariables were preserved. Original saved request/outcome/meta hashes remain
+unchanged. Native app sessions and the game were not launched or closed.
+
+Private merge/data/review/deployment evidence remains in ignored
+`.superpowers/sdd/2026-11-08-all-branches/`. Earlier records below are historical;
+their data, artifact hashes and main state apply to their frozen source versions.
+
 Latest continuation complete, 2026-11-08: required reputation, low-level quest
 eligibility, guide skip protection and missed-acceptance warnings are implemented,
 independently reviewed and merged into local `main`. All completed local branches

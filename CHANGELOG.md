@@ -38,8 +38,6 @@ An addon change also goes, in the same words, under Unreleased in that addon's o
 - WoW Forever: The Wrath of Rath'mael and The New Plague (Ruins of Lordaeron) ask for the chains of their zones done first (Rear Guard Patrol, both its parts, and A Recipe For Death), as in the game, so the guide plans the chains before them.
 - WoW Forever: more chains the sources list without a prerequisite are corrected, as in the game: Heart of Disruption (after An Alarming Request), Murloc Gills (after Testing the Wells), The Gurubashi Legends of Old, Highland Hides, the Buying Friendship quests and every starting zone's The Great Outdoors (after their zone's first quest).
 
-### WoW data
-
 - WoW Forever: the latest quest data and the game's new build, with 26 more contributions from players (quests seen in game, measured XP, creature places) and 55 Spanish, French and English names checked; Lakeshire's guards no longer count as hostile creatures around Guard Howe and Deputy Feldon.
 
 ## 0.16.0 (2026-11-07)
