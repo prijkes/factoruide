@@ -5497,6 +5497,16 @@ local function ReputationProgramTest()
         setup({ src }, { batch({ action("repair", "repair") }) })
         assert(char.guide.step == 2, "a below-Neutral repair source is unavailable exactly at Neutral")
     end)
+    check("a newly completed exclusive quest invalidates its active source", function()
+        local src = source("exclusive", 99101)
+        src.eligibility = { excluded_quests = { 99102 } }
+        setup({ src }, { batch({ action("exclusive", "exclusive") }) })
+        assert(char.guide.step == 1, "source initially available")
+        completed[99102] = true
+        FG.Guide:Advance()
+        assert(char.guide.step == 2, "a new exclusive alternative cannot trap an impossible reputation turn-in")
+        assert(table.concat(messages, " "):find("unavailable", 1, true), "source limitation is disclosed")
+    end)
     check("a reward updating standings before its event still belongs to the active run", function()
         local first, second = action("first", "one"), action("second", "two")
         first.completion_targets = { { kind = "reputation", faction_id = 69, standing = 100 } }
@@ -5508,10 +5518,121 @@ local function ReputationProgramTest()
         local progress = current().state
         actual = 100
         fire("UPDATE_FACTION")
+        FG.Guide:Advance()
+        assert(not progress.units.first, "a standing update cannot invent a turn-in completion")
         fire("QUEST_TURNED_IN", 99101, 0, 0)
         assert(
             progress.units.first == 1 and not progress.units.second,
             "event is attributed before its reward can advance the run"
+        )
+    end)
+    check("a terminal reputation checkpoint keeps delayed event attribution after the guide advances", function()
+        local delivery = action("terminal", "one")
+        delivery.completion_targets = { { kind = "reputation", faction_id = 69, standing = 100 } }
+        setup({ source("one", 99101) }, { batch({ delivery }) })
+        local progress = current().state
+        actual = 100
+        FG.Guide:Advance()
+        assert(char.guide.step == 2, "real targets finish without waiting on an event")
+        assert(not progress.units.terminal, "terminal target success is not a counted delivery")
+        fire("QUEST_TURNED_IN", 99101, 0, 0)
+        assert(progress.units.terminal == 1, "late event belongs to the exposed terminal occurrence")
+    end)
+    check("standing polls never latch future occurrences that were not exposed", function()
+        local first, future, other = action("exposed", "one"), action("unexposed", "one"), action("other", "two")
+        first.completion_targets = { { kind = "reputation", faction_id = 69, standing = 100 } }
+        future.completion_targets = first.completion_targets
+        setup(
+            { source("one", 99101), source("two", 99102) },
+            { batch({ first, future, other }) },
+            { ["69"] = 100, ["70"] = 100 }
+        )
+        local progress = current().state
+        actual = 100
+        FG.Guide:Advance()
+        FG.Guide:Refresh()
+        fire("QUEST_TURNED_IN", 99101, 0, 0)
+        fire("QUEST_TURNED_IN", 99101, 0, 0)
+        assert(
+            progress.units.exposed == 1 and not progress.units.unexposed,
+            "only the previously active occurrence can claim a late event"
+        )
+    end)
+    check("an old-window daily event records work without consuming fresh reset quota", function()
+        local first, second = action("old-window", "one"), action("new-window", "two")
+        first.completion_targets = { { kind = "reputation", faction_id = 69, standing = 100 } }
+        setup({ source("one", 99101, true, "shared"), source("two", 99102, true, "shared") }, {
+            daily({ first }),
+            { id = "next-window", kind = "daily_circuit", cycles = 1, actions = { second } },
+        }, { ["69"] = 100, ["70"] = 100 })
+        local progress = current().state
+        actual = 100
+        FG.Guide:Advance()
+        now, reset = 2001, 3000
+        FG.Guide:Advance()
+        fire("QUEST_TURNED_IN", 99101, 0, 0)
+        assert(progress.units["old-window"] == 1, "late daily event retains its old occurrence")
+        assert(FG.Guide:WantsQuest(99102), "old daily cannot spend the new window's shared quota")
+        fire("QUEST_TURNED_IN", 99102, 0, 0)
+        assert(char.guide.step == 2, "fresh-window daily remains executable")
+    end)
+    check("explicit navigation invalidates ambiguous pending completion attribution", function()
+        local first = action("old", "one")
+        first.completion_targets = { { kind = "reputation", faction_id = 69, standing = 100 } }
+        setup(
+            { source("one", 99101), source("two", 99102) },
+            { batch({ first, action("other", "two") }) },
+            { ["69"] = 100, ["70"] = 100 }
+        )
+        local progress = current().state
+        actual = 100
+        FG.Guide:Advance()
+        FG.Guide:Go(2)
+        fire("QUEST_TURNED_IN", 99101, 0, 0)
+        assert(not progress.units.old, "navigation cannot let an unrelated later event fund an old run")
+    end)
+    check("route version and programme changes cannot inherit pending occurrence credit", function()
+        for _, mode in ipairs({ "version", "fingerprint" }) do
+            local first = action("old", "one")
+            first.completion_targets = { { kind = "reputation", faction_id = 69, standing = 100 } }
+            local name, program = setup(
+                { source("one", 99101), source("two", 99102) },
+                { batch({ first, action("other", "two") }) },
+                { ["69"] = 100, ["70"] = 100 }
+            )
+            local previous = current().state
+            actual = 100
+            FG.Guide:Advance()
+            if mode == "version" then
+                FG.Routes[name].time = FG.Routes[name].time + 1
+            else
+                FG.Routes[name].steps[1].rp = {
+                    version = 1,
+                    sources = program.sources,
+                    result = program.result,
+                    phases = { batch({ first, action("other", "two", "turnin", 2) }) },
+                }
+            end
+            useRoute(name)
+            fire("QUEST_TURNED_IN", 99101, 0, 0)
+            assert(
+                not previous.units.old and not current().state.units.old,
+                mode .. " cannot count an old pending occurrence"
+            )
+        end
+    end)
+    check("a new same-quest interaction claims its own current occurrence", function()
+        local first = action("old", "one")
+        first.completion_targets = { { kind = "reputation", faction_id = 69, standing = 100 } }
+        setup({ source("one", 99101) }, { batch({ first, action("new", "one") }) }, { ["69"] = 100, ["70"] = 100 })
+        local progress = current().state
+        actual = 100
+        FG.Guide:Advance()
+        fire("QUEST_DETAIL")
+        fire("QUEST_TURNED_IN", 99101, 0, 0)
+        assert(
+            not progress.units.old and progress.units.new == 1,
+            "new acceptance clears ambiguous old same-quest attribution"
         )
     end)
     check("actual target stops unnecessary work; XP cannot prove standing", function()

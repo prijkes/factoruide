@@ -1250,6 +1250,7 @@ end
 --- step the character was on (login), since steps the game cannot say are done (a kill count, a
 --- grind, a use) would otherwise stop the guide far behind.
 function Guide:Resync(resume)
+    FG.Reputation:Deactivate()
     if route then
         PassVisits()
         if not (resume and route.steps[state.step]) then state.step = 1 end
@@ -1333,6 +1334,7 @@ end
 
 function Guide:Go(n)
     if not route then return end
+    FG.Reputation:Deactivate()
     state.step = math.max(1, math.min(n, #route.steps + 1))
     -- Arrived on a group done already: it stays shown until the player moves on.
     arrivedDone = false
@@ -1411,6 +1413,7 @@ local function SwitchProgress(name)
 end
 
 local function UseRoute(name)
+    FG.Reputation:Deactivate()
     if FG.AcceptanceAudit then FG.AcceptanceAudit:Reset() end
     route = FG.Routes and FG.Routes[name]
     name = route and name or nil

@@ -85,8 +85,43 @@ local function TargetsMet(targets, standings)
     return any
 end
 
+-- A standing update can retire the visible occurrence before its completion event arrives.
+-- Retain only that exposed occurrence: future actions skipped by the same poll earned nothing.
+local function LatchExposure(progress)
+    local exposed = progress.exposed
+    progress.exposed = nil
+    if not exposed or (progress.units[exposed.actionID] or 0) >= exposed.unitIndex then return end
+    progress.pending = progress.pending or {}
+    for _, pending in ipairs(progress.pending) do
+        if pending.key == exposed.key then return end
+    end
+    progress.pending[#progress.pending + 1] = exposed
+end
+
+local function ExposeTurnin(progress, action, source)
+    if action.kind ~= "turnin" then
+        progress.exposed = nil
+        return
+    end
+    local unitIndex = (progress.units[action.id] or 0) + 1
+    progress.exposed = {
+        key = table.concat({ progress.phase, progress.cycle, action.id, unitIndex }, ":"),
+        phase = progress.phase,
+        cycle = progress.cycle,
+        actionIndex = progress.action,
+        actionID = action.id,
+        questID = source.identity.quest_id,
+        unitIndex = unitIndex,
+        totalLimit = action.total_unit_limit,
+        resetAt = progress.resetAt,
+        daily = source.reset and source.reset.kind == "daily",
+        quotaKey = source.reset and source.reset.quota_key or source.id,
+    }
+end
+
 local function Finish(program, progress, standings)
     if progress.done then return end
+    LatchExposure(progress)
     local _, names = LiveStandings()
     for id, target in pairs(program.result and program.result.targets or {}) do
         local value = standings[tonumber(id)]
@@ -163,6 +198,9 @@ local function Allowed(source, standings)
     for _, id in ipairs(eligibility.prerequisite_quests or {}) do
         if not FG.QuestLog.IsQuestFlaggedCompleted(id) then return false end
     end
+    for _, id in ipairs(eligibility.excluded_quests or {}) do
+        if FG.QuestLog.IsQuestFlaggedCompleted(id) or FG.QuestLog.IsOnQuest(id) then return false end
+    end
     for _, condition in ipairs(eligibility.standing or {}) do
         local value, range = standings[condition.faction_id], condition.standing or {}
         if value == nil or range.minimum and value < range.minimum or range.maximum and value >= range.maximum then
@@ -211,6 +249,7 @@ end
 local function AdvanceAction(progress)
     progress.action = progress.action + 1
     progress.cycleUnits = {}
+    progress.exposed = nil
 end
 
 function Rep:Poll(step, index)
@@ -277,7 +316,9 @@ function Rep:Poll(step, index)
             local used = progress.cycleUnits[action.id] or 0
             local need = math.min(action.units_per_cycle or 0, (action.total_unit_limit or 0) - units + used)
             local daily = source and source.reset and source.reset.kind == "daily"
-            if need <= 0 or used >= need or action.kind ~= "acquire" and ActionTargetsMet(action, standings) then
+            local targetDone = action.kind ~= "acquire" and ActionTargetsMet(action, standings)
+            if need <= 0 or used >= need or targetDone then
+                if targetDone then LatchExposure(progress) end
                 AdvanceAction(progress)
             elseif
                 not source
@@ -338,6 +379,7 @@ function Rep:Poll(step, index)
                         )
                     )
                 end
+                ExposeTurnin(progress, action, source)
                 return false
             end
         end
@@ -350,6 +392,63 @@ function Rep:Poll(step, index)
     )
     return false
 end
+
+local function ProgramStates(each)
+    local guide = FG.Guide
+    local route = guide and guide:Route()
+    for index, step in ipairs(route and route.steps or {}) do
+        if step.k == "reputation" then
+            local _, progress = Context(step, index, false)
+            if progress and each(progress) then return true end
+        end
+    end
+    return false
+end
+
+-- Explicit navigation and route changes end the ambiguous event window. Recorded work stays.
+function Rep:Deactivate()
+    ProgramStates(function(progress)
+        progress.exposed, progress.pending = nil, nil
+    end)
+end
+
+local function CountPending(id)
+    return ProgramStates(function(progress)
+        for index, pending in ipairs(progress.pending or {}) do
+            if pending.questID == id then
+                table.remove(progress.pending, index)
+                local units = progress.units[pending.actionID] or 0
+                if units < pending.unitIndex and pending.unitIndex <= pending.totalLimit then
+                    progress.units[pending.actionID] = units + 1
+                    if
+                        progress.phase == pending.phase
+                        and progress.cycle == pending.cycle
+                        and progress.action == pending.actionIndex
+                    then
+                        progress.cycleUnits[pending.actionID] = (progress.cycleUnits[pending.actionID] or 0) + 1
+                    end
+                    -- The completion belongs to the captured server window, never a fresh quota.
+                    if pending.daily and pending.resetAt == progress.resetAt then
+                        progress.quota[pending.quotaKey] = (progress.quota[pending.quotaKey] or 0) + 1
+                    end
+                    return true
+                end
+            end
+        end
+    end)
+end
+
+local function NewQuestInteraction(id)
+    id = FG.Readable(id)
+    if type(id) ~= "number" then return end
+    ProgramStates(function(progress)
+        for index = #(progress.pending or {}), 1, -1 do
+            if progress.pending[index].questID == id then table.remove(progress.pending, index) end
+        end
+    end)
+end
+FG:On("QUEST_DETAIL", function() NewQuestInteraction(GetQuestID()) end)
+FG:On("QUEST_ACCEPTED", function(first, second) NewQuestInteraction(second or first) end)
 
 local function ActiveSnapshot()
     local guide = FG.Guide
@@ -407,6 +506,7 @@ function Rep:AutomationAllowed(id)
 end
 
 local function Count(kind, id)
+    if kind == "turnin" and CountPending(id) then return true end
     -- The reward may update standing or daily flags before QUEST_TURNED_IN. Attribute
     -- its event to the saved run before polling can advance to another run.
     local active = ActiveSnapshot()
