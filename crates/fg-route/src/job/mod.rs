@@ -21,6 +21,8 @@ mod routes;
 mod services;
 mod start;
 pub(crate) use start::objective_progress;
+#[cfg(test)]
+mod reputation_cancellation_tests;
 mod starts;
 mod timeline;
 
@@ -179,7 +181,16 @@ pub(crate) fn plan_prepared(
     let best = finalize_route(&planner, best)?;
     let members = req.members(prepared.params.edition.rules());
     let start = members.first().copied().or(req.start.as_ref());
-    let completed = planner.complete_reputation(&best, start)?;
+    let cancelled = || interrupt.cancelled();
+    let planner = planner.abortable(&cancelled);
+    if !planner.params.reputation_goals.is_empty() {
+        progress(&JobEvent::Status("Planning reputation activities"));
+    }
+    let completed = planner.complete_reputation(&best, start);
+    if interrupt.cancelled() {
+        return Err(JobError::Cancelled);
+    }
+    let completed = completed?;
     let route = export::build_traced(
         &planner,
         &prepared.profile,
