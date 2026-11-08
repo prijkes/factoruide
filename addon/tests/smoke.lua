@@ -5415,7 +5415,7 @@ local function ReputationProgramTest()
             completion_targets = {},
         }
     end
-    local function setup(sources, phases, target)
+    local function setup(sources, phases, target, notes)
         serial = serial + 1
         actual, stock, now, reset, shift, detail, accepts, turns, messages = 0, {}, 1000, 2000, false, 99101, 0, 0, {}
         onQuest[99101], completed[99101], completed[99102] = nil, nil, nil
@@ -5424,7 +5424,10 @@ local function ReputationProgramTest()
             version = 1,
             sources = sources,
             phases = phases,
-            result = { targets = type(target) == "table" and target or { ["69"] = target or 100 }, warnings = {} },
+            result = {
+                targets = type(target) == "table" and target or { ["69"] = target or 100 },
+                warnings = notes or {},
+            },
         }
         local name = "reputation-playback-" .. serial
         FG.Routes[name] = {
@@ -5454,6 +5457,56 @@ local function ReputationProgramTest()
         local ok, err = pcall(fn)
         if not ok then failures[#failures + 1] = name .. ": " .. tostring(err) end
     end
+    check("source audit notes produce one summary while estimates and runtime results stay visible", function()
+        local notes = {}
+        for i = 1, 333 do
+            notes[i] = "Unselected source audit note " .. i
+        end
+        local gather = action("gather", "cloth", "acquire", 20)
+        gather.acquisition = { kind = "exact_creature_drop", item_id = 14047, npc_id = 301 }
+        gather.completion_targets = { { kind = "inventory", item_id = 14047, count = 20 } }
+        setup(
+            { source("cloth", 99101), source("unavailable", nil) },
+            { batch({ gather, action("deliver", "cloth"), action("unavailable", "unavailable") }) },
+            100,
+            notes
+        )
+        assert(#messages <= 2, "hundreds of source notes cannot flood chat at first poll")
+        local initial = table.concat(messages, " ")
+        assert(
+            initial:find("333", 1, true) and initial:find("app", 1, true),
+            "source note count directs the player to the app"
+        )
+        assert(
+            initial:find("Classic reputation estimate", 1, true),
+            "used structured estimate confidence is visible during acquisition"
+        )
+        assert(not initial:find("Unselected source audit note", 1, true), "source audit details remain in the app")
+        local printed = #messages
+        for _ = 1, 20 do
+            FG.Guide:Advance()
+        end
+        assert(#messages == printed, "repeated activity polls do not repeat the summary or estimate notice")
+        stock[14047] = 20
+        fire("BAG_UPDATE_DELAYED")
+        stock[14047] = 0
+        fire("QUEST_TURNED_IN", 99101, 0, 0)
+        local final = table.concat(messages, " ")
+        assert(final:find("unavailable or unsupported", 1, true), "actual active-source limitation remains visible")
+        assert(
+            final:find("shortfall 100", 1, true) and char.guide.step == 2,
+            "actual final deficit remains visible without trapping the guide"
+        )
+    end)
+    check("unused estimate descriptors do not warn for confirmed work", function()
+        local confirmed = source("confirmed", 99101)
+        confirmed.confidence = "confirmed"
+        setup({ confirmed, source("unused-estimate", 99102) }, { batch({ action("confirmed", "confirmed") }) })
+        assert(
+            not table.concat(messages, " "):find("Classic reputation estimate", 1, true),
+            "only sources used by programme actions require an estimate notice"
+        )
+    end)
     check("repeatable events count active run only, across navigation and route switching", function()
         local name = setup(
             { source("cloth", 99101) },

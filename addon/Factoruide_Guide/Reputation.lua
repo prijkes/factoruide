@@ -119,6 +119,36 @@ local function ExposeTurnin(progress, action, source)
     }
 end
 
+local function ProgramNotices(program, progress)
+    if progress.noticesShown then return end
+    progress.noticesShown = true
+    local notes = #(program.result and program.result.warnings or {})
+    if notes > 0 then
+        Warn(
+            progress,
+            string.format(
+                FG.T("%d reputation planning notes. Review source details and limitations in the Factoruide app."),
+                notes
+            )
+        )
+    end
+    local used = {}
+    for _, phase in ipairs(program.phases or {}) do
+        for _, action in ipairs(phase.actions or {}) do
+            used[action.source_id] = true
+        end
+    end
+    for _, source in ipairs(program.sources or {}) do
+        if used[source.id] and source.confidence == "classic_estimate" then
+            Warn(
+                progress,
+                FG.T("Classic reputation estimate: actual inventory and faction standings determine your result.")
+            )
+            break
+        end
+    end
+end
+
 local function Finish(program, progress, standings)
     if progress.done then return end
     LatchExposure(progress)
@@ -268,9 +298,7 @@ function Rep:Poll(step, index)
         Finish(program, progress, standings)
         return true
     end
-    for _, warning in ipairs(program.result and program.result.warnings or {}) do
-        Warn(progress, warning)
-    end
+    ProgramNotices(program, progress)
     local clock = ResetWindow(progress)
     -- Each pass advances at least one action/cycle, or returns a live activity.
     for _ = 1, 1000 do
@@ -371,14 +399,6 @@ function Rep:Poll(step, index)
             elseif progress.blocked and progress.blocked[source.id] then
                 AdvanceAction(progress)
             else
-                if source.confidence == "classic_estimate" then
-                    Warn(
-                        progress,
-                        FG.T(
-                            "Classic reputation estimate: actual inventory and faction standings determine your result."
-                        )
-                    )
-                end
                 ExposeTurnin(progress, action, source)
                 return false
             end
