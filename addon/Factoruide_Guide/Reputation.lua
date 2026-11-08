@@ -438,9 +438,8 @@ FG:On("PARTY_KILL", function(attacker, target)
     local _, npc = FG.ParseGUID(target)
     if Count("kill", npc) and FG.Guide then FG.Guide:Advance() end
 end)
-FG:On("UPDATE_FACTION", function()
-    if FG.Guide then FG.Guide:Advance() end
-end)
+-- Faction gains can arrive before QUEST_TURNED_IN. Reconcile standings on the guide's
+-- normal ticker (or its quest/kill events), after attributing that completion to its run.
 
 function Rep:Presentation(step, index)
     if not step or step.k ~= "reputation" or not FG.Guide or FG.Guide:CurrentStep() ~= index then return step end

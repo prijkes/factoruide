@@ -5507,6 +5507,7 @@ local function ReputationProgramTest()
         )
         local progress = current().state
         actual = 100
+        fire("UPDATE_FACTION")
         fire("QUEST_TURNED_IN", 99101, 0, 0)
         assert(
             progress.units.first == 1 and not progress.units.second,
