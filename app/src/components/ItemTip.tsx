@@ -138,7 +138,7 @@ export function ItemBlock({ item, name, info, icon }: { item: number; name?: str
       {data.armor > 0 && <div className="item-armor">{t("Armure : {n}", { n: data.armor })}</div>}
       {data.dps > 0 && (
         <div className="item-weapon">
-          {t("{dps} dégâts par seconde (vitesse {speed})", { dps: data.dps, speed: data.speed })}
+          {t("{dps} dégâts par seconde (vitesse {speed})", { dps: data.dps.toFixed(1), speed: data.speed })}
         </div>
       )}
       {data.stats.map(([code, value]) => (
