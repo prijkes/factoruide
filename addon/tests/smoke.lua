@@ -5507,6 +5507,19 @@ local function ReputationProgramTest()
             "only sources used by programme actions require an estimate notice"
         )
     end)
+    check("the engine estimate warning stays visible without a phased source action", function()
+        setup({ source("prefix-estimate", 99101) }, {}, 100, {
+            "Classic-derived reputation rules are forecasts; gray-level scaling, per-kill rounding and live server behavior may differ.",
+        })
+        assert(
+            table.concat(messages, " "):find("Classic reputation estimate", 1, true),
+            "identified prefix/acquisition forecasts retain an explicit Classic notice"
+        )
+        local printed = #messages
+        FG.Guide:Advance()
+        FG.Guide:Refresh()
+        assert(#messages == printed, "engine estimate notice is not repeated after the programme finishes")
+    end)
     check("repeatable events count active run only, across navigation and route switching", function()
         local name = setup(
             { source("cloth", 99101) },

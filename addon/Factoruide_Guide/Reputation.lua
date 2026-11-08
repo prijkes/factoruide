@@ -138,14 +138,24 @@ local function ProgramNotices(program, progress)
             used[action.source_id] = true
         end
     end
-    for _, source in ipairs(program.sources or {}) do
-        if used[source.id] and source.confidence == "classic_estimate" then
-            Warn(
-                progress,
-                FG.T("Classic reputation estimate: actual inventory and faction standings determine your result.")
-            )
+    local estimated = false
+    for _, warning in ipairs(program.result and program.result.warnings or {}) do
+        if warning:find("Classic-derived reputation rules are forecasts", 1, true) == 1 then
+            estimated = true
             break
         end
+    end
+    for _, source in ipairs(program.sources or {}) do
+        if used[source.id] and source.confidence == "classic_estimate" then
+            estimated = true
+            break
+        end
+    end
+    if estimated then
+        Warn(
+            progress,
+            FG.T("Classic reputation estimate: actual inventory and faction standings determine your result.")
+        )
     end
 end
 
