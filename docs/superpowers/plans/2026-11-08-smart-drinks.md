@@ -73,7 +73,7 @@ paths; preserve the existing Objective and dungeon representations.
   pre-existing Windows fixture failure separately if it occurs.
 - [x] Build release CLI and scratch-generate the saved request; verify Smart
   Drinks prerequisites, actual collection/turn-in, reward and keep flags.
-- [ ] Build the desktop app with tauri/custom-protocol, identify the delivered
+- [x] Build the desktop app with tauri/custom-protocol, identify the delivered
   binary, then integrate under the user's existing main/push authorization.
 - [x] State that existing guides need regeneration; addon-only refresh is not
   sufficient for a planner fix. Preserve the installed Guide 0.16.2 import fix.

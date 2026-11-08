@@ -74,3 +74,6 @@ The CLI SHA-256 is
 This is a planner correction. The installed Guide 0.16.2 addon and guide format 3
 remain compatible and need no file changes. Reopen Factoruide, regenerate the
 guide, and import the new text into WoW. Existing guide text keeps its old steps.
+
+The verified source fix is commit `b77706f`, integrated into `main` by a
+fast-forward merge. The compiled code matches the independently reviewed source.
