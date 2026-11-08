@@ -427,6 +427,21 @@ pub struct Params {
 pub struct ParamsBuilder(Params);
 
 impl Params {
+    /// The settings of a dungeon guide of dungeon `area` (instance area): the guide does its
+    /// quests (`Profile::dungeon_guide`), so no other dungeon, no zone forced or preferred, no
+    /// reputation or gear goal, no start chosen.
+    pub fn for_dungeon_guide(&mut self, area: i64) {
+        self.dungeons = false;
+        self.forced_dungeons.clear();
+        self.forced_dungeon_quests.clear();
+        self.excluded_dungeons.retain(|&d| d != area);
+        self.forced_zones.clear();
+        self.preferred_zones.clear();
+        self.reputation_goals.clear();
+        self.bis = BisMode::Off;
+        self.start_zone = 0;
+    }
+
     /// Settings to change from these.
     pub fn builder(self) -> ParamsBuilder {
         ParamsBuilder(self)
@@ -1005,6 +1020,23 @@ pub(crate) fn kill_factor(d: f64) -> f64 {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn dungeon_guides_clear_inherited_gear_and_reputation_goals() {
+        for bis in [BisMode::Prefer, BisMode::Required] {
+            let mut params = Params {
+                bis,
+                reputation_goals: vec![ReputationGoal {
+                    faction: 72,
+                    target: 42000,
+                }],
+                ..Params::default()
+            };
+            params.for_dungeon_guide(900);
+            assert_eq!(params.bis, BisMode::Off, "a dungeon guide has no outside gear goals");
+            assert_eq!(params.reputation_goals, [] as [ReputationGoal; 0]);
+        }
+    }
 
     /// The builder changes what it is told to and nothing else.
     #[test]

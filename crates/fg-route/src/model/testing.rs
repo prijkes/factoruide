@@ -233,6 +233,16 @@ impl Q {
         self
     }
 
+    /// Its giver stands among `count` hostile mobs of level `level`.
+    pub fn guarded(mut self, level: i64, count: u32) -> Self {
+        self.quest.start_guard = Guard {
+            level,
+            count,
+            elite: false,
+        };
+        self
+    }
+
     pub fn xp(mut self, xp: i64) -> Self {
         self.quest.xp = xp;
         self
@@ -301,6 +311,12 @@ impl Q {
 
     pub fn exclusive_with(mut self, quests: &[i64]) -> Self {
         self.quest.exclusive = quests.to_vec();
+        self
+    }
+
+    /// A breadcrumb to quest `id`: closed once that one is taken.
+    pub fn breadcrumb_for(mut self, id: i64) -> Self {
+        self.quest.breadcrumb_for = Some(id);
         self
     }
 
@@ -609,6 +625,14 @@ impl Scenario {
         self
     }
 
+    /// A dungeon guide of dungeon `area` (`PlanRequest::dungeon`), ending at level `to` at least.
+    pub fn dungeon_guide(mut self, area: i64, to: i64) -> Self {
+        self.profile.dungeon_guide = Some(area);
+        self.profile.to_level = to;
+        self.params.for_dungeon_guide(area);
+        self
+    }
+
     pub fn levels(mut self, from: i64, to: i64) -> Self {
         self.profile.from_level = from;
         self.profile.to_level = to;
@@ -818,9 +842,11 @@ impl Scenario {
             }
         }
         let reputation = super::chains::reputation_candidates(&quests, &self.params);
-        // Use the loader's lower-level exception for selected faction reward ancestry.
+        // Match the loader's exceptions for dungeon guides, must-haves, and selected faction
+        // reward ancestry below the character's starting level.
         quests.retain(|q| {
             self.required.contains(&q.id)
+                || self.profile.dungeon_guide.is_some()
                 || reputation.contains(&q.id)
                     && q.min_level <= self.profile.to_level
                     && q.level <= self.profile.to_level + self.params.max_quest_above
@@ -914,10 +940,19 @@ impl Scenario {
         crate::job::check_dungeon_levels(&model, &self.params, &self.profile)?;
         let mut notes = Vec::new();
         crate::job::check_exclusive_choices(&model, &members)?;
-        if let Some(start) = first {
-            let mates: Vec<StartState> = members.iter().skip(1).copied().cloned().collect();
+        let mates: Vec<StartState> = members.iter().skip(1).copied().cloned().collect();
+        let mut start = first.cloned();
+        if let Some(start) = &start {
             crate::job::start_from(&mut model, &world, &mut self.params, start, &mates, &mut notes);
         }
+        crate::job::raise_dungeon_guide(
+            &mut model,
+            &world,
+            &mut self.params,
+            &mut self.profile,
+            start.as_mut().map(|s| (s, mates.as_slice())),
+            &mut notes,
+        )?;
         model.initial.abilities = model.abilities.initial(first, self.profile.from_level);
         Ok(Prepared {
             profile: self.profile,
@@ -1014,6 +1049,7 @@ pub fn profile(faction: Faction, from: i64, to: i64) -> Profile {
         locale: None,
         mates: Vec::new(),
         player: String::new(),
+        dungeon_guide: None,
     }
 }
 

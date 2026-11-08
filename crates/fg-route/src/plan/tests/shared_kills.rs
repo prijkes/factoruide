@@ -471,3 +471,30 @@ fn only_kills_beyond_the_rewarded_shared_goal_count_as_grinding() {
     assert_eq!(state.spent.fighting, 48.0);
     assert_eq!(state.spent.grinding, 72.0);
 }
+
+#[test]
+fn shared_kill_respawns_count_only_new_kills_and_not_imported_progress() {
+    for imported in [0.0, 0.4] {
+        let mut p = two_quests(2, 5);
+        p.model.initial.progress = vec![(1, 0, imported)];
+        for q in &mut p.model.quests {
+            let o = &mut q.objectives[0];
+            o.pool = crate::model::Pool {
+                mine: 1.0,
+                rate: 1.0 / 60.0,
+                each: 24.0,
+                wait: (o.kills - 1.0) * 36.0,
+            };
+            o.extra = o.pool.wait;
+        }
+        let planner = planner(&p);
+        let mut state = planner.sim().initial_state();
+        planner.sim().apply(&mut state, objective(0), None);
+        planner.sim().apply(&mut state, objective(1), None);
+        let kills = if imported == 0.0 { 5 } else { 3 };
+        let wait = f64::from(kills - 1) * 36.0;
+        assert_eq!(state.spent.mob_xp, i64::from(kills) * 95);
+        assert!((state.spent.waiting - wait).abs() < 1e-6);
+        assert!((state.spent.fighting - (f64::from(kills) * 24.0 + wait)).abs() < 1e-6);
+    }
+}

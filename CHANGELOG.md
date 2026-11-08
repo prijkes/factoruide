@@ -12,10 +12,6 @@ An addon change also goes, in the same words, under Unreleased in that addon's o
 
 - Reputation warnings describe the saved guide's shortfall, and missing starting standings are labeled as estimates for each faction.
 - Quest warnings separate class, gear and other mandatory goals, with neutral wording for older guides.
-- The steps inside a dungeon are a block of their own on the guide page, shown on the map of the dungeon's floor they are on (Classic and WoW Forever dungeons, from the game's own dungeon maps).
-- The first guide of a game version no longer fails now and then because another command removed its data while unpacking it.
-- A settings change made while the addon installs, or while a character is added back or forgotten, is no longer lost.
-- A dungeon quest with one objective inside shows its name in the guide ("An Ancient Grudge: Faldrim Anvilmar"), not the dungeon's ("The Hall of Thanes: Faldrim Anvilmar").
 - An item's details show on hover, as the game's tooltip: its picture beside its name colored by its quality, what it is, what it gives, the level it asks and what it sells for, in the game's own font, with the game's own money coins (the best gear's rows and a step's own tip; the picture, font and coins are the game's own, read from the client like the icons).
 - The best gear has its own tab in the guide view (Gear), laid out like the game's character sheet: one level band at a time, the game's own empty-slot pictures, the items' icons with their quality's border and details on hover, and where each comes from in the middle.
 
@@ -31,6 +27,35 @@ An addon change also goes, in the same words, under Unreleased in that addon's o
 - Accepted quests asking for the same creature kills share progress, with combat time, XP and loot counted once; shared work is not charged again as grinding for an unfinished quest.
 - With best gear from vendors enabled, the planner can still add useful quests and choose another version of a class quest.
 - A guide started from a character counts the copper already in the bags when buying gear from vendors.
+
+### Addon
+
+- Warns when a planned quest offered during a conversation was left unaccepted, so you can return and accept it manually.
+- Required guide steps, including planned reputation work, are kept when your level is ahead of the guide.
+
+### WoW data
+
+- WoW Forever: The Wrath of Rath'mael and The New Plague (Ruins of Lordaeron) ask for the chains of their zones done first (Rear Guard Patrol, both its parts, and A Recipe For Death), as in the game, so the guide plans the chains before them.
+- WoW Forever: more chains the sources list without a prerequisite are corrected, as in the game: Heart of Disruption (after An Alarming Request), Murloc Gills (after Testing the Wells), The Gurubashi Legends of Old, Highland Hides, the Buying Friendship quests and every starting zone's The Great Outdoors (after their zone's first quest).
+
+### WoW data
+
+- WoW Forever: the latest quest data and the game's new build, with 26 more contributions from players (quests seen in game, measured XP, creature places) and 55 Spanish, French and English names checked; Lakeshire's guards no longer count as hostile creatures around Guard Howe and Deputy Feldon.
+
+## 0.16.0 (2026-11-07)
+
+A guide for one dungeon from your character, dungeons as zones with their steps on their floor maps, every quest of a dungeon forced with its quests, and the fixes of your reports (GitHub #97 to #125).
+
+### App
+
+- A Dungeon tab: pick a character and a dungeon for a short guide of every quest of that dungeon, with the quests leading to them, and nothing else. A character below the level its quests need gets a warning.
+- The steps inside a dungeon are a block of their own on the guide page, shown on the map of the dungeon's floor they are on (Classic and WoW Forever dungeons, from the game's own dungeon maps).
+- The first guide of a game version no longer fails now and then because another command removed its data while unpacking it.
+- A settings change made while the addon installs, or while a character is added back or forgotten, is no longer lost.
+- A dungeon quest with one objective inside shows its name in the guide ("An Ancient Grudge: Faldrim Anvilmar"), not the dungeon's ("The Hall of Thanes: Faldrim Anvilmar").
+
+### Guides
+
 - A dungeon's quests are steps inside it: taken from a boss's drop or a giver inside, objectives and hand-ins, each where it is done, the dungeon entered once (its run's time and mobs counted then). Guides made before get those steps when opened.
 - After a quest at an NPC who walks around, the level checkpoint's arrow points at the checkpoint, not along the NPC's path.
 - A guide text with a control character or a character name with an unusual letter is written into the data addon as the game reads it, not as stray letters.
@@ -45,21 +70,20 @@ An addon change also goes, in the same words, under Unreleased in that addon's o
 - A quest started by an item found in a dungeon's object is planned with the run and taken in it: WoW Forever's The Treaty of Understanding, from the Hall of Thanes.
 - Dungeons run above their monsters' level: the level-60 dungeons are run at 60 instead of leaving the guide impossible to make (GitHub #99).
 - "Profession trainer stops" option (under the professions of a player of the new guide, off by default): with professions, the route goes to the trainer to learn each profession and, before the skill reaches the cap of its rank, each next rank. A trainer near the route is a detour, a far one a trip, both counted in the route's time; a rank no trainer teaches has no stop (GitHub #106).
+- A dungeon forced with its quests does all of them: a delivery filed under a dungeon ("Speak with Nara Wildmane") no longer asks for a run of its own, a breadcrumb the guide needs comes before the quest it leads to, a quest taken inside a dungeon is no longer held back by the creatures at its entrance, and the quest unlocking one of the dungeon's is done before its last level (GitHub #125).
+- WoW Forever: the rogue quests of C's dead drop near Pyrewood (The Horn of Xelthos, The Eye of Bhossca) can be in a guide: the infiltration alone at the dungeon's entrance, then the letter at a capital's mailbox and the reward at the dead drop (GitHub #125).
 - "Buy at the auction house" option (advanced settings, off by default): the items a quest asks for that nothing else gives, made by a profession like Rough Dynamite, are bought at the nearest auction house instead of leaving the quest out (GitHub #97).
 
 ### Addon
 
-- Warns when a planned quest offered during a conversation was left unaccepted, so you can return and accept it manually.
-- Required guide steps, including planned reputation work, are kept when your level is ahead of the guide.
 - WoW Forever: the Sleeping Bag XP reminder starts after its reward quest is completed.
 
 ### WoW data
 
+- WoW Forever: the Emeraldon Oracles are no longer placed in Orgrimmar, where they kept Thrall's Hidden Enemies chain (Ragefire Chasm) out of reach of every Horde guide (GitHub #125).
 - WoW Forever: the latest quest data and the game's new build, with 26 more contributions from players (quests seen in game, measured XP, creature places) and 90 contributed facts checked: Spanish and French names, seven Lordaeron and Undercity quests open at level 15, Khan Hratha asks only for the Maraudine Key Fragment.
 - WoW Forever's Hall of Thanes: Underground Map is planned (the Dark Iron Map drops from the Dark Iron Spies and Captain Beld), and Old Ironforge Incursion after it (GitHub #98).
 - WoW Forever: the warlocks' pets and the Theramore Emissaries no longer count as hostile creatures in Stormwind (they kept low-level characters from its auction house), and A Dynamite Plan asks for its 10 Rough Dynamite.
-- WoW Forever: The Wrath of Rath'mael and The New Plague (Ruins of Lordaeron) ask for the chains of their zones done first (Rear Guard Patrol, both its parts, and A Recipe For Death), as in the game, so the guide plans the chains before them.
-- WoW Forever: more chains the sources list without a prerequisite are corrected, as in the game: Heart of Disruption (after An Alarming Request), Murloc Gills (after Testing the Wells), The Gurubashi Legends of Old, Highland Hides, the Buying Friendship quests and every starting zone's The Great Outdoors (after their zone's first quest).
 - The players' latest contributions: more quests seen in game, creature ranks and object names (WoW Forever).
 - WoW Forever: the library's books (Friend of the Library) are planned again, the game files them with the event quests.
 - The XP players measure in game where the quest data was off (TBC: Your Place In The World and Rude Awakening give 40, not 60), with the latest quest data and the game's new builds.

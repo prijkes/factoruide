@@ -8,15 +8,17 @@ under Unreleased; `scripts/release.sh` gives them the release's version.
 
 - Warns when a planned quest offered during a conversation was left unaccepted, so you can return and accept it manually.
 - Required guide steps, including planned reputation work, are kept when your level is ahead of the guide.
-
-- WoW Forever: no more "ADDON_ACTION_BLOCKED: SetPassThroughButtons" message when the world map is open during a fight.
-- A dungeon's quests show together until each is done, even after leaving it; "Skip the dungeon" leaves the ones not finished aside.
-- WoW Forever: the Sleeping Bag XP reminder starts after its reward quest is completed.
 - WoW Forever: the automatic purchase of food, water and ammo works (the client lost the old item count API).
 - WoW Forever: no more interface errors from the quest panel in combat; its lines wait for the end of the fight.
 - Steps that buy the guide's gear at a vendor: the item's picture in the step, done once the item is in the bags or worn.
 - At a merchant, the guide's gear is bought for you, like the items its quests ask for (hold Shift to skip).
 - The reward item the guide picked for a turn-in shows its picture too.
+
+## 0.16.0 (2026-11-07)
+
+- WoW Forever: no more "ADDON_ACTION_BLOCKED: SetPassThroughButtons" message when the world map is open during a fight.
+- A dungeon's quests show together until each is done, even after leaving it; "Skip the dungeon" leaves the ones not finished aside.
+- WoW Forever: the Sleeping Bag XP reminder starts after its reward quest is completed.
 
 ## 0.15.0 (2026-11-01)
 

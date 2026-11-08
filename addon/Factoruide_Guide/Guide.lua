@@ -951,8 +951,9 @@ function Guide:Refresh()
     local function Add(index, done)
         local step = route.steps[index]
         -- The mobs to kill on the way to a step: a line of their own before it, counted while it
-        -- is the current step.
-        if (step.fx or step.fk) and not done then
+        -- is the current step, greyed with it once it is done (the XP bar's box still holds
+        -- their XP).
+        if step.fx or step.fk then
             local farm = index == state.step and state.farm and state.farm.step == index and state.farm or nil
             -- The XP of the kills (guides made before: their number).
             local need = step.fx or step.fk
@@ -974,7 +975,7 @@ function Guide:Refresh()
                 have = have,
                 need = need,
                 count = count,
-                done = have ~= nil and have >= need,
+                done = done or (have ~= nil and have >= need),
                 chips = {},
             })
         end

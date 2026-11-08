@@ -169,3 +169,38 @@ fn known_class_reward_reused_by_an_independent_goal_loses_class_origin() {
         assert!(!p.model.quests[0].mandatory_origins.contains(Origins::CLASS));
     }
 }
+
+#[test]
+fn dungeon_guide_origins_reach_the_outdoor_prerequisite() {
+    use crate::testing::{At, Obj};
+    let p = Scenario::new()
+        .levels(18, 18)
+        .zone(1, "Westfall")
+        .dungeon("The Deadmines", 1, 70.0, 70.0)
+        .dungeon_guide(900, 18)
+        .quest(Q::new(1, "Lead").level(18))
+        .quest(
+            Q::new(2, "Inside").level(18).after(&[1]).objective(
+                Obj::kill(
+                    "Defias",
+                    18,
+                    6,
+                    At {
+                        zone: 1,
+                        x: 70.0,
+                        y: 70.0,
+                    },
+                )
+                .inside(0),
+            ),
+        )
+        .build();
+    for id in [1, 2] {
+        let q = &p.model.quests[p.model.index[&id]];
+        assert!(q.mandatory && q.zone_forced);
+        assert!(
+            q.mandatory_origins.contains(Origins::FORCED_DUNGEON),
+            "{id} keeps the reason it is required"
+        );
+    }
+}
