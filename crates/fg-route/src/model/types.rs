@@ -806,6 +806,8 @@ pub struct Initial {
     pub reputation_all: crate::reputation::Standings,
     /// Selected factions whose initial standing was measured in the character snapshot.
     pub reputation_recorded: HashSet<i64>,
+    /// Present standings came from a continuation forecast rather than a fresh game snapshot.
+    pub reputation_inferred: bool,
     /// The other players of a group guide, as `Profile::mates`.
     pub mates: Vec<MateStart>,
     /// In a group: the members each quest is still for (a bit each, the character's 1), not

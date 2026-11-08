@@ -1,4 +1,4 @@
-//! Best-found selected faction totals and shortfalls from supported direct quest rewards.
+//! Best-found selected faction totals and shortfalls from the combined replay.
 
 use super::state::{Event, Kind};
 use super::{Planner, Stop};
@@ -48,6 +48,17 @@ impl Planner<'_> {
     /// Selected standings from the actual turn-ins of an explicit or ordinary replay.
     /// Resolved quest rewards already include their bonuses and spillover; apply them once.
     pub(crate) fn reputation_reached_trace(&self, trace: &[super::Timed]) -> Vec<f64> {
+        if let Some(program) = trace.iter().rev().find_map(|t| match &t.event {
+            Event::ReputationProgram { program } => Some(program),
+            _ => None,
+        }) {
+            return self
+                .params
+                .reputation_goals
+                .iter()
+                .map(|goal| program.result.reached.get(&goal.faction).copied().unwrap_or(0.0))
+                .collect();
+        }
         let initial = self.sim().initial_state();
         let mut reputation = initial.reputation.clone();
         let mut turned = HashSet::new();
@@ -99,7 +110,7 @@ impl Planner<'_> {
                         .unwrap_or_else(|| format!("Faction {}", goal.faction));
                     let start = self.model.initial.reputation.get(i).copied().unwrap_or(0.0);
                     let provenance = if self.model.initial.reputation_recorded.contains(&goal.faction) {
-                        "recorded standing"
+                        if self.model.initial.reputation_inferred { "inferred continuation forecast" } else { "recorded standing" }
                     } else {
                         "estimated race/class baseline"
                     };
@@ -107,9 +118,9 @@ impl Planner<'_> {
                         q.members & 1 != 0
                             && q.reputation.iter().any(|&(faction, points)| faction == goal.faction && points > 0.0)
                     }) {
-                        "this forecast supports direct single-completion quest rewards only; the selected turn-ins do not reach the target under current settings"
+                        "the supported quest and reputation work does not reach the target under current settings and available resources"
                     } else {
-                        "no supported direct single-completion quest reward is modeled for this faction under current settings"
+                        "supported sources may be missing or limited by standing caps, prerequisites or available resources"
                     };
                     format!(
                         "{SHORTFALL_PREFIX}{name} ({}): start {start} ({provenance}), target {}, actual {have}, deficit {}; {limitation}; the result is not a proven maximum",

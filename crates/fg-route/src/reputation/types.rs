@@ -358,9 +358,13 @@ pub enum RepResultStatus {
 
 #[derive(Debug, Clone, Default, PartialEq, Serialize, Deserialize)]
 pub struct RepProgramResult {
+    #[serde(deserialize_with = "deserialize_standings")]
     pub start: Standings,
+    #[serde(deserialize_with = "deserialize_standings")]
     pub reached: Standings,
+    #[serde(deserialize_with = "deserialize_standings")]
     pub targets: Standings,
+    #[serde(deserialize_with = "deserialize_standings")]
     pub deficits: Standings,
     pub status: RepResultStatus,
     pub active_play_seconds: f64,
@@ -379,4 +383,26 @@ pub struct RepProgram {
     pub sources: Vec<SourceDescriptor>,
     pub phases: Vec<RepPhase>,
     pub result: RepProgramResult,
+}
+
+/// Internally tagged route steps deserialize through serde's content buffer, which does
+/// not apply serde_json's numeric map-key adapter. Accept the serialized string IDs there.
+fn deserialize_standings<'de, D: serde::Deserializer<'de>>(deserializer: D) -> Result<Standings, D::Error> {
+    #[derive(Deserialize, PartialEq, Eq, PartialOrd, Ord)]
+    #[serde(untagged)]
+    enum Key {
+        Number(i64),
+        Text(String),
+    }
+    let values = BTreeMap::<Key, f64>::deserialize(deserializer)?;
+    values
+        .into_iter()
+        .map(|(key, value)| {
+            let id = match key {
+                Key::Number(id) => id,
+                Key::Text(id) => id.parse().map_err(serde::de::Error::custom)?,
+            };
+            Ok((id, value))
+        })
+        .collect()
 }

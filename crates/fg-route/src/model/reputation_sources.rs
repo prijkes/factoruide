@@ -23,6 +23,18 @@ pub(crate) enum BoundSourceKind {
     Turnin,
 }
 
+/// Only verified Classic quest bounds belong here; other editions need their own evidence.
+pub(crate) fn quest_standing_bounds(edition: Edition) -> StandingRange {
+    if edition == Edition::Classic {
+        StandingRange {
+            minimum: classic()["rules"]["global_min"].as_f64(),
+            maximum: classic()["rules"]["global_max"].as_f64(),
+        }
+    } else {
+        StandingRange::default()
+    }
+}
+
 #[derive(Debug, Clone)]
 pub(crate) struct BoundCreature {
     pub npc_id: i64,
@@ -57,9 +69,16 @@ pub(crate) struct BoundReputationSource {
     /// Only current normal outdoor creatures explicitly identified by the audited candidate list.
     pub automatic_farming: bool,
     pub warnings: Vec<String>,
+    #[cfg_attr(
+        not(test),
+        expect(dead_code, reason = "retain source flags for binding audits and regression fixtures")
+    )]
     pub quest_flags: i64,
+    #[expect(dead_code, reason = "retain raw source metadata for binding audits")]
     pub quest_flags_ex: i64,
+    #[expect(dead_code, reason = "retain raw source metadata for binding audits")]
     pub quest_flags_ex2: i64,
+    #[expect(dead_code, reason = "retain selected catalog patch for binding audits")]
     pub selected_patch: Option<i64>,
 }
 
@@ -731,8 +750,13 @@ fn bind_quest(
     };
     let starts = usable(Role::Start);
     let ends = usable(Role::End);
-    let giver_locations = starts.iter().flat_map(|(_, at)| at.clone()).collect();
-    let at: Vec<_> = ends.iter().flat_map(|(_, at)| at.clone()).collect();
+    // The portable identity names one NPC. Keep all of that NPC's verified spawns,
+    // so choosing another spawn never sends a target macro to a different NPC.
+    let giver_locations = starts.first().map_or_else(Vec::new, |(_, at)| at.clone());
+    let at = ends.first().map_or_else(Vec::new, |(_, at)| at.clone());
+    if starts.len() > 1 || ends.len() > 1 {
+        warnings.push("Multiple quest NPCs are known; completion uses the named NPC's recorded locations so target instructions remain exact. Other NPC alternatives are not searched.".into());
+    }
     if starts.is_empty() && starter.is_none() {
         supported = false;
         warnings.push("No current quest giver or verified starting item is known.".into());
@@ -815,6 +839,7 @@ fn bind_quest(
                 },
                 ..RewardModifiers::default()
             },
+            standing_bounds: quest_standing_bounds(params.edition),
             ..ReputationEffects::default()
         },
         input_items: inputs,
@@ -954,6 +979,11 @@ id = 674
 level = 45
 respawn = 120.0
 at = [{zone=12,x=60.0,y=40.0}]
+[[npc]]
+id = 990002
+friendly_to = "AH"
+npc_flags = 2
+at = [{zone=12,x=80.0,y=30.0}]
 [[quest]]
 id = 94004
 giver = 990001
@@ -1036,7 +1066,7 @@ items = [{item=3391,count=3,restock=600.0}]
         let kill = source(&enabled, "classic:kill:674");
         assert_eq!(kill.descriptor.confidence, SourceConfidence::ClassicEstimate);
         assert!(kill.automatic_farming);
-        assert!(!kill.warnings.is_empty());
+        assert!(kill.warnings.iter().any(|warning| warning.contains("Classic")));
         assert_eq!(kill.creature.as_ref().unwrap().respawn_seconds, Some(120.0));
         let loc = &kill.locations[0];
         assert_eq!(loc.map_x, Some(60.0));
@@ -1114,11 +1144,8 @@ items = [{item=3391,count=3,restock=600.0}]
             panic!("missing explicit spillover")
         };
         assert_eq!(edges.len(), 3);
-        assert!(
-            edges
-                .iter()
-                .all(|e| e.rounding == RoundingPolicy::Truncate && e.rate == 0.5)
-        );
+        assert!(edges.iter().all(|e| e.rounding == RoundingPolicy::Truncate));
+        assert_eq!(edges.iter().map(|e| e.rate).collect::<Vec<_>>(), vec![0.5; 3]);
         assert!(!source(&catalog, "forever:quest:98248").descriptor.repeatable);
         let repair = source(&catalog, "forever:repeatable:9259");
         assert!(
@@ -1164,6 +1191,52 @@ items = [{item=3391,count=3,restock=600.0}]
             vec![(68, 50.0), (67, 12.5), (76, -5.0)]
         );
         assert_eq!(source.descriptor.effects.spillover, SpilloverPolicy::None);
+    }
+
+    #[test]
+    fn reputation_binding_classic_quest_vectors_respect_verified_global_bounds() {
+        let conn = database();
+        conn.execute(
+            "UPDATE m_quest SET special_flags=1,reputation_reward='[[68,50],[67,-50]]' WHERE id=7819",
+            [],
+        )
+        .unwrap();
+        let catalog = load_settings(&conn, true, |params| params.edition = Edition::Classic);
+        let source = source(&catalog, "classic:repeatable:7819");
+        let mut standings = Standings::from([(68, 42990.0), (67, -41990.0)]);
+        apply_event(
+            &mut standings,
+            &ReputationEvent {
+                source_id: source.descriptor.id.clone(),
+                edition: "classic".into(),
+                confidence: source.descriptor.confidence,
+                effects: source.descriptor.effects.clone(),
+            },
+        )
+        .unwrap();
+        assert_eq!(standings[&68], 42999.0);
+        assert_eq!(standings[&67], -42000.0);
+        assert_eq!(quest_standing_bounds(Edition::Forever), StandingRange::default());
+    }
+
+    #[test]
+    fn reputation_binding_named_npc_positions_match_the_exported_identity() {
+        let conn = database();
+        conn.execute_batch("INSERT INTO m_quest_relation(quest_id,role,entity_type,entity_id) VALUES(7819,'start','npc',990002),(7819,'end','npc',990002);").unwrap();
+        let catalog = load(&conn, true);
+        let source = source(&catalog, "forever:repeatable:7819");
+        assert_eq!(source.descriptor.identity.giver_npc_id, Some(990001));
+        assert_eq!(source.descriptor.identity.ender_npc_id, Some(990001));
+        assert_eq!(
+            source.locations.len(),
+            1,
+            "delivery positions must belong to the named delivery NPC"
+        );
+        assert_eq!(
+            source.giver_locations.len(),
+            1,
+            "accept positions must belong to the named giver"
+        );
     }
 
     #[test]
@@ -1295,7 +1368,7 @@ items = [{item=3391,count=3,restock=600.0}]
         let catalog = load_settings(&database(), true, |p| p.excluded_zones = vec![12]);
         let daily = source(&catalog, "forever:daily:94004");
         assert!(!daily.supported);
-        assert!(daily.locations.is_empty());
+        assert_eq!(daily.locations.len(), 0);
         assert!(source(&catalog, "forever:repeatable:7819").acquisition.is_empty());
         assert!(!source(&catalog, "classic:kill:674").automatic_farming);
     }

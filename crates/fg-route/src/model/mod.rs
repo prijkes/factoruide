@@ -30,6 +30,7 @@ mod reputation_sources;
 mod required;
 pub(crate) use reputation_sources::{
     BoundAcquisition, BoundCreature, BoundReputationCatalog, BoundReputationSource, BoundSourceKind,
+    quest_standing_bounds,
 };
 pub mod requirements;
 mod rewards;
