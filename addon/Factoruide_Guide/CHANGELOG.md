@@ -6,6 +6,8 @@ under Unreleased; `scripts/release.sh` gives them the release's version.
 
 ## Unreleased
 
+- Repeated reputation deliveries, material farming and daily circuits now follow your actual progress across reloads; unmet goals are reported without blocking the rest of the guide.
+- Reputation activity automation follows only the current source and stops at its planned count; Classic estimates are clearly marked.
 - Warns when a planned quest offered during a conversation was left unaccepted, so you can return and accept it manually.
 - Required guide steps, including planned reputation work, are kept when your level is ahead of the guide.
 - WoW Forever: the automatic purchase of food, water and ammo works (the client lost the old item count API).

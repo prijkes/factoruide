@@ -5351,3 +5351,348 @@ function AcceptanceAuditTest()
     print("acceptance interaction audit and outdated keep protection ok")
 end
 AcceptanceAuditTest()
+
+-- These exercise the real guide/event/automation path; game inventory, clock and standings
+-- are controlled independently from the forecast in the exported programme.
+local function ReputationProgramTest()
+    local savedRep, savedItem, savedServer, savedReset = FG.Reputations, FG.ItemCount, GetServerTime, GetQuestResetTime
+    local savedPrint, savedID, savedShift = FG.Print, GetQuestID, IsShiftKeyDown
+    local savedOffers, savedActive = C_GossipInfo.GetAvailableQuests, C_GossipInfo.GetActiveQuests
+    local savedSelect, savedSelectActive = C_GossipInfo.SelectAvailableQuest, C_GossipInfo.SelectActiveQuest
+    local savedAccept, savedComplete, savedReward = AcceptQuest, CompleteQuest, GetQuestReward
+    local savedCompletable, savedChoices = IsQuestCompletable, GetNumQuestChoices
+    local oldLevel, serial = playerLevel, 0
+    local actual, stock, now, reset, shift, detail, accepts, turns, messages = 0, {}, 1000, 2000, false, 99101, 0, 0, {}
+    FG.Reputations = function() return { { id = 69, value = actual } } end
+    FG.ItemCount = function(id, includeBank)
+        assert(not includeBank, "carried materials only")
+        return stock[id] or 0
+    end
+    GetServerTime = function() return now end
+    GetQuestResetTime = function() return reset and reset - now end
+    FG.Print = function(_, fmt, ...) messages[#messages + 1] = string.format(fmt, ...) end
+    GetQuestID = function() return detail end
+    IsShiftKeyDown = function() return shift end
+    C_GossipInfo.GetAvailableQuests = function() return { { questID = detail, repeatable = true } } end
+    C_GossipInfo.GetActiveQuests = function() return { { questID = detail, isComplete = true } } end
+    C_GossipInfo.SelectAvailableQuest = function(id)
+        detail = id
+        fire("QUEST_DETAIL")
+    end
+    C_GossipInfo.SelectActiveQuest = function(id)
+        detail = id
+        fire("QUEST_PROGRESS")
+        fire("QUEST_COMPLETE")
+    end
+    AcceptQuest = function() accepts = accepts + 1 end
+    CompleteQuest = function() turns = turns + 1 end
+    GetQuestReward = function() turns = turns + 1 end
+    IsQuestCompletable = function() return true end
+    GetNumQuestChoices = function() return 0 end
+    local function source(id, quest, daily, quota)
+        return {
+            id = id,
+            name = id,
+            identity = {
+                quest_id = quest,
+                npc_id = 301,
+                ender_npc_id = 301,
+                npc_name = "Kobold",
+                ender_npc_name = "Cloth keeper",
+            },
+            input_items = {},
+            confidence = "classic_estimate",
+            reset = { kind = daily and "daily" or "none", quota_key = quota or id, units_per_reset = 1 },
+        }
+    end
+    local function action(id, src, kind, n)
+        return {
+            id = id,
+            source_id = src,
+            kind = kind or "turnin",
+            units_per_cycle = n or 1,
+            total_unit_limit = n or 1,
+            completion_targets = {},
+        }
+    end
+    local function setup(sources, phases, target)
+        serial = serial + 1
+        actual, stock, now, reset, shift, detail, accepts, turns, messages = 0, {}, 1000, 2000, false, 99101, 0, 0, {}
+        onQuest[99101], completed[99101], completed[99102] = nil, nil, nil
+        playerLevel = 60
+        local program = {
+            version = 1,
+            sources = sources,
+            phases = phases,
+            result = { targets = { ["69"] = target or 100 }, warnings = {} },
+        }
+        local name = "reputation-playback-" .. serial
+        FG.Routes[name] = {
+            time = serial,
+            fromLevel = 1,
+            toLevel = 60,
+            steps = {
+                { k = "reputation", kp = true, lvl = 1, t = "Reputation programme", rp = program },
+                { k = "train", kp = true, lvl = 60, t = "Ordinary required work" },
+            },
+        }
+        FG:Save("autoAccept", false)
+        FG:Save("autoTurnIn", false)
+        FG:Save("routeQuestsOnly", true)
+        useRoute(name)
+        return name, program
+    end
+    local function batch(actions, cycles)
+        return { id = "batch", kind = "batch", cycles = cycles or 1, actions = actions }
+    end
+    local function daily(actions, cycles)
+        return { id = "daily", kind = "daily_circuit", cycles = cycles or 1, actions = actions }
+    end
+    local function current() return FG.Reputation and FG.Reputation:Active() end
+    local failures = {}
+    local function check(name, fn)
+        local ok, err = pcall(fn)
+        if not ok then failures[#failures + 1] = name .. ": " .. tostring(err) end
+    end
+    check("repeatable events count active run only, across navigation and route switching", function()
+        local name = setup(
+            { source("cloth", 99101) },
+            { batch({ action("first", "cloth", "turnin", 2), action("second", "cloth") }) }
+        )
+        completed[99101] = true
+        FG.Guide:Advance()
+        assert(char.guide.step == 1, "permanent completion cannot complete a repeatable programme")
+        fire("QUEST_TURNED_IN", 123456, 0, 0)
+        assert(current() and current().action.id == "first", "unrelated turn-in ignored")
+        fire("QUEST_TURNED_IN", 99101, 0, 0)
+        FG.Guide:Go(2)
+        fire("QUEST_TURNED_IN", 99101, 0, 0)
+        FG.Guide:Go(1)
+        useRoute("reputation")
+        useRoute(name)
+        -- Reselecting/reloading Lua retains SavedVariables rather than rebuilding counters.
+        char.guide.reputation = assert(loadstring(assert(FG.Import.Serialize(char.guide.reputation))))()
+        local register = FG.On
+        FG.On = function() end -- the harness retains the one live event bus across module reloads
+        assert(loadfile("addon/Factoruide_Guide/Reputation.lua"))()
+        FG.On = register
+        assert(current().action.id == "first", "one completion persisted")
+        fire("QUEST_TURNED_IN", 99101, 0, 0)
+        assert(current().action.id == "second", "same quest in a distinct run has its own count")
+        fire("QUEST_TURNED_IN", 99101, 0, 0)
+        assert(char.guide.step == 2, "planned work finishes without trapping on unmet reputation")
+        assert(table.concat(messages, " "):find("100", 1, true), "actual shortfall reported")
+        fire("QUEST_TURNED_IN", 99101, 0, 0)
+        FG.Guide:Go(1)
+        FG.Guide:Resync()
+        assert(char.guide.step == 2, "completed programme is stable after extra events/navigation")
+        local version = FG.Routes[name].time
+        FG.Routes[name].time = version + 1000
+        useRoute(name)
+        assert(char.guide.step == 1, "new route version cannot inherit incompatible counters")
+    end)
+    check("actual target stops unnecessary work; XP cannot prove standing", function()
+        setup({ source("kill", nil) }, { batch({ action("kills", "kill", "kill", 2) }) })
+        FG.Guide:CountKill(100000, false)
+        assert(char.guide.step == 1, "XP does not prove reputation")
+        fire("PARTY_KILL", UnitGUID("player"), "Creature-0-1-2-3-999-1")
+        assert(char.guide.step == 1, "unrelated creature ignored")
+        fire("PARTY_KILL", UnitGUID("player"), "Creature-0-1-2-3-301-1")
+        assert(current().action.id == "kills", "first exact kill remains short")
+        actual = 100
+        fire("UPDATE_FACTION")
+        FG.Guide:Advance()
+        assert(char.guide.step == 2, "actual standings stop early")
+    end)
+    check("exact kill count ends best effort with actual deficit", function()
+        setup({ source("kill", nil) }, { batch({ action("kills", "kill", "kill", 1) }) })
+        fire("PARTY_KILL", UnitGUID("player"), "Creature-0-1-2-3-301-2")
+        assert(
+            char.guide.step == 2 and table.concat(messages, " "):find("100", 1, true),
+            "kill forecast cannot award actual standing"
+        )
+    end)
+    check("batches gather only one delivery and check real carried materials", function()
+        local src = source("cloth", 99101)
+        src.input_items = { { item_id = 14047, count = 20 } }
+        local acquire = action("gather", "cloth", "acquire", 20)
+        acquire.total_unit_limit = 40
+        acquire.acquisition = { kind = "exact_creature_drop", item_id = 14047, npc_id = 301 }
+        acquire.completion_targets = { { kind = "inventory", item_id = 14047, count = 20 } }
+        local deliver = action("deliver", "cloth")
+        deliver.total_unit_limit = 2
+        setup({ src }, { batch({ acquire, deliver }, 2) })
+        assert(current().action.kind == "acquire", "forecast stock does not pass gathering")
+        stock[14047] = 20
+        fire("BAG_UPDATE_DELAYED")
+        assert(current().action.kind == "turnin", "one delivery is enough inventory")
+        stock[14047] = 0
+        fire("QUEST_TURNED_IN", 99101, 0, 0)
+        assert(current().action.kind == "acquire", "next cycle needs fresh stock")
+        stock[14047] = 20
+        fire("BAG_UPDATE_DELAYED")
+        stock[14047] = 0
+        fire("QUEST_TURNED_IN", 99101, 0, 0)
+        assert(char.guide.step == 2, "two actual deliveries completed")
+    end)
+    check("farming targets the actual acquisition NPC, then the delivery NPC", function()
+        local src = source("cloth", 99101)
+        src.location = { map_id = 1426, map_x = 20, map_y = 30, x = 900000, y = 800000 }
+        local acquire = action("gather", "cloth", "acquire", 20)
+        acquire.acquisition = {
+            kind = "exact_creature_drop",
+            item_id = 14047,
+            npc_id = 999,
+            npc_name = "Runecloth bandit",
+            location = { map_id = 1426, map_x = 41, map_y = 51 },
+        }
+        acquire.completion_targets = { { kind = "inventory", item_id = 14047, count = 20 } }
+        FG:Save("targetMacro", true)
+        setup({ src }, { batch({ acquire, action("deliver", "cloth") }) })
+        assert(FG.TargetMacro.names[1] == "Runecloth bandit", "acquisition name, not the quest title or delivery giver")
+        local place = FG.Reputation:Presentation(FG.Guide:Route().steps[1], 1)
+        assert(place.x == 41 and place.y == 51, "acquisition map percentages, not delivery or world-yard coordinates")
+        stock[14047] = 20
+        fire("BAG_UPDATE_DELAYED")
+        assert(FG.TargetMacro.names[1] == "Cloth keeper", "target changes with active delivery")
+        FG:Save("targetMacro", nil)
+    end)
+    check("daily circuits rotate all sources then wait for actual reset", function()
+        local a, b = action("a", "daily-a"), action("b", "daily-b")
+        a.total_unit_limit, b.total_unit_limit = 2, 2
+        setup({ source("daily-a", 99101, true), source("daily-b", 99102, true) }, { daily({ a, b }, 2) })
+        fire("QUEST_TURNED_IN", 99101, 0, 0)
+        assert(current().source.identity.quest_id == 99102, "second daily before another day of first")
+        fire("QUEST_TURNED_IN", 99102, 0, 0)
+        assert(current().waiting and not FG.Guide:WantsQuest(99101), "wait until next real reset")
+        FG.Guide:Advance()
+        assert(current().waiting, "tick cannot manufacture reset")
+        now, reset = 2001, 3000
+        FG.Guide:Advance()
+        assert(current().source.identity.quest_id == 99101, "next real window starts circuit")
+        fire("QUEST_TURNED_IN", 99101, 0, 0)
+        fire("QUEST_TURNED_IN", 99102, 0, 0)
+        assert(char.guide.step == 2, "two circuits finish")
+    end)
+    check("unknown clock cannot invent reset and quota persists across phases", function()
+        local a, b = action("first-daily", "daily-a"), action("tail", "daily-a")
+        setup(
+            { source("daily-a", 99101, true, "shared") },
+            { daily({ a }), { id = "tail-phase", kind = "daily_circuit", cycles = 1, actions = { b } } }
+        )
+        fire("QUEST_TURNED_IN", 99101, 0, 0)
+        reset = nil
+        now = 999999
+        FG.Guide:Advance()
+        assert(
+            current().waiting and not FG.Guide:WantsQuest(99101),
+            "phase boundary and unknown clock cannot refill shared quota"
+        )
+        reset = 1000100
+        FG.Guide:Advance()
+        assert(FG.Guide:WantsQuest(99101), "known next reset permits tail")
+        fire("QUEST_TURNED_IN", 99101, 0, 0)
+        assert(char.guide.step == 2, "tail finishes")
+    end)
+    check("daily turn-in flags changing before the event do not steal its active completion", function()
+        local a = action("daily", "daily-a")
+        a.total_unit_limit = 2
+        setup({ source("daily-a", 99101, true) }, { daily({ a }, 2) })
+        completed[99101] = true
+        fire("QUEST_TURNED_IN", 99101, 0, 0)
+        assert(current().state.units.daily == 1, "event counts despite game already flagging this daily")
+        completed[99101], now, reset = nil, 2001, 3000
+        FG.Guide:Advance()
+        fire("QUEST_TURNED_IN", 99101, 0, 0)
+        assert(char.guide.step == 2, "next reset completes second real event")
+    end)
+    check("shared quota prevents a second source spending the same daily allowance", function()
+        setup({ source("daily-a", 99101, true, "one"), source("daily-b", 99102, true, "one") }, {
+            daily({ action("a", "daily-a"), action("b", "daily-b") }),
+        })
+        fire("QUEST_TURNED_IN", 99101, 0, 0)
+        assert(char.guide.step == 2, "exhausted shared source is warned and skipped without invented completion")
+        assert(table.concat(messages, " "):find("quota", 1, true), "shared allowance limitation disclosed")
+    end)
+    check("programme fingerprint rejects counters when action meaning changes", function()
+        local name, program = setup({ source("cloth", 99101) }, { batch({ action("deliver", "cloth", "turnin", 2) }) })
+        fire("QUEST_TURNED_IN", 99101, 0, 0)
+        local replacement = {
+            version = 1,
+            sources = program.sources,
+            phases = { batch({ action("deliver", "cloth", "turnin", 3) }) },
+            result = program.result,
+        }
+        FG.Routes[name].steps[1].rp = replacement
+        useRoute(name)
+        fire("QUEST_TURNED_IN", 99101, 0, 0)
+        fire("QUEST_TURNED_IN", 99101, 0, 0)
+        assert(char.guide.step == 1, "same route version with changed programme requires new three events")
+        fire("QUEST_TURNED_IN", 99101, 0, 0)
+        assert(char.guide.step == 2, "replacement finishes on its own count")
+    end)
+    check("unsupported acquisition cannot trap the guide or create a delivery", function()
+        local acquire = action("bad-acquire", "cloth", "acquire", 20)
+        acquire.acquisition = { kind = "imaginary_supply", item_id = 14047 }
+        acquire.completion_targets = { { kind = "inventory", item_id = 14047, count = 20 } }
+        setup({ source("cloth", 99101) }, { batch({ acquire, action("deliver", "cloth") }) })
+        assert(char.guide.step == 2, "unsupported supply disclosed and source skipped")
+        assert(table.concat(messages, " "):find("unavailable", 1, true), "unsupported supply warning shown")
+    end)
+    check("repeatable automation requires active wanted quest and respects settings/Shift", function()
+        setup({ source("cloth", 99101) }, { batch({ action("deliver", "cloth") }) })
+        fire("GOSSIP_SHOW")
+        assert(accepts == 0 and turns == 0, "automation off")
+        FG:Save("autoAccept", true)
+        FG:Save("autoTurnIn", true)
+        shift = true
+        fire("GOSSIP_SHOW")
+        assert(accepts == 0 and turns == 0, "Shift bypass")
+        shift = false
+        detail = 99102
+        fire("GOSSIP_SHOW")
+        fire("QUEST_DETAIL")
+        fire("QUEST_PROGRESS")
+        fire("QUEST_COMPLETE")
+        assert(accepts == 0 and turns == 0, "unrelated dialog blocked during activity")
+        detail = 99101
+        fire("GOSSIP_SHOW")
+        assert(turns == 2, "active turn-in automation allowed")
+        fire("QUEST_DETAIL")
+        assert(accepts == 1, "active repeatable acceptance allowed")
+        assert(FG.Guide:NeedsQuestAcceptance(99101), "acceptance audit sees active repeatable")
+        fire("QUEST_TURNED_IN", 99101, 0, 0)
+        fire("QUEST_DETAIL")
+        fire("QUEST_PROGRESS")
+        fire("QUEST_COMPLETE")
+        assert(accepts == 1 and turns == 2, "count limit closes automation")
+    end)
+    check("acceptance audit still warns on an unaccepted repeated run with a permanent flag", function()
+        setup({ source("cloth", 99101) }, { batch({ action("deliver", "cloth") }) })
+        completed[99101] = true
+        fire("GOSSIP_SHOW")
+        fire("GOSSIP_CLOSED", false)
+        fire("QUEST_FINISHED")
+        runTimers()
+        runTimers()
+        assert(
+            table.concat(messages, " "):find("#99101", 1, true),
+            "permanent first completion cannot suppress the missed repeated acceptance"
+        )
+    end)
+    FG.Reputations, FG.ItemCount, GetServerTime, GetQuestResetTime = savedRep, savedItem, savedServer, savedReset
+    FG.Print, GetQuestID, IsShiftKeyDown = savedPrint, savedID, savedShift
+    C_GossipInfo.GetAvailableQuests, C_GossipInfo.GetActiveQuests = savedOffers, savedActive
+    C_GossipInfo.SelectAvailableQuest, C_GossipInfo.SelectActiveQuest = savedSelect, savedSelectActive
+    AcceptQuest, CompleteQuest, GetQuestReward = savedAccept, savedComplete, savedReward
+    IsQuestCompletable, GetNumQuestChoices, playerLevel = savedCompletable, savedChoices, oldLevel
+    FG:Save("autoAccept", nil)
+    FG:Save("autoTurnIn", nil)
+    FG:Save("routeQuestsOnly", nil)
+    for _, failure in ipairs(failures) do
+        print("FAIL reputation programme: " .. failure)
+    end
+    assert(#failures == 0, #failures .. " reputation programme regressions failed")
+    print("reputation programme repeatables, inventory, kills, circuits and automation ok")
+end
+ReputationProgramTest()
