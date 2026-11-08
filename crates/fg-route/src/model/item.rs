@@ -74,7 +74,7 @@ impl QuestBuilder<'_> {
         let object_chance = places
             .sources
             .iter()
-            .filter(|(t, _)| *t == SourceKind::Object)
+            .filter(|(t, id)| *t == SourceKind::Object && self.has_points(EntityKind::Object, *id))
             .map(|(_, id)| self.sources.drop_chance.get(&(target, *id)).copied().unwrap_or(1.0))
             .fold(0.0, f64::max);
         let objects = if object_chance < 0.5 && !places.vendors.is_empty() {
