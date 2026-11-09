@@ -33,6 +33,7 @@ An addon change also goes, in the same words, under Unreleased in that addon's o
 
 ### Addon
 
+- Automatically switches an incompatible saved guide to one matching the current character; other characters' guides cannot be followed.
 - Warns when a planned quest offered during a conversation was left unaccepted, so you can return and accept it manually.
 - Required guide steps, including planned reputation work, are kept when your level is ahead of the guide.
 

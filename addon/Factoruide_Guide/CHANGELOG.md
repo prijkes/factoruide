@@ -6,6 +6,7 @@ under Unreleased; `scripts/release.sh` gives them the release's version.
 
 ## Unreleased
 
+- Automatically switches an incompatible saved guide to one matching the current character; other characters' guides cannot be followed.
 - Guide imports preserve large reputation race restrictions without integer overflow on WoW clients with 32-bit integer formatting.
 - Repeated reputation deliveries, material farming and daily circuits now follow your actual progress across reloads; unmet goals are reported without blocking the rest of the guide.
 - Reputation activity automation follows only the current source and stops at its planned count; Classic estimates are clearly marked.
