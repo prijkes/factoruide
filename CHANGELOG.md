@@ -17,6 +17,7 @@ An addon change also goes, in the same words, under Unreleased in that addon's o
 
 ### Guides
 
+- Classic and WoW Forever loot-selling stops avoid warlock-only shops when any group member cannot use them.
 - Selected reputation targets must be reached, even with detours or work after the target level; failed calculations name the missing points.
 - Useful low-level reputation quests and their prerequisites remain eligible when planning from a higher level.
 - Fractional quest reputation rewards are retained, including other rewards in the same quest.
