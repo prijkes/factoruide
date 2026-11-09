@@ -42,15 +42,17 @@ Merge prerequisites first, then rebase the single topic commit onto updated upst
 | 10 | [Support counted repeatables, farming, spillover and daily reputation](https://github.com/prijkes/factoruide/compare/pr%2Frequired-reputation-targets...pr%2Freputation-programmes) | [#153](https://github.com/brouznouf/factoruide/pull/153) | `pr/required-reputation-targets` | [Description](descriptions/reputation-programmes.md) |
 | 11 | [Finish useful reputation objectives before leaving forced dungeons](https://github.com/prijkes/factoruide/compare/pr%2Freputation-programmes...pr%2Freputation-dungeon-quest-order) | [#154](https://github.com/brouznouf/factoruide/pull/154) | `pr/reputation-programmes` | [Description](descriptions/reputation-dungeon-quest-order.md) |
 
-## Additional standalone bug fixes
+## Additional contributions
 
-These PRs are based directly on upstream and are separate from the original 22-topic series.
+These later contributions are separate from the original 22-topic split. Standalone changes are based directly on upstream; dependent changes name their prerequisite topic and provide a focused comparison.
 
 | Fix | Upstream draft PR | Validation | Description |
 | --- | --- | --- | --- |
-| Respect class access at loot-selling shops (Kayla Smithe) | [#155](https://github.com/brouznouf/factoruide/pull/155) | 499 planner tests passed; two ignored doctests and one known Windows fixture excluded | [Description](descriptions/class-gated-loot-vendors.md) |
+| Respect class access at loot-selling shops (Kayla Smithe) | [#155](https://github.com/brouznouf/factoruide/pull/155) | Standalone; 499 planner tests passed; two ignored doctests and one known Windows fixture excluded | [Description](descriptions/class-gated-loot-vendors.md) |
+| Automatically select a guide matching the logged-in character | [#157](https://github.com/brouznouf/factoruide/pull/157) | Standalone on `f812eb4`; both addon smoke suites, changed-file StyLua and whitespace pass | [Description](descriptions/automatic-profile-guide.md) |
+| Preserve generated reputation guides when editing | [#158](https://github.com/brouznouf/factoruide/pull/158) | Depends on [#154](https://github.com/brouznouf/factoruide/pull/154); [focused diff](https://github.com/prijkes/factoruide/compare/pr%2Freputation-dungeon-quest-order...pr%2Ffresh-guide-edit-replay); 804 planner tests plus strict draft regression, Clippy and formatting pass | [Description](descriptions/fresh-guide-edit-replay.md) |
 
-[Additional PR metadata](additional-pull-requests.json) records the standalone base, head and scope. The same AI disclosure applies; the new fix has not yet been confirmed in-game.
+[Additional PR metadata](additional-pull-requests.json) records exact bases, heads, scope and dependencies. The same AI disclosure applies; these new changes have not yet been confirmed in-game.
 
 ## Automated validation and source coverage
 
@@ -60,4 +62,4 @@ These PRs are based directly on upstream and are separate from the original 22-t
 
 [The manifest](manifest.json) contains exact heads, parents, changed paths and validation. [The upstream PR list](upstream-pull-requests.json) records all 22 draft URLs and head revisions.
 
-The original 22-topic split was frozen from fork `main` at `37b3f5f`; later standalone fixes are listed separately. PR publication does not update the installed application, addons or saved guides. Addon release versions remain maintainer-owned and are unchanged in the submission patches.
+The original 22-topic split was frozen from fork `main` at `37b3f5f`; later contributions are listed separately. PR publication does not update the installed application, addons or saved guides. Addon release versions remain maintainer-owned and are unchanged in the submission patches.

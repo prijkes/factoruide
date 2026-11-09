@@ -18,5 +18,79 @@
     "ignored_doctests": 2,
     "known_windows_fixture_filtered": 1,
     "description": "descriptions/class-gated-loot-vendors.md"
+  },
+  {
+    "number": 157,
+    "url": "https://github.com/brouznouf/factoruide/pull/157",
+    "title": "feat(addon): automatically select the matching character guide",
+    "branch": "pr/automatic-profile-guide",
+    "head": "c77e4b9f1bbceaeb8654e9270f731fc4a7928ab2",
+    "base_commit": "f812eb4397e9633df097df4a3f7413961f5820d7",
+    "draft": true,
+    "kind": "standalone",
+    "commits": 1,
+    "body_sha256": "5e9a69ef3c36b9f9da2d272b97baec50cdf90ad8f7113deb34d0827653f1e049",
+    "description": "descriptions/automatic-profile-guide.md",
+    "source_commit": "1a08abf935e9f61575d2d76381d1186551b203ea",
+    "files": [
+      "CHANGELOG.md",
+      "addon/Factoruide_Guide/CHANGELOG.md",
+      "addon/Factoruide_Guide/Guide.lua",
+      "addon/Factoruide_Guide/Options.lua",
+      "addon/tests/smoke.lua"
+    ],
+    "validation": {
+      "guide_smoke": "passed",
+      "profile_smoke": "passed",
+      "changed_lua_stylua": "passed",
+      "whitespace": "passed",
+      "optional_python_json": "skipped: python3 unavailable",
+      "in_game_confirmation": false,
+      "human_source_review": false
+    }
+  },
+  {
+    "number": 158,
+    "url": "https://github.com/brouznouf/factoruide/pull/158",
+    "title": "fix(route): preserve generated reputation guides when editing",
+    "branch": "pr/fresh-guide-edit-replay",
+    "head": "c36e4d9200b842a02238fc7e45830cbfab47f79c",
+    "prepared_parent": "4ec7b7a334bc57b9908397923e3f9217d94d86d3",
+    "base": "main",
+    "draft": true,
+    "kind": "dependent",
+    "prerequisite_prs": [
+      153,
+      154
+    ],
+    "topic_commits": 1,
+    "body_sha256": "67a4800884e0d00e5d3b88b2597871a52b0e39faec82524b423e93a8b4241080",
+    "description": "descriptions/fresh-guide-edit-replay.md",
+    "source_commit": "6a1b6cd695a0183311d31de624e3207e2835b8df",
+    "focused_comparison": "https://github.com/prijkes/factoruide/compare/pr%2Freputation-dungeon-quest-order...pr%2Ffresh-guide-edit-replay",
+    "files": [
+      "CHANGELOG.md",
+      "crates/fg-route/Cargo.toml",
+      "crates/fg-route/src/job/edit.rs",
+      "crates/fg-route/src/job/edit_orphan_tests.rs",
+      "crates/fg-route/src/job/edit_reputation_tests.rs",
+      "crates/fg-route/src/job/finalize_tests.rs",
+      "crates/fg-route/src/job/mod.rs",
+      "crates/fg-route/src/plan/search.rs",
+      "crates/fg-route/src/plan/tests/cleanup_training.rs"
+    ],
+    "tests_passed": 804,
+    "unit_tests_passed": 557,
+    "integration_tests_passed": 247,
+    "ignored_doctests": 2,
+    "known_windows_fixture_filtered": 1,
+    "validation": {
+      "strict_draft_regression": "passed",
+      "all_target_clippy": "passed",
+      "rust_formatting": "passed",
+      "whitespace": "passed",
+      "in_game_confirmation": false,
+      "human_source_review": false
+    }
   }
 ]
