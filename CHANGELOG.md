@@ -17,6 +17,8 @@ An addon change also goes, in the same words, under Unreleased in that addon's o
 
 ### Guides
 
+- Generated reputation guides no longer include unusable dungeon pickups; affected saved guides can be edited again.
+- Saving and reopening a guide preserves its reputation farming phases and time estimate.
 - Classic and WoW Forever loot-selling stops avoid warlock-only shops when any group member cannot use them.
 - Selected reputation targets must be reached, even with detours or work after the target level; failed calculations name the missing points.
 - Useful low-level reputation quests and their prerequisites remain eligible when planning from a higher level.
