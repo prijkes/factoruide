@@ -1,0 +1,1042 @@
+{
+  "schema_version": 1,
+  "repository": "prijkes/factoruide",
+  "upstream_repository": "brouznouf/factoruide",
+  "source": {
+    "common_base": "c27f59d1804367fe367407b74483ac89a5d4f64b",
+    "frozen_fork": "37b3f5f9de2a9c0784b9c26230a9bd6e87a55a57",
+    "upstream_base": "1c8e8352cdf7c1cac35e59efbc04e6d81b0d00e5"
+  },
+  "summary": {
+    "topic_count": 22,
+    "independent_topics": 11,
+    "stacked_topics": 11,
+    "authored_nonmerge_commits": 82,
+    "authored_merge_commits": 6,
+    "commit_dispositions": {
+      "covered": 67,
+      "already-upstream": 1,
+      "archive-only": 12,
+      "duplicate": 1,
+      "superseded-documentation": 1
+    },
+    "net_nonarchive_changed_paths": 203,
+    "assigned_net_paths": 203,
+    "excluded_archive_paths": 78,
+    "unassigned_source_behaviors": []
+  },
+  "coverage_scope": "Net surviving source ownership and intentional exclusions. Per-PR validation and cumulative-tree verification belong to the submission manifest.",
+  "topics": [
+    {
+      "topic": "windows-web-data-paths",
+      "delivery": "independent-branch",
+      "source_commits": [
+        "59fc943"
+      ],
+      "depends_on": [],
+      "coverage": "Resolve web game-data paths correctly on Windows."
+    },
+    {
+      "topic": "combat-safe-quest-tracker",
+      "delivery": "independent-branch",
+      "source_commits": [
+        "976ac98"
+      ],
+      "depends_on": [],
+      "coverage": "Defer protected tracker layout and secure item-button creation during combat."
+    },
+    {
+      "topic": "wide-guide-import-numbers",
+      "delivery": "independent-branch",
+      "source_commits": [
+        "3dd9017"
+      ],
+      "depends_on": [],
+      "coverage": "Serialize wide exact numeric guide values without a 32-bit integer formatter overflow."
+    },
+    {
+      "topic": "settings-dropdown-layout",
+      "delivery": "independent-branch",
+      "source_commits": [
+        "a1a3d67",
+        "53804fc",
+        "0e531b4"
+      ],
+      "depends_on": [],
+      "coverage": "Keep final dropdown sizing and remove redundant reset controls."
+    },
+    {
+      "topic": "missed-quest-acceptance-warnings",
+      "delivery": "independent-branch",
+      "source_commits": [
+        "a7a796d",
+        "3fdc85d",
+        "b0a588c"
+      ],
+      "depends_on": [],
+      "coverage": "Warn about offered planned quests left unaccepted, retaining audit state across source changes."
+    },
+    {
+      "topic": "quest-prerequisite-corrections",
+      "delivery": "independent-branch",
+      "source_commits": [
+        "ae0f152",
+        "e860efa"
+      ],
+      "depends_on": [],
+      "coverage": "Correct remaining prerequisite chains and retain active chain-order/island audit acceptances."
+    },
+    {
+      "topic": "reuse-route-travel-work",
+      "delivery": "independent-branch",
+      "source_commits": [
+        "0b6c44e"
+      ],
+      "depends_on": [],
+      "coverage": "Reuse reordered quest plans and candidate buffers, retain travel-cache working sets and relax known flight nodes."
+    },
+    {
+      "topic": "windows-allocator-test-guard",
+      "delivery": "independent-branch",
+      "source_commits": [
+        "f48cb59"
+      ],
+      "depends_on": [],
+      "coverage": "Match allocator stress-test platform gating to the WASI/Unix allocator module."
+    },
+    {
+      "topic": "quest-gold-and-item-prices",
+      "delivery": "independent-branch",
+      "source_commits": [
+        "265be86",
+        "de96623",
+        "0085ae5",
+        "ddfddb5"
+      ],
+      "depends_on": [],
+      "coverage": "Import money/prices, retain starting copper and project quest gold through routes and exports."
+    },
+    {
+      "topic": "finish-current-dungeon-before-next-run",
+      "delivery": "independent-branch",
+      "source_commits": [
+        "b77706f"
+      ],
+      "depends_on": [],
+      "coverage": "Finish available inside objectives and hand-ins before another forced run leaves the instance."
+    },
+    {
+      "topic": "outdoor-object-drop-rates",
+      "delivery": "independent-branch",
+      "source_commits": [
+        "b77706f"
+      ],
+      "depends_on": [],
+      "coverage": "Cost outdoor containers from placed providers; exclude instance-only provider rates."
+    },
+    {
+      "topic": "best-gear-and-merchant-purchases",
+      "delivery": "stacked-branch",
+      "source_commits": [
+        "a8928b6",
+        "77b06d6",
+        "4f339bb",
+        "cbe9c26",
+        "ddfddb5"
+      ],
+      "depends_on": [
+        "quest-gold-and-item-prices"
+      ],
+      "coverage": "Plan guaranteed quest/vendor equipment, buy route upgrades and preserve quest exploration; include supporting dynamic translations."
+    },
+    {
+      "topic": "client-item-icons",
+      "delivery": "stacked-branch",
+      "source_commits": [
+        "2dbca18"
+      ],
+      "depends_on": [
+        "best-gear-and-merchant-purchases"
+      ],
+      "coverage": "Extract client icons through CASC and bundle CLI, desktop and web access with attribution."
+    },
+    {
+      "topic": "equipment-tab-and-tooltips",
+      "delivery": "stacked-branch",
+      "source_commits": [
+        "efeff95",
+        "bac944d",
+        "29271f3",
+        "5a799c7"
+      ],
+      "depends_on": [
+        "best-gear-and-merchant-purchases",
+        "client-item-icons"
+      ],
+      "coverage": "Show equipment slots, item tooltips and client-style assets, with rounded weapon DPS."
+    },
+    {
+      "topic": "shared-quest-kill-credit",
+      "delivery": "stacked-branch",
+      "source_commits": [
+        "d1c733c"
+      ],
+      "depends_on": [],
+      "coverage": "Share accepted quest creature progress while counting combat, XP, loot and respawn work once."
+    },
+    {
+      "topic": "bounded-search-experiments",
+      "delivery": "stacked-branch",
+      "source_commits": [
+        "a3ce987"
+      ],
+      "depends_on": [
+        "best-gear-and-merchant-purchases"
+      ],
+      "coverage": "Provide opt-in bounded chain/hub moves and reproducible comparison tools; no performance-benefit claim."
+    },
+    {
+      "topic": "cleanup-accounting-and-training",
+      "delivery": "stacked-branch",
+      "source_commits": [
+        "09752b6",
+        "be5bd00",
+        "f6fe452"
+      ],
+      "depends_on": [
+        "shared-quest-kill-credit"
+      ],
+      "coverage": "Retain performed unrewarded work and useful training during cleanup and route edits."
+    },
+    {
+      "topic": "cleanup-replay-diagnostics",
+      "delivery": "stacked-branch",
+      "source_commits": [
+        "09752b6",
+        "df96a30",
+        "4fe8de4",
+        "10bb20a"
+      ],
+      "depends_on": [
+        "cleanup-accounting-and-training"
+      ],
+      "coverage": "Inspect explicit dungeon cleanup and replay archived outcomes without rerunning search."
+    },
+    {
+      "topic": "required-gear-source-completion",
+      "delivery": "stacked-branch",
+      "source_commits": [
+        "9861293",
+        "085d582",
+        "71fcf52",
+        "8ce9e10",
+        "8dbd2f9",
+        "42a54c8",
+        "20015a2",
+        "0178881",
+        "f48cb59",
+        "66d2123",
+        "a17dcad"
+      ],
+      "depends_on": [
+        "best-gear-and-merchant-purchases",
+        "cleanup-accounting-and-training"
+      ],
+      "coverage": "Select supported sources and enforce actual completion, visit windows and mandatory-goal provenance."
+    },
+    {
+      "topic": "required-reputation-targets",
+      "delivery": "stacked-branch",
+      "source_commits": [
+        "e6a65eb",
+        "0fb2163",
+        "95356fd",
+        "1626ed6",
+        "b0a588c"
+      ],
+      "depends_on": [
+        "required-gear-source-completion"
+      ],
+      "coverage": "Retain useful reputation work, prioritize targets and return best-found shortfalls through replay/editing."
+    },
+    {
+      "topic": "reputation-programmes",
+      "delivery": "stacked-branch",
+      "source_commits": [
+        "95459cb",
+        "598dbfe",
+        "3d74c89",
+        "7f70ab6",
+        "2c1d3a7",
+        "d157ad9",
+        "65299b1",
+        "a161d73",
+        "2e6a138",
+        "2b37c08",
+        "eade5e8",
+        "68f0b50",
+        "51db649",
+        "b08556e",
+        "243e18b",
+        "4d0e378",
+        "59d3d68",
+        "b55eb87"
+      ],
+      "depends_on": [
+        "required-reputation-targets",
+        "missed-quest-acceptance-warnings"
+      ],
+      "coverage": "Carry costed repeatable/farming/daily programmes through source catalogs, profiles, playback, editing, cancellation and exports."
+    },
+    {
+      "topic": "reputation-dungeon-quest-order",
+      "delivery": "stacked-branch",
+      "source_commits": [
+        "b77706f"
+      ],
+      "depends_on": [
+        "reputation-programmes",
+        "finish-current-dungeon-before-next-run",
+        "outdoor-object-drop-rates"
+      ],
+      "coverage": "Prepare and complete useful reputation chains around a single dungeon run; preserve mixed-source acquisition and objective-guide semantics."
+    }
+  ],
+  "authored_commits": [
+    {
+      "commit": "0b6c44e",
+      "status": "covered",
+      "topics": [
+        "reuse-route-travel-work"
+      ]
+    },
+    {
+      "commit": "59fc943",
+      "status": "covered",
+      "topics": [
+        "windows-web-data-paths"
+      ]
+    },
+    {
+      "commit": "265be86",
+      "status": "covered",
+      "topics": [
+        "quest-gold-and-item-prices"
+      ]
+    },
+    {
+      "commit": "de96623",
+      "status": "covered",
+      "topics": [
+        "quest-gold-and-item-prices"
+      ]
+    },
+    {
+      "commit": "0085ae5",
+      "status": "covered",
+      "topics": [
+        "quest-gold-and-item-prices"
+      ]
+    },
+    {
+      "commit": "a8928b6",
+      "status": "covered",
+      "topics": [
+        "best-gear-and-merchant-purchases"
+      ]
+    },
+    {
+      "commit": "77b06d6",
+      "status": "covered",
+      "topics": [
+        "best-gear-and-merchant-purchases"
+      ]
+    },
+    {
+      "commit": "2dbca18",
+      "status": "covered",
+      "topics": [
+        "client-item-icons"
+      ]
+    },
+    {
+      "commit": "4f339bb",
+      "status": "covered",
+      "topics": [
+        "best-gear-and-merchant-purchases"
+      ]
+    },
+    {
+      "commit": "cbe9c26",
+      "status": "covered",
+      "topics": [
+        "best-gear-and-merchant-purchases"
+      ]
+    },
+    {
+      "commit": "976ac98",
+      "status": "covered",
+      "topics": [
+        "combat-safe-quest-tracker"
+      ]
+    },
+    {
+      "commit": "efeff95",
+      "status": "covered",
+      "topics": [
+        "equipment-tab-and-tooltips"
+      ]
+    },
+    {
+      "commit": "bac944d",
+      "status": "covered",
+      "topics": [
+        "equipment-tab-and-tooltips"
+      ]
+    },
+    {
+      "commit": "29271f3",
+      "status": "covered",
+      "topics": [
+        "equipment-tab-and-tooltips"
+      ]
+    },
+    {
+      "commit": "91bb8ef",
+      "status": "already-upstream",
+      "reason": "Each Ruins quest already has the same sole mandatory pre_any prerequisite in both common-base and latest upstream data."
+    },
+    {
+      "commit": "ae0f152",
+      "status": "covered",
+      "topics": [
+        "quest-prerequisite-corrections"
+      ]
+    },
+    {
+      "commit": "e860efa",
+      "status": "covered",
+      "topics": [
+        "quest-prerequisite-corrections"
+      ]
+    },
+    {
+      "commit": "ddfddb5",
+      "status": "covered",
+      "topics": [
+        "quest-gold-and-item-prices",
+        "best-gear-and-merchant-purchases"
+      ]
+    },
+    {
+      "commit": "d1c733c",
+      "status": "covered",
+      "topics": [
+        "shared-quest-kill-credit"
+      ]
+    },
+    {
+      "commit": "a3ce987",
+      "status": "covered",
+      "topics": [
+        "bounded-search-experiments"
+      ]
+    },
+    {
+      "commit": "e73af02",
+      "status": "archive-only",
+      "reason": "Only excluded historical reports, plans, handoffs or raw results."
+    },
+    {
+      "commit": "09752b6",
+      "status": "covered",
+      "topics": [
+        "cleanup-accounting-and-training",
+        "cleanup-replay-diagnostics"
+      ]
+    },
+    {
+      "commit": "df96a30",
+      "status": "covered",
+      "topics": [
+        "cleanup-replay-diagnostics"
+      ]
+    },
+    {
+      "commit": "4ae4e9a",
+      "status": "archive-only",
+      "reason": "Only excluded historical reports, plans, handoffs or raw results."
+    },
+    {
+      "commit": "962fec6",
+      "status": "archive-only",
+      "reason": "Only excluded historical reports, plans, handoffs or raw results."
+    },
+    {
+      "commit": "be5bd00",
+      "status": "covered",
+      "topics": [
+        "cleanup-accounting-and-training"
+      ]
+    },
+    {
+      "commit": "4fe8de4",
+      "status": "covered",
+      "topics": [
+        "cleanup-replay-diagnostics"
+      ]
+    },
+    {
+      "commit": "10bb20a",
+      "status": "covered",
+      "topics": [
+        "cleanup-replay-diagnostics"
+      ]
+    },
+    {
+      "commit": "f6fe452",
+      "status": "covered",
+      "topics": [
+        "cleanup-accounting-and-training"
+      ]
+    },
+    {
+      "commit": "411b753",
+      "status": "archive-only",
+      "reason": "Only excluded historical reports, plans, handoffs or raw results."
+    },
+    {
+      "commit": "9861293",
+      "status": "covered",
+      "topics": [
+        "required-gear-source-completion"
+      ]
+    },
+    {
+      "commit": "085d582",
+      "status": "covered",
+      "topics": [
+        "required-gear-source-completion"
+      ]
+    },
+    {
+      "commit": "71fcf52",
+      "status": "covered",
+      "topics": [
+        "required-gear-source-completion"
+      ]
+    },
+    {
+      "commit": "8ce9e10",
+      "status": "covered",
+      "topics": [
+        "required-gear-source-completion"
+      ]
+    },
+    {
+      "commit": "8dbd2f9",
+      "status": "covered",
+      "topics": [
+        "required-gear-source-completion"
+      ]
+    },
+    {
+      "commit": "42a54c8",
+      "status": "covered",
+      "topics": [
+        "required-gear-source-completion"
+      ]
+    },
+    {
+      "commit": "20015a2",
+      "status": "covered",
+      "topics": [
+        "required-gear-source-completion"
+      ]
+    },
+    {
+      "commit": "c88f19e",
+      "status": "duplicate",
+      "covered_by": "0178881",
+      "reason": "Identical stable patch ID; include the implementation once."
+    },
+    {
+      "commit": "0178881",
+      "status": "covered",
+      "topics": [
+        "required-gear-source-completion"
+      ]
+    },
+    {
+      "commit": "f48cb59",
+      "status": "covered",
+      "topics": [
+        "windows-allocator-test-guard",
+        "required-gear-source-completion"
+      ]
+    },
+    {
+      "commit": "66d2123",
+      "status": "covered",
+      "topics": [
+        "required-gear-source-completion"
+      ]
+    },
+    {
+      "commit": "a17dcad",
+      "status": "covered",
+      "topics": [
+        "required-gear-source-completion"
+      ]
+    },
+    {
+      "commit": "41dde85",
+      "status": "archive-only",
+      "reason": "Only excluded historical reports, plans, handoffs or raw results."
+    },
+    {
+      "commit": "76e9bea",
+      "status": "archive-only",
+      "reason": "Only excluded historical reports, plans, handoffs or raw results."
+    },
+    {
+      "commit": "c23d75d",
+      "status": "archive-only",
+      "reason": "Only excluded historical reports, plans, handoffs or raw results."
+    },
+    {
+      "commit": "e6a65eb",
+      "status": "covered",
+      "topics": [
+        "required-reputation-targets"
+      ]
+    },
+    {
+      "commit": "a7a796d",
+      "status": "covered",
+      "topics": [
+        "missed-quest-acceptance-warnings"
+      ]
+    },
+    {
+      "commit": "3fdc85d",
+      "status": "covered",
+      "topics": [
+        "missed-quest-acceptance-warnings"
+      ]
+    },
+    {
+      "commit": "0fb2163",
+      "status": "covered",
+      "topics": [
+        "required-reputation-targets"
+      ]
+    },
+    {
+      "commit": "95356fd",
+      "status": "covered",
+      "topics": [
+        "required-reputation-targets"
+      ]
+    },
+    {
+      "commit": "b0a588c",
+      "status": "covered",
+      "topics": [
+        "missed-quest-acceptance-warnings",
+        "required-reputation-targets"
+      ]
+    },
+    {
+      "commit": "9f84593",
+      "status": "archive-only",
+      "reason": "Only excluded historical reports, plans, handoffs or raw results."
+    },
+    {
+      "commit": "843e617",
+      "status": "superseded-documentation",
+      "reason": "Historical integration records excluded; duplicate changelog heading cleanup is represented by the current upstream release layout."
+    },
+    {
+      "commit": "2f94185",
+      "status": "archive-only",
+      "reason": "Only excluded historical reports, plans, handoffs or raw results."
+    },
+    {
+      "commit": "5a799c7",
+      "status": "covered",
+      "topics": [
+        "equipment-tab-and-tooltips"
+      ]
+    },
+    {
+      "commit": "a1a3d67",
+      "status": "covered",
+      "topics": [
+        "settings-dropdown-layout"
+      ]
+    },
+    {
+      "commit": "53804fc",
+      "status": "covered",
+      "topics": [
+        "settings-dropdown-layout"
+      ]
+    },
+    {
+      "commit": "0e531b4",
+      "status": "covered",
+      "topics": [
+        "settings-dropdown-layout"
+      ]
+    },
+    {
+      "commit": "60b7c1c",
+      "status": "archive-only",
+      "reason": "Only excluded historical reports, plans, handoffs or raw results."
+    },
+    {
+      "commit": "95459cb",
+      "status": "covered",
+      "topics": [
+        "reputation-programmes"
+      ]
+    },
+    {
+      "commit": "1626ed6",
+      "status": "covered",
+      "topics": [
+        "required-reputation-targets"
+      ]
+    },
+    {
+      "commit": "598dbfe",
+      "status": "covered",
+      "topics": [
+        "reputation-programmes"
+      ]
+    },
+    {
+      "commit": "3d74c89",
+      "status": "covered",
+      "topics": [
+        "reputation-programmes"
+      ]
+    },
+    {
+      "commit": "7f70ab6",
+      "status": "covered",
+      "topics": [
+        "reputation-programmes"
+      ]
+    },
+    {
+      "commit": "2c1d3a7",
+      "status": "covered",
+      "topics": [
+        "reputation-programmes"
+      ]
+    },
+    {
+      "commit": "d157ad9",
+      "status": "covered",
+      "topics": [
+        "reputation-programmes"
+      ]
+    },
+    {
+      "commit": "65299b1",
+      "status": "covered",
+      "topics": [
+        "reputation-programmes"
+      ]
+    },
+    {
+      "commit": "a161d73",
+      "status": "covered",
+      "topics": [
+        "reputation-programmes"
+      ]
+    },
+    {
+      "commit": "2e6a138",
+      "status": "covered",
+      "topics": [
+        "reputation-programmes"
+      ]
+    },
+    {
+      "commit": "2b37c08",
+      "status": "covered",
+      "topics": [
+        "reputation-programmes"
+      ]
+    },
+    {
+      "commit": "eade5e8",
+      "status": "covered",
+      "topics": [
+        "reputation-programmes"
+      ]
+    },
+    {
+      "commit": "68f0b50",
+      "status": "covered",
+      "topics": [
+        "reputation-programmes"
+      ]
+    },
+    {
+      "commit": "51db649",
+      "status": "covered",
+      "topics": [
+        "reputation-programmes"
+      ]
+    },
+    {
+      "commit": "b08556e",
+      "status": "covered",
+      "topics": [
+        "reputation-programmes"
+      ]
+    },
+    {
+      "commit": "243e18b",
+      "status": "covered",
+      "topics": [
+        "reputation-programmes"
+      ]
+    },
+    {
+      "commit": "4d0e378",
+      "status": "covered",
+      "topics": [
+        "reputation-programmes"
+      ]
+    },
+    {
+      "commit": "59d3d68",
+      "status": "covered",
+      "topics": [
+        "reputation-programmes"
+      ]
+    },
+    {
+      "commit": "b55eb87",
+      "status": "covered",
+      "topics": [
+        "reputation-programmes"
+      ]
+    },
+    {
+      "commit": "80c13f5",
+      "status": "archive-only",
+      "reason": "Only excluded historical reports, plans, handoffs or raw results."
+    },
+    {
+      "commit": "3dd9017",
+      "status": "covered",
+      "topics": [
+        "wide-guide-import-numbers"
+      ]
+    },
+    {
+      "commit": "b77706f",
+      "status": "covered",
+      "topics": [
+        "finish-current-dungeon-before-next-run",
+        "outdoor-object-drop-rates",
+        "reputation-dungeon-quest-order"
+      ]
+    },
+    {
+      "commit": "37b3f5f",
+      "status": "archive-only",
+      "reason": "Only excluded historical reports, plans, handoffs or raw results."
+    }
+  ],
+  "split_commit_ownership": [
+    {
+      "commit": "b77706f",
+      "allocations": [
+        {
+          "topic": "finish-current-dungeon-before-next-run",
+          "scope": "Only move existing stop_inside handling before forced_now; standalone ordinary-quest regression."
+        },
+        {
+          "topic": "outdoor-object-drop-rates",
+          "scope": "Only constrain get_item object_chance to providers with has_points; ordinary outdoor container and NPC-control fixtures."
+        },
+        {
+          "topic": "reputation-dungeon-quest-order",
+          "scope": "Remaining reputation preparation, mixed-source objective/model reconstruction and constructor behavior. Retain current GuideObjective APIs. Generic fixes and their new regressions are prerequisites already carried by the cumulative series."
+        }
+      ]
+    },
+    {
+      "commit": "09752b6",
+      "allocations": [
+        {
+          "topic": "cleanup-replay-diagnostics",
+          "scope": "examples/cleanup_diagnose.rs only."
+        },
+        {
+          "topic": "cleanup-accounting-and-training",
+          "scope": "Core accounting/observation changes, tests and relevant release notes."
+        }
+      ]
+    },
+    {
+      "commit": "ddfddb5",
+      "allocations": [
+        {
+          "topic": "best-gear-and-merchant-purchases",
+          "scope": "Vendor-aware move dispatch, fixture support and quest-exploration regressions."
+        },
+        {
+          "topic": "quest-gold-and-item-prices",
+          "scope": "Starting-copper initialization and its meaningful regression."
+        }
+      ]
+    },
+    {
+      "commit": "f48cb59",
+      "allocations": [
+        {
+          "topic": "windows-allocator-test-guard",
+          "scope": "Only the alloc_stress.rs platform guard."
+        },
+        {
+          "topic": "required-gear-source-completion",
+          "scope": "Only the three fg-route test lint/platform integration adjustments."
+        }
+      ]
+    },
+    {
+      "commit": "4f339bb",
+      "allocations": [
+        {
+          "topic": "best-gear-and-merchant-purchases",
+          "scope": "BiS translations plus generic dynamic/multiline translation checking and translations for existing settings."
+        }
+      ]
+    }
+  ],
+  "merge_only_coverage": [
+    {
+      "commit": "c4d05a8",
+      "topics": [
+        "best-gear-and-merchant-purchases",
+        "client-item-icons",
+        "quest-gold-and-item-prices",
+        "reuse-route-travel-work"
+      ],
+      "coverage": "Retain current model/export/simulator interfaces, dungeon gathering during candidate reuse, CASC integration and monetary data. Worker Kit/PlannerCaches, training memo and mandatory-list caching were removed by this historical merge and are not resurrected."
+    },
+    {
+      "commit": "e041e69",
+      "topics": [
+        "reuse-route-travel-work",
+        "best-gear-and-merchant-purchases",
+        "quest-gold-and-item-prices",
+        "quest-prerequisite-corrections"
+      ],
+      "coverage": "Retain simulator API/cache adaptations and data integration. Preserve the two active audit acceptances for quest 97558 and Teldrassil; the obsolete cached XP ladder was removed by this merge.",
+      "active_audit_blob": "9ddf50e5ae0739a646b22d9dd439fa2c7c1fbe1b"
+    },
+    {
+      "commit": "d0f7ccc",
+      "topics": [
+        "required-gear-source-completion",
+        "shared-quest-kill-credit",
+        "quest-gold-and-item-prices",
+        "best-gear-and-merchant-purchases"
+      ],
+      "coverage": "Retain mandatory-origin propagation/provenance tests, shared-kill respawn adaptation and its added regression, money/objective-text SQL compatibility, and clearing gear goals for objective guides. Preserve upstream shared respawn waits."
+    },
+    {
+      "commit": "f9dde21",
+      "status": "duplicate ancestry only",
+      "coverage": "The required-gear implementation is included once through 0178881; duplicate c88f19e ancestry is not replayed."
+    },
+    {
+      "commit": "b6a3561",
+      "status": "obsolete ancestry only",
+      "coverage": "Retain upstream rebased group-guide behavior; do not submit obsolete Joel branch commits."
+    },
+    {
+      "commit": "20c96ab",
+      "status": "dependency ancestry only",
+      "coverage": "Retain already integrated Node types; do not resubmit the obsolete Dependabot ancestry."
+    }
+  ],
+  "intentional_exclusions": {
+    "already_upstream": {
+      "commit": "91bb8ef",
+      "proof": {
+        "table": "m_quest_link",
+        "rows": [
+          [
+            92422,
+            "pre_any",
+            99156
+          ],
+          [
+            95216,
+            "pre_any",
+            451
+          ]
+        ],
+        "present_in": [
+          "c27f59d1804367fe367407b74483ac89a5d4f64b",
+          "1c8e8352cdf7c1cac35e59efbc04e6d81b0d00e5"
+        ],
+        "semantics": "Each is the only alternative; availability requires pre_any_met(done)."
+      }
+    },
+    "duplicate": {
+      "omitted_commit": "c88f19e",
+      "included_commit": "0178881",
+      "stable_patch_id": "118dcb88b96ea4ea01c7510e80eee0b4d23d0988"
+    },
+    "obsolete_upstream_ancestry": {
+      "group_guide_commits": [
+        "aa39ac5",
+        "ffe708c",
+        "db01257"
+      ],
+      "upstream_rebased_commits": [
+        "b2e7310",
+        "9de6129",
+        "1b973d2",
+        "cc9fe12"
+      ],
+      "dependabot_commit": "0369a76"
+    },
+    "historical_archives": {
+      "count": 78,
+      "scope": "New fork historical docs/ reports, plans, handoffs and raw result files, plus ASTRA_HANDOFF.md. Functional source catalogs, source notices and concise user release notes remain assigned.",
+      "sorted_path_list_sha256": "bbd06b9d34960b080c68d96cc5000be603f6e98807a899978ffe921bd8fc2a45"
+    },
+    "release_versions": {
+      "policy": "Retain upstream addon release versions; omit fork-only release bumps. Functional module declarations and guide format metadata remain with their owning feature.",
+      "upstream_version": "0.16.0",
+      "paths": [
+        "addon/Factoruide_Guide/Factoruide_Guide.toc",
+        "addon/Factoruide_Profile/Factoruide_Profile.toc"
+      ]
+    }
+  },
+  "upstream_preservation": {
+    "commits": [
+      "01b04cf",
+      "18c39b8",
+      "1c8e835"
+    ],
+    "coverage": "Preserve objective guides, any-level/fixed-set planning, skipped explanations, recommendations and current quest data.",
+    "forever_database": "Latest upstream rows and provenance retained across all 62 table nonmoney projections; add only three monetary columns and 820 vmangos-money tokens. Retain the 27 upstream quests absent from the frozen fork with unknown money values."
+  },
+  "experimental_search": "The bounded chain/hub algorithms remain opt-in. No route-quality or computation-speed improvement is claimed.",
+  "gaps": [],
+  "source_path_count_basis": "Original common-base-to-frozen-fork diff c27f59d..37b3f5f: 281 paths, comprising 203 nonarchive paths and 78 excluded archive paths. This is source ownership, not the final upstream-to-series patch path count."
+}

@@ -1,0 +1,1224 @@
+{
+  "upstream_repository": "brouznouf/factoruide",
+  "fork_repository": "prijkes/factoruide",
+  "upstream_base": "1c8e8352cdf7c1cac35e59efbc04e6d81b0d00e5",
+  "original_fork_main": "37b3f5f9de2a9c0784b9c26230a9bd6e87a55a57",
+  "scope": "Prepared branches and descriptions only; no upstream PRs opened",
+  "series_base": {
+    "branch": "pr/series-base",
+    "head": "e53437e6fee4e0522bc0a1a17f2d551cf2155365",
+    "purpose": "Aggregate preview of the 11 independent topics, not an upstream PR"
+  },
+  "branches": [
+    {
+      "branch": "pr/windows-web-data-paths",
+      "title": "fix: include web game data when building on Windows",
+      "kind": "independent",
+      "base": "1c8e8352cdf7c1cac35e59efbc04e6d81b0d00e5",
+      "base_commit": "1c8e8352cdf7c1cac35e59efbc04e6d81b0d00e5",
+      "head": "6fc43a1dc456781908a544b63a5f6b75c4b0debc",
+      "compare_url": "https://github.com/prijkes/factoruide/compare/1c8e8352cdf7c1cac35e59efbc04e6d81b0d00e5...pr%2Fwindows-web-data-paths",
+      "description": "descriptions/windows-web-data-paths.md",
+      "source_commits": [
+        "59fc9438f6a6a272514b4c1ae9698ed61bf34d1b"
+      ],
+      "changed_paths": [
+        "CHANGELOG.md",
+        "scripts/web-data.mjs"
+      ],
+      "validation": [
+        "Windows fixture probe RED before fix: missing classic database; GREEN after: three databases, images, headers copied from path with spaces",
+        "node --check scripts/web-data.mjs: pass",
+        "git diff --check: pass"
+      ]
+    },
+    {
+      "branch": "pr/combat-safe-quest-tracker",
+      "title": "fix: defer protected quest tracker layout during combat",
+      "kind": "independent",
+      "base": "1c8e8352cdf7c1cac35e59efbc04e6d81b0d00e5",
+      "base_commit": "1c8e8352cdf7c1cac35e59efbc04e6d81b0d00e5",
+      "head": "0effbc45029c4934156a251ff95cc93f6dd88e7b",
+      "compare_url": "https://github.com/prijkes/factoruide/compare/1c8e8352cdf7c1cac35e59efbc04e6d81b0d00e5...pr%2Fcombat-safe-quest-tracker",
+      "description": "descriptions/combat-safe-quest-tracker.md",
+      "source_commits": [
+        "976ac98d9436888774c499656838733f40ecd173"
+      ],
+      "changed_paths": [
+        "CHANGELOG.md",
+        "addon/Factoruide_Guide/CHANGELOG.md",
+        "addon/Factoruide_Guide/Tracker.lua",
+        "addon/tests/smoke.lua"
+      ],
+      "validation": [
+        "Existing source regression RED before fix: a protected line is not moved during combat; GREEN after fix (full guide suite via LF-normalized settings comparison probe)",
+        "Native guide suite: unchanged baseline failure SettingsSchema.lua differs from settings.json (Windows CRLF checkout); no earlier regression failure",
+        "Native profile-only smoke suite: pass",
+        "StyLua 2.5.2 with Windows line-ending override for checkout: pass",
+        "git diff --check: pass",
+        "Guide smoke profile-export JSON parsing subcheck is skipped because python3 is unavailable; Windows shell also prints two missing-path messages. No in-game validation."
+      ]
+    },
+    {
+      "branch": "pr/wide-guide-import-numbers",
+      "title": "fix: preserve wide numeric guide metadata when importing",
+      "kind": "independent",
+      "base": "1c8e8352cdf7c1cac35e59efbc04e6d81b0d00e5",
+      "base_commit": "1c8e8352cdf7c1cac35e59efbc04e6d81b0d00e5",
+      "head": "6db4dea60f066bb74cb438d90bfe882c7b7f92e2",
+      "compare_url": "https://github.com/prijkes/factoruide/compare/1c8e8352cdf7c1cac35e59efbc04e6d81b0d00e5...pr%2Fwide-guide-import-numbers",
+      "description": "descriptions/wide-guide-import-numbers.md",
+      "source_commits": [
+        "3dd9017b167f3a82efead633ec9310c2db1cc5ad"
+      ],
+      "changed_paths": [
+        "CHANGELOG.md",
+        "addon/Factoruide_Guide/CHANGELOG.md",
+        "addon/Factoruide_Guide/Import.lua",
+        "addon/tests/smoke.lua"
+      ],
+      "validation": [
+        "Source regression adapted to upstream format 2: RED before fix with integer overflow 8589934770; GREEN after fix including signed 32-bit boundaries, wide exact masks, numeric keys and fractional values",
+        "Full guide smoke via LF-normalized settings comparison probe: pass; native guide run retains baseline SettingsSchema CRLF failure",
+        "Native profile-only smoke: pass",
+        "StyLua 2.5.2 on LF-normalized snapshots with repository config: pass",
+        "git diff --check: pass",
+        "Guide smoke profile-export JSON parsing subcheck is skipped because python3 is unavailable; Windows shell also prints two missing-path messages. No in-game validation."
+      ]
+    },
+    {
+      "branch": "pr/settings-dropdown-layout",
+      "title": "fix: fit settings dropdowns to their options",
+      "kind": "independent",
+      "base": "1c8e8352cdf7c1cac35e59efbc04e6d81b0d00e5",
+      "base_commit": "1c8e8352cdf7c1cac35e59efbc04e6d81b0d00e5",
+      "head": "6f30d89337160d46dd09248606ddfa13410e0730",
+      "compare_url": "https://github.com/prijkes/factoruide/compare/1c8e8352cdf7c1cac35e59efbc04e6d81b0d00e5...pr%2Fsettings-dropdown-layout",
+      "description": "descriptions/settings-dropdown-layout.md",
+      "source_commits": [
+        "a1a3d67a748f52c55393e0f628269ae98e3ea99d",
+        "53804fcb968b401b4550d7daf74bd9e0bb753f4a",
+        "0e531b4ff67dd212ae588250c1c5b3af0cf822e5"
+      ],
+      "changed_paths": [
+        "CHANGELOG.md",
+        "app/src/components/ParamField.tsx",
+        "app/src/index.css"
+      ],
+      "validation": [
+        "React server-render probe RED against upstream then GREEN with final component: changed/default selects omit duplicate reset, preserve default/current options, changed numbers/switches retain reset",
+        "npm ci --ignore-scripts: pass (35 packages, 0 vulnerabilities)",
+        "npm run build: pass; existing large-chunk warning retained",
+        "npm test: pass 2/2",
+        "npx oxlint --deny-warnings: pass",
+        "npm run check:i18n: pass, 1166 texts",
+        "git diff --check: pass"
+      ]
+    },
+    {
+      "branch": "pr/missed-quest-acceptance-warnings",
+      "title": "fix: warn when offered guide quests are left unaccepted",
+      "kind": "independent",
+      "base": "1c8e8352cdf7c1cac35e59efbc04e6d81b0d00e5",
+      "base_commit": "1c8e8352cdf7c1cac35e59efbc04e6d81b0d00e5",
+      "head": "adb6d880c38c49c0a3a027be2798bb4197f5323b",
+      "compare_url": "https://github.com/prijkes/factoruide/compare/1c8e8352cdf7c1cac35e59efbc04e6d81b0d00e5...pr%2Fmissed-quest-acceptance-warnings",
+      "description": "descriptions/missed-quest-acceptance-warnings.md",
+      "source_commits": [
+        "a7a796d9e94e296b1f87ae6f77bb545b32c96544",
+        "3fdc85db35e76571835098c9bc65f8a1236e5e8c"
+      ],
+      "changed_paths": [
+        "CHANGELOG.md",
+        "addon/Factoruide_Guide/AcceptanceAudit.lua",
+        "addon/Factoruide_Guide/CHANGELOG.md",
+        "addon/Factoruide_Guide/Factoruide_Guide.toc",
+        "addon/Factoruide_Guide/Guide.lua",
+        "addon/Factoruide_Profile/Locales/deDE.lua",
+        "addon/Factoruide_Profile/Locales/esES.lua",
+        "addon/Factoruide_Profile/Locales/frFR.lua",
+        "addon/Factoruide_Profile/Locales/koKR.lua",
+        "addon/Factoruide_Profile/Locales/ptBR.lua",
+        "addon/Factoruide_Profile/Locales/ruRU.lua",
+        "addon/Factoruide_Profile/Locales/zhCN.lua",
+        "addon/Factoruide_Profile/Locales/zhTW.lua",
+        "addon/tests/smoke.lua"
+      ],
+      "validation": [
+        "Source regressions RED before implementation: 18 acceptance audit regressions fail; GREEN after extraction including transitions/reopenings",
+        "Full guide smoke via LF-normalized settings-comparison-only scratch probe: pass (acceptance interaction audit and outdated keep protection ok)",
+        "Native guide smoke: unchanged baseline SettingsSchema CRLF byte-comparison failure before acceptance section; native profile-only smoke: pass",
+        "StyLua 2.5.2 on LF-normalized snapshots using repository config: pass for all changed Lua files",
+        "git diff --check: pass",
+        "Guide smoke profile-export JSON parsing subcheck is skipped because python3 is unavailable; Windows shell also prints two missing-path messages. No in-game validation."
+      ]
+    },
+    {
+      "branch": "pr/quest-prerequisite-corrections",
+      "title": "fix(data): enforce required quest prerequisite chains",
+      "kind": "independent",
+      "base": "1c8e8352cdf7c1cac35e59efbc04e6d81b0d00e5",
+      "base_commit": "1c8e8352cdf7c1cac35e59efbc04e6d81b0d00e5",
+      "head": "1f9e535585ed9d22040dccecb9bf5d68c8e96412",
+      "compare_url": "https://github.com/prijkes/factoruide/compare/1c8e8352cdf7c1cac35e59efbc04e6d81b0d00e5...pr%2Fquest-prerequisite-corrections",
+      "description": "descriptions/quest-prerequisite-corrections.md",
+      "source_commits": [
+        "ae0f152bd967b7ad2e4b470b11631220dc36af06",
+        "e860efa6775784b56efb7da5fe4e4fbb87bc27d0",
+        "e041e69a36999d80b0b7a59f14e333a10cdfaf5f"
+      ],
+      "changed_paths": [
+        "CHANGELOG.md",
+        "crates/fg-route/tests/fixtures/forever_dalaran.toml",
+        "crates/fg-route/tests/it/routes.rs",
+        "overrides/forever/audit.toml",
+        "overrides/forever/need_help.toml",
+        "overrides/forever/quests.toml",
+        "overrides/quests.toml"
+      ],
+      "validation": [
+        {
+          "command": "cargo test --profile fast -p fg-route --test it the_new_chains_the_sources_list_as_breadcrumbs_reach_the_model -- --nocapture",
+          "phase": "red",
+          "result": "1 failed on baseline; missing Adventurer prerequisite [] versus [96627]"
+        },
+        {
+          "command": "cargo test --profile fast -p fg-route --test it chains -- --nocapture",
+          "phase": "green",
+          "result": "1 passed after omitting redundant Ruins source changes"
+        },
+        {
+          "command": "cargo test --profile fast -p fg-route --test it camping -- --nocapture",
+          "result": "1 passed"
+        },
+        {
+          "command": "cargo test --profile fast -p fg-route --test it dalaran -- --nocapture",
+          "result": "1 passed"
+        },
+        {
+          "command": "git diff --check",
+          "result": "passed"
+        },
+        {
+          "command": "Python tomllib parse and exact source blob comparison",
+          "result": "2 active merge-only audit accept entries restored; full file equals original surviving fork audit"
+        }
+      ]
+    },
+    {
+      "branch": "pr/reuse-route-travel-work",
+      "title": "perf(route): reuse search plans and cached travel work",
+      "kind": "independent",
+      "base": "1c8e8352cdf7c1cac35e59efbc04e6d81b0d00e5",
+      "base_commit": "1c8e8352cdf7c1cac35e59efbc04e6d81b0d00e5",
+      "head": "b5d6127e308e9401e7f4dd06151d48367b44617b",
+      "compare_url": "https://github.com/prijkes/factoruide/compare/1c8e8352cdf7c1cac35e59efbc04e6d81b0d00e5...pr%2Freuse-route-travel-work",
+      "description": "descriptions/reuse-route-travel-work.md",
+      "source_commits": [
+        "0b6c44e2d772ffab9a27a27f29156dd69e748ba9",
+        "c4d05a8203d23f206226a8b70ecd716c1379af60",
+        "e041e69a36999d80b0b7a59f14e333a10cdfaf5f"
+      ],
+      "changed_paths": [
+        "crates/fg-route/src/plan/evaluate.rs",
+        "crates/fg-route/src/plan/on_the_way.rs",
+        "crates/fg-route/src/plan/search.rs",
+        "crates/fg-route/src/plan/state.rs",
+        "crates/fg-route/src/plan/travel.rs",
+        "crates/fg-route/src/world.rs"
+      ],
+      "validation": [
+        {
+          "command": "cargo test --profile fast -p fg-route --lib plan::tests:: -- --test-threads=1",
+          "phase": "baseline and final",
+          "result": "92 passed on each"
+        },
+        {
+          "command": "cargo test --profile fast -p fg-route --lib flight -- --nocapture",
+          "result": "5 passed"
+        },
+        {
+          "command": "cargo test --profile fast -p fg-route --test it improved_route_stays_valid -- --nocapture",
+          "result": "1 passed; verified incremental/full replay"
+        },
+        {
+          "command": "rustfmt --check crates/fg-route/src/plan/evaluate.rs crates/fg-route/src/plan/search.rs crates/fg-route/src/plan/state.rs crates/fg-route/src/plan/on_the_way.rs crates/fg-route/src/plan/travel.rs crates/fg-route/src/world.rs",
+          "result": "passed"
+        },
+        {
+          "command": "git diff --check",
+          "result": "passed"
+        }
+      ]
+    },
+    {
+      "branch": "pr/windows-allocator-test-guard",
+      "title": "test(web): match allocator stress test platform support",
+      "kind": "independent",
+      "base": "1c8e8352cdf7c1cac35e59efbc04e6d81b0d00e5",
+      "base_commit": "1c8e8352cdf7c1cac35e59efbc04e6d81b0d00e5",
+      "head": "a2112c6cfcdea4df62dfda382e52b258f262d59a",
+      "compare_url": "https://github.com/prijkes/factoruide/compare/1c8e8352cdf7c1cac35e59efbc04e6d81b0d00e5...pr%2Fwindows-allocator-test-guard",
+      "description": "descriptions/windows-allocator-test-guard.md",
+      "source_commits": [
+        "f48cb5903f0529b5ca145c08987377d73b85fb14"
+      ],
+      "changed_paths": [
+        "crates/fg-web/tests/alloc_stress.rs"
+      ],
+      "validation": [
+        {
+          "command": "cargo test --profile fast -p fg-web --test alloc_stress --no-run",
+          "phase": "red",
+          "result": "2 E0433 compile errors on baseline Windows"
+        },
+        {
+          "command": "cargo test --profile fast -p fg-web --test alloc_stress",
+          "phase": "green",
+          "result": "passed; 0 tests on Windows, intended cfg exclusion"
+        },
+        {
+          "command": "git diff --check",
+          "result": "passed"
+        }
+      ]
+    },
+    {
+      "branch": "pr/quest-gold-and-item-prices",
+      "title": "feat(economy): import item prices and project quest gold",
+      "kind": "independent",
+      "base": "1c8e8352cdf7c1cac35e59efbc04e6d81b0d00e5",
+      "base_commit": "1c8e8352cdf7c1cac35e59efbc04e6d81b0d00e5",
+      "head": "d48259b0740a5226f53b2783399f94b224ad8155",
+      "compare_url": "https://github.com/prijkes/factoruide/compare/1c8e8352cdf7c1cac35e59efbc04e6d81b0d00e5...pr%2Fquest-gold-and-item-prices",
+      "description": "descriptions/quest-gold-and-item-prices.md",
+      "source_commits": [
+        "265be86afadf21be46789fd4e8f16180a36cc1a3",
+        "de9662344c6d1a5c5d9c32591bebf0e17f65358b",
+        "0085ae56b842880650ccb6dbfbecb6bba48c312f"
+      ],
+      "changed_paths": [
+        "CHANGELOG.md",
+        "NOTICE.md",
+        "app/src/api.ts",
+        "app/src/catalog.ts",
+        "app/src/components/RouteSummary.tsx",
+        "app/src/components/StepList.tsx",
+        "app/src/index.css",
+        "crates/fg-route/src/export/diff.rs",
+        "crates/fg-route/src/export/types.rs",
+        "crates/fg-route/src/export/writer.rs",
+        "crates/fg-route/src/job/start.rs",
+        "crates/fg-route/src/model/quest.rs",
+        "crates/fg-route/src/model/sources.rs",
+        "crates/fg-route/src/model/testing.rs",
+        "crates/fg-route/src/model/types.rs",
+        "crates/fg-route/src/plan/sim.rs",
+        "crates/fg-route/src/plan/state.rs",
+        "crates/fg-route/src/plan/step.rs",
+        "crates/fg-route/src/plan/tests.rs",
+        "crates/fg-route/src/power.rs",
+        "crates/fg/src/gold.rs",
+        "crates/fg/src/main.rs",
+        "data/classic.sqlite.zst",
+        "data/forever.sqlite.zst"
+      ],
+      "validation": {
+        "rust_selected_totals": [
+          510,
+          0,
+          2,
+          0,
+          1
+        ],
+        "clippy": "fg-route, fg, fg-app all targets with warnings denied passed",
+        "frontend": "build, 2 tests, lint, 1168 translations passed"
+      }
+    },
+    {
+      "branch": "pr/finish-current-dungeon-before-next-run",
+      "title": "fix(route): finish the current dungeon before another forced run",
+      "kind": "independent",
+      "base": "1c8e8352cdf7c1cac35e59efbc04e6d81b0d00e5",
+      "base_commit": "1c8e8352cdf7c1cac35e59efbc04e6d81b0d00e5",
+      "head": "6544e4daaf5758074e5502075e8771312f716c30",
+      "compare_url": "https://github.com/prijkes/factoruide/compare/1c8e8352cdf7c1cac35e59efbc04e6d81b0d00e5...pr%2Ffinish-current-dungeon-before-next-run",
+      "description": "descriptions/finish-current-dungeon-before-next-run.md",
+      "source_commits": [
+        "b77706fa267fa79ebbdf641bda7c41233c633d1a"
+      ],
+      "changed_paths": [
+        "CHANGELOG.md",
+        "crates/fg-route/src/plan/construct.rs"
+      ],
+      "validation": [
+        {
+          "command": "cargo test --profile fast -p fg-route --lib the_current_dungeon_finishes_before_another_forced_run -- --nocapture",
+          "phase": "red",
+          "result": "1 failed on upstream; selected Dungeon(1) instead of Objective(0)"
+        },
+        {
+          "command": "cargo test --profile fast -p fg-route --lib the_current_dungeon_finishes_before_another_forced_run -- --nocapture",
+          "phase": "green",
+          "result": "1 passed; inside objective/turn-in before next run plus valid greedy replay"
+        },
+        {
+          "command": "cargo test --profile fast -p fg-route --lib dungeon -- --nocapture",
+          "result": "9 passed"
+        },
+        {
+          "command": "cargo test --profile fast -p fg-route --test it forced_dungeon -- --nocapture",
+          "result": "4 passed"
+        },
+        {
+          "command": "rustfmt --check crates/fg-route/src/plan/construct.rs",
+          "result": "passed"
+        },
+        {
+          "command": "cargo clippy --profile fast -p fg-route --lib --tests -- -D warnings",
+          "result": "passed"
+        },
+        {
+          "command": "git diff --check",
+          "result": "passed"
+        }
+      ]
+    },
+    {
+      "branch": "pr/outdoor-object-drop-rates",
+      "title": "fix(route): use placed containers for outdoor item drop costs",
+      "kind": "independent",
+      "base": "1c8e8352cdf7c1cac35e59efbc04e6d81b0d00e5",
+      "base_commit": "1c8e8352cdf7c1cac35e59efbc04e6d81b0d00e5",
+      "head": "116a5bb4a9ebc158853a014cf7b0519a01e6d30b",
+      "compare_url": "https://github.com/prijkes/factoruide/compare/1c8e8352cdf7c1cac35e59efbc04e6d81b0d00e5...pr%2Foutdoor-object-drop-rates",
+      "description": "descriptions/outdoor-object-drop-rates.md",
+      "source_commits": [
+        "b77706fa267fa79ebbdf641bda7c41233c633d1a"
+      ],
+      "changed_paths": [
+        "crates/fg-route/src/model/item.rs"
+      ],
+      "validation": [
+        {
+          "command": "cargo test --profile fast -p fg-route --lib model::item::tests -- --nocapture",
+          "phase": "red",
+          "result": "outdoor container failed 6.0 versus 60.0 uses; NPC control passed"
+        },
+        {
+          "command": "cargo test --profile fast -p fg-route --lib model::item::tests -- --nocapture",
+          "phase": "green",
+          "result": "2 passed, including after final test-module placement correction"
+        },
+        {
+          "command": "cargo test --profile fast -p fg-route --test it item -- --nocapture",
+          "result": "12 passed"
+        },
+        {
+          "command": "rustfmt --check crates/fg-route/src/model/item.rs",
+          "result": "passed"
+        },
+        {
+          "command": "cargo clippy --profile fast -p fg-route --lib --tests -- -D warnings",
+          "result": "passed after moving test module below implementation"
+        },
+        {
+          "command": "git diff --check",
+          "result": "passed"
+        }
+      ]
+    },
+    {
+      "branch": "pr/best-gear-and-merchant-purchases",
+      "title": "Plan best quest/vendor gear and merchant purchases",
+      "kind": "dependent",
+      "base": "e53437e6fee4e0522bc0a1a17f2d551cf2155365",
+      "base_commit": "e53437e6fee4e0522bc0a1a17f2d551cf2155365",
+      "head": "ccd7ba27867c9970d1a9b4c6bd1f2bff87714c5a",
+      "compare_url": "https://github.com/prijkes/factoruide/compare/pr%2Fseries-base...pr%2Fbest-gear-and-merchant-purchases",
+      "description": "descriptions/best-gear-and-merchant-purchases.md",
+      "source_commits": [
+        "a8928b674c53bfaef2c396b192760e14118cc2f8",
+        "77b06d6dc0f1869eecc196ec2e662b014b9b88f6",
+        "4f339bbe631a665b97186d2f824a49494a45e376",
+        "cbe9c2672edd0e2adb98156e14eeceb3df2e6f1d",
+        "ddfddb5778dda16e5a006def8db0e1c24e385765"
+      ],
+      "changed_paths": [
+        "CHANGELOG.md",
+        "addon/Factoruide_Guide/CHANGELOG.md",
+        "addon/Factoruide_Guide/Guide.lua",
+        "addon/Factoruide_Guide/Merchant.lua",
+        "addon/Factoruide_Guide/Pathing.lua",
+        "addon/Factoruide_Profile/Locales/deDE.lua",
+        "addon/Factoruide_Profile/Locales/esES.lua",
+        "addon/Factoruide_Profile/Locales/frFR.lua",
+        "addon/Factoruide_Profile/Locales/koKR.lua",
+        "addon/Factoruide_Profile/Locales/ptBR.lua",
+        "addon/Factoruide_Profile/Locales/ruRU.lua",
+        "addon/Factoruide_Profile/Locales/zhCN.lua",
+        "addon/Factoruide_Profile/Locales/zhTW.lua",
+        "addon/tests/smoke.lua",
+        "app/scripts/check-i18n.mjs",
+        "app/src/api.ts",
+        "app/src/catalog.ts",
+        "app/src/components/BisPanel.tsx",
+        "app/src/components/RouteSummary.tsx",
+        "app/src/components/editing.tsx",
+        "app/src/components/guideTimeline.ts",
+        "app/src/components/segments.ts",
+        "app/src/index.css",
+        "app/src/paramSchema.ts",
+        "crates/fg-route/src/export/diff.rs",
+        "crates/fg-route/src/export/mod.rs",
+        "crates/fg-route/src/export/polestar/mod.rs",
+        "crates/fg-route/src/export/templates.rs",
+        "crates/fg-route/src/export/types.rs",
+        "crates/fg-route/src/export/writer.rs",
+        "crates/fg-route/src/job/draft.rs",
+        "crates/fg-route/src/job/edit.rs",
+        "crates/fg-route/src/model/bis.rs",
+        "crates/fg-route/src/model/mod.rs",
+        "crates/fg-route/src/model/testing.rs",
+        "crates/fg-route/src/model/types.rs",
+        "crates/fg-route/src/params.rs",
+        "crates/fg-route/src/plan/availability.rs",
+        "crates/fg-route/src/plan/evaluate.rs",
+        "crates/fg-route/src/plan/growth.rs",
+        "crates/fg-route/src/plan/moves.rs",
+        "crates/fg-route/src/plan/places.rs",
+        "crates/fg-route/src/plan/state.rs",
+        "crates/fg-route/src/plan/step.rs",
+        "crates/fg-route/src/plan/tests.rs",
+        "crates/fg-route/src/plan/tests/moves.rs",
+        "crates/fg-route/src/power.rs",
+        "crates/fg-route/tests/it/edit.rs"
+      ],
+      "validation": {
+        "state": "normalized_stage_checks_passed",
+        "checks": [
+          {
+            "check": "rust_all_targets_locked",
+            "exit_code": 0
+          },
+          {
+            "check": "typescript",
+            "exit_code": 0
+          },
+          {
+            "check": "frontend_tests",
+            "exit_code": 0
+          },
+          {
+            "check": "translations",
+            "exit_code": 0
+          },
+          {
+            "check": "format",
+            "exit_code": 0
+          }
+        ]
+      }
+    },
+    {
+      "branch": "pr/client-item-icons",
+      "title": "Extract and bundle client item icons",
+      "kind": "dependent",
+      "base": "ccd7ba27867c9970d1a9b4c6bd1f2bff87714c5a",
+      "base_commit": "ccd7ba27867c9970d1a9b4c6bd1f2bff87714c5a",
+      "head": "a27483c0443010e99377c72612fd924868bc3e05",
+      "compare_url": "https://github.com/prijkes/factoruide/compare/pr%2Fbest-gear-and-merchant-purchases...pr%2Fclient-item-icons",
+      "description": "descriptions/client-item-icons.md",
+      "source_commits": [
+        "2dbca18ae048d563fe31ac6e60aa1869009ff9e9"
+      ],
+      "changed_paths": [
+        "Cargo.lock",
+        "NOTICE.md",
+        "app/src-tauri/build.rs",
+        "app/src-tauri/src/icons.rs",
+        "app/src-tauri/src/main.rs",
+        "app/src/api.ts",
+        "app/src/components/BisPanel.tsx",
+        "app/src/index.css",
+        "app/src/web/shims/core.ts",
+        "app/src/web/statics.ts",
+        "crates/fg-casc/Cargo.toml",
+        "crates/fg-casc/examples/probe.rs",
+        "crates/fg-casc/src/blp.rs",
+        "crates/fg-casc/src/blte.rs",
+        "crates/fg-casc/src/dbc.rs",
+        "crates/fg-casc/src/encoding.rs",
+        "crates/fg-casc/src/hotfix.rs",
+        "crates/fg-casc/src/idx.rs",
+        "crates/fg-casc/src/jenkins.rs",
+        "crates/fg-casc/src/lib.rs",
+        "crates/fg-casc/src/root.rs",
+        "crates/fg/Cargo.toml",
+        "crates/fg/src/icons.rs",
+        "crates/fg/src/main.rs",
+        "data/icons/classic/icons.pack",
+        "data/icons/forever/icons.pack",
+        "data/icons/item-icons.csv",
+        "scripts/web-data.mjs"
+      ],
+      "validation": {
+        "state": "normalized_stage_checks_passed",
+        "checks": [
+          {
+            "check": "rust_all_targets_locked",
+            "exit_code": 0
+          },
+          {
+            "check": "typescript",
+            "exit_code": 0
+          },
+          {
+            "check": "frontend_tests",
+            "exit_code": 0
+          },
+          {
+            "check": "translations",
+            "exit_code": 0
+          },
+          {
+            "check": "format",
+            "exit_code": 0
+          }
+        ]
+      }
+    },
+    {
+      "branch": "pr/equipment-tab-and-tooltips",
+      "title": "Show equipment slots and item tooltips with rounded DPS",
+      "kind": "dependent",
+      "base": "a27483c0443010e99377c72612fd924868bc3e05",
+      "base_commit": "a27483c0443010e99377c72612fd924868bc3e05",
+      "head": "ba0a74d6f7115e2bf23ab4c468b39922c9544856",
+      "compare_url": "https://github.com/prijkes/factoruide/compare/pr%2Fclient-item-icons...pr%2Fequipment-tab-and-tooltips",
+      "description": "descriptions/equipment-tab-and-tooltips.md",
+      "source_commits": [
+        "efeff952bf9c347d79842bd56f2c911380f304a1",
+        "bac944dbd1ed23516289542c26be0f8443cd585b",
+        "29271f3e95c58976f250e9d92a2a3d96fb7405a2",
+        "5a799c7d2e6c52b5c861c77a92654b7213f0b4b3"
+      ],
+      "changed_paths": [
+        "CHANGELOG.md",
+        "NOTICE.md",
+        "app/scripts/check-i18n.mjs",
+        "app/src-tauri/src/items.rs",
+        "app/src-tauri/src/main.rs",
+        "app/src/api.ts",
+        "app/src/assets/coins/copper.png",
+        "app/src/assets/coins/gold.png",
+        "app/src/assets/coins/silver.png",
+        "app/src/assets/friz-quadrata.ttf",
+        "app/src/assets/slots/chest.png",
+        "app/src/assets/slots/feet.png",
+        "app/src/assets/slots/finger.png",
+        "app/src/assets/slots/hands.png",
+        "app/src/assets/slots/head.png",
+        "app/src/assets/slots/legs.png",
+        "app/src/assets/slots/main-hand.png",
+        "app/src/assets/slots/neck.png",
+        "app/src/assets/slots/ranged.png",
+        "app/src/assets/slots/secondary-hand.png",
+        "app/src/assets/slots/shirt.png",
+        "app/src/assets/slots/shoulder.png",
+        "app/src/assets/slots/trinket.png",
+        "app/src/assets/slots/waist.png",
+        "app/src/assets/slots/wrists.png",
+        "app/src/catalog.ts",
+        "app/src/components/BisPanel.tsx",
+        "app/src/components/ItemTip.tsx",
+        "app/src/components/ResultView.tsx",
+        "app/src/components/RouteSummary.tsx",
+        "app/src/components/StepList.tsx",
+        "app/src/index.css",
+        "crates/fg-app/src/items.rs",
+        "crates/fg-app/src/lib.rs",
+        "crates/fg-casc/examples/extract-client-assets.rs",
+        "crates/fg-web/src/app.rs",
+        "crates/fg-web/src/app/tests.rs"
+      ],
+      "validation": {
+        "state": "normalized_stage_checks_passed",
+        "checks": [
+          {
+            "check": "rust_all_targets_locked",
+            "exit_code": 0
+          },
+          {
+            "check": "typescript",
+            "exit_code": 0
+          },
+          {
+            "check": "frontend_tests",
+            "exit_code": 0
+          },
+          {
+            "check": "translations",
+            "exit_code": 0
+          },
+          {
+            "check": "format",
+            "exit_code": 0
+          }
+        ]
+      }
+    },
+    {
+      "branch": "pr/shared-quest-kill-credit",
+      "title": "Share accepted quest kill credit without duplicate work",
+      "kind": "dependent",
+      "base": "ba0a74d6f7115e2bf23ab4c468b39922c9544856",
+      "base_commit": "ba0a74d6f7115e2bf23ab4c468b39922c9544856",
+      "head": "4b37eeb2ad44acb975a511fa6ac44183ab8ae764",
+      "compare_url": "https://github.com/prijkes/factoruide/compare/pr%2Fequipment-tab-and-tooltips...pr%2Fshared-quest-kill-credit",
+      "description": "descriptions/shared-quest-kill-credit.md",
+      "source_commits": [
+        "d1c733cd6ba14834acf1682d677c4843e992bd7e"
+      ],
+      "changed_paths": [
+        "CHANGELOG.md",
+        "crates/fg-route/src/model/objectives.rs",
+        "crates/fg-route/src/model/testing.rs",
+        "crates/fg-route/src/model/types.rs",
+        "crates/fg-route/src/plan/evaluate.rs",
+        "crates/fg-route/src/plan/indexes.rs",
+        "crates/fg-route/src/plan/sim.rs",
+        "crates/fg-route/src/plan/spot.rs",
+        "crates/fg-route/src/plan/state.rs",
+        "crates/fg-route/src/plan/step.rs",
+        "crates/fg-route/src/plan/tests.rs",
+        "crates/fg-route/src/plan/tests/shared_kills.rs",
+        "crates/fg-route/tests/it/routes.rs"
+      ],
+      "validation": {
+        "state": "normalized_stage_checks_passed",
+        "checks": [
+          {
+            "check": "rust_all_targets_locked",
+            "exit_code": 0
+          },
+          {
+            "check": "typescript",
+            "exit_code": 0
+          },
+          {
+            "check": "frontend_tests",
+            "exit_code": 0
+          },
+          {
+            "check": "translations",
+            "exit_code": 0
+          },
+          {
+            "check": "format",
+            "exit_code": 0
+          }
+        ]
+      }
+    },
+    {
+      "branch": "pr/bounded-search-experiments",
+      "title": "Add opt-in bounded chain and hub search experiments",
+      "kind": "dependent",
+      "base": "4b37eeb2ad44acb975a511fa6ac44183ab8ae764",
+      "base_commit": "4b37eeb2ad44acb975a511fa6ac44183ab8ae764",
+      "head": "30571ad1796f98e8282841c1c540d2d01081f603",
+      "compare_url": "https://github.com/prijkes/factoruide/compare/pr%2Fshared-quest-kill-credit...pr%2Fbounded-search-experiments",
+      "description": "descriptions/bounded-search-experiments.md",
+      "source_commits": [
+        "a3ce9878830b3414b4b200d9fbbfd1febc88cb58"
+      ],
+      "changed_paths": [
+        "crates/fg-route/examples/quality_compare.rs",
+        "crates/fg-route/src/job/mod.rs",
+        "crates/fg-route/src/params.rs",
+        "crates/fg-route/src/plan/chains.rs",
+        "crates/fg-route/src/plan/mod.rs",
+        "crates/fg-route/src/plan/moves.rs",
+        "crates/fg-route/src/plan/neighborhood.rs",
+        "crates/fg-route/src/plan/report.rs",
+        "crates/fg-route/src/plan/tests/moves.rs",
+        "scripts/route_quality_compare.py",
+        "scripts/test_route_quality_compare.py"
+      ],
+      "validation": {
+        "state": "normalized_stage_checks_passed",
+        "checks": [
+          {
+            "check": "rust_all_targets_locked",
+            "exit_code": 0
+          },
+          {
+            "check": "typescript",
+            "exit_code": 0
+          },
+          {
+            "check": "frontend_tests",
+            "exit_code": 0
+          },
+          {
+            "check": "translations",
+            "exit_code": 0
+          },
+          {
+            "check": "format",
+            "exit_code": 0
+          }
+        ]
+      }
+    },
+    {
+      "branch": "pr/cleanup-accounting-and-training",
+      "title": "Preserve performed quest work and useful training during cleanup",
+      "kind": "dependent",
+      "base": "30571ad1796f98e8282841c1c540d2d01081f603",
+      "base_commit": "30571ad1796f98e8282841c1c540d2d01081f603",
+      "head": "10bf8a06f35024e5b461205fb7cfa1ede6e07c86",
+      "compare_url": "https://github.com/prijkes/factoruide/compare/pr%2Fbounded-search-experiments...pr%2Fcleanup-accounting-and-training",
+      "description": "descriptions/cleanup-accounting-and-training.md",
+      "source_commits": [
+        "09752b6a69d40766bb0f1edcce5a9971d5ba37f4",
+        "be5bd00ae5c8534aada2e61220477a23787d3605",
+        "f6fe4522dcb06ca114d6de3266082b2203222f98"
+      ],
+      "changed_paths": [
+        "CHANGELOG.md",
+        "crates/fg-route/src/export/writer.rs",
+        "crates/fg-route/src/job/edit.rs",
+        "crates/fg-route/src/plan/availability.rs",
+        "crates/fg-route/src/plan/edit.rs",
+        "crates/fg-route/src/plan/evaluate.rs",
+        "crates/fg-route/src/plan/mod.rs",
+        "crates/fg-route/src/plan/places.rs",
+        "crates/fg-route/src/plan/search.rs",
+        "crates/fg-route/src/plan/sim.rs",
+        "crates/fg-route/src/plan/state.rs",
+        "crates/fg-route/src/plan/step.rs",
+        "crates/fg-route/src/plan/tests.rs",
+        "crates/fg-route/src/plan/tests/abandoned_work.rs",
+        "crates/fg-route/src/plan/tests/cleanup_observation.rs",
+        "crates/fg-route/src/plan/tests/cleanup_training.rs",
+        "crates/fg-route/src/plan/tests/profession_trainers.rs",
+        "crates/fg-route/tests/it/routes.rs"
+      ],
+      "validation": {
+        "state": "normalized_stage_checks_passed",
+        "checks": [
+          {
+            "check": "rust_all_targets_locked",
+            "exit_code": 0
+          },
+          {
+            "check": "typescript",
+            "exit_code": 0
+          },
+          {
+            "check": "frontend_tests",
+            "exit_code": 0
+          },
+          {
+            "check": "translations",
+            "exit_code": 0
+          },
+          {
+            "check": "format",
+            "exit_code": 0
+          }
+        ]
+      }
+    },
+    {
+      "branch": "pr/cleanup-replay-diagnostics",
+      "title": "Replay and inspect archived cleanup outcomes",
+      "kind": "dependent",
+      "base": "10bf8a06f35024e5b461205fb7cfa1ede6e07c86",
+      "base_commit": "10bf8a06f35024e5b461205fb7cfa1ede6e07c86",
+      "head": "9f60dc93c0b67f83b585896576bf2942a9bea575",
+      "compare_url": "https://github.com/prijkes/factoruide/compare/pr%2Fcleanup-accounting-and-training...pr%2Fcleanup-replay-diagnostics",
+      "description": "descriptions/cleanup-replay-diagnostics.md",
+      "source_commits": [
+        "09752b6a69d40766bb0f1edcce5a9971d5ba37f4",
+        "df96a3087c0e491c6edcc37549fdddf025f127c7",
+        "4fe8de4fca56d100a990d72c076b83dc476df2de",
+        "10bb20af5c1afda0d43b49da2ede653651a92b18"
+      ],
+      "changed_paths": [
+        "crates/fg-route/examples/cleanup_diagnose.rs"
+      ],
+      "validation": {
+        "state": "normalized_stage_checks_passed",
+        "checks": [
+          {
+            "check": "rust_all_targets_locked",
+            "exit_code": 0
+          },
+          {
+            "check": "typescript",
+            "exit_code": 0
+          },
+          {
+            "check": "frontend_tests",
+            "exit_code": 0
+          },
+          {
+            "check": "translations",
+            "exit_code": 0
+          },
+          {
+            "check": "format",
+            "exit_code": 0
+          }
+        ]
+      }
+    },
+    {
+      "branch": "pr/required-gear-source-completion",
+      "title": "Select supported gear sources and enforce actual completion",
+      "kind": "dependent",
+      "base": "9f60dc93c0b67f83b585896576bf2942a9bea575",
+      "base_commit": "9f60dc93c0b67f83b585896576bf2942a9bea575",
+      "head": "7509acf895d53c3323a082768a318f9be44adfa5",
+      "compare_url": "https://github.com/prijkes/factoruide/compare/pr%2Fcleanup-replay-diagnostics...pr%2Frequired-gear-source-completion",
+      "description": "descriptions/required-gear-source-completion.md",
+      "source_commits": [
+        "98612936652f9e427c85ac53a11fe1088eb2990b",
+        "085d58204661ee2dfb72c3d20070074a4d09da1a",
+        "71fcf526a60d8c7ea5ee7a4ddb677b70980a1e62",
+        "8ce9e10e81080bdcca9c6c301c550b9f8987d147",
+        "8dbd2f93b3d1f1722a244793b1a80146807a607c",
+        "42a54c8b1934f77f8d2b4e152c5d27108518af10",
+        "20015a2f7dbd644ce5b202629cec0430384baca6",
+        "017888112a7b1560b7003f56f86616a7c8c6cbaa",
+        "f48cb5903f0529b5ca145c08987377d73b85fb14",
+        "66d21231ecbf833155f247e4a370904c57c925e8"
+      ],
+      "changed_paths": [
+        "CHANGELOG.md",
+        "app/package.json",
+        "app/scripts/mandatory-goal-warnings.test.mjs",
+        "app/src/api.ts",
+        "app/src/catalog.ts",
+        "app/src/components/RouteSummary.tsx",
+        "app/src/mandatoryGoalWarnings.ts",
+        "app/src/paramSchema.ts",
+        "crates/fg-route/src/export/diff.rs",
+        "crates/fg-route/src/job/mod.rs",
+        "crates/fg-route/src/job/notes.rs",
+        "crates/fg-route/src/job/race.rs",
+        "crates/fg-route/src/job/start.rs",
+        "crates/fg-route/src/model/bis.rs",
+        "crates/fg-route/src/model/bis/tests.rs",
+        "crates/fg-route/src/model/chains.rs",
+        "crates/fg-route/src/model/derive.rs",
+        "crates/fg-route/src/model/feasibility.rs",
+        "crates/fg-route/src/model/feasibility/tests.rs",
+        "crates/fg-route/src/model/mod.rs",
+        "crates/fg-route/src/model/provenance_tests.rs",
+        "crates/fg-route/src/model/quest.rs",
+        "crates/fg-route/src/model/testing.rs",
+        "crates/fg-route/src/model/types.rs",
+        "crates/fg-route/src/plan/construct.rs",
+        "crates/fg-route/src/plan/evaluate.rs",
+        "crates/fg-route/src/plan/gear.rs",
+        "crates/fg-route/src/plan/mod.rs",
+        "crates/fg-route/src/plan/on_the_way.rs",
+        "crates/fg-route/src/plan/places.rs",
+        "crates/fg-route/src/plan/report.rs",
+        "crates/fg-route/src/plan/search.rs",
+        "crates/fg-route/src/plan/share.rs",
+        "crates/fg-route/src/plan/spot.rs",
+        "crates/fg-route/src/plan/state.rs",
+        "crates/fg-route/src/plan/step.rs",
+        "crates/fg-route/src/plan/tests.rs",
+        "crates/fg-route/src/plan/tests/mandatory_reporting.rs",
+        "crates/fg-route/src/plan/tests/required_gear.rs",
+        "crates/fg-route/src/plan/tidy.rs"
+      ],
+      "validation": {
+        "state": "normalized_stage_checks_passed",
+        "checks": [
+          {
+            "check": "rust_all_targets_locked",
+            "exit_code": 0
+          },
+          {
+            "check": "typescript",
+            "exit_code": 0
+          },
+          {
+            "check": "frontend_tests",
+            "exit_code": 0
+          },
+          {
+            "check": "translations",
+            "exit_code": 0
+          },
+          {
+            "check": "format",
+            "exit_code": 0
+          }
+        ]
+      }
+    },
+    {
+      "branch": "pr/required-reputation-targets",
+      "title": "Prioritize required reputation work and return best-found deficits",
+      "kind": "dependent",
+      "base": "7509acf895d53c3323a082768a318f9be44adfa5",
+      "base_commit": "7509acf895d53c3323a082768a318f9be44adfa5",
+      "head": "2e820a2663dbc328f5915ade6428d250cce48c96",
+      "compare_url": "https://github.com/prijkes/factoruide/compare/pr%2Frequired-gear-source-completion...pr%2Frequired-reputation-targets",
+      "description": "descriptions/required-reputation-targets.md",
+      "source_commits": [
+        "e6a65eb29f0de0f8463bf76a90019cae83150cf6",
+        "0fb216313352c8a703950fff09fc7e3c9c974508",
+        "95356fdf18d4c4b6ea34fb74140b35394f0a28d1",
+        "1626ed6d0eec06f215581acd744bf8261c51c919"
+      ],
+      "changed_paths": [
+        "CHANGELOG.md",
+        "app/src/catalog.ts",
+        "app/src/components/ReputationPanel.tsx",
+        "app/src/components/RouteSummary.tsx",
+        "app/src/paramSchema.ts",
+        "crates/fg-route/src/export/checkpoints.rs",
+        "crates/fg-route/src/export/mod.rs",
+        "crates/fg-route/src/export/types.rs",
+        "crates/fg-route/src/job/edit.rs",
+        "crates/fg-route/src/job/mod.rs",
+        "crates/fg-route/src/job/options.rs",
+        "crates/fg-route/src/job/race.rs",
+        "crates/fg-route/src/job/reputation.rs",
+        "crates/fg-route/src/model/chains.rs",
+        "crates/fg-route/src/model/mod.rs",
+        "crates/fg-route/src/model/pvp.rs",
+        "crates/fg-route/src/model/quest.rs",
+        "crates/fg-route/src/model/required.rs",
+        "crates/fg-route/src/model/selection.rs",
+        "crates/fg-route/src/model/sources.rs",
+        "crates/fg-route/src/model/testing.rs",
+        "crates/fg-route/src/model/types.rs",
+        "crates/fg-route/src/plan/availability.rs",
+        "crates/fg-route/src/plan/construct.rs",
+        "crates/fg-route/src/plan/evaluate.rs",
+        "crates/fg-route/src/plan/gear.rs",
+        "crates/fg-route/src/plan/mod.rs",
+        "crates/fg-route/src/plan/reputation.rs",
+        "crates/fg-route/src/plan/search.rs",
+        "crates/fg-route/src/plan/sim.rs",
+        "crates/fg-route/src/plan/state.rs",
+        "crates/fg-route/src/plan/step.rs",
+        "crates/fg-route/src/plan/tests.rs",
+        "crates/fg-route/src/plan/tests/required_reputation.rs",
+        "crates/fg-route/src/plan/worth.rs",
+        "crates/fg-route/tests/it/edit.rs"
+      ],
+      "validation": {
+        "state": "normalized_stage_checks_passed",
+        "checks": [
+          {
+            "check": "rust_all_targets_locked",
+            "exit_code": 0
+          },
+          {
+            "check": "typescript",
+            "exit_code": 0
+          },
+          {
+            "check": "frontend_tests",
+            "exit_code": 0
+          },
+          {
+            "check": "translations",
+            "exit_code": 0
+          },
+          {
+            "check": "format",
+            "exit_code": 0
+          }
+        ]
+      }
+    },
+    {
+      "branch": "pr/reputation-programmes",
+      "title": "Support counted repeatables, farming, spillover and daily reputation",
+      "kind": "dependent",
+      "base": "2e820a2663dbc328f5915ade6428d250cce48c96",
+      "base_commit": "2e820a2663dbc328f5915ade6428d250cce48c96",
+      "head": "93e670832b7dcfd05e219289c14414c507f3de07",
+      "compare_url": "https://github.com/prijkes/factoruide/compare/pr%2Frequired-reputation-targets...pr%2Freputation-programmes",
+      "description": "descriptions/reputation-programmes.md",
+      "source_commits": [
+        "95459cbbb93e26906d4d505817e966265df12f85",
+        "598dbfe14ffe28f4697e6e9906acae929a3663c2",
+        "3d74c89394885c742bc1f98b7ed5b54a7a03d6ed",
+        "7f70ab68bc18d42f5dab7d33b9fe84b65ad1ebe0",
+        "2c1d3a76ade4e785e93d3492bd2d2e1a232def47",
+        "d157ad976d09ee04000a846a632eaf6ee9585514",
+        "65299b1d1f8a5802213800b33935839194910f22",
+        "a161d739a8a4477f2d10036aa81464c5021936e6",
+        "2e6a138b8f522465a0c1d24d6390ef62ae09f580",
+        "2b37c08bfaad991c5836acd7390e5ed8ac11a0dc",
+        "eade5e8758738ebb60e2a6e40a2a4e7cd7544ee7",
+        "68f0b5007bda51f77d5356c0e36d7a9935578ef6",
+        "51db649f914a19d5e9bf7196213913e241daa374",
+        "b08556ebf249c79f0dda8ad73f3de05234cbaafa",
+        "243e18b6c047d749287a4b2c600bb21e25423873",
+        "4d0e378ca6c89b91f66f7da45cf7aaef1342497a",
+        "59d3d6845b0c02bb7fd9243e876d0c3d8dcb5c3b",
+        "b55eb8725ef05c43d73ba8e7d4c170323764d3b4"
+      ],
+      "changed_paths": [
+        "NOTICE.md",
+        "addon/Factoruide_Guide/AcceptanceAudit.lua",
+        "addon/Factoruide_Guide/Automation.lua",
+        "addon/Factoruide_Guide/CHANGELOG.md",
+        "addon/Factoruide_Guide/Factoruide_Guide.toc",
+        "addon/Factoruide_Guide/Guide.lua",
+        "addon/Factoruide_Guide/Import.lua",
+        "addon/Factoruide_Guide/MapPins.lua",
+        "addon/Factoruide_Guide/Reputation.lua",
+        "addon/Factoruide_Profile/CHANGELOG.md",
+        "addon/Factoruide_Profile/Factoruide_Profile.toc",
+        "addon/Factoruide_Profile/Profile.lua",
+        "addon/Factoruide_Profile/ReputationProfile.lua",
+        "addon/tests/smoke.lua",
+        "app/package.json",
+        "app/scripts/reputation-program.test.mjs",
+        "app/src-tauri/src/addon.rs",
+        "app/src/api.ts",
+        "app/src/catalog.ts",
+        "app/src/components/ConfigForm.tsx",
+        "app/src/components/ReputationPanel.tsx",
+        "app/src/components/RouteSummary.tsx",
+        "app/src/components/StepList.tsx",
+        "app/src/components/editing.tsx",
+        "app/src/components/segments.ts",
+        "app/src/components/useDraft.ts",
+        "app/src/paramSchema.ts",
+        "app/src/reputationProgram.ts",
+        "crates/fg-app/src/studio.rs",
+        "crates/fg-route/src/export/diff.rs",
+        "crates/fg-route/src/export/format.rs",
+        "crates/fg-route/src/export/lua.rs",
+        "crates/fg-route/src/export/mod.rs",
+        "crates/fg-route/src/export/polestar/mod.rs",
+        "crates/fg-route/src/export/reputation.rs",
+        "crates/fg-route/src/export/templates.rs",
+        "crates/fg-route/src/export/types.rs",
+        "crates/fg-route/src/export/writer.rs",
+        "crates/fg-route/src/job/draft.rs",
+        "crates/fg-route/src/job/edit.rs",
+        "crates/fg-route/src/job/edit_reputation_tests.rs",
+        "crates/fg-route/src/job/mod.rs",
+        "crates/fg-route/src/job/reputation.rs",
+        "crates/fg-route/src/job/reputation_cancellation_tests.rs",
+        "crates/fg-route/src/job/routes.rs",
+        "crates/fg-route/src/job/start.rs",
+        "crates/fg-route/src/job/timeline.rs",
+        "crates/fg-route/src/lib.rs",
+        "crates/fg-route/src/model/mod.rs",
+        "crates/fg-route/src/model/quest.rs",
+        "crates/fg-route/src/model/reputation_sources.rs",
+        "crates/fg-route/src/model/sources.rs",
+        "crates/fg-route/src/model/testing.rs",
+        "crates/fg-route/src/model/types.rs",
+        "crates/fg-route/src/params.rs",
+        "crates/fg-route/src/plan/edit.rs",
+        "crates/fg-route/src/plan/evaluate.rs",
+        "crates/fg-route/src/plan/mod.rs",
+        "crates/fg-route/src/plan/reputation.rs",
+        "crates/fg-route/src/plan/reputation_program.rs",
+        "crates/fg-route/src/plan/sim.rs",
+        "crates/fg-route/src/plan/state.rs",
+        "crates/fg-route/src/plan/step.rs",
+        "crates/fg-route/src/plan/tests.rs",
+        "crates/fg-route/src/plan/tests/reputation_program.rs",
+        "crates/fg-route/src/plan/tests/required_reputation.rs",
+        "crates/fg-route/src/reputation/mod.rs",
+        "crates/fg-route/src/reputation/tests.rs",
+        "crates/fg-route/src/reputation/transition.rs",
+        "crates/fg-route/src/reputation/types.rs",
+        "crates/fg-route/tests/it/edit.rs",
+        "data/reputation/README.md",
+        "data/reputation/classic.json",
+        "data/reputation/forever.json",
+        "scripts/update-reputation-data.py"
+      ],
+      "validation": {
+        "state": "normalized_stage_checks_passed",
+        "checks": [
+          {
+            "check": "rust_all_targets_locked",
+            "exit_code": 0
+          },
+          {
+            "check": "typescript",
+            "exit_code": 0
+          },
+          {
+            "check": "frontend_tests",
+            "exit_code": 0
+          },
+          {
+            "check": "translations",
+            "exit_code": 0
+          },
+          {
+            "check": "format",
+            "exit_code": 0
+          }
+        ]
+      }
+    },
+    {
+      "branch": "pr/reputation-dungeon-quest-order",
+      "title": "Finish useful reputation objectives before leaving forced dungeons",
+      "kind": "dependent",
+      "base": "93e670832b7dcfd05e219289c14414c507f3de07",
+      "base_commit": "93e670832b7dcfd05e219289c14414c507f3de07",
+      "head": "4ec7b7a334bc57b9908397923e3f9217d94d86d3",
+      "compare_url": "https://github.com/prijkes/factoruide/compare/pr%2Freputation-programmes...pr%2Freputation-dungeon-quest-order",
+      "description": "descriptions/reputation-dungeon-quest-order.md",
+      "source_commits": [
+        "b77706fa267fa79ebbdf641bda7c41233c633d1a"
+      ],
+      "changed_paths": [
+        "crates/fg-route/src/model/derive.rs",
+        "crates/fg-route/src/model/mod.rs",
+        "crates/fg-route/src/model/objectives.rs",
+        "crates/fg-route/src/plan/construct.rs"
+      ],
+      "validation": {
+        "state": "normalized_stage_checks_passed",
+        "checks": [
+          {
+            "check": "rust_all_targets_locked",
+            "exit_code": 0
+          },
+          {
+            "check": "typescript",
+            "exit_code": 0
+          },
+          {
+            "check": "frontend_tests",
+            "exit_code": 0
+          },
+          {
+            "check": "translations",
+            "exit_code": 0
+          },
+          {
+            "check": "format",
+            "exit_code": 0
+          }
+        ]
+      }
+    }
+  ]
+}
