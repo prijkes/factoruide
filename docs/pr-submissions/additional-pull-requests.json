@@ -1,0 +1,22 @@
+[
+  {
+    "number": 155,
+    "url": "https://github.com/brouznouf/factoruide/pull/155",
+    "title": "fix(route): respect class access at loot-selling shops",
+    "branch": "pr/class-gated-loot-vendors",
+    "head": "f941f14cdfdd03ae93bcda319f2dea7c03fab8c3",
+    "base_commit": "1c8e8352cdf7c1cac35e59efbc04e6d81b0d00e5",
+    "draft": true,
+    "commits": 1,
+    "files": [
+      "CHANGELOG.md",
+      "crates/fg-route/src/model/places.rs",
+      "crates/fg-route/tests/it/routes.rs",
+      "crates/fg-route/tests/fixtures/vendor_access.toml"
+    ],
+    "tests_passed": 499,
+    "ignored_doctests": 2,
+    "known_windows_fixture_filtered": 1,
+    "description": "descriptions/class-gated-loot-vendors.md"
+  }
+]
