@@ -1,5 +1,7 @@
 # Source coverage for the 22-topic submission series
 
+The checks described here were performed by AI; no human source-code review is claimed.
+
 Source: frozen fork `37b3f5f`, common base `c27f59d`, and current upstream `1c8e835`. The series assigns every surviving fork behavior to a topic while preserving upstream objective guides and current quest data. [Machine-readable source coverage](source-coverage.json) records all source commits, split ownership and exclusions.
 
 ## Coverage totals

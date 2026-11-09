@@ -1,5 +1,7 @@
 # Database verification
 
+The checks described here were performed by AI; no human source-code review is claimed.
+
 The economic-data branch starts from the latest upstream packed databases at `1c8e835`. It adds nullable monetary columns for quest rewards and item buy/sell prices, plus the corresponding `vmangos-money` provenance tokens. It preserves the original nonmonetary values and schema objects.
 
 ## Forever data

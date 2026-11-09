@@ -3,7 +3,7 @@
   "fork_repository": "prijkes/factoruide",
   "upstream_base": "1c8e8352cdf7c1cac35e59efbc04e6d81b0d00e5",
   "original_fork_main": "37b3f5f9de2a9c0784b9c26230a9bd6e87a55a57",
-  "scope": "Prepared branches and descriptions only; no upstream PRs opened",
+  "scope": "Published 22 upstream draft pull requests; submitter reports combined-fork in-game testing only and no source-code review. Automated checks were AI-run.",
   "series_base": {
     "branch": "pr/series-base",
     "head": "e53437e6fee4e0522bc0a1a17f2d551cf2155365",
@@ -30,7 +30,12 @@
         "Windows fixture probe RED before fix: missing classic database; GREEN after: three databases, images, headers copied from path with spaces",
         "node --check scripts/web-data.mjs: pass",
         "git diff --check: pass"
-      ]
+      ],
+      "pull_request": {
+        "number": 133,
+        "url": "https://github.com/brouznouf/factoruide/pull/133",
+        "draft": true
+      }
     },
     {
       "branch": "pr/combat-safe-quest-tracker",
@@ -57,7 +62,12 @@
         "StyLua 2.5.2 with Windows line-ending override for checkout: pass",
         "git diff --check: pass",
         "Guide smoke profile-export JSON parsing subcheck is skipped because python3 is unavailable; Windows shell also prints two missing-path messages. No in-game validation."
-      ]
+      ],
+      "pull_request": {
+        "number": 134,
+        "url": "https://github.com/brouznouf/factoruide/pull/134",
+        "draft": true
+      }
     },
     {
       "branch": "pr/wide-guide-import-numbers",
@@ -84,7 +94,12 @@
         "StyLua 2.5.2 on LF-normalized snapshots with repository config: pass",
         "git diff --check: pass",
         "Guide smoke profile-export JSON parsing subcheck is skipped because python3 is unavailable; Windows shell also prints two missing-path messages. No in-game validation."
-      ]
+      ],
+      "pull_request": {
+        "number": 135,
+        "url": "https://github.com/brouznouf/factoruide/pull/135",
+        "draft": true
+      }
     },
     {
       "branch": "pr/settings-dropdown-layout",
@@ -113,7 +128,12 @@
         "npx oxlint --deny-warnings: pass",
         "npm run check:i18n: pass, 1166 texts",
         "git diff --check: pass"
-      ]
+      ],
+      "pull_request": {
+        "number": 136,
+        "url": "https://github.com/brouznouf/factoruide/pull/136",
+        "draft": true
+      }
     },
     {
       "branch": "pr/missed-quest-acceptance-warnings",
@@ -151,7 +171,12 @@
         "StyLua 2.5.2 on LF-normalized snapshots using repository config: pass for all changed Lua files",
         "git diff --check: pass",
         "Guide smoke profile-export JSON parsing subcheck is skipped because python3 is unavailable; Windows shell also prints two missing-path messages. No in-game validation."
-      ]
+      ],
+      "pull_request": {
+        "number": 137,
+        "url": "https://github.com/brouznouf/factoruide/pull/137",
+        "draft": true
+      }
     },
     {
       "branch": "pr/quest-prerequisite-corrections",
@@ -203,7 +228,12 @@
           "command": "Python tomllib parse and exact source blob comparison",
           "result": "2 active merge-only audit accept entries restored; full file equals original surviving fork audit"
         }
-      ]
+      ],
+      "pull_request": {
+        "number": 138,
+        "url": "https://github.com/brouznouf/factoruide/pull/138",
+        "draft": true
+      }
     },
     {
       "branch": "pr/reuse-route-travel-work",
@@ -249,7 +279,12 @@
           "command": "git diff --check",
           "result": "passed"
         }
-      ]
+      ],
+      "pull_request": {
+        "number": 139,
+        "url": "https://github.com/brouznouf/factoruide/pull/139",
+        "draft": true
+      }
     },
     {
       "branch": "pr/windows-allocator-test-guard",
@@ -281,7 +316,12 @@
           "command": "git diff --check",
           "result": "passed"
         }
-      ]
+      ],
+      "pull_request": {
+        "number": 140,
+        "url": "https://github.com/brouznouf/factoruide/pull/140",
+        "draft": true
+      }
     },
     {
       "branch": "pr/quest-gold-and-item-prices",
@@ -333,6 +373,11 @@
         ],
         "clippy": "fg-route, fg, fg-app all targets with warnings denied passed",
         "frontend": "build, 2 tests, lint, 1168 translations passed"
+      },
+      "pull_request": {
+        "number": 141,
+        "url": "https://github.com/brouznouf/factoruide/pull/141",
+        "draft": true
       }
     },
     {
@@ -382,7 +427,12 @@
           "command": "git diff --check",
           "result": "passed"
         }
-      ]
+      ],
+      "pull_request": {
+        "number": 142,
+        "url": "https://github.com/brouznouf/factoruide/pull/142",
+        "draft": true
+      }
     },
     {
       "branch": "pr/outdoor-object-drop-rates",
@@ -426,7 +476,12 @@
           "command": "git diff --check",
           "result": "passed"
         }
-      ]
+      ],
+      "pull_request": {
+        "number": 143,
+        "url": "https://github.com/brouznouf/factoruide/pull/143",
+        "draft": true
+      }
     },
     {
       "branch": "pr/best-gear-and-merchant-purchases",
@@ -518,6 +573,11 @@
             "exit_code": 0
           }
         ]
+      },
+      "pull_request": {
+        "number": 144,
+        "url": "https://github.com/brouznouf/factoruide/pull/144",
+        "draft": true
       }
     },
     {
@@ -586,6 +646,11 @@
             "exit_code": 0
           }
         ]
+      },
+      "pull_request": {
+        "number": 145,
+        "url": "https://github.com/brouznouf/factoruide/pull/145",
+        "draft": true
       }
     },
     {
@@ -666,6 +731,11 @@
             "exit_code": 0
           }
         ]
+      },
+      "pull_request": {
+        "number": 146,
+        "url": "https://github.com/brouznouf/factoruide/pull/146",
+        "draft": true
       }
     },
     {
@@ -719,6 +789,11 @@
             "exit_code": 0
           }
         ]
+      },
+      "pull_request": {
+        "number": 147,
+        "url": "https://github.com/brouznouf/factoruide/pull/147",
+        "draft": true
       }
     },
     {
@@ -770,6 +845,11 @@
             "exit_code": 0
           }
         ]
+      },
+      "pull_request": {
+        "number": 148,
+        "url": "https://github.com/brouznouf/factoruide/pull/148",
+        "draft": true
       }
     },
     {
@@ -830,6 +910,11 @@
             "exit_code": 0
           }
         ]
+      },
+      "pull_request": {
+        "number": 149,
+        "url": "https://github.com/brouznouf/factoruide/pull/149",
+        "draft": true
       }
     },
     {
@@ -874,6 +959,11 @@
             "exit_code": 0
           }
         ]
+      },
+      "pull_request": {
+        "number": 150,
+        "url": "https://github.com/brouznouf/factoruide/pull/150",
+        "draft": true
       }
     },
     {
@@ -963,6 +1053,11 @@
             "exit_code": 0
           }
         ]
+      },
+      "pull_request": {
+        "number": 151,
+        "url": "https://github.com/brouznouf/factoruide/pull/151",
+        "draft": true
       }
     },
     {
@@ -1042,6 +1137,11 @@
             "exit_code": 0
           }
         ]
+      },
+      "pull_request": {
+        "number": 152,
+        "url": "https://github.com/brouznouf/factoruide/pull/152",
+        "draft": true
       }
     },
     {
@@ -1174,6 +1274,11 @@
             "exit_code": 0
           }
         ]
+      },
+      "pull_request": {
+        "number": 153,
+        "url": "https://github.com/brouznouf/factoruide/pull/153",
+        "draft": true
       }
     },
     {
@@ -1218,6 +1323,11 @@
             "exit_code": 0
           }
         ]
+      },
+      "pull_request": {
+        "number": 154,
+        "url": "https://github.com/brouznouf/factoruide/pull/154",
+        "draft": true
       }
     }
   ]

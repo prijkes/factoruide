@@ -1,4 +1,6 @@
-# Composition validation
+# AI-run composition validation
+
+All checks below were performed by AI. The submitter reports only in-game testing of the combined fork and has not reviewed the source code. These split branches have not been individually verified in-game; no human source-code review is claimed.
 
 Checks below apply to the complete prepared tree `df9fd779eef0411c26ec9acdfda484045e9f5c59`, at `pr/reputation-dungeon-quest-order` commit `4ec7b7a`. The upstream base is `1c8e835`. Validation ran on Windows; installed application and addon files were unchanged.
 
@@ -33,7 +35,7 @@ Every independent branch has exactly one commit above the upstream base. Each de
 
 All twelve cumulative snapshots passed their Rust all-target checks with the lockfile, TypeScript checks, frontend tests, translations and formatting. The eleven topic deltas also passed whitespace checks. These stage checks complement the release test of the final combined tree.
 
-Independent review approved the extraction, the monetary-data overlay and the combined topic boundaries. Across all twelve cumulative snapshots, the three added economy regressions, the two generic dungeon/drop-rate fixes, the active audit entries and upstream objective-guide entry points remain present. All 281 upstream test names in the modified existing Rust test files remain. The complete source audit assigns all 203 original nonarchive paths and classifies all 82 authored nonmerge commits and six merges.
+AI agents checked the extraction, the monetary-data overlay and the combined topic boundaries. Those checks do not constitute human source-code review. Across all twelve cumulative snapshots, the three added economy regressions, the two generic dungeon/drop-rate fixes, the active audit entries and upstream objective-guide entry points remain present. All 281 upstream test names in the modified existing Rust test files remain. The complete source audit assigns all 203 original nonarchive paths and classifies all 82 authored nonmerge commits and six merges.
 
 ## Platform limits
 
